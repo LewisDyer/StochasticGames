@@ -23,5 +23,5 @@ Downloaded PRISM and PRISM-games, both load on my machine but I haven't done any
 
 Ideas for games
 
-* Tried coming up with some ideas, but I think right now I'm not sure what makes a game *interesting* (yet feasible) to model/analyse. I have one idea though:
+* Tried coming up with some ideas, but I think right now I'm not sure what makes a game *interesting* (yet feasible) to model/analyse.
 * Most of my background research should focus on different examples of stochastic games, in order to find an interesting game to model - I think I'm still thinking of a "game" in the everyday sense.
