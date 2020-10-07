@@ -25,3 +25,4 @@ Date | Duration | Summary
 Date | Duration | Summary
 ---- | -------- | -------
 05/10/2020 | 0.5 hours | Tidied up weekly status report in preparation for supervisor meeting, created git repository and committed progress so far.
+07/10/2020 | 0.5 hours | Supervisor meeting
