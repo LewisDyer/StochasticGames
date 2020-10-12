@@ -20,9 +20,13 @@ Date | Duration | Summary
 02/10/2020 | 0.5 hours | Supervisor meeting
 04/10/2020 | 2 hours | Read industry-focused paper on quantitative verification, completed first 2 tutorials on the PRISM model checker.
 
-## Week 1
+## Week 2
 
 Date | Duration | Summary
 ---- | -------- | -------
 05/10/2020 | 0.5 hours | Tidied up weekly status report in preparation for supervisor meeting, created git repository and committed progress so far.
 07/10/2020 | 0.5 hours | Supervisor meeting
+08/10/2020 | 2.5 hours | Completed PRISM tutorial part 5 on EGL contract signing
+
+## Week 3
+12/10/2020 | 2.0 hours | Worked on PRISM tutorial on dining philosophers (up to courteous extension). Read lectures 1-4 of PMC lecture notes.
