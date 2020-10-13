@@ -30,3 +30,4 @@ Date | Duration | Summary
 
 ## Week 3
 12/10/2020 | 2.0 hours | Worked on PRISM tutorial on dining philosophers (up to courteous extension). Read lectures 1-4 of PMC lecture notes.
+13/10/2020 | 1.5 hours | Read lectures 5-7 and 10-12 of PMC lecture notes, prepared summary and questions for tomorrow's supervisor meeting.
