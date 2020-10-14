@@ -1,0 +1,15 @@
+# Week 3 Meeting Minutes - 14/10/2020
+
+First, the submitted questions for the week were discussed. Regarding model checking engines, I learned that PRISM-games only supports the Explicit engine, so I don't need to consider this choice, though this may limit the model checking techniques available.
+
+A discussion on "interesting" strategies ensued, and Gethin said it was mainly a mixture of complexity and understanding. This is also complicated by concurrent games having probabilistic strategies, increasing complexity while reducing understanding. Gethin also emphasised that varying strategies based on parameters would also be useful - for instance, with highly biased dice.
+
+On MDPs, Gethin remarked that memoryless strategies are generally easier to analyse, since they lead to smaller, finite DTMCs, thus having smaller transtiion matrices. Gethin also remarked that bounded properties inherently require memory, since strategies may vary based on remaining steps (for instance, riskier options become more variable when there are few steps left).
+
+On handling large scripts, Gethin mentioned that a PRISM preprocessor is also available [here](https://www.prismmodelchecker.org/prismpp/), but it's in beta and somewhat limited. Indeed, William uses his own preprocessing scripts written in Python, and I may want to look into doing this if my models end up including large numbers of states.
+
+I then presented the game of "Shut the Box", discussing the basic ideas along with some potential variations such as different numbers of boards. Gethin liked this idea and recommended it as a good, nontrivial introduction to modelling and analysis. We then discussed the "Liar's Dice" game that William proposed, which seemed similar in idea to "Shut the Box" but more complex.
+
+This then led into a discussion on writing my dissertation. I was initially concerned that discussing too many different classes of games could make them hard to compare, but Gethin remarked that the games could be connected in some other way (for instance, under the wider umbrella of dice-based games). This would allow comparing classes of games (for instance, how complex they are to model), but also comparing games directly by varying common properties (for instance, exploring the effect of biased dice), and provide a clear structure by combining background, development and analysis per game, then identifying commonalities in the conclusion.
+
+Finally, a plan was agreed for next week. I should move onto PRISM-games, completing the two provided examples, and looking into one of the case studies so I get experience of turn-based and stochastic games. I should read the paper William suggested about model checking in game design, and read the PMC lecture notes I didn't get time to read last week. Finally, if time permits, I should start developing a design for "Shut the Box" in PRISM-games.
