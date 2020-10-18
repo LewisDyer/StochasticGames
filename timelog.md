@@ -32,3 +32,4 @@ Date | Duration | Summary
 12/10/2020 | 2 hours | Worked on PRISM tutorial on dining philosophers (up to courteous extension). Read lectures 1-4 of PMC lecture notes.
 13/10/2020 | 1.5 hours | Read lectures 5-7 and 10-12 of PMC lecture notes, prepared summary and questions for tomorrow's supervisor meeting.
 14/10/2020 | 1 hour | Supervisor meeting + refining minutes
+18/10/2020 | 1.5 hours | Completed example 1 and most of example 2 of PRISM-games (still to fix one little thing).
