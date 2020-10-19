@@ -33,3 +33,7 @@ Date | Duration | Summary
 13/10/2020 | 1.5 hours | Read lectures 5-7 and 10-12 of PMC lecture notes, prepared summary and questions for tomorrow's supervisor meeting.
 14/10/2020 | 1 hour | Supervisor meeting + refining minutes
 18/10/2020 | 3.5 hours | Completed examples 1 and 2 of PRISM-games, along with reading up on user-centric networks case study. Read first two case studies of game design paper and downloaded source code to read through/experiment with
+
+
+## Week 4
+19/10/2020 | 2 hours | Finished reading case studies of game design paper, Read through some source code from their examples. Reviewed .dot file from rock paper scissors to try and understand strategies. Added some questions for this week's meeting.
