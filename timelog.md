@@ -37,3 +37,4 @@ Date | Duration | Summary
 
 ## Week 4
 19/10/2020 | 2 hours | Finished reading case studies of game design paper, Read through some source code from their examples. Reviewed .dot file from rock paper scissors to try and understand strategies. Added some questions for this week's meeting.
+20/10/20 | 0.5 hours | Completed plan for week 4 meeting
