@@ -1,6 +1,10 @@
 # Readme
 
-Put a brief description of your code here. This should at least describe the file structure.
+This folder contains PRISM code for all of the case study models I'm developing.
+
+An overview of the current folder structure:
+* `ShutTheBox` - models for the Shut the Box game.
+* `utils` - a collection of Python scripts designed to automate the process of generating PRISM models. (model-specific processing is provided in that model's folder, while the `utils` folder focuses on common aspects of preprocessing).
 
 ## Build instructions
 
@@ -13,29 +17,12 @@ List the all of the pre-requisites software required to set up your project (e.g
 
 For example:
 
-* Python 3.7
-* Packages: listed in `requirements.txt` 
+* PRISM-games 3.0
 * Tested on Windows 10
-
-or another example:
-
-* Requires Raspberry Pi 3 
-* a Linux host machine with the `arm-none-eabi` toolchain (at least version `x.xx`) installed
-* a working LuaJIT installation > 2.1.0
-
-### Build steps
-
-List the steps required to build software. 
-
-Hopefully something simple like `pip install -e .` or `make` or `cd build; cmake ..`. In
-some cases you may have much more involved setup required.
 
 ### Test steps
 
-List steps needed to show your software works. This might be running a test suite, or just starting the program; but something that could be used to verify your code is working correctly.
+Open the model files in PRISM-games (extension `.prism`), along with the property files (extension `.props`), then run experiments and verify properties.
 
-Examples:
-
-* Run automated tests by running `pytest`
-* Start the software by running `bin/editor.exe` and opening the file `examples/example_01.bin`
+(N.B a script to automatically run experiments and generate graphs will be added in the future)
 

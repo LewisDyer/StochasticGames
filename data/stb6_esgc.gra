@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE chartFormat SYSTEM "chartformat.dtd">
+<chartFormat graphTitle="Probability of a score k given a covered board" legendFontColourB="0" legendFontColourG="0" legendFontColourR="0" legendFontName="SansSerif" legendFontSize="11" legendFontStyle="0" legendPosition="right" legendVisible="true" titleFontColourB="0" titleFontColourG="0" titleFontColourR="0" titleFontName="SansSerif" titleFontSize="14" titleFontStyle="0" versionString="3.0">
+<layout/>
+<axis autoscale="false" heading="k" headingFontColourB="0" headingFontColourG="0" headingFontColourR="0" headingFontName="SansSerif" headingFontSize="12" headingFontStyle="0" logBase="10.0" logStyle="1" logarithmic="false" majorColourB="204" majorColourG="204" majorColourR="204" majorGridInterval="1.0" maxValue="21.0" maximumPower="1.0" minValue="1.0" minimumPower="0.0" numberFontColourB="0" numberFontColourG="0" numberFontColourR="0" numberFontName="SansSerif" numberFontSize="12" numberFontStyle="0" showMajor="true"/>
+<axis autoscale="false" heading="Probability" headingFontColourB="0" headingFontColourG="0" headingFontColourR="0" headingFontName="SansSerif" headingFontSize="12" headingFontStyle="0" logBase="10.0" logStyle="1" logarithmic="false" majorColourB="204" majorColourG="204" majorColourR="204" majorGridInterval="0.01" maxValue="0.1656646909398815" maximumPower="1.0" minValue="0.0" minimumPower="0.0" numberFontColourB="0" numberFontColourG="0" numberFontColourR="0" numberFontName="SansSerif" numberFontSize="12" numberFontStyle="0" showMajor="true"/>
+<graph lineStyle="normal" lineWidth="1.0" seriesColourB="255" seriesColourG="0" seriesColourR="0" seriesHeading="Board 1" seriesShape="circle" showLines="true" showPoints="true">
+<point x="1.0" y="0.044523842242682424"/>
+<point x="2.0" y="0.0"/>
+<point x="3.0" y="0.029682561495121617"/>
+<point x="4.0" y="0.014841280747560808"/>
+<point x="5.0" y="0.014841280747560808"/>
+<point x="6.0" y="0.044523842242682424"/>
+<point x="7.0" y="0.01855160093445101"/>
+<point x="8.0" y="0.044523842242682424"/>
+<point x="9.0" y="0.014841280747560808"/>
+<point x="10.0" y="0.06101415418441665"/>
+<point x="11.0" y="0.030507077092208325"/>
+<point x="12.0" y="0.04658513123539921"/>
+<point x="13.0" y="0.030507077092208325"/>
+<point x="14.0" y="0.017314827538820944"/>
+<point x="15.0" y="0.042668682149237316"/>
+<point x="16.0" y="0.03126288305620447"/>
+<point x="17.0" y="0.011508863542668678"/>
+<point x="18.0" y="0.008245155970867113"/>
+<point x="19.0" y="0.0036072557372543623"/>
+<point x="20.0" y="0.0"/>
+<point x="21.0" y="0.037927717465988726"/>
+</graph>
+<graph lineStyle="normal" lineWidth="1.0" seriesColourB="0" seriesColourG="127" seriesColourR="0" seriesHeading="Board 2" seriesShape="square" showLines="true" showPoints="true">
+<point x="1.0" y="0.0"/>
+<point x="2.0" y="0.05217811417988565"/>
+<point x="3.0" y="0.0347854094532571"/>
+<point x="4.0" y="0.0"/>
+<point x="5.0" y="0.01739270472662855"/>
+<point x="6.0" y="0.060874466543199925"/>
+<point x="7.0" y="0.021740880908285687"/>
+<point x="8.0" y="0.01739270472662855"/>
+<point x="9.0" y="0.021740880908285687"/>
+<point x="10.0" y="0.04734680731137771"/>
+<point x="11.0" y="0.03865045494806344"/>
+<point x="12.0" y="0.05652629036154279"/>
+<point x="13.0" y="0.014493920605523791"/>
+<point x="14.0" y="0.013527659231822205"/>
+<point x="15.0" y="0.04436750140913115"/>
+<point x="16.0" y="0.02858523230533858"/>
+<point x="17.0" y="0.01928496658346082"/>
+<point x="18.0" y="0.009662613737015859"/>
+<point x="19.0" y="0.0"/>
+<point x="20.0" y="2.0130445285449703E-4"/>
+<point x="21.0" y="0.04444802319027296"/>
+</graph>
+<graph lineStyle="normal" lineWidth="1.0" seriesColourB="0" seriesColourG="0" seriesColourR="255" seriesHeading="Board 3" seriesShape="triangle" showLines="true" showPoints="true">
+<point x="1.0" y="0.0"/>
+<point x="2.0" y="0.0"/>
+<point x="3.0" y="0.0"/>
+<point x="4.0" y="0.02498554077501446"/>
+<point x="5.0" y="0.02498554077501446"/>
+<point x="6.0" y="0.062463851937536154"/>
+<point x="7.0" y="0.0"/>
+<point x="8.0" y="0.04997108155002892"/>
+<point x="9.0" y="0.018739155581260845"/>
+<point x="10.0" y="0.09022556390977443"/>
+<point x="11.0" y="0.04303065355696934"/>
+<point x="12.0" y="0.02359745517640254"/>
+<point x="13.0" y="0.013880855986119144"/>
+<point x="14.0" y="0.015268941584731058"/>
+<point x="15.0" y="0.08143435511856563"/>
+<point x="16.0" y="0.04106419895893579"/>
+<point x="17.0" y="0.019375361480624635"/>
+<point x="18.0" y="0.0"/>
+<point x="19.0" y="0.006072874493927125"/>
+<point x="20.0" y="2.891844997108154E-4"/>
+<point x="21.0" y="0.06385193753614805"/>
+</graph>
+<graph lineStyle="normal" lineWidth="1.0" seriesColourB="191" seriesColourG="191" seriesColourR="0" seriesHeading="Board 4" seriesShape="rectangle_h" showLines="true" showPoints="true">
+<point x="1.0" y="0.0"/>
+<point x="2.0" y="0.0"/>
+<point x="3.0" y="0.0"/>
+<point x="4.0" y="0.0"/>
+<point x="5.0" y="0.03171340478637499"/>
+<point x="6.0" y="0.0"/>
+<point x="7.0" y="0.03964175598296873"/>
+<point x="8.0" y="0.06342680957274997"/>
+<point x="9.0" y="0.007928351196593747"/>
+<point x="10.0" y="0.08633093525179855"/>
+<point x="11.0" y="0.007928351196593747"/>
+<point x="12.0" y="0.024665981500513873"/>
+<point x="13.0" y="0.06783144912641315"/>
+<point x="14.0" y="0.019380414036118045"/>
+<point x="15.0" y="0.08089854646894727"/>
+<point x="16.0" y="0.06680369989722505"/>
+<point x="17.0" y="0.0"/>
+<point x="18.0" y="0.018939950080751722"/>
+<point x="19.0" y="0.007708119218910584"/>
+<point x="20.0" y="3.670532961385992E-4"/>
+<point x="21.0" y="0.08104536778740273"/>
+</graph>
+<graph lineStyle="normal" lineWidth="1.0" seriesColourB="191" seriesColourG="0" seriesColourR="191" seriesHeading="Board 5" seriesShape="rectangle_v" showLines="true" showPoints="true">
+<point x="1.0" y="0.0"/>
+<point x="2.0" y="0.0"/>
+<point x="3.0" y="0.0"/>
+<point x="4.0" y="0.0"/>
+<point x="5.0" y="0.0"/>
+<point x="6.0" y="0.0"/>
+<point x="7.0" y="0.0"/>
+<point x="8.0" y="0.02311643835616439"/>
+<point x="9.0" y="0.011558219178082195"/>
+<point x="10.0" y="0.0"/>
+<point x="11.0" y="0.0719178082191781"/>
+<point x="12.0" y="0.03595890410958905"/>
+<point x="13.0" y="0.02568493150684932"/>
+<point x="14.0" y="0.03595890410958905"/>
+<point x="15.0" y="0.13291952054794523"/>
+<point x="16.0" y="0.0"/>
+<point x="17.0" y="0.05126284246575343"/>
+<point x="18.0" y="0.027611301369863013"/>
+<point x="19.0" y="0.011237157534246575"/>
+<point x="20.0" y="5.351027397260274E-4"/>
+<point x="21.0" y="0.11815068493150688"/>
+</graph>
+<graph lineStyle="normal" lineWidth="1.0" seriesColourB="0" seriesColourG="191" seriesColourR="191" seriesHeading="Board 6" seriesShape="circle" showLines="true" showPoints="true">
+<point x="1.0" y="0.0"/>
+<point x="2.0" y="0.0"/>
+<point x="3.0" y="0.0"/>
+<point x="4.0" y="0.0"/>
+<point x="5.0" y="0.0"/>
+<point x="6.0" y="0.0"/>
+<point x="7.0" y="0.0"/>
+<point x="8.0" y="0.0"/>
+<point x="9.0" y="0.030482641828958518"/>
+<point x="10.0" y="0.0"/>
+<point x="11.0" y="0.015241320914479259"/>
+<point x="12.0" y="0.047417442845046585"/>
+<point x="13.0" y="0.050804403048264196"/>
+<point x="14.0" y="0.07112616426756987"/>
+<point x="15.0" y="0.0"/>
+<point x="16.0" y="0.1577758961332205"/>
+<point x="17.0" y="0.06759808072255152"/>
+<point x="18.0" y="0.03640982218458933"/>
+<point x="19.0" y="0.014817950889077055"/>
+<point x="20.0" y="7.056167090036692E-4"/>
+<point x="21.0" y="0.1558001693480102"/>
+</graph>
+</chartFormat>

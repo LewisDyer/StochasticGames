@@ -29,6 +29,8 @@ Date | Duration | Summary
 08/10/2020 | 2.5 hours | Completed PRISM tutorial part 5 on EGL contract signing
 
 ## Week 3
+Date | Duration | Summary
+---- | -------- | -------
 12/10/2020 | 2 hours | Worked on PRISM tutorial on dining philosophers (up to courteous extension). Read lectures 1-4 of PMC lecture notes.
 13/10/2020 | 1.5 hours | Read lectures 5-7 and 10-12 of PMC lecture notes, prepared summary and questions for tomorrow's supervisor meeting.
 14/10/2020 | 1 hour | Supervisor meeting + refining minutes
@@ -36,7 +38,10 @@ Date | Duration | Summary
 
 
 ## Week 4
+Date | Duration | Summary
+---- | -------- | -------
 19/10/2020 | 2 hours | Finished reading case studies of game design paper, Read through some source code from their examples. Reviewed .dot file from rock paper scissors to try and understand strategies. Added some questions for this week's meeting.
 20/10/20 | 0.5 hours | Completed plan for week 4 meeting
 21/10/20 | 0.5 hours | Supervisor meeting
-24/10/20 | 2.5 hours | Started developing shut the box model with 6 boards, basic model definition + created some properties to analyse. 
+24/10/20 | 2.5 hours | Started developing shut the box model with 6 boards, basic model definition + created some properties to analyse.
+25/10/20 | 2.0 hours | Wrote up initial analysis, tidied up project structure, planned next steps for Shut The Box model.
