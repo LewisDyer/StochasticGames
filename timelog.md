@@ -39,3 +39,4 @@ Date | Duration | Summary
 19/10/2020 | 2 hours | Finished reading case studies of game design paper, Read through some source code from their examples. Reviewed .dot file from rock paper scissors to try and understand strategies. Added some questions for this week's meeting.
 20/10/20 | 0.5 hours | Completed plan for week 4 meeting
 21/10/20 | 0.5 hours | Supervisor meeting
+24/10/20 | 2.5 hours | Started developing shut the box model with 6 boards, basic model definition + created some properties to analyse. 
