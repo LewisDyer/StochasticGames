@@ -1,0 +1,23 @@
+# Week 4 Status Report - 28/10/20
+
+This week, I have completed an initial model for Shut the Box in `stb6.prism`, with a reduced number of boards and a simpler probability distribution. I have also conducted some analysis of this model, which shows that the high-board strategy (choosing the set of boards to cover containing the largest board, described in `stb6_max.prism`) is the optimal strategy for our simplified model. The results of this analysis are described in `stb6.md` in the `research_notes` directory. As part of this analysis I have noticed a number of phenomena, which have informed my next steps with modelling Shut the Box.
+
+## Questions
+
+* I've experienced some unusual behaviour when trying to synthesise strategies for my model. Whenever I try to run the following command: `prism stb6.prism stb6.props -prop 8 -exportstrat stb6_strat8.dot`, a blank `.dot` file is created, while a `.tra` file is created listing the numbers of states and their associated action labels. I've tried the same command with different filenames on the rock-paper-scissors example and it generates a non-empty `.dot` file as expected.
+* I tried to model the expected value of the number of die rolls used to get a particular score, but since this state isn't always reachable (i.e you don't always get the same score), the expected number of rolls is Infinity by design. Is there any way I can circumvent this? I can do this for terminating states in general without any problems, but I'm interested in investigating the correlation between score and the number of die rolls required (which I expect to be linear, but there could be some interesting dips or peaks).
+* I'm still not sure what's meant by a "maximum" and "minimum" probability/expected value (e.g Pmax=? or Rmin=?) for nondeterministic models. My current intuition is that their difference represents the impact of strategy on the model (e.g if the difference is small, the player's choices make little impact on the model as a whole).
+* I'm not sure when I should be aiming to finish development and focus on writing my dissertation (mainly so I can budget time appropriately in my plan). My current thinking is that I should aim to have completed most development by around the start of February (i.e don't try adding anything important at this point), and absolutely have development finished by the start of March (ideally starting work on parts of the dissertation throughout February along with minor development polish as required).
+
+
+## Other comments
+
+* I've been thinking of using Jupyter notebooks to run my experiments, especially when their creation needs to be automated. In particular, Jupyter notebooks should be useful because they allow me to combine preprocessing (in Python), analysis (using PRISM via command line arguments) and visualisation (either using graphs directly from PRISM, or using some other library such as Matplotlib).
+* I've started thinking about another potential case study - based on my current work and the available time, I think 3 case studies would be a feasible number to consider. I'm not sure on specifics yet, but I think that some sort of concurrent dice-based game would be good to contrast with Shut the Box and Liar's Dice which are both turn-based games. There's some really good lists of board games that let you filter by mechanics, so I'll look into that over the next few weeks and come up with some ideas.
+
+
+## Initial plan for next week
+
+* My main aim for this week will be to create some preprocessing scripts. In particular, I'll need to preprocess getting the set of possible boards to cover, expressing preferences to develop strategies, and potentially using different probability distributions (such as investigating how the game changes if I use 2 six-sided dice compared to a 12-sided dice, or considering the impact of biased dice). I plan to create these scripts in Python, since I'm already very familiar with it.
+* My other main aim this week is to develop a month-by-month plan, particularly going into November, so I have a clearer idea of the remaining work left to perform.
+* If I'm able to complete the first two tasks in reasonable time (which I think I will), I plan to start analysing Shut the Box for a "full" model (i.e 12 boards and 2d6). The key benefit of my previous research notes is that I have a clear plan of attack for developing and analysing a full model, and so I think automating this process from the getgo would be a viable option (as opposed to analysing the model manually then automating it later).

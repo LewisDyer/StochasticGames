@@ -45,3 +45,8 @@ Date | Duration | Summary
 21/10/20 | 0.5 hours | Supervisor meeting
 24/10/20 | 2.5 hours | Started developing shut the box model with 6 boards, basic model definition + created some properties to analyse.
 25/10/20 | 2.0 hours | Wrote up initial analysis, tidied up project structure, planned next steps for Shut The Box model.
+
+## Week 5
+Date | Duration | Summary
+---- | -------- | -------
+27/10/20 | 1 hour | Added questions, prepared notes for upcoming supervisor meeting
