@@ -50,3 +50,4 @@ Date | Duration | Summary
 Date | Duration | Summary
 ---- | -------- | -------
 27/10/20 | 1 hour | Added questions, prepared notes for upcoming supervisor meeting
+28/10/20 | 1 hour | Supervisor meeting + writing minutes
