@@ -51,3 +51,4 @@ Date | Duration | Summary
 ---- | -------- | -------
 27/10/20 | 1 hour | Added questions, prepared notes for upcoming supervisor meeting
 28/10/20 | 1 hour | Supervisor meeting + writing minutes
+29/10/20 | 1.5 hours | Started work on preprocessing scripts - developed core system to handle function calls and write to new files.
