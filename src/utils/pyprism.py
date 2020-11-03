@@ -2,6 +2,7 @@ import argparse
 import pathlib
 import importlib
 import re
+import csv
 
 def parse_template(template):
     ### parse template into each part
@@ -28,21 +29,65 @@ def get_function(location, fname):
     
     return functions.lookup(fname)
 
-parser = argparse.ArgumentParser()
-parser.add_argument('input', type=pathlib.Path)
-parser.add_argument('output', type=pathlib.Path)
+def check_int(s):
+    # given a string, checks if it's an integer (without explicit type conversion)
+    if s[0] == '-':
+        return s[1:].isdigit()
+    return s.isdigit()
 
-args = parser.parse_args()
+def set_params(p_values):
+    # allows variables to be given specific values externally, either with a .csv file or via user input
+    param_lookup = {}
+    if p_values:
+        # don't try to open file if no arg given
+        with p_values.open('r') as p_csv:
+            param_lookup = csv.reader(p_csv)
+            for p in param_lookup:
+                param_lookup[p[0]] = int(p[1])
+   
+    return param_lookup
 
-with args.input.open('r') as f_in, args.output.open('w') as f_out:
-    for line in f_in:
-        template = re.search(r'@(.*?)@', line)
-        if template:
-            location, fname, params = parse_template(template.group(1))
-            fn = get_function(location, fname)
-            params = [int(p) for p in params]
-            f_out.write(fn(*params) + '\n')
-        else:
-            f_out.write(line + '\n')
+def replace_params(params, param_lookup):
+    # given a list of arguments for a function, gives them specific values (either from a lookup dictionary or from user input if needed)
+    for i, param in enumerate(params):
+        if not check_int(param):
+            print(param)
+            print(param_lookup)
+            # only applicable for variable parameters, not constants
+            if param not in param_lookup:
+            # accept user input if param not found in csv file
+                p = " "
+                while not check_int(p):
+                    p = input(f"Enter value for {param}:")
+
+                param_lookup[param] = p
+            else:
+                params[i] = param_lookup[param]
+
+    return params
+    
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('input', type=pathlib.Path)
+    parser.add_argument('output', type=pathlib.Path)
+    parser.add_argument('params', type=pathlib.Path, nargs='?', default=None)
+
+    args = parser.parse_args()
+
+    param_lookup = set_params(args.params)
+
+    with args.input.open('r') as f_in, args.output.open('w') as f_out:
+        for line in f_in:
+            template = re.search(r'@(.*?)@', line)
+            if template:
+                location, fname, params = parse_template(template.group(1))
+                
+                if params:
+                    params = replace_params(params, param_lookup)
+                fn = get_function(location, fname)
+                
+                f_out.write(fn(*params) + '\n')
+            else:
+                f_out.write(line)
 
 
