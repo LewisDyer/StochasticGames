@@ -41,8 +41,8 @@ def set_params(p_values):
     if p_values:
         # don't try to open file if no arg given
         with p_values.open('r') as p_csv:
-            param_lookup = csv.reader(p_csv)
-            for p in param_lookup:
+            params_csv = csv.reader(p_csv)
+            for p in params_csv:
                 param_lookup[p[0]] = int(p[1])
    
     return param_lookup
@@ -51,16 +51,15 @@ def replace_params(params, param_lookup):
     # given a list of arguments for a function, gives them specific values (either from a lookup dictionary or from user input if needed)
     for i, param in enumerate(params):
         if not check_int(param):
-            print(param)
-            print(param_lookup)
             # only applicable for variable parameters, not constants
             if param not in param_lookup:
             # accept user input if param not found in csv file
                 p = " "
                 while not check_int(p):
                     p = input(f"Enter value for {param}:")
-
-                param_lookup[param] = p
+                
+                params[i] = int(p)
+                param_lookup[param] = int(p)
             else:
                 params[i] = param_lookup[param]
 

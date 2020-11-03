@@ -1,15 +1,14 @@
 // Modelling Shut the Box using 6 boards and one d6
-// "Highest number" strategy for board covering
-// Manually created
+// Automatically generated
 
 // turn-based stochastic game
 
 smg
 
-player p1 [die_toss], [cover], [halts] endplayer
+player p1 player1 endplayer
 
 formula game_over = (state=3);
-@score b@
+@stb/score b@
 
 module player1
 
@@ -19,20 +18,22 @@ module player1
     // 2: no more valid choices to cover, halt
     state: [0..2] init 0;
     // current value on die (with initial 0 state)
-    @die d@
+    @stb/die d@
     // boards (0 if uncovered, 1 if covered)
     // note that we use ints instead of bools to make it easier to count the payoffs later
-    @listboards b@
 
-    @dietoss d@
+    @stb/dietoss d ndie@
 
-    @listcovers b strategy@
+    @stb/listcovers b strategy@
 
     [count] state=2 -> (state'=3);
 
     [halts] state=3 -> true;
 
 endmodule
+
+@stb/listboards b@
+
 
 rewards "total_boards"
     state=2 : score;
