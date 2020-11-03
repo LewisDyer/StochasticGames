@@ -1,4 +1,4 @@
-# Week 4 Status Report - 28/10/20
+# Week 5 Status Report - 28/10/20
 
 This week, I have completed an initial model for Shut the Box in `stb6.prism`, with a reduced number of boards and a simpler probability distribution. I have also conducted some analysis of this model, which shows that the high-board strategy (choosing the set of boards to cover containing the largest board, described in `stb6_max.prism`) is the optimal strategy for our simplified model. The results of this analysis are described in `stb6.md` in the `research_notes` directory. As part of this analysis I have noticed a number of phenomena, which have informed my next steps with modelling Shut the Box.
 

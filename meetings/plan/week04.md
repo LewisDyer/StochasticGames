@@ -1,4 +1,4 @@
-# Week 3 Status Report - 14/10/2020
+# Week 4 Status Report - 14/10/2020
 
 This week, I have completed examples 1 and 2 from the PRISM-games tutorials, along with reviewing the user-centric networks example to gain more experience with SMGs in particular. I've also read the paper William suggested containing case studies on model checking with game design. The source code provided with this paper has been especially helpful, and I've also spent some time reviewing these models in order to understand how they're constructed.
 
