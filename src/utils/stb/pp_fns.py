@@ -27,11 +27,6 @@ def dietoss(d, ndie):
     probs = "\n\t\t\t\t\t+ ".join(probs)
     return(f"[die_toss] state=0 -> {probs};")
 
-def nCr(n, r):
-    print(n)
-    print(r)
-    return factorial(n) // factorial(r) // factorial(n-r)
-
 def prob_sum(sides, throws, target):
     # given n d-sided die, gives the number of outcomes that result in the die summing to k
 

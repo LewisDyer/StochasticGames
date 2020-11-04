@@ -57,3 +57,4 @@ Date | Duration | Summary
 Date | Duration | Summary
 ---- | -------- | -------
 03/11/20 | 3.5 hours | Wrote month-by-month plan for remainder of project, extended preprocessing to support parameters, added some ShutTheBox specific functionality. Prepared status report and questions for tomorrow's meeting.
+04/11/20 | 0.5 hours | Supervisor meeting, added minutes
