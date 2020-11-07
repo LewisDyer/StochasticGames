@@ -93,9 +93,14 @@ def covers_to_prism(n, covers, determ):
             negate_states = f" !({' | '.join(prev_states)}) &"
             #print(negate_states)
 
-        prism_cover = f"{action_label} state=1 & die={n} &{negate_states} {convert_cover(cover)} -> (state'=0) & {convert_cover_post(cover)}"
+        prism_cover = f"{action_label} state=1 & die={n} &{negate_states} {convert_cover(cover)} -> (state'=0) & {convert_cover_post(cover)};"
         all_covers.append(prism_cover)
 
+
+    prev_states = [convert_cover(c) for c in covers]
+    negate_states = f" !({' | '.join(prev_states)})"
+
+    all_covers.append(f"[ncover] state=1 & die={n} & {negate_states} -> (state'=2);") 
     return("\n".join(all_covers))
 
 
