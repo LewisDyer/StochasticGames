@@ -59,3 +59,8 @@ Date | Duration | Summary
 03/11/20 | 3.5 hours | Wrote month-by-month plan for remainder of project, extended preprocessing to support parameters, added some ShutTheBox specific functionality. Prepared status report and questions for tomorrow's meeting.
 04/11/20 | 0.5 hours | Supervisor meeting, added minutes
 07/11/20 | 2 hours | Added board cover generating function to preprocessing
+
+## Week 7
+Date | Duration | Summary
+---- | -------- | -------
+10/11/20 | 2.5 hours | Improved preprocessor to inherit whitespace from template tag. Almost finished off ShutTheBox specific functions, generated a few example models and prepared status report.

@@ -1,0 +1,390 @@
+// Modelling Shut the Box using 6 boards and one d6
+// Automatically generated
+
+// turn-based stochastic game
+
+smg
+
+player p1 player1 endplayer
+
+formula game_over = (state=3);
+
+formula score = b1*1 + b2*2 + b3*3 + b4*4 + b5*5 + b6*6 + b7*7 + b8*8 + b9*9 + b10*10 + b11*11 + b12*12;
+
+module player1
+
+    // Local state:
+    // 0: rolling dice
+    // 1: choosing boards to cover
+    // 2: no more valid choices to cover, halt
+    state: [0..2] init 0;
+    // current value on die (with initial 0 state)
+
+    die: [0..6] init 0;
+
+    // boards (0 if uncovered, 1 if covered)
+    // note that we use ints instead of bools to make it easier to count the payoffs later
+
+
+    [die_toss] state=0 -> 1/36:(die'=2) & (state'=1)
+    					+ 2/36:(die'=3) & (state'=1)
+    					+ 3/36:(die'=4) & (state'=1)
+    					+ 4/36:(die'=5) & (state'=1)
+    					+ 5/36:(die'=6) & (state'=1)
+    					+ 6/36:(die'=7) & (state'=1)
+    					+ 5/36:(die'=8) & (state'=1)
+    					+ 4/36:(die'=9) & (state'=1)
+    					+ 3/36:(die'=10) & (state'=1)
+    					+ 2/36:(die'=11) & (state'=1)
+    					+ 1/36:(die'=12) & (state'=1);
+
+
+    [cover1] state=1 & die=1 & (b1=0) -> (state'=0);
+    [ncover] state=1 & die=1 &  !((b1=0)) -> (state'=2);
+
+    [cover2] state=1 & die=2 & (b2=0) -> (state'=0);
+    [ncover] state=1 & die=2 &  !((b2=0)) -> (state'=2);
+
+    [cover3] state=1 & die=3 & (b3=0) -> (state'=0);
+    [cover21] state=1 & die=3 & !((b3=0)) & (b2=0 & b1=0) -> (state'=0);
+    [ncover] state=1 & die=3 &  !((b3=0) | (b2=0 & b1=0)) -> (state'=2);
+
+    [cover4] state=1 & die=4 & (b4=0) -> (state'=0);
+    [cover31] state=1 & die=4 & !((b4=0)) & (b3=0 & b1=0) -> (state'=0);
+    [ncover] state=1 & die=4 &  !((b4=0) | (b3=0 & b1=0)) -> (state'=2);
+
+    [cover5] state=1 & die=5 & (b5=0) -> (state'=0);
+    [cover41] state=1 & die=5 & !((b5=0)) & (b4=0 & b1=0) -> (state'=0);
+    [cover32] state=1 & die=5 & !((b5=0)) & (b3=0 & b2=0) -> (state'=0);
+    [ncover] state=1 & die=5 &  !((b5=0) | (b4=0 & b1=0) | (b3=0 & b2=0)) -> (state'=2);
+
+    [cover6] state=1 & die=6 & (b6=0) -> (state'=0);
+    [cover51] state=1 & die=6 & !((b6=0)) & (b5=0 & b1=0) -> (state'=0);
+    [cover42] state=1 & die=6 & !((b6=0)) & (b4=0 & b2=0) -> (state'=0);
+    [cover321] state=1 & die=6 & !((b6=0) | (b5=0 & b1=0) | (b4=0 & b2=0)) & (b3=0 & b2=0 & b1=0) -> (state'=0);
+    [ncover] state=1 & die=6 &  !((b6=0) | (b5=0 & b1=0) | (b4=0 & b2=0) | (b3=0 & b2=0 & b1=0)) -> (state'=2);
+
+    [cover7] state=1 & die=7 & (b7=0) -> (state'=0);
+    [cover61] state=1 & die=7 & !((b7=0)) & (b6=0 & b1=0) -> (state'=0);
+    [cover52] state=1 & die=7 & !((b7=0)) & (b5=0 & b2=0) -> (state'=0);
+    [cover43] state=1 & die=7 & !((b7=0) | (b6=0 & b1=0) | (b5=0 & b2=0)) & (b4=0 & b3=0) -> (state'=0);
+    [cover421] state=1 & die=7 & !((b7=0) | (b6=0 & b1=0) | (b5=0 & b2=0)) & (b4=0 & b2=0 & b1=0) -> (state'=0);
+    [ncover] state=1 & die=7 &  !((b7=0) | (b6=0 & b1=0) | (b5=0 & b2=0) | (b4=0 & b3=0) | (b4=0 & b2=0 & b1=0)) -> (state'=2);
+
+    [cover8] state=1 & die=8 & (b8=0) -> (state'=0);
+    [cover71] state=1 & die=8 & !((b8=0)) & (b7=0 & b1=0) -> (state'=0);
+    [cover62] state=1 & die=8 & !((b8=0)) & (b6=0 & b2=0) -> (state'=0);
+    [cover53] state=1 & die=8 & !((b8=0) | (b7=0 & b1=0) | (b6=0 & b2=0)) & (b5=0 & b3=0) -> (state'=0);
+    [cover521] state=1 & die=8 & !((b8=0) | (b7=0 & b1=0) | (b6=0 & b2=0)) & (b5=0 & b2=0 & b1=0) -> (state'=0);
+    [cover431] state=1 & die=8 & !((b8=0) | (b7=0 & b1=0) | (b6=0 & b2=0) | (b5=0 & b3=0) | (b5=0 & b2=0 & b1=0)) & (b4=0 & b3=0 & b1=0) -> (state'=0);
+    [ncover] state=1 & die=8 &  !((b8=0) | (b7=0 & b1=0) | (b6=0 & b2=0) | (b5=0 & b3=0) | (b5=0 & b2=0 & b1=0) | (b4=0 & b3=0 & b1=0)) -> (state'=2);
+
+    [cover9] state=1 & die=9 & (b9=0) -> (state'=0);
+    [cover81] state=1 & die=9 & !((b9=0)) & (b8=0 & b1=0) -> (state'=0);
+    [cover72] state=1 & die=9 & !((b9=0)) & (b7=0 & b2=0) -> (state'=0);
+    [cover63] state=1 & die=9 & !((b9=0) | (b8=0 & b1=0) | (b7=0 & b2=0)) & (b6=0 & b3=0) -> (state'=0);
+    [cover621] state=1 & die=9 & !((b9=0) | (b8=0 & b1=0) | (b7=0 & b2=0)) & (b6=0 & b2=0 & b1=0) -> (state'=0);
+    [cover54] state=1 & die=9 & !((b9=0) | (b8=0 & b1=0) | (b7=0 & b2=0) | (b6=0 & b3=0) | (b6=0 & b2=0 & b1=0)) & (b5=0 & b4=0) -> (state'=0);
+    [cover531] state=1 & die=9 & !((b9=0) | (b8=0 & b1=0) | (b7=0 & b2=0) | (b6=0 & b3=0) | (b6=0 & b2=0 & b1=0)) & (b5=0 & b3=0 & b1=0) -> (state'=0);
+    [cover432] state=1 & die=9 & !((b9=0) | (b8=0 & b1=0) | (b7=0 & b2=0) | (b6=0 & b3=0) | (b6=0 & b2=0 & b1=0) | (b5=0 & b4=0) | (b5=0 & b3=0 & b1=0)) & (b4=0 & b3=0 & b2=0) -> (state'=0);
+    [ncover] state=1 & die=9 &  !((b9=0) | (b8=0 & b1=0) | (b7=0 & b2=0) | (b6=0 & b3=0) | (b6=0 & b2=0 & b1=0) | (b5=0 & b4=0) | (b5=0 & b3=0 & b1=0) | (b4=0 & b3=0 & b2=0)) -> (state'=2);
+
+    [cover10] state=1 & die=10 & (b10=0) -> (state'=0);
+    [cover91] state=1 & die=10 & !((b10=0)) & (b9=0 & b1=0) -> (state'=0);
+    [cover82] state=1 & die=10 & !((b10=0)) & (b8=0 & b2=0) -> (state'=0);
+    [cover73] state=1 & die=10 & !((b10=0) | (b9=0 & b1=0) | (b8=0 & b2=0)) & (b7=0 & b3=0) -> (state'=0);
+    [cover721] state=1 & die=10 & !((b10=0) | (b9=0 & b1=0) | (b8=0 & b2=0)) & (b7=0 & b2=0 & b1=0) -> (state'=0);
+    [cover64] state=1 & die=10 & !((b10=0) | (b9=0 & b1=0) | (b8=0 & b2=0) | (b7=0 & b3=0) | (b7=0 & b2=0 & b1=0)) & (b6=0 & b4=0) -> (state'=0);
+    [cover631] state=1 & die=10 & !((b10=0) | (b9=0 & b1=0) | (b8=0 & b2=0) | (b7=0 & b3=0) | (b7=0 & b2=0 & b1=0)) & (b6=0 & b3=0 & b1=0) -> (state'=0);
+    [cover541] state=1 & die=10 & !((b10=0) | (b9=0 & b1=0) | (b8=0 & b2=0) | (b7=0 & b3=0) | (b7=0 & b2=0 & b1=0) | (b6=0 & b4=0) | (b6=0 & b3=0 & b1=0)) & (b5=0 & b4=0 & b1=0) -> (state'=0);
+    [cover532] state=1 & die=10 & !((b10=0) | (b9=0 & b1=0) | (b8=0 & b2=0) | (b7=0 & b3=0) | (b7=0 & b2=0 & b1=0) | (b6=0 & b4=0) | (b6=0 & b3=0 & b1=0)) & (b5=0 & b3=0 & b2=0) -> (state'=0);
+    [cover4321] state=1 & die=10 & !((b10=0) | (b9=0 & b1=0) | (b8=0 & b2=0) | (b7=0 & b3=0) | (b7=0 & b2=0 & b1=0) | (b6=0 & b4=0) | (b6=0 & b3=0 & b1=0) | (b5=0 & b4=0 & b1=0) | (b5=0 & b3=0 & b2=0)) & (b4=0 & b3=0 & b2=0 & b1=0) -> (state'=0);
+    [ncover] state=1 & die=10 &  !((b10=0) | (b9=0 & b1=0) | (b8=0 & b2=0) | (b7=0 & b3=0) | (b7=0 & b2=0 & b1=0) | (b6=0 & b4=0) | (b6=0 & b3=0 & b1=0) | (b5=0 & b4=0 & b1=0) | (b5=0 & b3=0 & b2=0) | (b4=0 & b3=0 & b2=0 & b1=0)) -> (state'=2);
+
+    [cover11] state=1 & die=11 & (b11=0) -> (state'=0);
+    [cover101] state=1 & die=11 & !((b11=0)) & (b10=0 & b1=0) -> (state'=0);
+    [cover92] state=1 & die=11 & !((b11=0)) & (b9=0 & b2=0) -> (state'=0);
+    [cover83] state=1 & die=11 & !((b11=0) | (b10=0 & b1=0) | (b9=0 & b2=0)) & (b8=0 & b3=0) -> (state'=0);
+    [cover821] state=1 & die=11 & !((b11=0) | (b10=0 & b1=0) | (b9=0 & b2=0)) & (b8=0 & b2=0 & b1=0) -> (state'=0);
+    [cover74] state=1 & die=11 & !((b11=0) | (b10=0 & b1=0) | (b9=0 & b2=0) | (b8=0 & b3=0) | (b8=0 & b2=0 & b1=0)) & (b7=0 & b4=0) -> (state'=0);
+    [cover731] state=1 & die=11 & !((b11=0) | (b10=0 & b1=0) | (b9=0 & b2=0) | (b8=0 & b3=0) | (b8=0 & b2=0 & b1=0)) & (b7=0 & b3=0 & b1=0) -> (state'=0);
+    [cover65] state=1 & die=11 & !((b11=0) | (b10=0 & b1=0) | (b9=0 & b2=0) | (b8=0 & b3=0) | (b8=0 & b2=0 & b1=0) | (b7=0 & b4=0) | (b7=0 & b3=0 & b1=0)) & (b6=0 & b5=0) -> (state'=0);
+    [cover641] state=1 & die=11 & !((b11=0) | (b10=0 & b1=0) | (b9=0 & b2=0) | (b8=0 & b3=0) | (b8=0 & b2=0 & b1=0) | (b7=0 & b4=0) | (b7=0 & b3=0 & b1=0)) & (b6=0 & b4=0 & b1=0) -> (state'=0);
+    [cover632] state=1 & die=11 & !((b11=0) | (b10=0 & b1=0) | (b9=0 & b2=0) | (b8=0 & b3=0) | (b8=0 & b2=0 & b1=0) | (b7=0 & b4=0) | (b7=0 & b3=0 & b1=0) | (b6=0 & b5=0) | (b6=0 & b4=0 & b1=0)) & (b6=0 & b3=0 & b2=0) -> (state'=0);
+    [cover542] state=1 & die=11 & !((b11=0) | (b10=0 & b1=0) | (b9=0 & b2=0) | (b8=0 & b3=0) | (b8=0 & b2=0 & b1=0) | (b7=0 & b4=0) | (b7=0 & b3=0 & b1=0) | (b6=0 & b5=0) | (b6=0 & b4=0 & b1=0)) & (b5=0 & b4=0 & b2=0) -> (state'=0);
+    [cover5321] state=1 & die=11 & !((b11=0) | (b10=0 & b1=0) | (b9=0 & b2=0) | (b8=0 & b3=0) | (b8=0 & b2=0 & b1=0) | (b7=0 & b4=0) | (b7=0 & b3=0 & b1=0) | (b6=0 & b5=0) | (b6=0 & b4=0 & b1=0) | (b6=0 & b3=0 & b2=0) | (b5=0 & b4=0 & b2=0)) & (b5=0 & b3=0 & b2=0 & b1=0) -> (state'=0);
+    [ncover] state=1 & die=11 &  !((b11=0) | (b10=0 & b1=0) | (b9=0 & b2=0) | (b8=0 & b3=0) | (b8=0 & b2=0 & b1=0) | (b7=0 & b4=0) | (b7=0 & b3=0 & b1=0) | (b6=0 & b5=0) | (b6=0 & b4=0 & b1=0) | (b6=0 & b3=0 & b2=0) | (b5=0 & b4=0 & b2=0) | (b5=0 & b3=0 & b2=0 & b1=0)) -> (state'=2);
+
+    [cover12] state=1 & die=12 & (b12=0) -> (state'=0);
+    [cover111] state=1 & die=12 & !((b12=0)) & (b11=0 & b1=0) -> (state'=0);
+    [cover102] state=1 & die=12 & !((b12=0)) & (b10=0 & b2=0) -> (state'=0);
+    [cover93] state=1 & die=12 & !((b12=0) | (b11=0 & b1=0) | (b10=0 & b2=0)) & (b9=0 & b3=0) -> (state'=0);
+    [cover921] state=1 & die=12 & !((b12=0) | (b11=0 & b1=0) | (b10=0 & b2=0)) & (b9=0 & b2=0 & b1=0) -> (state'=0);
+    [cover84] state=1 & die=12 & !((b12=0) | (b11=0 & b1=0) | (b10=0 & b2=0) | (b9=0 & b3=0) | (b9=0 & b2=0 & b1=0)) & (b8=0 & b4=0) -> (state'=0);
+    [cover831] state=1 & die=12 & !((b12=0) | (b11=0 & b1=0) | (b10=0 & b2=0) | (b9=0 & b3=0) | (b9=0 & b2=0 & b1=0)) & (b8=0 & b3=0 & b1=0) -> (state'=0);
+    [cover75] state=1 & die=12 & !((b12=0) | (b11=0 & b1=0) | (b10=0 & b2=0) | (b9=0 & b3=0) | (b9=0 & b2=0 & b1=0) | (b8=0 & b4=0) | (b8=0 & b3=0 & b1=0)) & (b7=0 & b5=0) -> (state'=0);
+    [cover741] state=1 & die=12 & !((b12=0) | (b11=0 & b1=0) | (b10=0 & b2=0) | (b9=0 & b3=0) | (b9=0 & b2=0 & b1=0) | (b8=0 & b4=0) | (b8=0 & b3=0 & b1=0)) & (b7=0 & b4=0 & b1=0) -> (state'=0);
+    [cover732] state=1 & die=12 & !((b12=0) | (b11=0 & b1=0) | (b10=0 & b2=0) | (b9=0 & b3=0) | (b9=0 & b2=0 & b1=0) | (b8=0 & b4=0) | (b8=0 & b3=0 & b1=0) | (b7=0 & b5=0) | (b7=0 & b4=0 & b1=0)) & (b7=0 & b3=0 & b2=0) -> (state'=0);
+    [cover651] state=1 & die=12 & !((b12=0) | (b11=0 & b1=0) | (b10=0 & b2=0) | (b9=0 & b3=0) | (b9=0 & b2=0 & b1=0) | (b8=0 & b4=0) | (b8=0 & b3=0 & b1=0) | (b7=0 & b5=0) | (b7=0 & b4=0 & b1=0)) & (b6=0 & b5=0 & b1=0) -> (state'=0);
+    [cover642] state=1 & die=12 & !((b12=0) | (b11=0 & b1=0) | (b10=0 & b2=0) | (b9=0 & b3=0) | (b9=0 & b2=0 & b1=0) | (b8=0 & b4=0) | (b8=0 & b3=0 & b1=0) | (b7=0 & b5=0) | (b7=0 & b4=0 & b1=0) | (b7=0 & b3=0 & b2=0) | (b6=0 & b5=0 & b1=0)) & (b6=0 & b4=0 & b2=0) -> (state'=0);
+    [cover6321] state=1 & die=12 & !((b12=0) | (b11=0 & b1=0) | (b10=0 & b2=0) | (b9=0 & b3=0) | (b9=0 & b2=0 & b1=0) | (b8=0 & b4=0) | (b8=0 & b3=0 & b1=0) | (b7=0 & b5=0) | (b7=0 & b4=0 & b1=0) | (b7=0 & b3=0 & b2=0) | (b6=0 & b5=0 & b1=0)) & (b6=0 & b3=0 & b2=0 & b1=0) -> (state'=0);
+    [cover543] state=1 & die=12 & !((b12=0) | (b11=0 & b1=0) | (b10=0 & b2=0) | (b9=0 & b3=0) | (b9=0 & b2=0 & b1=0) | (b8=0 & b4=0) | (b8=0 & b3=0 & b1=0) | (b7=0 & b5=0) | (b7=0 & b4=0 & b1=0) | (b7=0 & b3=0 & b2=0) | (b6=0 & b5=0 & b1=0) | (b6=0 & b4=0 & b2=0) | (b6=0 & b3=0 & b2=0 & b1=0)) & (b5=0 & b4=0 & b3=0) -> (state'=0);
+    [cover5421] state=1 & die=12 & !((b12=0) | (b11=0 & b1=0) | (b10=0 & b2=0) | (b9=0 & b3=0) | (b9=0 & b2=0 & b1=0) | (b8=0 & b4=0) | (b8=0 & b3=0 & b1=0) | (b7=0 & b5=0) | (b7=0 & b4=0 & b1=0) | (b7=0 & b3=0 & b2=0) | (b6=0 & b5=0 & b1=0) | (b6=0 & b4=0 & b2=0) | (b6=0 & b3=0 & b2=0 & b1=0)) & (b5=0 & b4=0 & b2=0 & b1=0) -> (state'=0);
+    [ncover] state=1 & die=12 &  !((b12=0) | (b11=0 & b1=0) | (b10=0 & b2=0) | (b9=0 & b3=0) | (b9=0 & b2=0 & b1=0) | (b8=0 & b4=0) | (b8=0 & b3=0 & b1=0) | (b7=0 & b5=0) | (b7=0 & b4=0 & b1=0) | (b7=0 & b3=0 & b2=0) | (b6=0 & b5=0 & b1=0) | (b6=0 & b4=0 & b2=0) | (b6=0 & b3=0 & b2=0 & b1=0) | (b5=0 & b4=0 & b3=0) | (b5=0 & b4=0 & b2=0 & b1=0)) -> (state'=2);
+
+    [count] state=2 -> (state'=3);
+
+    [halts] state=3 -> true;
+
+endmodule
+
+
+module board1
+
+	b1 : [0..1];
+
+	[cover1] b1=0 -> (b1'=1);
+	[cover12] b1=0 -> (b1'=1);
+	[cover13] b1=0 -> (b1'=1);
+	[cover14] b1=0 -> (b1'=1);
+	[cover15] b1=0 -> (b1'=1);
+	[cover16] b1=0 -> (b1'=1);
+	[cover17] b1=0 -> (b1'=1);
+	[cover18] b1=0 -> (b1'=1);
+	[cover19] b1=0 -> (b1'=1);
+	[cover110] b1=0 -> (b1'=1);
+	[cover111] b1=0 -> (b1'=1);
+	[cover123] b1=0 -> (b1'=1);
+	[cover124] b1=0 -> (b1'=1);
+	[cover125] b1=0 -> (b1'=1);
+	[cover134] b1=0 -> (b1'=1);
+	[cover126] b1=0 -> (b1'=1);
+	[cover135] b1=0 -> (b1'=1);
+	[cover127] b1=0 -> (b1'=1);
+	[cover145] b1=0 -> (b1'=1);
+	[cover136] b1=0 -> (b1'=1);
+	[cover146] b1=0 -> (b1'=1);
+	[cover137] b1=0 -> (b1'=1);
+	[cover128] b1=0 -> (b1'=1);
+	[cover147] b1=0 -> (b1'=1);
+	[cover156] b1=0 -> (b1'=1);
+	[cover138] b1=0 -> (b1'=1);
+	[cover129] b1=0 -> (b1'=1);
+	[cover1234] b1=0 -> (b1'=1);
+	[cover1235] b1=0 -> (b1'=1);
+	[cover1236] b1=0 -> (b1'=1);
+	[cover1245] b1=0 -> (b1'=1);
+
+endmodule
+
+module board2
+
+	b2 : [0..1];
+
+	[cover2] b2=0 -> (b2'=1);
+	[cover12] b2=0 -> (b2'=1);
+	[cover23] b2=0 -> (b2'=1);
+	[cover24] b2=0 -> (b2'=1);
+	[cover25] b2=0 -> (b2'=1);
+	[cover26] b2=0 -> (b2'=1);
+	[cover27] b2=0 -> (b2'=1);
+	[cover28] b2=0 -> (b2'=1);
+	[cover29] b2=0 -> (b2'=1);
+	[cover210] b2=0 -> (b2'=1);
+	[cover123] b2=0 -> (b2'=1);
+	[cover124] b2=0 -> (b2'=1);
+	[cover125] b2=0 -> (b2'=1);
+	[cover234] b2=0 -> (b2'=1);
+	[cover126] b2=0 -> (b2'=1);
+	[cover127] b2=0 -> (b2'=1);
+	[cover235] b2=0 -> (b2'=1);
+	[cover245] b2=0 -> (b2'=1);
+	[cover236] b2=0 -> (b2'=1);
+	[cover128] b2=0 -> (b2'=1);
+	[cover237] b2=0 -> (b2'=1);
+	[cover246] b2=0 -> (b2'=1);
+	[cover129] b2=0 -> (b2'=1);
+	[cover1234] b2=0 -> (b2'=1);
+	[cover1235] b2=0 -> (b2'=1);
+	[cover1236] b2=0 -> (b2'=1);
+	[cover1245] b2=0 -> (b2'=1);
+
+endmodule
+
+module board3
+
+	b3 : [0..1];
+
+	[cover3] b3=0 -> (b3'=1);
+	[cover13] b3=0 -> (b3'=1);
+	[cover23] b3=0 -> (b3'=1);
+	[cover34] b3=0 -> (b3'=1);
+	[cover35] b3=0 -> (b3'=1);
+	[cover36] b3=0 -> (b3'=1);
+	[cover37] b3=0 -> (b3'=1);
+	[cover38] b3=0 -> (b3'=1);
+	[cover39] b3=0 -> (b3'=1);
+	[cover123] b3=0 -> (b3'=1);
+	[cover134] b3=0 -> (b3'=1);
+	[cover234] b3=0 -> (b3'=1);
+	[cover135] b3=0 -> (b3'=1);
+	[cover235] b3=0 -> (b3'=1);
+	[cover136] b3=0 -> (b3'=1);
+	[cover236] b3=0 -> (b3'=1);
+	[cover137] b3=0 -> (b3'=1);
+	[cover237] b3=0 -> (b3'=1);
+	[cover345] b3=0 -> (b3'=1);
+	[cover138] b3=0 -> (b3'=1);
+	[cover1234] b3=0 -> (b3'=1);
+	[cover1235] b3=0 -> (b3'=1);
+	[cover1236] b3=0 -> (b3'=1);
+
+endmodule
+
+module board4
+
+	b4 : [0..1];
+
+	[cover4] b4=0 -> (b4'=1);
+	[cover14] b4=0 -> (b4'=1);
+	[cover24] b4=0 -> (b4'=1);
+	[cover34] b4=0 -> (b4'=1);
+	[cover45] b4=0 -> (b4'=1);
+	[cover46] b4=0 -> (b4'=1);
+	[cover47] b4=0 -> (b4'=1);
+	[cover48] b4=0 -> (b4'=1);
+	[cover124] b4=0 -> (b4'=1);
+	[cover134] b4=0 -> (b4'=1);
+	[cover234] b4=0 -> (b4'=1);
+	[cover145] b4=0 -> (b4'=1);
+	[cover146] b4=0 -> (b4'=1);
+	[cover245] b4=0 -> (b4'=1);
+	[cover147] b4=0 -> (b4'=1);
+	[cover345] b4=0 -> (b4'=1);
+	[cover246] b4=0 -> (b4'=1);
+	[cover1234] b4=0 -> (b4'=1);
+	[cover1245] b4=0 -> (b4'=1);
+
+endmodule
+
+module board5
+
+	b5 : [0..1];
+
+	[cover5] b5=0 -> (b5'=1);
+	[cover15] b5=0 -> (b5'=1);
+	[cover25] b5=0 -> (b5'=1);
+	[cover35] b5=0 -> (b5'=1);
+	[cover45] b5=0 -> (b5'=1);
+	[cover56] b5=0 -> (b5'=1);
+	[cover57] b5=0 -> (b5'=1);
+	[cover125] b5=0 -> (b5'=1);
+	[cover135] b5=0 -> (b5'=1);
+	[cover145] b5=0 -> (b5'=1);
+	[cover235] b5=0 -> (b5'=1);
+	[cover245] b5=0 -> (b5'=1);
+	[cover156] b5=0 -> (b5'=1);
+	[cover345] b5=0 -> (b5'=1);
+	[cover1235] b5=0 -> (b5'=1);
+	[cover1245] b5=0 -> (b5'=1);
+
+endmodule
+
+module board6
+
+	b6 : [0..1];
+
+	[cover6] b6=0 -> (b6'=1);
+	[cover16] b6=0 -> (b6'=1);
+	[cover26] b6=0 -> (b6'=1);
+	[cover36] b6=0 -> (b6'=1);
+	[cover46] b6=0 -> (b6'=1);
+	[cover56] b6=0 -> (b6'=1);
+	[cover126] b6=0 -> (b6'=1);
+	[cover136] b6=0 -> (b6'=1);
+	[cover146] b6=0 -> (b6'=1);
+	[cover236] b6=0 -> (b6'=1);
+	[cover156] b6=0 -> (b6'=1);
+	[cover246] b6=0 -> (b6'=1);
+	[cover1236] b6=0 -> (b6'=1);
+
+endmodule
+
+module board7
+
+	b7 : [0..1];
+
+	[cover7] b7=0 -> (b7'=1);
+	[cover17] b7=0 -> (b7'=1);
+	[cover27] b7=0 -> (b7'=1);
+	[cover37] b7=0 -> (b7'=1);
+	[cover47] b7=0 -> (b7'=1);
+	[cover57] b7=0 -> (b7'=1);
+	[cover127] b7=0 -> (b7'=1);
+	[cover137] b7=0 -> (b7'=1);
+	[cover147] b7=0 -> (b7'=1);
+	[cover237] b7=0 -> (b7'=1);
+
+endmodule
+
+module board8
+
+	b8 : [0..1];
+
+	[cover8] b8=0 -> (b8'=1);
+	[cover18] b8=0 -> (b8'=1);
+	[cover28] b8=0 -> (b8'=1);
+	[cover38] b8=0 -> (b8'=1);
+	[cover48] b8=0 -> (b8'=1);
+	[cover128] b8=0 -> (b8'=1);
+	[cover138] b8=0 -> (b8'=1);
+
+endmodule
+
+module board9
+
+	b9 : [0..1];
+
+	[cover9] b9=0 -> (b9'=1);
+	[cover19] b9=0 -> (b9'=1);
+	[cover29] b9=0 -> (b9'=1);
+	[cover39] b9=0 -> (b9'=1);
+	[cover129] b9=0 -> (b9'=1);
+
+endmodule
+
+module board10
+
+	b10 : [0..1];
+
+	[cover10] b10=0 -> (b10'=1);
+	[cover110] b10=0 -> (b10'=1);
+	[cover210] b10=0 -> (b10'=1);
+
+endmodule
+
+module board11
+
+	b11 : [0..1];
+
+	[cover11] b11=0 -> (b11'=1);
+	[cover111] b11=0 -> (b11'=1);
+
+endmodule
+
+module board12
+
+	b12 : [0..1];
+
+	[cover12] b12=0 -> (b12'=1);
+
+endmodule
+
+
+rewards "total_boards"
+    state=2 : score;
+endrewards
+
+rewards "no_rolls"
+    state=0: 1;
+endrewards

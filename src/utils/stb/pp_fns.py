@@ -78,7 +78,8 @@ def list_covers(b, strategy, newline):
         else:
             covers = parts.sort(reverse=True) # tidy up arrangement even with no strategy
 
-        all_covers.append(covers_to_prism(i, covers, strategy!=0, newline))
+        if covers:
+            all_covers.append(covers_to_prism(i, covers, strategy!=0, newline))
     
     return f"\n{newline}".join(all_covers)
 
@@ -94,7 +95,7 @@ def covers_to_prism(n, covers, determ, newline):
             prev_states = [convert_cover(c) for c in covers[:i]]
             negate_states = f" !({' | '.join(prev_states)}) &"
 
-        prism_cover = f"{action_label} state=1 & die={n} &{negate_states} {convert_cover(cover)} -> (state'=0) & {convert_cover_post(cover)};"
+        prism_cover = f"{action_label} state=1 & die={n} &{negate_states} {convert_cover(cover)} -> (state'=0);"
         all_covers.append(prism_cover)
 
 
@@ -110,12 +111,6 @@ def convert_cover(cover):
 
     return(f"({' & '.join(bools)})")
 
-def convert_cover_post(cover):
-    # given a single cover, convert it to a PRISM expression (after transition)
-    bools = [f"(b{i}'=1)" for i in cover]
-
-    return(f"{' & '.join(bools)})")
-
 def partitions(n):
     # all partitions, allowing repetition (e.g multiple ones)
     all_parts = set()
@@ -125,7 +120,29 @@ def partitions(n):
             all_parts.add(tuple(sorted((i, ) + j, reverse=True)))
     
     return all_parts
+
+def list_boards(b, newline):
+    # given b boards, produces PRISM mode producing these board modules
+    return((newline*2).join([produce_board(i, b, newline) for i in range(1,b+1)]))
+
+def produce_board(current, b, newline):
+    # produce PRISM code for one board
+    parts = []
+    for i in range(1, b+1):
+        parts.extend([p[::-1] for p in partitions(i) if len(set(p)) == len(p) and current in p])
+
+    parts.sort(key=len, reverse=False)
+
+    board_module = [f"module board{current}", "", f"\tb{current} : [0..1];", ""]
+
+    for p in parts:
+        board_module.append(f"\t[cover{''.join([str(i) for i in p])}] b{current}=0 -> (b{current}'=1);")
     
+    board_module.append("")
+    board_module.append("endmodule")
+    
+    return(newline.join(board_module))
+
 def lookup(fname):
-    functions = {"score": score, "die": die, "dietoss": dietoss, "listcovers": list_covers}
+    functions = {"score": score, "die": die, "dietoss": dietoss, "listcovers": list_covers, "listboards": list_boards}
     return functions[fname]
