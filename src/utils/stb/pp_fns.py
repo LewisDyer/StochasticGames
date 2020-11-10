@@ -1,5 +1,8 @@
 # Shut the Box-specific functions
-from math import floor, factorial
+
+from math import factorial, floor
+
+
 
 def test(x=0):
     if(x):
@@ -7,24 +10,23 @@ def test(x=0):
     else:
         return("this is from the stb folder")
 
-def score(n):
+def score(n, newline):
     # outputs a prism formula for the score as the sum of covered boards
     # could extend later to count number of boards/use other scoring schemes?
     score_terms = " + ".join([f"b{i}*{i}"for i in range(1, n+1)])
     return(f"formula score = {score_terms};")
 
-def die(d):
-   
-   return(f"die: [0..{d}] init 0;\n")
+def die(d, newline):
+    return(f"die: [0..{d}] init 0;\n")
 
-def dietoss(d, ndie):
+def dietoss(d, ndie, newline):
     # defines PRISM code for rolling a given number of d-sided dice
 
     all_outcomes = d**ndie
     
     probs = [f"{prob_sum(d, ndie, i)}/{all_outcomes}:(die'={i}) & (state'=1)" for i in range(ndie, d*ndie+1)]
 
-    probs = "\n\t\t\t\t\t+ ".join(probs)
+    probs = f"{newline}\t\t\t\t\t+ ".join(probs)
     return(f"[die_toss] state=0 -> {probs};")
 
 def prob_sum(sides, throws, target):
@@ -59,7 +61,7 @@ def low_board(covers):
     covers.sort(key=len, reverse=True)
     return(covers)
 
-def list_covers(b, strategy):
+def list_covers(b, strategy, newline):
 
     strategy_lookup = {1: high_board, 2: low_board}
     # given b boards to cover and a strategy to prioritise boards, returns PRISM model code presenting all possible board coverings
@@ -76,11 +78,11 @@ def list_covers(b, strategy):
         else:
             covers = parts.sort(reverse=True) # tidy up arrangement even with no strategy
 
-        all_covers.append(covers_to_prism(i, covers, strategy!=0))
+        all_covers.append(covers_to_prism(i, covers, strategy!=0, newline))
     
-    return "\n\n".join(all_covers)
+    return f"\n{newline}".join(all_covers)
 
-def covers_to_prism(n, covers, determ):
+def covers_to_prism(n, covers, determ, newline):
     # given a list of covers for a value n, convert to PRISM model code
     negate_states = ""
     all_covers = []
@@ -91,7 +93,6 @@ def covers_to_prism(n, covers, determ):
         if determ & i > 0:
             prev_states = [convert_cover(c) for c in covers[:i]]
             negate_states = f" !({' | '.join(prev_states)}) &"
-            #print(negate_states)
 
         prism_cover = f"{action_label} state=1 & die={n} &{negate_states} {convert_cover(cover)} -> (state'=0) & {convert_cover_post(cover)};"
         all_covers.append(prism_cover)
@@ -101,8 +102,7 @@ def covers_to_prism(n, covers, determ):
     negate_states = f" !({' | '.join(prev_states)})"
 
     all_covers.append(f"[ncover] state=1 & die={n} & {negate_states} -> (state'=2);") 
-    return("\n".join(all_covers))
-
+    return(newline.join(all_covers))
 
 def convert_cover(cover):
     # given a single cover, convert it to a PRISM expression
@@ -126,11 +126,6 @@ def partitions(n):
     
     return all_parts
     
-
-print(list_covers(6, 1))
-#list_covers(12, 2)
-
-
 def lookup(fname):
     functions = {"score": score, "die": die, "dietoss": dietoss, "listcovers": list_covers}
     return functions[fname]

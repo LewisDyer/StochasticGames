@@ -26,7 +26,7 @@ def get_function(location, fname):
         functions = importlib.import_module(f'{location}.pp_fns')
     else:
         functions = importlib.import_module('pp_fns')
-    
+
     return functions.lookup(fname)
 
 def check_int(s):
@@ -64,7 +64,7 @@ def replace_params(params, param_lookup):
                 params[i] = param_lookup[param]
 
     return params
-    
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('input', type=pathlib.Path)
@@ -75,6 +75,7 @@ if __name__ == '__main__':
 
     param_lookup = set_params(args.params)
 
+
     with args.input.open('r') as f_in, args.output.open('w') as f_out:
         for line in f_in:
             template = re.search(r'@(.*?)@', line)
@@ -83,9 +84,14 @@ if __name__ == '__main__':
                 
                 if params:
                     params = replace_params(params, param_lookup)
+                else:
+                    params = [] # need to append whitespace later on
                 fn = get_function(location, fname)
-                
-                f_out.write(fn(*params) + '\n')
+                            
+                whitespace = f"\n{line[:len(line)-len(line.lstrip())]}" # capture leading whitespace to add to new line
+
+                params.append(whitespace)
+                f_out.write(whitespace + fn(*params) + '\n')
             else:
                 f_out.write(line)
 
