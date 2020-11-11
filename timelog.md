@@ -64,3 +64,4 @@ Date | Duration | Summary
 Date | Duration | Summary
 ---- | -------- | -------
 10/11/20 | 2.5 hours | Improved preprocessor to inherit whitespace from template tag. Almost finished off ShutTheBox specific functions, generated a few example models and prepared status report.
+11/11/20 | 0.5 hours | Supervisor meeting, added minutes
