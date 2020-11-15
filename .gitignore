@@ -1,1 +1,4 @@
 __pycache__/
+.vscode/settings.json
+src/.ipynb_checkpoints/ShutTheBox-checkpoint.ipynb
+src/ShutTheBox/data

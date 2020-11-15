@@ -16,7 +16,7 @@ def comment(b, d, ndie, newline):
 def player(b, newline):
     # given a number of boards, defines player1 using those boards to set all of player 1's actions
 
-    output = ["player p1"]
+    output = ["player p1", "player1,"]
 
     for i in range(1, b+1):
         parts = [p for p in partitions(i) if len(set(p)) == len(p)]
@@ -24,7 +24,7 @@ def player(b, newline):
         parts = [f"[cover_{'_'.join(str(c) for c in p)}]" for p in parts]
         output.append(", ".join(parts) + ",")
     
-    output.append("[ncover], [count], [halts]")
+    output.append("[die_toss], [ncover], [count], [halts]")
     full_output = f"{newline}\t".join(output) + f"{newline}endplayer"
 
     return full_output

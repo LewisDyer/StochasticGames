@@ -95,4 +95,6 @@ if __name__ == '__main__':
             else:
                 f_out.write(line)
 
+    print(f"Model generated successfully at {args.output}") # provide feedback in Jupyter notebook
+
 
