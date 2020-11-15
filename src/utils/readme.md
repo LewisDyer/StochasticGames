@@ -10,7 +10,14 @@ PyPrism is a tool which accepts a partially completed PRISM model file, using th
 * The _function_ represents the name of the function which generates PRISM model code.
 * The _parameters_ are provided to the function to allow for the complexity of the model to vary based on instance size (for instance, for easily varying the number of players in an n player game). Note that template functions only support integer arguments at the moment.
 
-Each template instruction represents a function call, and the outputted PRISM model code from that function is placed where the template instruction occurs.
+Each template instruction represents a function call, and the outputted PRISM model code from that function is placed where the template instruction occurs. Any whitespace before the template instruction, such as tabs or spaces, is preserved.
+
+## Defining functions
+
+When defining functions in a `pp_fns.py` file, several considerations must be taken into account:
+
+* The file *must* contain a function called `lookup`. This function takes in a string, and must return a function corresponding to the given string. The implementation details of this function are not specified, but a dictionary matching strings to functions is the recommended approach.
+* Functions which are externally available to the preprocessor (i.e functions accessible via `lookup`) *must* include `newline` as their last parameter, even if the function does not take any newlines. When including a newline in generated PRISM code, make sure to use `newline` instead of `\n`. This ensures that any whitespace before the template instruction is respected.
 
 ## Usage
 
