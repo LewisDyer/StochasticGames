@@ -1,11 +1,10 @@
-// Modelling Shut the Box using 6 boards and one d6
+@stb/comment b d ndie@
 // Automatically generated
 
 // turn-based stochastic game
+csg
 
-smg
-
-player p1 player1 endplayer
+@stb/player b@
 
 formula game_over = (state=3);
 @stb/score b@
@@ -18,7 +17,7 @@ module player1
     // 2: no more valid choices to cover, halt
     state: [0..2] init 0;
     // current value on die (with initial 0 state)
-    @stb/die d@a
+    @stb/die d@
     // boards (0 if uncovered, 1 if covered)
     // note that we use ints instead of bools to make it easier to count the payoffs later
 

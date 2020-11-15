@@ -2,13 +2,32 @@
 
 from math import factorial, floor
 
-
-
 def test(x=0):
     if(x):
         return("this is from the stb folder\nyou set my argument as true!")
     else:
         return("this is from the stb folder")
+
+
+def comment(b, d, ndie, newline):
+    # generate comment at start of file giving info about game
+    return f"// Modelling Shut the Box with {b} boards and {ndie}d{d}"
+
+def player(b, newline):
+    # given a number of boards, defines player1 using those boards to set all of player 1's actions
+
+    output = ["player p1"]
+
+    for i in range(1, b+1):
+        parts = [p for p in partitions(i) if len(set(p)) == len(p)]
+        parts.sort(reverse=True)
+        parts = [f"[cover_{'_'.join(str(c) for c in p)}]" for p in parts]
+        output.append(", ".join(parts) + ",")
+    
+    output.append("[ncover], [count], [halts]")
+    full_output = f"{newline}\t".join(output) + f"{newline}endplayer"
+
+    return full_output
 
 def score(n, newline):
     # outputs a prism formula for the score as the sum of covered boards
@@ -89,7 +108,7 @@ def covers_to_prism(n, covers, determ, newline):
     all_covers = []
     for i in range(len(covers)):
         cover = covers[i]
-        action_label = f"[cover{''.join(str(c) for c in cover)}]"
+        action_label = f"[cover_{'_'.join(str(c) for c in cover)}]"
 
         if determ & i > 0:
             prev_states = [convert_cover(c) for c in covers[:i]]
@@ -131,12 +150,13 @@ def produce_board(current, b, newline):
     for i in range(1, b+1):
         parts.extend([p[::-1] for p in partitions(i) if len(set(p)) == len(p) and current in p])
 
-    parts.sort(key=len, reverse=False)
+    parts = [sorted(p, reverse=True) for p in parts]
+    parts.sort(key=len)
 
     board_module = [f"module board{current}", "", f"\tb{current} : [0..1];", ""]
 
     for p in parts:
-        board_module.append(f"\t[cover{''.join([str(i) for i in p])}] b{current}=0 -> (b{current}'=1);")
+        board_module.append(f"\t[cover_{'_'.join([str(i) for i in p])}] b{current}=0 -> (b{current}'=1);")
     
     board_module.append("")
     board_module.append("endmodule")
@@ -144,5 +164,5 @@ def produce_board(current, b, newline):
     return(newline.join(board_module))
 
 def lookup(fname):
-    functions = {"score": score, "die": die, "dietoss": dietoss, "listcovers": list_covers, "listboards": list_boards}
+    functions = {"comment": comment, "player": player, "score": score, "die": die, "dietoss": dietoss, "listcovers": list_covers, "listboards": list_boards}
     return functions[fname]
