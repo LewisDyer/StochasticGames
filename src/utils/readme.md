@@ -21,6 +21,6 @@ When defining functions in a `pp_fns.py` file, several considerations must be ta
 
 ## Usage
 
-`python pyprism.py [input] [output]`.
+`python pyprism.py [input] [output] <params>`.
 
-The `input` parameter represents the filename of the `.pyprism` template file, while `output` represents the filename of the outputted `.prism` model file.
+The `input` parameter represents the filename of the `.pyprism` template file, while `output` represents the filename of the outputted `.prism` model file. The optional `params` parameter represents the location of a `csv` file containing parameters and their values.
