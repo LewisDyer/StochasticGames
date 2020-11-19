@@ -1,0 +1,31 @@
+const int k;
+
+// check the game always eventually terminates
+<<p1>>Pmax=? [ F game_over ]
+
+// probability that score is k
+<<p1>>Pmin=? [ F game_over&score=k ]
+// probability that score is k
+<<p1>>Pmax=? [ F game_over&score=k ]
+
+// expected difference in prob of score = k
+<<p1>>Pmax=? [ F game_over&score=k ] - <<p1>>Pmin=? [ F game_over&score=k ]
+// probability that score is at least k
+<<p1>>Pmin=? [ F game_over&score<=k ]
+
+// probability that score is at least k
+<<p1>>Pmax=? [ F game_over&score<=k ]
+
+// Min and max expected boards
+<<p1>>R{"total_boards"}min=? [ F game_over ]
+<<p1>>R{"total_boards"}max=? [ F game_over ]
+
+// min rolls
+<<p1>>R{"no_rolls"}max=? [ F game_over ]
+
+// max rolls
+<<p1>>R{"no_rolls"}min=? [ F game_over ]
+
+@stb/board_given_score b@
+@stb/score_given_board b@
+

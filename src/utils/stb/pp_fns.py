@@ -163,6 +163,28 @@ def produce_board(current, b, newline):
     
     return(newline.join(board_module))
 
+def board_given_score(b, newline):
+    output = []
+    for i in range(1, b+1):
+        # generate single property
+        # first the comment
+        output.append(f"// Probability of {i} being covered given the score is k")
+        # now the property
+        output.append(f"<<p1>>Pmin=? [ F game_over&b{i}=1&score=k ]/<<p1>>Pmin=? [ F game_over&score=k ]")
+        output.append("")
+    return newline.join(output)
+
+def score_given_board(b, newline):
+    output = []
+    for i in range(1, b+1):
+        # generate single property
+        # first the comment
+        output.append(f"// Probability of score k given that {i} is covered")
+        # now the property
+        output.append(f"<<p1>>Pmin=? [ F game_over&b{i}=1&score=k ]/<<p1>>Pmin=? [ F game_over&b{i}=1 ]")
+        output.append("")
+    return newline.join(output)
+
 def lookup(fname):
-    functions = {"comment": comment, "player": player, "score": score, "die": die, "dietoss": dietoss, "listcovers": list_covers, "listboards": list_boards}
+    functions = {"comment": comment, "player": player, "score": score, "die": die, "dietoss": dietoss, "listcovers": list_covers, "listboards": list_boards, "board_given_score": board_given_score, "score_given_board": score_given_board}
     return functions[fname]
