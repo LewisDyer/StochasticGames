@@ -71,3 +71,4 @@ Date | Duration | Summary
 Date | Duration | Summary
 ---- | -------- | -------
 18/11/20 | 0.5 hours | Supervisor meeting, writing up minutes
+19/11/20 | 1.5 hours | Adding more visualisations to automation environment, fixed bug in preprocessor with nondeterministic strategy in ShutTheBox

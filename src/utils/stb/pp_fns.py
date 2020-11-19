@@ -95,7 +95,9 @@ def list_covers(b, strategy, newline):
         if strategy:
             covers = strategy_lookup[strategy](parts)
         else:
-            covers = parts.sort(reverse=True) # tidy up arrangement even with no strategy
+            covers = parts
+            covers.sort(reverse=True) # tidy up arrangement even with no strategy
+            print(covers)
 
         if covers:
             all_covers.append(covers_to_prism(i, covers, strategy!=0, newline))
@@ -121,7 +123,7 @@ def covers_to_prism(n, covers, determ, newline):
     prev_states = [convert_cover(c) for c in covers]
     negate_states = f" !({' | '.join(prev_states)})"
 
-    all_covers.append(f"[ncover] state=1 & die={n} & {negate_states} -> (state'=2);") 
+    all_covers.append(f"[ncover] state=1 & die={n} & {negate_states} -> (state'=2);")
     return(newline.join(all_covers))
 
 def convert_cover(cover):
