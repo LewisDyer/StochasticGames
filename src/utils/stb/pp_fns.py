@@ -97,7 +97,6 @@ def list_covers(b, strategy, newline):
         else:
             covers = parts
             covers.sort(reverse=True) # tidy up arrangement even with no strategy
-            print(covers)
 
         if covers:
             all_covers.append(covers_to_prism(i, covers, strategy!=0, newline))
