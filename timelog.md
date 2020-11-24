@@ -77,5 +77,5 @@ Date | Duration | Summary
 ## Week 9
 Date | Duration | Summary
 ---- | -------- | -------
-23/11/20 | 2.0 hours | Tidying up visualisations, improving experiment automation, added some questions for next meeting
-24/11/20 | 1.0 hours | Started fixing bug when max roll is greater than board count, still need to fix labels not being associated to players
+23/11/20 | 2 hours | Tidying up visualisations, improving experiment automation, added some questions for next meeting
+24/11/20 | 2 hours | Fixed bug with model not fully generating when max roll is greater than number of possible boards. Tidied up questions and comments for next supervisor meeting

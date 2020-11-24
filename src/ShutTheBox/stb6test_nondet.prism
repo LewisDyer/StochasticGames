@@ -1,5 +1,5 @@
 
-// Modelling Shut the Box with 9 boards and 2d6
+// Modelling Shut the Box with 12 boards and 2d6
 // Automatically generated
 
 // turn-based stochastic game
@@ -8,7 +8,6 @@ csg
 
 player p1
 	player1,
-	[cover_1],
 	[cover_2],
 	[cover_3], [cover_2_1],
 	[cover_4], [cover_3_1],
@@ -17,15 +16,15 @@ player p1
 	[cover_7], [cover_6_1], [cover_5_2], [cover_4_3], [cover_4_2_1],
 	[cover_8], [cover_7_1], [cover_6_2], [cover_5_3], [cover_5_2_1], [cover_4_3_1],
 	[cover_9], [cover_8_1], [cover_7_2], [cover_6_3], [cover_6_2_1], [cover_5_4], [cover_5_3_1], [cover_4_3_2],
-	[cover_9_1], [cover_8_2], [cover_7_3], [cover_7_2_1], [cover_6_4], [cover_6_3_1], [cover_5_4_1], [cover_5_3_2], [cover_4_3_2_1],
-	[cover_9_2], [cover_8_3], [cover_8_2_1], [cover_7_4], [cover_7_3_1], [cover_6_5], [cover_6_4_1], [cover_6_3_2], [cover_5_4_2], [cover_5_3_2_1],
-	[cover_9_3], [cover_9_2_1], [cover_8_4], [cover_8_3_1], [cover_7_5], [cover_7_4_1], [cover_7_3_2], [cover_6_5_1], [cover_6_4_2], [cover_6_3_2_1], [cover_5_4_3], [cover_5_4_2_1],
+	[cover_10], [cover_9_1], [cover_8_2], [cover_7_3], [cover_7_2_1], [cover_6_4], [cover_6_3_1], [cover_5_4_1], [cover_5_3_2], [cover_4_3_2_1],
+	[cover_11], [cover_10_1], [cover_9_2], [cover_8_3], [cover_8_2_1], [cover_7_4], [cover_7_3_1], [cover_6_5], [cover_6_4_1], [cover_6_3_2], [cover_5_4_2], [cover_5_3_2_1],
+	[cover_12], [cover_11_1], [cover_10_2], [cover_9_3], [cover_9_2_1], [cover_8_4], [cover_8_3_1], [cover_7_5], [cover_7_4_1], [cover_7_3_2], [cover_6_5_1], [cover_6_4_2], [cover_6_3_2_1], [cover_5_4_3], [cover_5_4_2_1],
 	[die_toss], [ncover], [count], [halts]
 endplayer
 
 formula game_over = (state=3);
 
-formula score = b1*1 + b2*2 + b3*3 + b4*4 + b5*5 + b6*6 + b7*7 + b8*8 + b9*9;
+formula score = b1*1 + b2*2 + b3*3 + b4*4 + b5*5 + b6*6 + b7*7 + b8*8 + b9*9 + b10*10 + b11*11 + b12*12;
 
 module player1
 
@@ -102,6 +101,7 @@ module player1
     [cover_4_3_2] state=1 & die=9 & (b4=0 & b3=0 & b2=0) -> (state'=0);
     [ncover] state=1 & die=9 &  !((b9=0) | (b8=0 & b1=0) | (b7=0 & b2=0) | (b6=0 & b3=0) | (b6=0 & b2=0 & b1=0) | (b5=0 & b4=0) | (b5=0 & b3=0 & b1=0) | (b4=0 & b3=0 & b2=0)) -> (state'=2);
 
+    [cover_10] state=1 & die=10 & (b10=0) -> (state'=0);
     [cover_9_1] state=1 & die=10 & (b9=0 & b1=0) -> (state'=0);
     [cover_8_2] state=1 & die=10 & (b8=0 & b2=0) -> (state'=0);
     [cover_7_3] state=1 & die=10 & (b7=0 & b3=0) -> (state'=0);
@@ -111,8 +111,10 @@ module player1
     [cover_5_4_1] state=1 & die=10 & (b5=0 & b4=0 & b1=0) -> (state'=0);
     [cover_5_3_2] state=1 & die=10 & (b5=0 & b3=0 & b2=0) -> (state'=0);
     [cover_4_3_2_1] state=1 & die=10 & (b4=0 & b3=0 & b2=0 & b1=0) -> (state'=0);
-    [ncover] state=1 & die=10 &  !((b9=0 & b1=0) | (b8=0 & b2=0) | (b7=0 & b3=0) | (b7=0 & b2=0 & b1=0) | (b6=0 & b4=0) | (b6=0 & b3=0 & b1=0) | (b5=0 & b4=0 & b1=0) | (b5=0 & b3=0 & b2=0) | (b4=0 & b3=0 & b2=0 & b1=0)) -> (state'=2);
+    [ncover] state=1 & die=10 &  !((b10=0) | (b9=0 & b1=0) | (b8=0 & b2=0) | (b7=0 & b3=0) | (b7=0 & b2=0 & b1=0) | (b6=0 & b4=0) | (b6=0 & b3=0 & b1=0) | (b5=0 & b4=0 & b1=0) | (b5=0 & b3=0 & b2=0) | (b4=0 & b3=0 & b2=0 & b1=0)) -> (state'=2);
 
+    [cover_11] state=1 & die=11 & (b11=0) -> (state'=0);
+    [cover_10_1] state=1 & die=11 & (b10=0 & b1=0) -> (state'=0);
     [cover_9_2] state=1 & die=11 & (b9=0 & b2=0) -> (state'=0);
     [cover_8_3] state=1 & die=11 & (b8=0 & b3=0) -> (state'=0);
     [cover_8_2_1] state=1 & die=11 & (b8=0 & b2=0 & b1=0) -> (state'=0);
@@ -123,8 +125,11 @@ module player1
     [cover_6_3_2] state=1 & die=11 & (b6=0 & b3=0 & b2=0) -> (state'=0);
     [cover_5_4_2] state=1 & die=11 & (b5=0 & b4=0 & b2=0) -> (state'=0);
     [cover_5_3_2_1] state=1 & die=11 & (b5=0 & b3=0 & b2=0 & b1=0) -> (state'=0);
-    [ncover] state=1 & die=11 &  !((b9=0 & b2=0) | (b8=0 & b3=0) | (b8=0 & b2=0 & b1=0) | (b7=0 & b4=0) | (b7=0 & b3=0 & b1=0) | (b6=0 & b5=0) | (b6=0 & b4=0 & b1=0) | (b6=0 & b3=0 & b2=0) | (b5=0 & b4=0 & b2=0) | (b5=0 & b3=0 & b2=0 & b1=0)) -> (state'=2);
+    [ncover] state=1 & die=11 &  !((b11=0) | (b10=0 & b1=0) | (b9=0 & b2=0) | (b8=0 & b3=0) | (b8=0 & b2=0 & b1=0) | (b7=0 & b4=0) | (b7=0 & b3=0 & b1=0) | (b6=0 & b5=0) | (b6=0 & b4=0 & b1=0) | (b6=0 & b3=0 & b2=0) | (b5=0 & b4=0 & b2=0) | (b5=0 & b3=0 & b2=0 & b1=0)) -> (state'=2);
 
+    [cover_12] state=1 & die=12 & (b12=0) -> (state'=0);
+    [cover_11_1] state=1 & die=12 & (b11=0 & b1=0) -> (state'=0);
+    [cover_10_2] state=1 & die=12 & (b10=0 & b2=0) -> (state'=0);
     [cover_9_3] state=1 & die=12 & (b9=0 & b3=0) -> (state'=0);
     [cover_9_2_1] state=1 & die=12 & (b9=0 & b2=0 & b1=0) -> (state'=0);
     [cover_8_4] state=1 & die=12 & (b8=0 & b4=0) -> (state'=0);
@@ -137,7 +142,7 @@ module player1
     [cover_6_3_2_1] state=1 & die=12 & (b6=0 & b3=0 & b2=0 & b1=0) -> (state'=0);
     [cover_5_4_3] state=1 & die=12 & (b5=0 & b4=0 & b3=0) -> (state'=0);
     [cover_5_4_2_1] state=1 & die=12 & (b5=0 & b4=0 & b2=0 & b1=0) -> (state'=0);
-    [ncover] state=1 & die=12 &  !((b9=0 & b3=0) | (b9=0 & b2=0 & b1=0) | (b8=0 & b4=0) | (b8=0 & b3=0 & b1=0) | (b7=0 & b5=0) | (b7=0 & b4=0 & b1=0) | (b7=0 & b3=0 & b2=0) | (b6=0 & b5=0 & b1=0) | (b6=0 & b4=0 & b2=0) | (b6=0 & b3=0 & b2=0 & b1=0) | (b5=0 & b4=0 & b3=0) | (b5=0 & b4=0 & b2=0 & b1=0)) -> (state'=2);
+    [ncover] state=1 & die=12 &  !((b12=0) | (b11=0 & b1=0) | (b10=0 & b2=0) | (b9=0 & b3=0) | (b9=0 & b2=0 & b1=0) | (b8=0 & b4=0) | (b8=0 & b3=0 & b1=0) | (b7=0 & b5=0) | (b7=0 & b4=0 & b1=0) | (b7=0 & b3=0 & b2=0) | (b6=0 & b5=0 & b1=0) | (b6=0 & b4=0 & b2=0) | (b6=0 & b3=0 & b2=0 & b1=0) | (b5=0 & b4=0 & b3=0) | (b5=0 & b4=0 & b2=0 & b1=0)) -> (state'=2);
 
     [count] state=2 -> (state'=3);
 
@@ -150,7 +155,6 @@ module board1
 
 	b1 : [0..1];
 
-	[cover_1] b1=0 -> (b1'=1);
 	[cover_2_1] b1=0 -> (b1'=1);
 	[cover_3_1] b1=0 -> (b1'=1);
 	[cover_4_1] b1=0 -> (b1'=1);
@@ -159,6 +163,8 @@ module board1
 	[cover_7_1] b1=0 -> (b1'=1);
 	[cover_8_1] b1=0 -> (b1'=1);
 	[cover_9_1] b1=0 -> (b1'=1);
+	[cover_10_1] b1=0 -> (b1'=1);
+	[cover_11_1] b1=0 -> (b1'=1);
 	[cover_3_2_1] b1=0 -> (b1'=1);
 	[cover_4_2_1] b1=0 -> (b1'=1);
 	[cover_5_2_1] b1=0 -> (b1'=1);
@@ -195,6 +201,7 @@ module board2
 	[cover_7_2] b2=0 -> (b2'=1);
 	[cover_8_2] b2=0 -> (b2'=1);
 	[cover_9_2] b2=0 -> (b2'=1);
+	[cover_10_2] b2=0 -> (b2'=1);
 	[cover_3_2_1] b2=0 -> (b2'=1);
 	[cover_4_2_1] b2=0 -> (b2'=1);
 	[cover_5_2_1] b2=0 -> (b2'=1);
@@ -354,6 +361,33 @@ module board9
 	[cover_9_2] b9=0 -> (b9'=1);
 	[cover_9_3] b9=0 -> (b9'=1);
 	[cover_9_2_1] b9=0 -> (b9'=1);
+
+endmodule
+
+module board10
+
+	b10 : [0..1];
+
+	[cover_10] b10=0 -> (b10'=1);
+	[cover_10_1] b10=0 -> (b10'=1);
+	[cover_10_2] b10=0 -> (b10'=1);
+
+endmodule
+
+module board11
+
+	b11 : [0..1];
+
+	[cover_11] b11=0 -> (b11'=1);
+	[cover_11_1] b11=0 -> (b11'=1);
+
+endmodule
+
+module board12
+
+	b12 : [0..1];
+
+	[cover_12] b12=0 -> (b12'=1);
 
 endmodule
 

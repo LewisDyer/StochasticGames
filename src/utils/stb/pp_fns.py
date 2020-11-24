@@ -18,7 +18,7 @@ def player(b, d, ndie, newline):
 
     output = ["player p1", "player1,"]
 
-    for i in range(1, d*ndie+1):
+    for i in range(ndie, d*ndie+1):
         parts = get_covers(i, b)
         parts.sort(reverse=True)
         parts = [f"[cover_{'_'.join(str(c) for c in p)}]" for p in parts]
@@ -162,7 +162,7 @@ def list_boards(b, d, ndie, newline):
 def produce_board(current, b, d, ndie, newline):
     # produce PRISM code for one board
     parts = []
-    for i in range(1, (d*ndie)+1):
+    for i in range(ndie, (d*ndie)+1):
         valid_parts = get_covers(i, b)
         parts.extend([p[::-1] for p in valid_parts if current in p])
 

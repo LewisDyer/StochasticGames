@@ -54,6 +54,15 @@ const int k;
 // Probability of 9 being covered given the score is k
 <<p1>>Pmin=? [ F game_over&b9=1&score=k ]/<<p1>>Pmin=? [ F game_over&score=k ]
 
+// Probability of 10 being covered given the score is k
+<<p1>>Pmin=? [ F game_over&b10=1&score=k ]/<<p1>>Pmin=? [ F game_over&score=k ]
+
+// Probability of 11 being covered given the score is k
+<<p1>>Pmin=? [ F game_over&b11=1&score=k ]/<<p1>>Pmin=? [ F game_over&score=k ]
+
+// Probability of 12 being covered given the score is k
+<<p1>>Pmin=? [ F game_over&b12=1&score=k ]/<<p1>>Pmin=? [ F game_over&score=k ]
+
 
 // Probability of score k given that 1 is covered
 <<p1>>Pmin=? [ F game_over&b1=1&score=k ]/<<p1>>Pmin=? [ F game_over&b1=1 ]
@@ -81,5 +90,14 @@ const int k;
 
 // Probability of score k given that 9 is covered
 <<p1>>Pmin=? [ F game_over&b9=1&score=k ]/<<p1>>Pmin=? [ F game_over&b9=1 ]
+
+// Probability of score k given that 10 is covered
+<<p1>>Pmin=? [ F game_over&b10=1&score=k ]/<<p1>>Pmin=? [ F game_over&b10=1 ]
+
+// Probability of score k given that 11 is covered
+<<p1>>Pmin=? [ F game_over&b11=1&score=k ]/<<p1>>Pmin=? [ F game_over&b11=1 ]
+
+// Probability of score k given that 12 is covered
+<<p1>>Pmin=? [ F game_over&b12=1&score=k ]/<<p1>>Pmin=? [ F game_over&b12=1 ]
 
 
