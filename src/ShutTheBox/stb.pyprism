@@ -4,7 +4,7 @@
 // turn-based stochastic game
 csg
 
-@stb/player b@
+@stb/player b d ndie@
 
 formula game_over = (state=3);
 @stb/score b@
@@ -23,7 +23,7 @@ module player1
 
     @stb/dietoss d ndie@
 
-    @stb/listcovers b strategy@
+    @stb/listcovers b d ndie strategy@
 
     [count] state=2 -> (state'=3);
 
@@ -31,7 +31,7 @@ module player1
 
 endmodule
 
-@stb/listboards b@
+@stb/listboards b d ndie@
 
 
 rewards "total_boards"

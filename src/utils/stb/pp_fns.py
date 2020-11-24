@@ -13,13 +13,13 @@ def comment(b, d, ndie, newline):
     # generate comment at start of file giving info about game
     return f"// Modelling Shut the Box with {b} boards and {ndie}d{d}"
 
-def player(b, newline):
+def player(b, d, ndie, newline):
     # given a number of boards, defines player1 using those boards to set all of player 1's actions
 
     output = ["player p1", "player1,"]
 
-    for i in range(1, b+1):
-        parts = [p for p in partitions(i) if len(set(p)) == len(p)]
+    for i in range(1, d*ndie+1):
+        parts = get_covers(i, b)
         parts.sort(reverse=True)
         parts = [f"[cover_{'_'.join(str(c) for c in p)}]" for p in parts]
         output.append(", ".join(parts) + ",")
@@ -80,7 +80,7 @@ def low_board(covers):
     covers.sort(key=len, reverse=True)
     return(covers)
 
-def list_covers(b, strategy, newline):
+def list_covers(b, d, ndie, strategy, newline):
 
     strategy_lookup = {1: high_board, 2: low_board}
     # given b boards to cover and a strategy to prioritise boards, returns PRISM model code presenting all possible board coverings
@@ -89,15 +89,15 @@ def list_covers(b, strategy, newline):
     # step 2: order partitions
     # step 3: convert to PRISM code
 
+    
     all_covers = []
-    for i in range(1, b+1):
-        parts = [p for p in partitions(i) if len(set(p)) == len(p)] # get partitions with distinct parts
+    for i in range(ndie, (d*ndie)+1):
+        parts = get_covers(i, b)
         if strategy:
             covers = strategy_lookup[strategy](parts)
         else:
             covers = parts
             covers.sort(reverse=True) # tidy up arrangement even with no strategy
-
         if covers:
             all_covers.append(covers_to_prism(i, covers, strategy!=0, newline))
     
@@ -141,15 +141,30 @@ def partitions(n):
     
     return all_parts
 
-def list_boards(b, newline):
-    # given b boards, produces PRISM mode producing these board modules
-    return((newline*2).join([produce_board(i, b, newline) for i in range(1,b+1)]))
+def get_covers(sum, no_boards):
 
-def produce_board(current, b, newline):
+    def has_valid_boards(cover, b):
+        # given a potential convering, determines if this covering is possible with the available boards in the model
+        for board in cover:
+            if board > b:
+                return False
+        return True
+    
+    parts = [p for p in partitions(sum) if len(set(p)) == len(p)] # get partitions with distinct parts
+    parts = [p for p in parts if has_valid_boards(p, no_boards)] # remove partitions which use overly large boards
+
+    return (parts)
+
+def list_boards(b, d, ndie, newline):
+    # given b boards, produces PRISM mode producing these board modules
+    return((newline*2).join([produce_board(i, b, d, ndie, newline) for i in range(1,b+1)]))
+
+def produce_board(current, b, d, ndie, newline):
     # produce PRISM code for one board
     parts = []
-    for i in range(1, b+1):
-        parts.extend([p[::-1] for p in partitions(i) if len(set(p)) == len(p) and current in p])
+    for i in range(1, (d*ndie)+1):
+        valid_parts = get_covers(i, b)
+        parts.extend([p[::-1] for p in valid_parts if current in p])
 
     parts = [sorted(p, reverse=True) for p in parts]
     parts.sort(key=len)
