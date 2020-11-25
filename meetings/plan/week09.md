@@ -1,4 +1,4 @@
-# Week 8 Status Report - 25/11/20
+# Week 9 Status Report - 25/11/20
 
 This week, I have continued to develop the experiment automation environment - namely, I've included a few more visualisations (for the probability of each score under each strategy, cumulative probability,
 and the difference in cumulative property between each pair of strategies). I still have some polish to work on, but the skeleton of the environment is mostly completed.

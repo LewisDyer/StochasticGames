@@ -79,3 +79,4 @@ Date | Duration | Summary
 ---- | -------- | -------
 23/11/20 | 2 hours | Tidying up visualisations, improving experiment automation, added some questions for next meeting
 24/11/20 | 2 hours | Fixed bug with model not fully generating when max roll is greater than number of possible boards. Tidied up questions and comments for next supervisor meeting
+25/11/20 | 1 hour | Supervisor meeting and writing up minutes
