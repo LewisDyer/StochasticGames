@@ -81,3 +81,9 @@ Date | Duration | Summary
 24/11/20 | 2 hours | Fixed bug with model not fully generating when max roll is greater than number of possible boards. Tidied up questions and comments for next supervisor meeting
 25/11/20 | 1 hour | Supervisor meeting and writing up minutes
 26/11/20 | 1.5 hours | Reorganised folder structure, parameterised filenames, separated visualistion and model checking into separate notebooks
+29/11/20 | 1 hour | Trialled generating and viewing strategies using .dot files - experimented with various tools for visualisation (Gephi/Pajek/ZGRViewer), tried out diff (seems really messy, focus on subsets of .dot files instead)
+
+## Week 10
+Date | Duration | Summary
+---- | -------- | -------
+30/11/20 | 0.5 hours | Looked into gvpr for processing .dot files, decided it was probably overkill/ill-suited for my usecase
