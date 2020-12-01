@@ -28,40 +28,21 @@ const int k;
 
 
 // Probability of 1 being covered given the score is k
-<<p1>>Pmin=? [ F game_over&b1=1&score=k ]/<<p1>>Pmin=? [ F game_over&score=k ]
+<<p1>>Pmin=? [ F game_over&b1=1&score=k ]
 
 // Probability of 2 being covered given the score is k
-<<p1>>Pmin=? [ F game_over&b2=1&score=k ]/<<p1>>Pmin=? [ F game_over&score=k ]
+<<p1>>Pmin=? [ F game_over&b2=1&score=k ]
 
 // Probability of 3 being covered given the score is k
-<<p1>>Pmin=? [ F game_over&b3=1&score=k ]/<<p1>>Pmin=? [ F game_over&score=k ]
+<<p1>>Pmin=? [ F game_over&b3=1&score=k ]
 
 // Probability of 4 being covered given the score is k
-<<p1>>Pmin=? [ F game_over&b4=1&score=k ]/<<p1>>Pmin=? [ F game_over&score=k ]
+<<p1>>Pmin=? [ F game_over&b4=1&score=k ]
 
 // Probability of 5 being covered given the score is k
-<<p1>>Pmin=? [ F game_over&b5=1&score=k ]/<<p1>>Pmin=? [ F game_over&score=k ]
+<<p1>>Pmin=? [ F game_over&b5=1&score=k ]
 
 // Probability of 6 being covered given the score is k
-<<p1>>Pmin=? [ F game_over&b6=1&score=k ]/<<p1>>Pmin=? [ F game_over&score=k ]
-
-
-// Probability of score k given that 1 is covered
-<<p1>>Pmin=? [ F game_over&b1=1&score=k ]/<<p1>>Pmin=? [ F game_over&b1=1 ]
-
-// Probability of score k given that 2 is covered
-<<p1>>Pmin=? [ F game_over&b2=1&score=k ]/<<p1>>Pmin=? [ F game_over&b2=1 ]
-
-// Probability of score k given that 3 is covered
-<<p1>>Pmin=? [ F game_over&b3=1&score=k ]/<<p1>>Pmin=? [ F game_over&b3=1 ]
-
-// Probability of score k given that 4 is covered
-<<p1>>Pmin=? [ F game_over&b4=1&score=k ]/<<p1>>Pmin=? [ F game_over&b4=1 ]
-
-// Probability of score k given that 5 is covered
-<<p1>>Pmin=? [ F game_over&b5=1&score=k ]/<<p1>>Pmin=? [ F game_over&b5=1 ]
-
-// Probability of score k given that 6 is covered
-<<p1>>Pmin=? [ F game_over&b6=1&score=k ]/<<p1>>Pmin=? [ F game_over&b6=1 ]
+<<p1>>Pmin=? [ F game_over&b6=1&score=k ]
 
 

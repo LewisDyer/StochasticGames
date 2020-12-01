@@ -88,3 +88,4 @@ Date | Duration | Summary
 ---- | -------- | -------
 30/11/20 | 0.5 hours | Looked into gvpr for processing .dot files, decided it was probably overkill/ill-suited for my usecase
 31/11/20 | 1.5 hours | Visualised stb6_1d12 with ZGRViewer, wrote up initial notes on strategy generation
+01/12/20 | 3.5 hours | Improved strategy generation notes, wrote up questions for supervisor meeting, refactored conditional probabilities to improve efficiency

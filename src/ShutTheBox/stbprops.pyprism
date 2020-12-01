@@ -27,5 +27,4 @@ const int k;
 <<p1>>R{"no_rolls"}min=? [ F game_over ]
 
 @stb/board_given_score b@
-@stb/score_given_board b@
 

@@ -1,0 +1,191 @@
+
+// Modelling Shut the Box with 12 boards and 1d6
+// Automatically generated
+
+// turn-based stochastic game
+csg
+
+
+player p1
+	player1,
+	[cover_1],
+	[cover_2],
+	[cover_3], [cover_2_1],
+	[cover_4], [cover_3_1],
+	[cover_5], [cover_4_1], [cover_3_2],
+	[cover_6], [cover_5_1], [cover_4_2], [cover_3_2_1],
+	[die_toss], [ncover], [count], [halts]
+endplayer
+
+formula game_over = (state=3);
+
+formula score = b1*1 + b2*2 + b3*3 + b4*4 + b5*5 + b6*6 + b7*7 + b8*8 + b9*9 + b10*10 + b11*11 + b12*12;
+
+module player1
+
+    // Local state:
+    // 0: rolling dice
+    // 1: choosing boards to cover
+    // 2: no more valid choices to cover, halt
+    state: [0..2] init 0;
+    // current value on die (with initial 0 state)
+
+    die: [0..6] init 0;
+
+    // boards (0 if uncovered, 1 if covered)
+    // note that we use ints instead of bools to make it easier to count the payoffs later
+
+
+    [die_toss] state=0 -> 1/6:(die'=1) & (state'=1)
+    					+ 1/6:(die'=2) & (state'=1)
+    					+ 1/6:(die'=3) & (state'=1)
+    					+ 1/6:(die'=4) & (state'=1)
+    					+ 1/6:(die'=5) & (state'=1)
+    					+ 1/6:(die'=6) & (state'=1);
+
+
+    [cover_1] state=1 & die=1 & (b1=0) -> (state'=0);
+    [ncover] state=1 & die=1 &  !((b1=0)) -> (state'=2);
+
+    [cover_2] state=1 & die=2 & (b2=0) -> (state'=0);
+    [ncover] state=1 & die=2 &  !((b2=0)) -> (state'=2);
+
+    [cover_3] state=1 & die=3 & (b3=0) -> (state'=0);
+    [cover_2_1] state=1 & die=3 & !((b3=0)) & (b2=0 & b1=0) -> (state'=0);
+    [ncover] state=1 & die=3 &  !((b3=0) | (b2=0 & b1=0)) -> (state'=2);
+
+    [cover_4] state=1 & die=4 & (b4=0) -> (state'=0);
+    [cover_3_1] state=1 & die=4 & !((b4=0)) & (b3=0 & b1=0) -> (state'=0);
+    [ncover] state=1 & die=4 &  !((b4=0) | (b3=0 & b1=0)) -> (state'=2);
+
+    [cover_5] state=1 & die=5 & (b5=0) -> (state'=0);
+    [cover_4_1] state=1 & die=5 & !((b5=0)) & (b4=0 & b1=0) -> (state'=0);
+    [cover_3_2] state=1 & die=5 & !((b5=0)) & (b3=0 & b2=0) -> (state'=0);
+    [ncover] state=1 & die=5 &  !((b5=0) | (b4=0 & b1=0) | (b3=0 & b2=0)) -> (state'=2);
+
+    [cover_6] state=1 & die=6 & (b6=0) -> (state'=0);
+    [cover_5_1] state=1 & die=6 & !((b6=0)) & (b5=0 & b1=0) -> (state'=0);
+    [cover_4_2] state=1 & die=6 & !((b6=0)) & (b4=0 & b2=0) -> (state'=0);
+    [cover_3_2_1] state=1 & die=6 & !((b6=0) | (b5=0 & b1=0) | (b4=0 & b2=0)) & (b3=0 & b2=0 & b1=0) -> (state'=0);
+    [ncover] state=1 & die=6 &  !((b6=0) | (b5=0 & b1=0) | (b4=0 & b2=0) | (b3=0 & b2=0 & b1=0)) -> (state'=2);
+
+    [count] state=2 -> (state'=3);
+
+    [halts] state=3 -> true;
+
+endmodule
+
+
+module board1
+
+	b1 : [0..1];
+
+	[cover_1] b1=0 -> (b1'=1);
+	[cover_2_1] b1=0 -> (b1'=1);
+	[cover_3_1] b1=0 -> (b1'=1);
+	[cover_4_1] b1=0 -> (b1'=1);
+	[cover_5_1] b1=0 -> (b1'=1);
+	[cover_3_2_1] b1=0 -> (b1'=1);
+
+endmodule
+
+module board2
+
+	b2 : [0..1];
+
+	[cover_2] b2=0 -> (b2'=1);
+	[cover_2_1] b2=0 -> (b2'=1);
+	[cover_3_2] b2=0 -> (b2'=1);
+	[cover_4_2] b2=0 -> (b2'=1);
+	[cover_3_2_1] b2=0 -> (b2'=1);
+
+endmodule
+
+module board3
+
+	b3 : [0..1];
+
+	[cover_3] b3=0 -> (b3'=1);
+	[cover_3_1] b3=0 -> (b3'=1);
+	[cover_3_2] b3=0 -> (b3'=1);
+	[cover_3_2_1] b3=0 -> (b3'=1);
+
+endmodule
+
+module board4
+
+	b4 : [0..1];
+
+	[cover_4] b4=0 -> (b4'=1);
+	[cover_4_1] b4=0 -> (b4'=1);
+	[cover_4_2] b4=0 -> (b4'=1);
+
+endmodule
+
+module board5
+
+	b5 : [0..1];
+
+	[cover_5] b5=0 -> (b5'=1);
+	[cover_5_1] b5=0 -> (b5'=1);
+
+endmodule
+
+module board6
+
+	b6 : [0..1];
+
+	[cover_6] b6=0 -> (b6'=1);
+
+endmodule
+
+module board7
+
+	b7 : [0..1];
+
+
+endmodule
+
+module board8
+
+	b8 : [0..1];
+
+
+endmodule
+
+module board9
+
+	b9 : [0..1];
+
+
+endmodule
+
+module board10
+
+	b10 : [0..1];
+
+
+endmodule
+
+module board11
+
+	b11 : [0..1];
+
+
+endmodule
+
+module board12
+
+	b12 : [0..1];
+
+
+endmodule
+
+
+rewards "total_boards"
+    state=2 : score;
+endrewards
+
+rewards "no_rolls"
+    state=0: 1;
+endrewards

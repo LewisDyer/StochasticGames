@@ -12,7 +12,7 @@ Because of how strategies are generated in PRISM-games, I need to use .dot files
 
 ### Data Processing
 
-`.dot` files for the high-board and nondeterministic versions of the `stb6_1d6` model were generated, verifying the probability that the max score was obtained, and were cleaned up as so:
+`.dot` files for the high-board and nondeterministic versions of the `stb6_1d6` model were generated, verifying the probability that the max score was obtained, and were cleaned up to improve visibility:
 
 * The label for each state was simplified to remove the state number, only showing the information for each state (the phase, value on the die, and the status for each board).
 
@@ -22,8 +22,10 @@ Because of how strategies are generated in PRISM-games, I need to use .dot files
 
 ### Exploratory analysis
 
-My aim in analysis was to identify ways in which the optimal and high-board strategy differed. After some searching, I found some interesting points. In particular, consider the state where a 6 is rolled, and boards 1, 3 and 5 are covered. The optimal strategy chooses to cover boards 4 and 2, while the high board strategy covers board 6. In the optimal strategy, the probability of getting the maximum score after making this move is 1 in 6 (need to roll a 6), whereas the probability of maxmimum score in the high board strategy is 1 in 18 (need to roll either 4 then 2, or 2 then 4). However, the expected value of the score is higher in the high-board case (16 1/6, as opposed to 16 for the optimal strategy).
+My aim in analysis was to identify ways in which the optimal and high-board strategy differed. After some searching, I found some interesting points. In particular, consider the state where a 6 is rolled, and boards 1, 3 and 5 are covered. The optimal strategy chooses to cover boards 4 and 2, while the high board strategy covers board 6. In the optimal strategy, the probability of getting the maximum score after making this move is 1 in 6 (need to roll a 6), whereas the probability of maximum score in the high board strategy is 1 in 18 (need to roll either 4 then 2, or 2 then 4). However, the expected value of the score is higher in the high-board case from that provided initial state (16 1/6, as opposed to 16 for the optimal strategy).
 
-In essence, this is because the optimal case _only_ values satisfying the particular property (namely, getting the highest score). It assigns no value whatsoever to attaining anything lower than 21, so the higher expected value is completely irrelevant. On the other hand, the high board strategy is more general, designed to obtain high scores more generally (if not the highest score possible).
+In essence, this is because the optimal case _only_ values satisfying the particular property (namely, getting the highest score). It assigns no value whatsoever to attaining anything lower than 21, so the higher expected value is completely irrelevant. On the other hand, the high board strategy is slightly less greedy, designed to obtain high scores more generally (if not the highest score possible).
 
-Further property verification presents an interesting fact - the optimal and high-board strategies both have the same expected score at the end of the game, even though the strategies are different.
+Further property verification presents an interesting fact - the optimal and high-board strategies both have the same expected score at the end of the game, even though the strategies are different. This shows the underlying trade-off at the heart of each of these strategies. The high-board strategy is far simpler to describe and intuit, and leads to the same expected value for the final score, but is slightly less likely overall to obtain the maximum possible score - whereas the optimal strategy for obtaining the maximum possible score is more complex, and harder to derive manually.
+
+In essence, this suggests that Shut the Box is poorly designed, because there is little incentive to learn a more complex strategy, since the simpler strategy is just as good in most situations (and potentially equivalent, depending on the payoff structure used for the game). This is slightly alleviated for larger games (in the 12-board variant with 2d6, the expected score for the optimal max-score strategy is about 0.1 points higher than the high-board strategy), but not significantly.
