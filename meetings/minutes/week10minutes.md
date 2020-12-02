@@ -1,0 +1,13 @@
+# Week 10 Minutes - 02/12/20
+
+Firstly, the questions from last week were discussed.
+
+* On the question of triangular peaks in the 2d6 and 1d12 graphs - Gethin suggested that the main difference between both models is the probability distribution of values (namely not including 1 in the 2d6 model, and biasing towards the central values, in particular boards 6-8). I agreed with this and emphasised how the middle values are the most "interesting" (since low values don't offer many covering options, while for high values covering the large boards is almost always optimal), so this could be a plausible explanation. Gethin also suggested trying a 3d4 model to see if this behaviour also held, which I agreed was a good suggestion, albeit with potential performance issues.
+
+* For the conditional probability graphs, Gethin made similar suggestions as above, in particular examining properties for 1d12 and 3d4, and comparing these conditional probabilities to the overall probability graphs.
+
+* Gethin agreed that moving onto Liar's Dice soon would be ideal, preferably next week, and also suggested that I should solely focus on modelling next week, as opposed to analysis, since having about 80 hours to focus solely on modelling would be very useful.
+
+* On the topic of hidden information for Liar's dice - Gethin remarked that this could be achieved using partially observable MDPs (POMDPs), but with the constraint that only one player could exhibit nondeterministic behavior - a constraint which I agreed was reasonable, since I could create other deterministic players with some simple fixed strategies (for instance, a fixed probability of bluffing, or a probability based on the difference in dice count between players) and define strategies to beat these players. POMDPs were discussed further, including showing a paper involving POMDPs, and Gethin remarked there was a development version of PRISM that could handle POMDPs, but that since model checking POMDPs was undecideable in general, properties could only have upper and lower bounds of some sort.
+
+Finally, the plan for next week was discussed. I would explore the 3d4 case in more detail, which could help explain the peaks at triangular numbers. After that, I should focus on reading up on POMDPs and setting up the development version of PRISM that supports POMDPs, in preparation for the December project period. In this period, my aim is to complete modelling of Liar's Dice, and potentially start modelling my third game if I have time. Gethin also mentioned that a status report will need to be submitted by the end of this project period, but that I shouldn't spend more than an hour or so on this - it is mainly intended to ensure that I am on track project-wise.

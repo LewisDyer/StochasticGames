@@ -1,4 +1,4 @@
-# Week 10 Status Report - 25/11/20
+# Week 10 Status Report - 02/12/20
 
 This week, I have continued further development of the experiment automation environment. Output from different models is now placed in different folders, so that experiment data from different models can now be compared and contrasted (and crucially, particularly laborious experiments only need to be performed once). In particular, experiments were completed on two particular cases (the 12-board variant with 2 six-sided dice, and the 12-board variant with a single 12-sided die), making initial attempts to compare their graphs. I have also refactored the calculation of conditional probabilities to avoid floating point error, and moreover I also explored different ways to generate strategies for different models and perform comparisons, using the 6-board variant with a single 6-sided die as a small example to visualise.
 
@@ -8,7 +8,7 @@ Overall, I think that I won't be able to do much work around strategy generation
 
 * Comparing the graphs of the two 12-board variants gives some interesting differences, in particular where the probabilities in the 2d6 graph appear to peak at triangular numbers. My current intuition is that this occurs in places where "bad" decisions can lead to the game ending prematurely (e.g if you roll a 10 and cover boards 1-4, that limits a lot more options for future rolls than if you cover board 10), but I'm struggling to come up with ideas as to why that doesn't really show in the 1d12 graph.
 
-* On a similar note, after computing and visualising the conditional probabilities for each score given that a particular board is covered, I noticed some peculiar patterns, where a particular shape appears to repeat periodically in the graph (while increasing) - an example for board 4 is shown but it's applicable to every graph to some extent. I'm curious why this could be the case - it does seem to be related to the triangular numbers somehow, but given it's not an exact match there could be some element of coincedence as well
+* On a similar note, after computing and visualising the conditional probabilities for each score given that a particular board is covered, I noticed some peculiar patterns, where a particular shape appears to repeat periodically in the graph (while increasing) - an example for board 4 is shown but it's applicable to every graph to some extent. I'm curious why this could be the case - it does seem to be related to the triangular numbers somehow, but given it's not an exact match there could be some element of coincedence as well.
 
 * My current thinking is that it will be more effective for me to move onto Liar's Dice soon, even if Shut the Box isn't completed - I might come up with some ideas for analysis that could later be applied to Shut the Box, and if I spend too long on Shut the Box now there's the risk that my other case studies will be under-developed.
 
