@@ -90,3 +90,4 @@ Date | Duration | Summary
 31/11/20 | 1.5 hours | Visualised stb6_1d12 with ZGRViewer, wrote up initial notes on strategy generation
 01/12/20 | 3.5 hours | Improved strategy generation notes, wrote up questions for supervisor meeting, refactored conditional probabilities to improve efficiency
 02/12/20 | 1.5 hours | Supervisor meeting, added minutes and tidied up plan
+03/12/20 | 2 hours | Collected more data for multiple dice in stb12 case, started background reading on POMDPs
