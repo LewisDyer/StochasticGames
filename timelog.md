@@ -91,4 +91,5 @@ Date | Duration | Summary
 01/12/20 | 3.5 hours | Improved strategy generation notes, wrote up questions for supervisor meeting, refactored conditional probabilities to improve efficiency
 02/12/20 | 1.5 hours | Supervisor meeting, added minutes and tidied up plan
 03/12/20 | 3 hours | Collected more data for multiple dice in stb12 case, started background reading on POMDPs. Built development version of PRISM using Cygwin, still need to edit system path to be able to access both versions of PRISM at once
-04/12/20 | 1 hours | Experimenting with McCallum's maze problem in PRISM-POMDPs
+04/12/20 | 1 hour | Experimenting with McCallum's maze problem in PRISM-POMDPs
+05/12/20 | 1 hour | Built prism-pomdps on Ubuntu, setup aliases for prism-games and prism-pomdps. Verified dev environment works as expected on linux.
