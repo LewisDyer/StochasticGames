@@ -98,4 +98,4 @@ Date | Duration | Summary
 
 Date | Duration | Summary
 ---- | -------- | -------
-06/12/20 | 4.5 hours | Read through POMDPs paper in more detail, took notes on aspects of POMDPs that would be relevant when designing Liar's Dice. Added notes on the mechanics of Liar's Dice, and ideas for potential opponents. Started implementation of Liar's Dice model, implementing die roll phase and simple initial bid phase. Also implemented extremely simplistic betting strategy to show game flow.
+06/12/20 | 6 hours | Read through POMDPs paper in more detail, took notes on aspects of POMDPs that would be relevant when designing Liar's Dice. Added notes on the mechanics of Liar's Dice, and ideas for potential opponents. Started implementation of Liar's Dice model, implementing die roll phase and simple initial bid phase. Also implemented extremely simplistic betting strategy to show game flow. Completed skeleton model of Liar's Dice - _very_ simplistic, and still needs double checking/verifying, but the whole process of a round is modelled.
