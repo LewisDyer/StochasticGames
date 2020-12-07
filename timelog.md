@@ -93,3 +93,9 @@ Date | Duration | Summary
 03/12/20 | 3 hours | Collected more data for multiple dice in stb12 case, started background reading on POMDPs. Built development version of PRISM using Cygwin, still need to edit system path to be able to access both versions of PRISM at once
 04/12/20 | 1 hour | Experimenting with McCallum's maze problem in PRISM-POMDPs
 05/12/20 | 1 hour | Built prism-pomdps on Ubuntu, setup aliases for prism-games and prism-pomdps. Verified dev environment works as expected on linux.
+
+## Week 11 (Crunch period part 1)
+
+Date | Duration | Summary
+---- | -------- | -------
+06/12/20 | 1 hour | Read through POMDPs paper in more detail, took notes on aspects of POMDPs that would be relevant when designing Liar's Dice.
