@@ -98,4 +98,4 @@ Date | Duration | Summary
 
 Date | Duration | Summary
 ---- | -------- | -------
-06/12/20 | 1 hour | Read through POMDPs paper in more detail, took notes on aspects of POMDPs that would be relevant when designing Liar's Dice.
+06/12/20 | 2 hours | Read through POMDPs paper in more detail, took notes on aspects of POMDPs that would be relevant when designing Liar's Dice. Added notes on the mechanics of Liar's Dice, and ideas for potential opponents.
