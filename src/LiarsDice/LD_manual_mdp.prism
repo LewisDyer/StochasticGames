@@ -43,7 +43,7 @@ module player1
 	p1_d3 : [0..6] init 0;
 
 	
-	p1_bid_face : [0..6] init 0;
+	p1_bid_face : [0..7] init 0;
 	p1_bid_quat : [0..6] init 0;
 
 	[roll_die1] phase=0 & p1_d1=0 -> 1/6: (p1_d1'=1)
@@ -66,7 +66,7 @@ module player1
                                        + 1/6: (p1_d3'=6);
 
 	// starting bid: Just take the minimum bid you can see in your hand
-	
+	// this should never be 7, since p1_[i]s can't be 0 for all i
 	[p1_bid_init] phase=1 -> (p1_bid_face' = min((p1_1s != 0 ? 1 : 7),
 		                                (p1_2s != 0 ? 2 : 7),
                                                 (p1_3s != 0 ? 3 : 7),
@@ -77,9 +77,9 @@ module player1
 
 	// very stupid bidding strategy: just keep increasing the face count until you can't, then increase quantity until you can't, then challenge.
 
-	[p1_bid_face] phase=2 & p2_bid_face < 6 -> (p1_bid_face' = p2_bid_face + 1) & (p1_bid_quat' = current_bid_quat);
+	[p1_bid_face] phase=2 & p2_bid_face < 6 -> (p1_bid_face' = min(p2_bid_face + 1, 6)) & (p1_bid_quat' = current_bid_quat);
 
-	[p1_bid_quat] phase=2 & p2_bid_face = 6 & p2_bid_quat < 6 -> (p1_bid_quat' = p2_bid_quat + 1) & (p1_bid_face' = current_bid_face);
+	[p1_bid_quat] phase=2 & p2_bid_face = 6 & p2_bid_quat < 6 -> (p1_bid_quat' = min(p2_bid_quat + 1, 6)) & (p1_bid_face' = current_bid_face);
 
 endmodule
 
@@ -112,20 +112,20 @@ module player2
                                        + 1/6: (p2_d3'=5)
                                        + 1/6: (p2_d3'=6);
 
-	[p2_bid_face] phase=3 & p1_bid_face < 6 -> (p2_bid_face' = current_bid_face + 1) & (p2_bid_quat' = current_bid_quat);
+	[p2_bid_face] phase=3 & p1_bid_face < 6 -> (p2_bid_face' = min(current_bid_face + 1, 6)) & (p2_bid_quat' = current_bid_quat);
 
-	[p2_bid_quat] phase=3 & p2_bid_face = 6 & p1_bid_quat < 6 -> (p2_bid_quat' = current_bid_quat + 1) & (p2_bid_face' = current_bid_face);
+	[p2_bid_quat] phase=3 & p1_bid_face = 6 & p1_bid_quat < 6 -> (p2_bid_quat' = min(current_bid_quat + 1, 6)) & (p2_bid_face' = current_bid_face);
 
 endmodule
 
 // handles general game state
 module controller
 
-	phase : [0..5] init 0;
+	phase : [0..7] init 0;
 
-	made_challenge : [0..2] init 0;
+	made_challenge : [1..2] init 1;
 
-	challenge_correct : bool;
+	challenge_correct : bool init true;
 
 	[all_rolled] phase=0 & p1_d3 != 0 -> (phase'=1);
 
@@ -147,11 +147,11 @@ module controller
 	[check_challenge_5s] phase=4 & current_bid_face = 5 -> (challenge_correct' = (all_5s >= current_bid_quat)) & (phase'=5);
 	[check_challenge_6s] phase=4 & current_bid_face = 6 -> (challenge_correct' = (all_6s >= current_bid_quat)) & (phase'=5);
 
-	[challenge_true_p1] phase=5 & challenge_correct=true & made_challenge=1 -> (phase'=7);
-	[challenge_false_p1] phase=5 & challenge_correct=false & made_challenge=1 -> (phase'=6);
+	[challenge_true_p1] phase=5 & challenge_correct & made_challenge=1 -> (phase'=7);
+	[challenge_false_p1] phase=5 & !challenge_correct & made_challenge=1 -> (phase'=6);
 
-	[challenge_true_p2] phase=5 & challenge_correct=true & made_challenge=2 -> (phase'=6);
-	[challenge_false_p2] phase=5 & challenge_correct=false & made_challenge=2 -> (phase'=7);
+	[challenge_true_p2] phase=5 & challenge_correct & made_challenge=2 -> (phase'=6);
+	[challenge_false_p2] phase=5 & !challenge_correct & made_challenge=2 -> (phase'=7);
 
 endmodule
 
