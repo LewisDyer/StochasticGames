@@ -1,9 +1,13 @@
 // Probability that round terminates (should be 1)
-Pmax=? [F "game_over"]
+Pmax=? [ F "game_over" ]
 
 // Probability that player 1 loses a die
-Pmax=? [F "p1_loses"]
+Pmax=? [ F "p1_loses" ]
 
 // Probability that player 2 loses a die
-Pmax=? [F "p2_loses"]
+Pmax=? [ F "p2_loses" ]
+
+Pmin=? [F "game_over"]
+
+Pmin=? [F "p1_loses"]
 
