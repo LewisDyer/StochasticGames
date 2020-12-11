@@ -86,10 +86,7 @@ if __name__ == '__main__':
                     params = replace_params(params, param_lookup)
                 else:
                     params = [] # need to append whitespace later on
-                
-                print(params)
                 fn = get_function(location, fname)
-                print(fn)
                 whitespace = line[:len(line)-len(line.lstrip())] # capture leading whitespace to add to new line
                 params.append(f"\n{whitespace}")
                 f_out.write(whitespace + fn(*params) + '\n')

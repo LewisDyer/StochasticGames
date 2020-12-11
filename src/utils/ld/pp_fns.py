@@ -89,7 +89,39 @@ def bid_random_in_hand(p, p1_die, p2_die, newLine):
 
     return newLine.join(output) + ';'
 
+def set_bids(strat, p, newLine):
+    strat_lookup = {0: bid_nondet, 1: face_first}
+
+    return strat_lookup[strat](p, newLine)
+
+def bid_nondet(p, newLine):
+    # nondeterministic: just set the guards for valid bids, without encouraging a particular decision
+    other_p = 2 if p == 1 else 1
+    output = []
+
+    output.append(f"[p{p}_bid_face] phase=2 & p{other_p}_bid_face < 6 -> (p{p}_bid_face' = min(p{other_p}_bid_face + 1, 6)) & (p{p}_bid_quat' = current_bid_quat);")
+    output.append("")
+    output.append(f"[p{p}_bid_quat] phase=2 & p{other_p}_bid_quat < 6 -> (p{p}_bid_quat' = min(p{other_p}_bid_face + 1, 6)) & (p{p}_bid_quat' = current_bid_quat);")
+
+    return newLine.join(output)
+
+def face_first(p, newLine):
+    # very basic bidding strategy: always increment the face value until it reaches 6, then increment quantity.
+    other_p = 2 if p == 1 else 1
+    output = []
+
+    output.append(f"[p{p}_bid_face] phase=2 & p{other_p}_bid_face < 6 -> (p{p}_bid_face' = min(p{other_p}_bid_face + 1, 6)) & (p{p}_bid_quat' = current_bid_quat);")
+    output.append("")
+    output.append(f"[p{p}_bid_quat] phase=2 & p{other_p}_bid_face = 6 & p{other_p}_bid_quat < 6 -> (p{p}_bid_quat' = min(p{other_p}_bid_face + 1, 6)) & (p{p}_bid_quat' = current_bid_quat);")
+
+    return newLine.join(output)
+
+def all_rolled(p1_die, p2_die, newLine):
+    p = 1 if p1_die >= p2_die else 2
+    return f"[all_rolled] phase=0 & p{p}_d{max(p1_die, p2_die)} != 0 -> (phase'=1);"
+
 def lookup(fname):
     functions = {"list_p1_dice": list_p1_dice, "formulas": formulas, "init_dice": init_dice,
-                 "roll_dice": roll_dice, "define_init_bid": define_init_bid}
+                 "roll_dice": roll_dice, "define_init_bid": define_init_bid, "set_bids": set_bids,
+                 "all_rolled": all_rolled}
     return functions[fname]
