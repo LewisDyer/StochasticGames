@@ -48,14 +48,14 @@ def roll_dice(no_die, p, newLine):
 def roll_die(die_no, p, newLine):
     # PRISM code to roll a single die
     if die_no == 1:
-        prelude = f"[roll_die{die_no}] phase=0 & p{p}_{die_no} = 0 -"
+        prelude = f"[roll_die{die_no}] phase=0 & p{p}_d{die_no} = 0 -"
     else:
-        prelude = f"[roll_die{die_no}] phase=0 & p{p}_{die_no} != 0 & p{p}_{die_no-1} != 0 -"
+        prelude = f"[roll_die{die_no}] phase=0 & p{p}_d{die_no} = 0 & p{p}_d{die_no-1} != 0 -"
 
     output = []
-    output.append(f"{prelude}> 1/6: (p{p}_d1'=1)")
+    output.append(f"{prelude}> 1/6: (p{p}_d{die_no}'=1)")
     for i in range(2, 7):
-        output.append(f"{' '*len(prelude)}+ 1/6: (p{p}_d{i}'={i})")
+        output.append(f"{' '*len(prelude)}+ 1/6: (p{p}_d{die_no}'={i})")
     
     return newLine.join(output) + ";"
       
@@ -101,7 +101,7 @@ def bid_nondet(p, newLine):
 
     output.append(f"[p{p}_bid_face] phase=2 & p{other_p}_bid_face < 6 -> (p{p}_bid_face' = min(p{other_p}_bid_face + 1, 6)) & (p{p}_bid_quat' = current_bid_quat);")
     output.append("")
-    output.append(f"[p{p}_bid_quat] phase=2 & p{other_p}_bid_quat < 6 -> (p{p}_bid_quat' = min(p{other_p}_bid_face + 1, 6)) & (p{p}_bid_quat' = current_bid_quat);")
+    output.append(f"[p{p}_bid_quat] phase=2 & p{other_p}_bid_quat < 6 -> (p{p}_bid_quat' = min(p{other_p}_bid_quat + 1, 6)) & (p{p}_bid_face' = current_bid_face);")
 
     return newLine.join(output)
 
@@ -110,9 +110,9 @@ def face_first(p, newLine):
     other_p = 2 if p == 1 else 1
     output = []
 
-    output.append(f"[p{p}_bid_face] phase=2 & p{other_p}_bid_face < 6 -> (p{p}_bid_face' = min(p{other_p}_bid_face + 1, 6)) & (p{p}_bid_quat' = current_bid_quat);")
+    output.append(f"[p{p}_bid_face] phase=3 & p{other_p}_bid_face < 6 -> (p{p}_bid_face' = min(p{other_p}_bid_face + 1, 6)) & (p{p}_bid_quat' = current_bid_quat);")
     output.append("")
-    output.append(f"[p{p}_bid_quat] phase=2 & p{other_p}_bid_face = 6 & p{other_p}_bid_quat < 6 -> (p{p}_bid_quat' = min(p{other_p}_bid_face + 1, 6)) & (p{p}_bid_quat' = current_bid_quat);")
+    output.append(f"[p{p}_bid_quat] phase=3 & p{other_p}_bid_face = 6 & p{other_p}_bid_quat < 6 -> (p{p}_bid_quat' = min(p{other_p}_bid_quat + 1, 6)) & (p{p}_bid_face' = current_bid_face);")
 
     return newLine.join(output)
 
