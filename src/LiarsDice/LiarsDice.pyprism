@@ -23,7 +23,7 @@ module player1
     @ld/roll_dice p1_die p1@
 
 
-    @ld/define_init_bid p1_strat p1@
+    @ld/define_init_bid p1_strat p1_die p2_die p1@
 	
 
 	@ld/set_bids p1_strat p1@
