@@ -1,5 +1,13 @@
 from itertools import product
 
+def list_p1_dice(n_die, newLine):
+    dice_list = []
+    for i in range(1, n_die+1):
+        dice_list.append(f"p1_d{i}")
+    
+    return ", ".join(dice_list) + ","
+
+
 def get_rolls(n_die, p, newLine):
     # get prism model code to roll n dice
     all_rolls = list(product(range(1,7), repeat=n_die))
@@ -24,5 +32,5 @@ def roll_to_prism(roll, p):
 
 
 def lookup(fname):
-    functions = {"get_rolls": get_rolls}
+    functions = {"list_p1_dice": list_p1_dice, "get_rolls": get_rolls}
     return functions[fname]
