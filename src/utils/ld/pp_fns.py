@@ -78,6 +78,7 @@ def bid_random(p, p1_die, p2_die, newLine):
     return newLine.join(output) + ';'
 
     return newLine.join(output) + ";"
+
 def bid_random_in_hand(p, p1_die, p2_die, newLine):
     # choose a random dice in your hand and set its face as your bid, with quantity 1.
     prelude = f"[p{p}_bid_init] phase=1 -"
@@ -120,8 +121,33 @@ def all_rolled(p1_die, p2_die, newLine):
     p = 1 if p1_die >= p2_die else 2
     return f"[all_rolled] phase=0 & p{p}_d{max(p1_die, p2_die)} != 0 -> (phase'=1);"
 
+def challenge(strat, p, p1_dice, p2_dice, newLine):
+    # define a strategy for determining when to challenge
+
+    strat_lookup = {0: challenge_nondet, 1: challenge_threshold, 2: challenge_late}
+
+    return strat_lookup[strat](p, p1_dice, p2_dice)
+
+def challenge_nondet(p, p1_dice, p2_dice):
+    # nondeterministic challenge
+    phase = 2 if p == 1 else 3
+
+    return f"[p{p}_challenge] phase={phase} -> (phase'=4) & (made_challenge' = {p});"
+
+def challenge_threshold(p, p1_dice, p2_dice):
+    phase = 2 if p == 1 else 3
+
+    return f"[p{p}_challenge] phase={phase} & ((current_bid_face + current_bid_quat)/{6 + p1_dice + p2_dice} >= p{p}_c) -> (phase'=4) & (made_challenge' = {p});"
+    pass
+
+def challenge_late(p, p1_dice, p2_dice):
+    # only challenge if no higher bids are available
+    phase = 2 if p == 1 else 3
+
+    return f"[p{p}_challenge] phase={phase} & (current_bid_face=6) & (current_bid_quat={p1_dice + p2_dice}) -> (phase'=4) & (made_challenge' = {p});"
+
 def lookup(fname):
     functions = {"list_p1_dice": list_p1_dice, "formulas": formulas, "init_dice": init_dice,
                  "roll_dice": roll_dice, "define_init_bid": define_init_bid, "set_bids": set_bids,
-                 "all_rolled": all_rolled}
+                 "all_rolled": all_rolled, "challenge": challenge}
     return functions[fname]

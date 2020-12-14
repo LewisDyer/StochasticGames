@@ -1,6 +1,9 @@
 // Liar's Dice
 pomdp
 
+const double p1_c;
+const double p2_c;
+
 observables
 	@ld/list_p1_dice p1_die@
 	p1_bid_face, p1_bid_quat, p2_bid_face, p2_bid_quat,
@@ -22,10 +25,8 @@ module player1
 
     @ld/roll_dice p1_die p1@
 
-
     @ld/define_init_bid p1_strat p1_die p2_die p1@
 	
-
 	@ld/set_bids p1_strat p1@
 
 endmodule
@@ -47,7 +48,6 @@ endmodule
 // handles general game state
 module controller
 
-
 	// current phase of a round
 	// 0: roll dice
 	// 1: starting player bids
@@ -62,19 +62,18 @@ module controller
 
 	challenge_correct : bool init true;
 
-
     @ld/all_rolled p1_die p2_die@
 
 	[p1_bid_init] phase=1 -> (phase'=3);
 	[p1_bid_face] phase=2 -> (phase'=3);
 	[p1_bid_quat] phase=2 -> (phase'=3);
 
-	[p1_challenge] phase=2 -> (phase'=4) & (made_challenge' = 1);
+	@ld/challenge p1_strat p1 p1_die p2_die@
 
 	[p2_bid_face] phase=3 -> (phase'=2);
 	[p2_bid_quat] phase=3 -> (phase'=2);
 	
-	[p2_challenge] phase=3 -> (phase'=4) & (made_challenge' = 2);
+	@ld/challenge p2_strat p2 p1_die p2_die@
 
 	[check_challenge_1s] phase=4 & current_bid_face = 1 -> (challenge_correct' = (all_1s >= current_bid_quat)) & (phase'=5);
 	[check_challenge_2s] phase=4 & current_bid_face = 2 -> (challenge_correct' = (all_2s >= current_bid_quat)) & (phase'=5);
@@ -95,3 +94,11 @@ label "game_over" = (phase>=6);
 
 label "p1_loses" = (phase=6);
 label "p2_loses" = (phase=7);
+
+rewards "total_bids"
+	[p1_bid_init] true : 1;
+	[p1_bid_face] true : 1;
+	[p1_bid_quat] true : 1;
+	[p2_bid_face] true : 1;
+	[p2_bid_quat] true : 1;
+endrewards
