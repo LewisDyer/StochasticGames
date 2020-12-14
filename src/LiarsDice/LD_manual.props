@@ -7,7 +7,9 @@ Pmax=? [ F "p1_loses" ]
 // Probability that player 2 loses a die
 Pmax=? [ F "p2_loses" ]
 
-Pmin=? [F "game_over"]
+Pmin=? [ F "game_over" ]
 
-Pmin=? [F "p1_loses"]
+Pmin=? [ F "p1_loses" ]
+
+Pmin=? [F "p2_loses" ]
 

@@ -102,4 +102,10 @@ Date | Duration | Summary
 08/12/20 | 5 hours | Morning + afternoon session of project guidance lectures. Wrote up rough draft of status report (will update next week with more relevant information). Noticed problem with properties taking a long time to terminate with MDPs - will investigate further tomorrow.
 09/12/20 | 5 hours | Investigated long verification time for Liar's Dice - tried making smaller variants of models, altering grid resolution. Supervisor meeting + adding minutes. Came up with method to reduce state space, started creating preprocessing tools to permit this.
 10/12/20 | 6 hours | State reduction method unsuccessful, need to find other ways to simplify model. Tried combining all die rolls into one step - this too was unsuccessful. Storing both player's bids in one set of variables also unsuccessful - for now, start preprocessing and adjust as needed later.
-11/12/20 | 6 hours | Started preprocessing for Liar's Dice, can now generate an entire model (albeit with simple strategies). Noticed some strange issues with model size between POMDPs and MDPs - will investigate further
+11/12/20 | 6 hours | Started preprocessing for Liar's Dice, can now generate an entire model (albeit with simple strategies). Noticed some strange issues with model size between POMDPs and MDPs - will investigate further.
+
+## Week 12 (Crunch period part 2)
+
+Date | Duration | Summary
+---- | -------- | -------
+14/12/20 | 3 hours | Sketched out ideas for evaluating Liar's Dice using game trees, generated smaller example with 2 dice each to demonstrate viability of model checking. Started plan for the week, polished status report slightly.
