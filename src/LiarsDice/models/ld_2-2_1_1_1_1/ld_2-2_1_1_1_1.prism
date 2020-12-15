@@ -56,30 +56,8 @@ module player1
                                                   + 1/6: (p1_d2'=5)
                                                   + 1/6: (p1_d2'=6);
 
-    [p1_bid_init] phase=1 -> 1/24: (p1_bid_face' = 1) & (p1_bid_quat' = 1)
-                           + 1/24: (p1_bid_face' = 1) & (p1_bid_quat' = 2)
-                           + 1/24: (p1_bid_face' = 1) & (p1_bid_quat' = 3)
-                           + 1/24: (p1_bid_face' = 1) & (p1_bid_quat' = 4)
-                           + 1/24: (p1_bid_face' = 2) & (p1_bid_quat' = 1)
-                           + 1/24: (p1_bid_face' = 2) & (p1_bid_quat' = 2)
-                           + 1/24: (p1_bid_face' = 2) & (p1_bid_quat' = 3)
-                           + 1/24: (p1_bid_face' = 2) & (p1_bid_quat' = 4)
-                           + 1/24: (p1_bid_face' = 3) & (p1_bid_quat' = 1)
-                           + 1/24: (p1_bid_face' = 3) & (p1_bid_quat' = 2)
-                           + 1/24: (p1_bid_face' = 3) & (p1_bid_quat' = 3)
-                           + 1/24: (p1_bid_face' = 3) & (p1_bid_quat' = 4)
-                           + 1/24: (p1_bid_face' = 4) & (p1_bid_quat' = 1)
-                           + 1/24: (p1_bid_face' = 4) & (p1_bid_quat' = 2)
-                           + 1/24: (p1_bid_face' = 4) & (p1_bid_quat' = 3)
-                           + 1/24: (p1_bid_face' = 4) & (p1_bid_quat' = 4)
-                           + 1/24: (p1_bid_face' = 5) & (p1_bid_quat' = 1)
-                           + 1/24: (p1_bid_face' = 5) & (p1_bid_quat' = 2)
-                           + 1/24: (p1_bid_face' = 5) & (p1_bid_quat' = 3)
-                           + 1/24: (p1_bid_face' = 5) & (p1_bid_quat' = 4)
-                           + 1/24: (p1_bid_face' = 6) & (p1_bid_quat' = 1)
-                           + 1/24: (p1_bid_face' = 6) & (p1_bid_quat' = 2)
-                           + 1/24: (p1_bid_face' = 6) & (p1_bid_quat' = 3)
-                           + 1/24: (p1_bid_face' = 6) & (p1_bid_quat' = 4);
+    [p1_bid_init] phase=1 -> 1/2: (p1_bid_face' = p1_d1) & (p1_bid_quat' = 1)
+                           + 1/2: (p1_bid_face' = p1_d2) & (p1_bid_quat' = 1);
 	
 	[p1_bid_face] phase=2 & p2_bid_face < 6 -> (p1_bid_face' = min(p2_bid_face + 1, 6)) & (p1_bid_quat' = current_bid_quat);
 	
@@ -109,30 +87,7 @@ module player2
 	                                              + 1/6: (p2_d2'=5)
 	                                              + 1/6: (p2_d2'=6);
 
-	[p1_bid_init] phase=1 -> 1/24: (p1_bid_face' = 1) & (p1_bid_quat' = 1)
-	                       + 1/24: (p1_bid_face' = 1) & (p1_bid_quat' = 2)
-	                       + 1/24: (p1_bid_face' = 1) & (p1_bid_quat' = 3)
-	                       + 1/24: (p1_bid_face' = 1) & (p1_bid_quat' = 4)
-	                       + 1/24: (p1_bid_face' = 2) & (p1_bid_quat' = 1)
-	                       + 1/24: (p1_bid_face' = 2) & (p1_bid_quat' = 2)
-	                       + 1/24: (p1_bid_face' = 2) & (p1_bid_quat' = 3)
-	                       + 1/24: (p1_bid_face' = 2) & (p1_bid_quat' = 4)
-	                       + 1/24: (p1_bid_face' = 3) & (p1_bid_quat' = 1)
-	                       + 1/24: (p1_bid_face' = 3) & (p1_bid_quat' = 2)
-	                       + 1/24: (p1_bid_face' = 3) & (p1_bid_quat' = 3)
-	                       + 1/24: (p1_bid_face' = 3) & (p1_bid_quat' = 4)
-	                       + 1/24: (p1_bid_face' = 4) & (p1_bid_quat' = 1)
-	                       + 1/24: (p1_bid_face' = 4) & (p1_bid_quat' = 2)
-	                       + 1/24: (p1_bid_face' = 4) & (p1_bid_quat' = 3)
-	                       + 1/24: (p1_bid_face' = 4) & (p1_bid_quat' = 4)
-	                       + 1/24: (p1_bid_face' = 5) & (p1_bid_quat' = 1)
-	                       + 1/24: (p1_bid_face' = 5) & (p1_bid_quat' = 2)
-	                       + 1/24: (p1_bid_face' = 5) & (p1_bid_quat' = 3)
-	                       + 1/24: (p1_bid_face' = 5) & (p1_bid_quat' = 4)
-	                       + 1/24: (p1_bid_face' = 6) & (p1_bid_quat' = 1)
-	                       + 1/24: (p1_bid_face' = 6) & (p1_bid_quat' = 2)
-	                       + 1/24: (p1_bid_face' = 6) & (p1_bid_quat' = 3)
-	                       + 1/24: (p1_bid_face' = 6) & (p1_bid_quat' = 4);
+	
 
 	[p2_bid_face] phase=3 & p1_bid_face < 6 -> (p2_bid_face' = min(p1_bid_face + 1, 6)) & (p2_bid_quat' = current_bid_quat);
 	
@@ -159,8 +114,8 @@ module controller
 
     [all_rolled] phase=0 & p1_d2 != 0 -> (phase'=1);
 
-	[p1_bid_init] phase=2 -> (phase' = 3);
-	
+	[p1_bid_init] phase=1 -> (phase' = 3);
+
 	[p1_bid_face] phase=2 -> (phase'=3);
 	[p1_bid_quat] phase=2 -> (phase'=3);
 

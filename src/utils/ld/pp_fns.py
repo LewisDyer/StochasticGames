@@ -1,5 +1,15 @@
 from itertools import product
 
+def constants(p1_strat, p2_strat, newLine):
+    # adds constants for thresholds, but only if the strategy requires it
+    output = []
+    if p1_strat == 1:
+        output.append("const double p1_c;")
+    if p2_strat == 1:
+        output.append("const double p2_c;")
+    
+    return newLine.join(output)
+
 def list_p1_dice(n_die, newLine):
     dice_list = []
     for i in range(1, n_die+1):
@@ -59,10 +69,13 @@ def roll_die(die_no, p, newLine):
     
     return newLine.join(output) + ";"
       
-def define_init_bid(strat, p1_die, p2_die, p, newLine):
+def define_init_bid(strat, start_player, p1_die, p2_die, p, newLine):
     strat_lookup = {0: bid_random, 1: bid_random_in_hand}
 
-    return strat_lookup[strat](p, p1_die, p2_die, newLine)
+    if start_player == p:
+        return strat_lookup[strat](p, p1_die, p2_die, newLine)
+    else:
+        return ""
 
 def bid_random(p, p1_die, p2_die, newLine):
     # choose a totally random bid face and quantity, even if it's not in hand
@@ -95,6 +108,10 @@ def set_bids(strat, p, newLine):
 
     return strat_lookup[strat](p, newLine)
 
+def init_bid(start_player, newLine):
+    phase = 3 if start_player == 1 else 2
+    return f"[p{start_player}_bid_init] phase=1 -> (phase' = {phase});"
+
 def bid_nondet(p, newLine):
     # nondeterministic: just set the guards for valid bids, without encouraging a particular decision
     other_p = 2 if p == 1 else 1
@@ -108,12 +125,13 @@ def bid_nondet(p, newLine):
 
 def face_first(p, newLine):
     # very basic bidding strategy: always increment the face value until it reaches 6, then increment quantity.
+    phase = 2 if p == 1 else 3
     other_p = 2 if p == 1 else 1
     output = []
 
-    output.append(f"[p{p}_bid_face] phase=3 & p{other_p}_bid_face < 6 -> (p{p}_bid_face' = min(p{other_p}_bid_face + 1, 6)) & (p{p}_bid_quat' = current_bid_quat);")
+    output.append(f"[p{p}_bid_face] phase={phase} & p{other_p}_bid_face < 6 -> (p{p}_bid_face' = min(p{other_p}_bid_face + 1, 6)) & (p{p}_bid_quat' = current_bid_quat);")
     output.append("")
-    output.append(f"[p{p}_bid_quat] phase=3 & p{other_p}_bid_face = 6 & p{other_p}_bid_quat < 6 -> (p{p}_bid_quat' = min(p{other_p}_bid_quat + 1, 6)) & (p{p}_bid_face' = current_bid_face);")
+    output.append(f"[p{p}_bid_quat] phase={phase} & p{other_p}_bid_face = 6 & p{other_p}_bid_quat < 6 -> (p{p}_bid_quat' = min(p{other_p}_bid_quat + 1, 6)) & (p{p}_bid_face' = current_bid_face);")
 
     return newLine.join(output)
 
@@ -137,7 +155,7 @@ def challenge_nondet(p, p1_dice, p2_dice):
 def challenge_threshold(p, p1_dice, p2_dice):
     phase = 2 if p == 1 else 3
 
-    return f"[p{p}_challenge] phase={phase} & ((current_bid_face + current_bid_quat)/{6 + p1_dice + p2_dice} >= p{p}_c) -> (phase'=4) & (made_challenge' = {p});"
+    return f"[p{p}_challenge] phase={phase} & (((current_bid_face + current_bid_quat)/{6 + p1_dice + p2_dice} >= p{p}_c) | ((current_bid_face = 6) & (current_bid_quat = {p1_dice + p2_dice}))) -> (phase'=4) & (made_challenge' = {p});"
     pass
 
 def challenge_late(p, p1_dice, p2_dice):
@@ -147,7 +165,8 @@ def challenge_late(p, p1_dice, p2_dice):
     return f"[p{p}_challenge] phase={phase} & (current_bid_face=6) & (current_bid_quat={p1_dice + p2_dice}) -> (phase'=4) & (made_challenge' = {p});"
 
 def lookup(fname):
-    functions = {"list_p1_dice": list_p1_dice, "formulas": formulas, "init_dice": init_dice,
-                 "roll_dice": roll_dice, "define_init_bid": define_init_bid, "set_bids": set_bids,
-                 "all_rolled": all_rolled, "challenge": challenge}
+    functions = {"constants": constants, "list_p1_dice": list_p1_dice, "formulas": formulas,
+                 "init_dice": init_dice, "roll_dice": roll_dice, "define_init_bid": define_init_bid,
+                 "set_bids": set_bids, "all_rolled": all_rolled, "challenge": challenge,
+                 "init_bid": init_bid}
     return functions[fname]
