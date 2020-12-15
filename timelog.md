@@ -108,4 +108,4 @@ Date | Duration | Summary
 
 Date | Duration | Summary
 ---- | -------- | -------
-14/12/20 | 3 hours | Sketched out ideas for evaluating Liar's Dice using game trees, generated smaller example with 2 dice each to demonstrate viability of model checking. Started plan for the week, polished status report slightly.
+14/12/20 | 5.5 hours | Sketched out ideas for evaluating Liar's Dice using game trees, generated smaller example with 2 dice each to demonstrate viability of model checking. Started plan for the week, polished status report slightly. Defined some more challenge strategies. Setup prism-pomdps alias on Windows, will be able to start experiment environment tomorrow.
