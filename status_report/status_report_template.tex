@@ -2,7 +2,7 @@
 \usepackage{times}
     \usepackage{fullpage}
     
-    \title{Modelling and analysis of stochastic games}
+    \title{Modelling and analysis of dice-based stochastic games}
     \author{ Lewis Dyer - 2299195D }
 
     \begin{document}
@@ -17,25 +17,18 @@
 
 \subsubsection{Motivation}\label{motivation}
 
-\emph{{[}Clearly motivate the purpose of your project; why someone would
-care about what you are doing{]}}
-
 When designing and balancing games, various aspects of a game must be considered in order to create games which are interesting, enjoyable and replayable. These aspects are often considered manually, which is time-consuming and potentially inaccurate. Model checking aims to provide more rigorous evaluations of different game designs, for many different classes of games.
+One of the most commonly methods of implementing random elements in a game is via using dice, offering a tactile and simple way of introducing random elements. However, dice are usually assumed to be fair, when in practice dice are often biased to particular values, and this bias can significantly impact how a game is played.
 
 \subsubsection{Aims}\label{aims}
 
-\emph{{[}Clearly state what the project is intended to do. This should
-be something which is measurable; it should be possible to tell if you
-succeeded{]}}
-
-This project will develop three case studies of various dice-based games, generating models whose properties can be verified using model checking. These results will then be analysed, discussing the implications of these results with respect to the game's design. These case studies will be chosen to emphasise different aspects of game design, such as hidden information and the differences between concurrent and turn-based decision making.
+This project will develop three case studies of various dice-based games, generating models whose properties can be verified using model checking. These results will then be analysed, discussing the implications of these results with respect to the game's design. These case studies will be chosen to emphasise different aspects of game design, such as hidden information and the differences between concurrent and turn-based decision making. Finally, the impact of weighted dice will be examined in order to analyse the extent to which optimal play depends on both luck and strategy.
 
 \subsection{Progress}\label{progress}
 
 \begin{itemize}
     \item Developed background knowledge of PRISM (including the PRISM-games and PRISM-pomdps offshoots)
-    \item Created preprocessor to parameterise and generate models appropriately
-    \item Developed experiment automation environment to automatically gather data via model checking and produce appropriate visualisations
+    \item Created preprocessor and experiment automation environment to create replicable experiments
     \item Completed core modelling for Shut The Box, and the bulk of the analysis/visualisation
     \item Started basic modelling for Liar's Dice using POMDPs
 \end{itemize}
@@ -44,18 +37,16 @@ This project will develop three case studies of various dice-based games, genera
 
 \subsubsection{Problems}\label{problems}
 
-
 \begin{itemize}
 \item Experimental development versions of PRISM do not contain the full subset of features such as manual simulation and strategy generation, limiting the set of properties which can be considered.
-\item Some models take a long time to generate data, slowing down the process of analysis.
+\item Some models take a long time to generate data, slowing down the process of analysis and visualisation.
 \end{itemize}
 
 \subsubsection{Risks}\label{risks}
 
 \begin{itemize}
 
-\item Third game currently undecided, may end up being more complex than expected. \textbf{Mitigation}: Will use knowledge from modelling first two games to help scope the third game.
-\item Model checking taking longer than expected to run, leading to a bottleneck in generating visualisations. \textbf{Mitigation}: Experiment automation environment means experiments are only re-ran when new data is required. Will also generate smaller examples of models when considering new visualisations to include. Aim is to create \emph{minimally complete examples} - enough complexity to be interesting, but not too much to detract from the core ideas.
+\item Third game currently decided but may end up being more complex than expected \textbf{Mitigation}: Will use knowledge from modelling first two games to help scope the third game. Will focus on core mechanics of game first, adding extra mechanics if time permits.
 \item Final analysis from considering weighted dice may take more time than originally planned. \textbf{Mitigation}: Will focus on simple example of weighted dice first on all 3 games, then extend later on if time is available.
 \end{itemize}
 
@@ -68,7 +59,7 @@ This project will develop three case studies of various dice-based games, genera
     \item Weeks 4-6: Include consideration of weighted dice in analysis of each game. \textbf{Deliverable}: New sets of data from each game, considering the impact of weighted dice, including new visualisations.
     \item Weeks 5-8: Write up dissertation section for each game. \textbf{Deliverable}: Three dissertation sections, including sending chapters to supervisor for feedback on a regular basis.
     \item Weeks 9-11: Write and record presentation. \textbf{Deliverable}: Slides and video of project presentation.
-    \item Weeks 9-10: Write up remaining sections of dissertation (mainly conclusion). \textbf{Deliverable}: First draft of dissertation.
+    \item Weeks 9-10: Write up remaining sections of dissertation (mainly conclusion). \textbf{Deliverable}: A mostly complete draft of dissertation.
     \item Week 10-11: Final polishing/tweaking of dissertation based on supervisor feedback. \textbf{Deliverable}: Final dissertation.
 \end{itemize}
 

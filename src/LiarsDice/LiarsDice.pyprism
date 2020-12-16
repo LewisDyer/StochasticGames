@@ -1,8 +1,6 @@
 // Liar's Dice
 pomdp
 
-@ld/constants p1_strat p2_strat@
-
 observables
 	@ld/list_p1_dice p1_die@
 	p1_bid_face, p1_bid_quat, p2_bid_face, p2_bid_quat,

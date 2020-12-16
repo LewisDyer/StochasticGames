@@ -1,15 +1,5 @@
 from itertools import product
 
-def constants(p1_strat, p2_strat, newLine):
-    # adds constants for thresholds, but only if the strategy requires it
-    output = []
-    if p1_strat == 1:
-        output.append("const double p1_c;")
-    if p2_strat == 1:
-        output.append("const double p2_c;")
-    
-    return newLine.join(output)
-
 def list_p1_dice(n_die, newLine):
     dice_list = []
     for i in range(1, n_die+1):
@@ -142,31 +132,38 @@ def all_rolled(p1_die, p2_die, newLine):
 def challenge(strat, p, p1_dice, p2_dice, newLine):
     # define a strategy for determining when to challenge
 
-    strat_lookup = {0: challenge_nondet, 1: challenge_threshold, 2: challenge_late}
+    strat_lookup = {0: challenge_nondet, 1: challenge_risky, 2: challenge_late}
 
-    return strat_lookup[strat](p, p1_dice, p2_dice)
+    return strat_lookup[strat](p, p1_dice, p2_dice, newLine)
 
-def challenge_nondet(p, p1_dice, p2_dice):
+def challenge_nondet(p, p1_dice, p2_dice, newLine):
     # nondeterministic challenge
     phase = 2 if p == 1 else 3
 
     return f"[p{p}_challenge] phase={phase} -> (phase'=4) & (made_challenge' = {p});"
 
-def challenge_threshold(p, p1_dice, p2_dice):
+def challenge_risky(p, p1_dice, p2_dice, newLine):
+    # challenge if the current bid requires the opponent has at least 2 unseen die with the bid values
     phase = 2 if p == 1 else 3
+    output = []
+    for bid_val in range(1,7):
+        output.append(f"[p{p}_challenge] phase={phase} & current_bid_face={bid_val} & ((current_bid_quat - p{p}_{bid_val}s >= 2)) | ((current_bid_face = 6) & (current_bid_quat = {p1_dice + p2_dice})) -> (phase'=4) & (made_challenge' = {p});")
+    
+    return newLine.join(output)
+    
 
-    return f"[p{p}_challenge] phase={phase} & (((current_bid_face + current_bid_quat)/{6 + p1_dice + p2_dice} >= p{p}_c) | ((current_bid_face = 6) & (current_bid_quat = {p1_dice + p2_dice}))) -> (phase'=4) & (made_challenge' = {p});"
-    pass
-
-def challenge_late(p, p1_dice, p2_dice):
-    # only challenge if no higher bids are available
+def challenge_late(p, p1_dice, p2_dice, newLine):
+    # only challenge if the current bid is impossible given what you can see
     phase = 2 if p == 1 else 3
+    output = []
+    for bid_val in range(1,7):
+        output.append(f"[p{p}_challenge] phase={phase} & current_bid_face={bid_val} & ((current_bid_quat - p{p}_{bid_val}s > 2)) | ((current_bid_face = 6) & (current_bid_quat = {p1_dice + p2_dice})) -> (phase'=4) & (made_challenge' = {p});")
 
-    return f"[p{p}_challenge] phase={phase} & (current_bid_face=6) & (current_bid_quat={p1_dice + p2_dice}) -> (phase'=4) & (made_challenge' = {p});"
+    return newLine.join(output)
 
 def lookup(fname):
-    functions = {"constants": constants, "list_p1_dice": list_p1_dice, "formulas": formulas,
-                 "init_dice": init_dice, "roll_dice": roll_dice, "define_init_bid": define_init_bid,
+    functions = {"list_p1_dice": list_p1_dice, "formulas": formulas, "init_dice": init_dice, 
+                 "roll_dice": roll_dice, "define_init_bid": define_init_bid,
                  "set_bids": set_bids, "all_rolled": all_rolled, "challenge": challenge,
                  "init_bid": init_bid}
     return functions[fname]

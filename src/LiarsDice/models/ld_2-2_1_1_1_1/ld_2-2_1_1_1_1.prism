@@ -1,9 +1,6 @@
 // Liar's Dice
 pomdp
 
-const double p1_c;
-const double p2_c;
-
 observables
 	p1_d1, p1_d2,
 	p1_bid_face, p1_bid_quat, p2_bid_face, p2_bid_quat,
@@ -119,12 +116,22 @@ module controller
 	[p1_bid_face] phase=2 -> (phase'=3);
 	[p1_bid_quat] phase=2 -> (phase'=3);
 
-	[p1_challenge] phase=2 & (((current_bid_face + current_bid_quat)/10 >= p1_c) | ((current_bid_face = 6) & (current_bid_quat = 4))) -> (phase'=4) & (made_challenge' = 1);
+	[p1_challenge] phase=2 & current_bid_face=1 & ((current_bid_quat - p1_1s >= 2)) | ((current_bid_face = 6) & (current_bid_quat = 4)) -> (phase'=4) & (made_challenge' = 1);
+	[p1_challenge] phase=2 & current_bid_face=2 & ((current_bid_quat - p1_2s >= 2)) | ((current_bid_face = 6) & (current_bid_quat = 4)) -> (phase'=4) & (made_challenge' = 1);
+	[p1_challenge] phase=2 & current_bid_face=3 & ((current_bid_quat - p1_3s >= 2)) | ((current_bid_face = 6) & (current_bid_quat = 4)) -> (phase'=4) & (made_challenge' = 1);
+	[p1_challenge] phase=2 & current_bid_face=4 & ((current_bid_quat - p1_4s >= 2)) | ((current_bid_face = 6) & (current_bid_quat = 4)) -> (phase'=4) & (made_challenge' = 1);
+	[p1_challenge] phase=2 & current_bid_face=5 & ((current_bid_quat - p1_5s >= 2)) | ((current_bid_face = 6) & (current_bid_quat = 4)) -> (phase'=4) & (made_challenge' = 1);
+	[p1_challenge] phase=2 & current_bid_face=6 & ((current_bid_quat - p1_6s >= 2)) | ((current_bid_face = 6) & (current_bid_quat = 4)) -> (phase'=4) & (made_challenge' = 1);
 
 	[p2_bid_face] phase=3 -> (phase'=2);
 	[p2_bid_quat] phase=3 -> (phase'=2);
 	
-	[p2_challenge] phase=3 & (((current_bid_face + current_bid_quat)/10 >= p2_c) | ((current_bid_face = 6) & (current_bid_quat = 4))) -> (phase'=4) & (made_challenge' = 2);
+	[p2_challenge] phase=3 & current_bid_face=1 & ((current_bid_quat - p2_1s >= 2)) | ((current_bid_face = 6) & (current_bid_quat = 4)) -> (phase'=4) & (made_challenge' = 2);
+	[p2_challenge] phase=3 & current_bid_face=2 & ((current_bid_quat - p2_2s >= 2)) | ((current_bid_face = 6) & (current_bid_quat = 4)) -> (phase'=4) & (made_challenge' = 2);
+	[p2_challenge] phase=3 & current_bid_face=3 & ((current_bid_quat - p2_3s >= 2)) | ((current_bid_face = 6) & (current_bid_quat = 4)) -> (phase'=4) & (made_challenge' = 2);
+	[p2_challenge] phase=3 & current_bid_face=4 & ((current_bid_quat - p2_4s >= 2)) | ((current_bid_face = 6) & (current_bid_quat = 4)) -> (phase'=4) & (made_challenge' = 2);
+	[p2_challenge] phase=3 & current_bid_face=5 & ((current_bid_quat - p2_5s >= 2)) | ((current_bid_face = 6) & (current_bid_quat = 4)) -> (phase'=4) & (made_challenge' = 2);
+	[p2_challenge] phase=3 & current_bid_face=6 & ((current_bid_quat - p2_6s >= 2)) | ((current_bid_face = 6) & (current_bid_quat = 4)) -> (phase'=4) & (made_challenge' = 2);
 
 	[check_challenge_1s] phase=4 & current_bid_face = 1 -> (challenge_correct' = (all_1s >= current_bid_quat)) & (phase'=5);
 	[check_challenge_2s] phase=4 & current_bid_face = 2 -> (challenge_correct' = (all_2s >= current_bid_quat)) & (phase'=5);

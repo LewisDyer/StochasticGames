@@ -1,4 +1,4 @@
-# Week 12 Status Report - 14/12/20
+# Week 12 Status Report - 16/12/20
 
 This week, I have completed preprocessing functions for Liar's Dice, and started developing the automation environment so that I can analyse entire games by considering individual rounds. During preprocessing, I have experimented with various methods for reducing the state space for Liar's Dice, however most of these methods have been unsuccessful.
 
