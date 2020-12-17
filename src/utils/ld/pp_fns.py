@@ -1,5 +1,15 @@
 from itertools import product
 
+def constants(p1_strat, p2_strat, newLine):
+    # adds constants for thresholds, but only if the strategy requires it
+    output = []
+    if p1_strat in [1, 2]:
+        output.append("const double p1_c;")
+    if p2_strat in [1, 2]:
+        output.append("const double p2_c;")
+    
+    return newLine.join(output)
+
 def list_p1_dice(n_die, newLine):
     dice_list = []
     for i in range(1, n_die+1):
@@ -28,6 +38,26 @@ def create_formula(p1_die, value, p):
     for die in range(2, p1_die+1):
         output.append(f"(p{p}_d{die} = {value} ? 1 : 0)")
     return " + ".join(output) + ";"
+
+def challenge_forms(p1_strat, p2_strat, p1_dice, p2_dice, newLine):
+    # formulas to determine when to challenge
+    strategy_lookup = {0: challenge_nondet, 1: challenge_threshold, 2: challenge_late}
+    
+    output = []
+    output.append(strategy_lookup[p1_strat](1, p1_dice, p2_dice))
+    output.append(strategy_lookup[p2_strat](2, p1_dice, p2_dice))
+
+    return newLine.join(output)
+
+def challenge_nondet(p, p1_dice, p2_dice):
+    # don't need a formula, but set it as false so that bids happen properly
+    return f"formula p{p}_challenge = false;"
+
+def challenge_threshold(p, p1_dice, p2_dice):
+    return f"formula p{p}_challenge = ((current_bid_face + current_bid_quat)/{6 + p1_dice + p2_dice} >= p{p}_c);"
+
+def challenge_late(p, p1_dice, p2_dice):
+    return f"formula p{p}_challenge = ((current_bid_face = 6) & (current_bid_quat={p1_dice + p2_dice}))"
 
 def init_dice(no_die, p, newLine):
     # PRISM code for variable declarations for each die
@@ -107,9 +137,9 @@ def bid_nondet(p, newLine):
     other_p = 2 if p == 1 else 1
     output = []
 
-    output.append(f"[p{p}_bid_face] phase=2 & p{other_p}_bid_face < 6 -> (p{p}_bid_face' = min(p{other_p}_bid_face + 1, 6)) & (p{p}_bid_quat' = current_bid_quat);")
+    output.append(f"[p{p}_bid_face] phase=2 & p{other_p}_bid_face < 6 & !p{p}_challenge -> (p{p}_bid_face' = min(p{other_p}_bid_face + 1, 6)) & (p{p}_bid_quat' = current_bid_quat);")
     output.append("")
-    output.append(f"[p{p}_bid_quat] phase=2 & p{other_p}_bid_quat < 6 -> (p{p}_bid_quat' = min(p{other_p}_bid_quat + 1, 6)) & (p{p}_bid_face' = current_bid_face);")
+    output.append(f"[p{p}_bid_quat] phase=2 & p{other_p}_bid_quat < 6 & !p{p}_challenge -> (p{p}_bid_quat' = min(p{other_p}_bid_quat + 1, 6)) & (p{p}_bid_face' = current_bid_face);")
 
     return newLine.join(output)
 
@@ -119,9 +149,9 @@ def face_first(p, newLine):
     other_p = 2 if p == 1 else 1
     output = []
 
-    output.append(f"[p{p}_bid_face] phase={phase} & p{other_p}_bid_face < 6 -> (p{p}_bid_face' = min(p{other_p}_bid_face + 1, 6)) & (p{p}_bid_quat' = current_bid_quat);")
+    output.append(f"[p{p}_bid_face] phase={phase} & p{other_p}_bid_face < 6 & p{p}_challenge -> (p{p}_bid_face' = min(p{other_p}_bid_face + 1, 6)) & (p{p}_bid_quat' = current_bid_quat);")
     output.append("")
-    output.append(f"[p{p}_bid_quat] phase={phase} & p{other_p}_bid_face = 6 & p{other_p}_bid_quat < 6 -> (p{p}_bid_quat' = min(p{other_p}_bid_quat + 1, 6)) & (p{p}_bid_face' = current_bid_face);")
+    output.append(f"[p{p}_bid_quat] phase={phase} & p{other_p}_bid_face = 6 & p{other_p}_bid_quat < 6 & p{p}_challenge -> (p{p}_bid_quat' = min(p{other_p}_bid_quat + 1, 6)) & (p{p}_bid_face' = current_bid_face);")
 
     return newLine.join(output)
 
@@ -129,41 +159,18 @@ def all_rolled(p1_die, p2_die, newLine):
     p = 1 if p1_die >= p2_die else 2
     return f"[all_rolled] phase=0 & p{p}_d{max(p1_die, p2_die)} != 0 -> (phase'=1);"
 
-def challenge(strat, p, p1_dice, p2_dice, newLine):
-    # define a strategy for determining when to challenge
-
-    strat_lookup = {0: challenge_nondet, 1: challenge_risky, 2: challenge_late}
-
-    return strat_lookup[strat](p, p1_dice, p2_dice, newLine)
-
-def challenge_nondet(p, p1_dice, p2_dice, newLine):
-    # nondeterministic challenge
+def challenge(strat, p, newLine):
+    # defines challenge in the controller-side
     phase = 2 if p == 1 else 3
-
-    return f"[p{p}_challenge] phase={phase} -> (phase'=4) & (made_challenge' = {p});"
-
-def challenge_risky(p, p1_dice, p2_dice, newLine):
-    # challenge if the current bid requires the opponent has at least 2 unseen die with the bid values
-    phase = 2 if p == 1 else 3
-    output = []
-    for bid_val in range(1,7):
-        output.append(f"[p{p}_challenge] phase={phase} & current_bid_face={bid_val} & ((current_bid_quat - p{p}_{bid_val}s >= 2)) | ((current_bid_face = 6) & (current_bid_quat = {p1_dice + p2_dice})) -> (phase'=4) & (made_challenge' = {p});")
-    
-    return newLine.join(output)
-    
-
-def challenge_late(p, p1_dice, p2_dice, newLine):
-    # only challenge if the current bid is impossible given what you can see
-    phase = 2 if p == 1 else 3
-    output = []
-    for bid_val in range(1,7):
-        output.append(f"[p{p}_challenge] phase={phase} & current_bid_face={bid_val} & ((current_bid_quat - p{p}_{bid_val}s > 2)) | ((current_bid_face = 6) & (current_bid_quat = {p1_dice + p2_dice})) -> (phase'=4) & (made_challenge' = {p});")
-
-    return newLine.join(output)
+    if strat == 0:
+        # nondeterministic case
+        return(f"[p{p}_challenge] phase={phase} & p{p}_challenge -> (phase'=4) & (made_challenge' = {p});")
+    else:
+        return(f"[p{p}_challenge] phase={phase} -> (phase'=4) & (made_challenge' = {p});")
 
 def lookup(fname):
     functions = {"list_p1_dice": list_p1_dice, "formulas": formulas, "init_dice": init_dice, 
                  "roll_dice": roll_dice, "define_init_bid": define_init_bid,
-                 "set_bids": set_bids, "all_rolled": all_rolled, "challenge": challenge,
-                 "init_bid": init_bid}
+                 "set_bids": set_bids, "all_rolled": all_rolled, "init_bid": init_bid,
+                 "challenge": challenge, "challenge_forms": challenge_forms, "constants": constants}
     return functions[fname]
