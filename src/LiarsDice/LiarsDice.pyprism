@@ -100,7 +100,7 @@ label "p1_loses" = (phase=6);
 label "p2_loses" = (phase=7);
 
 rewards "total_bids"
-	[p1_bid_init] true : 1;
+	@ld/init_bid_reward start_player@
 	[p1_bid_face] true : 1;
 	[p1_bid_quat] true : 1;
 	[p2_bid_face] true : 1;

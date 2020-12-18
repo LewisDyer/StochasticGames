@@ -168,9 +168,13 @@ def challenge(strat, p, newLine):
     else:
         return(f"[p{p}_challenge] phase={phase} -> (phase'=4) & (made_challenge' = {p});")
 
+def init_bid_reward(start_player, newLine):
+    return f"[p{start_player}_bid_init] true : 1;"
+
 def lookup(fname):
     functions = {"list_p1_dice": list_p1_dice, "formulas": formulas, "init_dice": init_dice, 
                  "roll_dice": roll_dice, "define_init_bid": define_init_bid,
                  "set_bids": set_bids, "all_rolled": all_rolled, "init_bid": init_bid,
-                 "challenge": challenge, "challenge_forms": challenge_forms, "constants": constants}
+                 "challenge": challenge, "challenge_forms": challenge_forms, "constants": constants,
+                 "init_bid_reward": init_bid_reward}
     return functions[fname]
