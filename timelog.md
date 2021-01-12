@@ -113,3 +113,10 @@ Date | Duration | Summary
 16/12/20 | 4 hours | Continued work on game tree construction. Supervisor meeting, wrote up minutes, finalised status report. Drafted message to designer of 3rd game asking some questions about their design decisions.
 17/12/20 | 5 hours | Debugged POMDP, encountered issue with different action choice based on hidden variables. Reverted to previous challenge criteria due to this issue, continued work on experiment environment. Tomorrow - use game tree results to get probability of winning game.
 18/12/20 | 4 hours | More debugging of game tree construction - modified reward structure to support different starting players. Constructed tree, got meaningful results about winrate! Code might need a refactor (currently need to generate relevant model checking data beforehand). Still need some sort of visualisation (.dot file?)
+
+## Week 13 (start of semester 2)
+
+Date | Duration | Summary
+---- | -------- | -------
+11/01/21 | 0.5 hours | Started planning structure of dissertation, getting up to speed
+12/01/21 | 1 hour | Further work on dissertation structure, added very approximate page counts. Supervisor meeting plus adding minutes
