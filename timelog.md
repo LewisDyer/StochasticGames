@@ -120,3 +120,4 @@ Date | Duration | Summary
 ---- | -------- | -------
 11/01/21 | 0.5 hours | Started planning structure of dissertation, getting up to speed
 12/01/21 | 1 hour | Further work on dissertation structure, added very approximate page counts. Supervisor meeting plus adding minutes
+13/01/21 | 4 hours | Started developing manual model for 26.2 - mostly complete game flow, need to fix bugs with space overflow at end of game.
