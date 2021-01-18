@@ -121,3 +121,12 @@ Date | Duration | Summary
 11/01/21 | 0.5 hours | Started planning structure of dissertation, getting up to speed
 12/01/21 | 1 hour | Further work on dissertation structure, added very approximate page counts. Supervisor meeting plus adding minutes
 13/01/21 | 4 hours | Started developing manual model for 26.2 - mostly complete game flow, need to fix bugs with space overflow at end of game.
+14/01/21 | 2 hours | Some more work on manual model, core gameflow is complete but model size is a big challenge. Can currently get ~100 spaces, full game uses 262.
+
+
+
+## Week 14
+
+Date | Duration | Summary
+---- | -------- | -------
+18/01/21 | 2 hours | Wrote some questions/a plan for supervisor meeting, came up with a new method for state space reduction.
