@@ -130,3 +130,4 @@ Date | Duration | Summary
 Date | Duration | Summary
 ---- | -------- | -------
 18/01/21 | 2 hours | Wrote some questions/a plan for supervisor meeting, came up with a new method for state space reduction.
+19/01/21 | 1 hour | Supervisor meeting + writing up minutes
