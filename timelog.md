@@ -131,3 +131,11 @@ Date | Duration | Summary
 ---- | -------- | -------
 18/01/21 | 2 hours | Wrote some questions/a plan for supervisor meeting, came up with a new method for state space reduction.
 19/01/21 | 1 hour | Supervisor meeting + writing up minutes
+20/01/21 | 3.5 hours | Implemented method for state space reduction - still need to debug a step (I think with win condition not triggering?), but already the model is *substantially* smaller! Very basic start on properties, but still need to refine to get meaningful results.
+22/01/21 | 2.5 hours | Started creating some properties to get some results, but ran into a lot of issues with the model taking too long to give results... PRISM actually crashes after multiple hours trying to give basic results for larger boards.
+
+## Week 15
+
+Date | Duration | Summary
+---- | -------- | -------
+25/01/21 | 2 hours | Created status report for supervisor meeting, created variant of model with only one player - variant works successfully on large boards. Aim to use this for bulk of analysis, but also need to consider how different players interact. Now ready to start preprocessing.

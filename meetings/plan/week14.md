@@ -1,4 +1,4 @@
-# Week 14 Status Report - 14/01/21
+# Week 14 Status Report - 19/01/21
 
 This week, I have completed an initial manual model of 26.2, the third game in the project. The general game flow is complete, although the "water tokens" mechanics have not been included yet. Currently, the main challenge in the model is coping with size - the current model builds successfully with around 100 spaces and two players, but the full game uses 262 spaces by default.
 

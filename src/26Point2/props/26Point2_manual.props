@@ -1,0 +1,19 @@
+const int rounds;
+
+// probability that player 1 wins - expect to be 50/50 since same behaviour
+Pmax=? [F "p1_wins"];
+
+// probability that player 2 wins - should be complement of p1 wins
+Pmax=? [F "p2_wins"];
+
+// probability of both players ending on the same position - should we be concerned about this edgecase?
+Pmax=? [F "players_tied"];
+
+Pmax=? [F "game_over"];
+
+R{"no_rounds"}max=? [F "game_over"];
+
+R{"p1_busts"}max=? [F "game_over"];
+
+// be careful with nondet here
+R{"p1_busts"}max=? [F "game_over"] / R{"no_rounds"}max=? [F "game_over"]; 
