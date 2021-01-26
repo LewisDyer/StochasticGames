@@ -139,3 +139,4 @@ Date | Duration | Summary
 Date | Duration | Summary
 ---- | -------- | -------
 25/01/21 | 2 hours | Created status report for supervisor meeting, created variant of model with only one player - variant works successfully on large boards. Aim to use this for bulk of analysis, but also need to consider how different players interact. Now ready to start preprocessing.
+26/01/21 | 2 hours | Minutes from dissertation meeting, restuctured dissertation template and separated into multiple files
