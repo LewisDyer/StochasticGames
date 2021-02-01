@@ -1,0 +1,61 @@
+// Manual model for 26 Point 2
+// 2 players, 4d6 each, 30 spaces.
+
+csg
+
+const int no_space; // goal space to win game
+const int no_dice; // max no of dice players can roll a turn
+const int no_sides; // number of sides per die
+
+@26point2/end_formulas players@
+
+@26point2/pair_formulas players no_sides@
+
+@26point2/bust_formulas players no_sides@
+
+@26point2/move_formulas players no_sides@
+
+formula p1_end_pos = p1_pos + (p1_end ? no_spaces : 0);
+formula p2_end_pos = p2_pos + (p2_end ? no_spaces : 0);
+@26point2/endpos_formulas players@
+
+
+@26point2/def_player p1 no_sides no_dice strategy1@
+
+@26point2/def_player p2 no_sides no_dice strategy2@
+
+
+module board
+
+    // Local state:
+    // 0: choosing how many dice to roll
+    // 1: roll dice1
+    // 2: roll dice2
+    // 3: roll dice3
+    // 4: roll dice4
+    // 5: Moving (if allowed!)
+    // 6: Deciding winner
+    // 7: game over
+    state : [0..8] init 0;
+    @26point2/winner players@
+
+    @26point2/states no_dice@
+
+
+    @26point2/pick_wins no_dice players@
+    
+    [game_over] state=7 -> (state'=7);
+
+endmodule
+
+
+@26point2/winner_labels players no_dice@
+
+@26point2/bust_labels players@
+
+rewards "no_rounds"
+	[pick_dice] true: 1;
+endrewards
+
+
+@26point2/bust_rewards players no_dice@

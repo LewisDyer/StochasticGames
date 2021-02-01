@@ -140,3 +140,6 @@ Date | Duration | Summary
 ---- | -------- | -------
 25/01/21 | 2 hours | Created status report for supervisor meeting, created variant of model with only one player - variant works successfully on large boards. Aim to use this for bulk of analysis, but also need to consider how different players interact. Now ready to start preprocessing.
 26/01/21 | 2 hours | Minutes from dissertation meeting, restuctured dissertation template and separated into multiple files
+27/01/21 | 1 hour | Attempted to increase CUDD max memory in PRISM, led to unexpected results - issue identified as not saving options before closing, but increasing CUDD max memory to 8gb led to the PRISM GUI no longer opening. Will troubleshoot further tomorrow.
+28/01/21 | 2 hours | Further troubleshooted PRISM, attempted using CLI to run models instead - still receive EXCEPTION_ACCESS_VIOLATION when trying to increase CUDD max memory, even for small values.
+29/01/21 | 2 hours | Trialled statistical model checking (especially APMC due to offering a probabilistic guarantee on approximations) - seems viable even for very large models/unlikely circumstances. Will include this in notes and bring up at supervisor meeting. Also continued working on background section, added section on rewards in stochastic games and introduced PCTL.

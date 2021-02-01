@@ -1,3 +1,4 @@
+
 \chapter{Background (3 pages)}
 
 Give context on existing work, both in model checking and in automated game design (RMT coursework very helpful for this). Identify a gap in current work (e.g certain types of games that haven't been analysed very much, or discussion on robustness of models). How can I tie this into my project?
@@ -15,3 +16,30 @@ The very key points I need to mention:
     \item Gap in current work (e.g focus on dice/hidden information/weighted dice?)
 \end{itemize}
 
+In order to begin formal analysis of a game, we must first formally define a model of a game, along with properties of this game we wish to consider.
+
+\section{Stochastic games}
+
+We first introduce a turn based multiplayer stochastic game (TSG), as described by \cite{kavanagh_balancing_2019}. This model is refined and adapted in each case study to develop a different type of model suited to different types of games.
+
+A turn based multiplayer stochastic game (TSG) is defined as a tuple $(\Pi, S, A, \langle S_i \rangle_{i \in \Pi}, \delta)$ such that:
+
+\begin{itemize}
+    \item $\Pi$ is a finite set of players;
+    \item $S$ is a finite set of states for a game (for instance, every possible board position in chess);
+    \item $A$ is a finite set of actions (such as every possible move in chess, not just those which are possible in the current state);
+    \item $\langle S_i \rangle_{i \in \Pi}$ is a partition, such that every state is controlled by exactly one player;
+    \item $\delta : S \times A \rightarrow Dist(S)$ is a partial transition function denoting the probability of taking an action in a particular state, where an action $a \in A$ is only available in a state $s \in S$ if $\delta(s, a)$ is defined. $Dist(S)$ denotes the set of discrete probability distributions on $S$.
+\end{itemize}
+
+Playing a game is represented as an infinite \emph{path}, denoted as a sequence $\omega = s_0 \xrightarrow{a_0} s1 \xrightarrow{a_1} \dots$ where $\delta(s_k, a_k)(s_{k+1})>0$ for all $k\geq0$, or in other words where each action is possible.
+
+We may also augment this TSG with a set of \emph{reward structures}, which are each comprised of a \emph{state reward function} $\rho : S \rightarrow \mathbb{N}$, associating each state with the value of a reward, and a \emph{state transition function} $\iota : S \times S \rightarrow \mathbb{N}$ associates each transition with the value of a reward. For instance, in chess, we may define a reward structure where $\iota$ returns $0$ for all transitions, and $\rho$ returns $1$ for all states where a player is in check. Note that the reward values may be continuous (though they may never be negative), but we only consider reward values in $\mathbb{N}$.
+
+\section{Property specification}
+
+When analysing stochastic games, we consider two main types of properties: \emph{probabilistic reachability} properties and \emph{reward-based} properties. We may define properties in terms of \emph{Probabilistic Computation Tree Logic} (PCTL), as defined by \cite{hansson_logic_1994}. These properties are comprised of path quantifiers and temporal operators, though for the purposes of this dissertation we only consider one temporal operator. In particular, the $\mathbf{F}$ operator considers whether a particular proposition \emph{eventually} holds at some state on a given path.
+
+For probabilistic reachability properties, we also include the $\mathbf{P}$ operator, which considers the probability of a particular property holding, including its proposition and any temporal operators, across all possible executions of the TSG. For instance, if we define $\mathtt{game\_over}$ as the proposition that the game is considered to be completed in the current state, the property $\mathbf{P}_{=?} [\mathbf{F}\ \mathtt{game\_over}]$ represents the probability that the game eventually terminates.
+
+For reward-based properties, PRISM defines an extension to PCTL introducing the $\mathbf{R}$ operator, which allows for properties where the value of a reward is taken into account. For the purposes of this dissertation we only consider one type of reward-based property, namely the \emph{reachability reward} property, referring to the expected cumulative value of a reward along a path, until a state satisfying a particular proposition is reached. As an example, using our previous definition of $\mathtt{game\_over}$, the property $\mathbf{R}_{=?} [\mathbf{F}\ \mathtt{game\_over}]$ represents the expected value of a particular reward (such as the number of rounds in a game) before the game is completed.

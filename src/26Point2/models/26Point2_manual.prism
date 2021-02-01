@@ -1,9 +1,9 @@
 // Manual model for 26 Point 2
 // 2 players, 4d6 each, 30 spaces.
 
-mdp
+csg
 
-const int no_spaces = 100; // goal space to win game
+const int no_spaces = 262; // goal space to win game
 const int no_dice = 4; // max no of dice players can roll a turn
 const int no_sides = 6; // number of sides per die
 
