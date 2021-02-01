@@ -34,7 +34,7 @@ A turn based multiplayer stochastic game (TSG) is defined as a tuple $(\Pi, S, A
 
 Playing a game is represented as an infinite \emph{path}, denoted as a sequence $\omega = s_0 \xrightarrow{a_0} s1 \xrightarrow{a_1} \dots$ where $\delta(s_k, a_k)(s_{k+1})>0$ for all $k\geq0$, or in other words where each action is possible.
 
-We may also augment this TSG with a set of \emph{reward structures}, which are each comprised of a \emph{state reward function} $\rho : S \rightarrow \mathbb{N}$, associating each state with the value of a reward, and a \emph{state transition function} $\iota : S \times S \rightarrow \mathbb{N}$ associates each transition with the value of a reward. For instance, in chess, we may define a reward structure where $\iota$ returns $0$ for all transitions, and $\rho$ returns $1$ for all states where a player is in check. Note that the reward values may be continuous (though they may never be negative), but we only consider reward values in $\mathbb{N}$.
+We may also augment this TSG with a set of \emph{reward structures}, which are each comprised of a \emph{state reward function} $\rho : S \rightarrow \mathbb{N}$, associating each state with the value of a reward, and a \emph{state transition function} $\iota : S \times S \rightarrow \mathbb{N}$ which associates each transition with the value of a reward. For instance, in chess, we may define a reward structure where $\iota$ returns $0$ for all transitions, and $\rho$ returns $1$ for all states where a player is in check. Note that the reward values may be continuous (though they may never be negative), but we only consider reward values in $\mathbb{N}$.
 
 \section{Property specification}
 

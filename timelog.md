@@ -143,3 +143,10 @@ Date | Duration | Summary
 27/01/21 | 1 hour | Attempted to increase CUDD max memory in PRISM, led to unexpected results - issue identified as not saving options before closing, but increasing CUDD max memory to 8gb led to the PRISM GUI no longer opening. Will troubleshoot further tomorrow.
 28/01/21 | 2 hours | Further troubleshooted PRISM, attempted using CLI to run models instead - still receive EXCEPTION_ACCESS_VIOLATION when trying to increase CUDD max memory, even for small values.
 29/01/21 | 2 hours | Trialled statistical model checking (especially APMC due to offering a probabilistic guarantee on approximations) - seems viable even for very large models/unlikely circumstances. Will include this in notes and bring up at supervisor meeting. Also continued working on background section, added section on rewards in stochastic games and introduced PCTL.
+
+## Week 16
+
+Date | Duration | Summary
+---- | -------- | -------
+01/02/21 | 3.5 hours | Refactored dissertation template to only show chapters I'm working on (plus dummy intro to fix page numbering). Started preprocessing, currently completed all formula definitions. Added questions for supervisor meeting
+
