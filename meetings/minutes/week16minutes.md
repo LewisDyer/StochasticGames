@@ -1,0 +1,11 @@
+# Week 16 Minutes - 02/02/21
+
+First, the issue of model size was discussed. Gethin offered to examine my model so far to determine whether there are any alternative methods for reducing state space, and I agreed to send him my model along with this week's minutes.
+
+I briefly discussed statistical model checking as a potential backup, although Gethin remarked that statistical model checking is generally inappropriate for nondeterministic models, since statistical model checking resolves nondeteriminism uniformly which is generally not successful. I mentioned that it could potentially be useful with deterministic cases (for instance, comparing two predefined strategies) but agreed with the suggestion. I also proposed using statistical model checking while testing the development environment, to obtain fast and somewhat realistic results, then use probabilistic model checking to obtain final results.
+
+Next, dissertation writing was discussed. Gethin agreed that it is important to vary the level of detail depending on the importance of the definition to the project. In particular, the dissertation need not be entirely self-contained - it is entirely normal for some background information to be cited rather than being fully described in the dissertation itself. Gethin also recommended using LaTeX environments for definitions, theorems and examples, which allows referencing these items later on in the dissertation as required. I remarked that I decided to front load mathematical definitions in the background section, slowing down writing speed due to dense notation, and Gethin mentioned that writing should speed up later on.
+
+I also asked about describing PRISM in the background section, specifically mentioning implementation details on how model checking is computed. Gethin remarked that, although this is important to include, I should prioritise the level of detail based on its relevance to different aspects of the project.
+
+Finally the plan for next week was summarised - I plan to continue preprocessing, continue work on the background section, and send Gethin my original model to discuss potential techniques for state space reduction.

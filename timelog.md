@@ -149,4 +149,5 @@ Date | Duration | Summary
 Date | Duration | Summary
 ---- | -------- | -------
 01/02/21 | 3.5 hours | Refactored dissertation template to only show chapters I'm working on (plus dummy intro to fix page numbering). Started preprocessing, currently completed all formula definitions. Added questions for supervisor meeting
+02/02/21 | 1 hours | Added minutes from supervisor meeting
 

@@ -22,15 +22,26 @@ In order to begin formal analysis of a game, we must first formally define a mod
 
 We first introduce a turn based multiplayer stochastic game (TSG), as described by \cite{kavanagh_balancing_2019}. This model is refined and adapted in each case study to develop a different type of model suited to different types of games.
 
-A turn based multiplayer stochastic game (TSG) is defined as a tuple $(\Pi, S, A, \langle S_i \rangle_{i \in \Pi}, \delta)$ such that:
+\begin{definition}
+    A turn based multiplayer stochastic game (TSG) is defined as a tuple $(\Pi, S, A, \langle S_i \rangle_{i \in \Pi}, \delta)$ such that:
 
-\begin{itemize}
-    \item $\Pi$ is a finite set of players;
-    \item $S$ is a finite set of states for a game (for instance, every possible board position in chess);
-    \item $A$ is a finite set of actions (such as every possible move in chess, not just those which are possible in the current state);
-    \item $\langle S_i \rangle_{i \in \Pi}$ is a partition, such that every state is controlled by exactly one player;
-    \item $\delta : S \times A \rightarrow Dist(S)$ is a partial transition function denoting the probability of taking an action in a particular state, where an action $a \in A$ is only available in a state $s \in S$ if $\delta(s, a)$ is defined. $Dist(S)$ denotes the set of discrete probability distributions on $S$.
-\end{itemize}
+
+    \begin{itemize}
+        \item $\Pi$ is a finite set of players;
+        \item $S$ is a finite set of states for a game (for instance, every possible board position in chess);
+        \item $A$ is a finite set of actions (such as every possible move in chess, not just those which are possible in the current state);
+        \item $\langle S_i \rangle_{i \in \Pi}$ is a partition, such that every state is controlled by exactly one player;
+        \item $\delta : S \times A \rightarrow Dist(S)$ is a partial transition function denoting the probability of taking an action in a particular state, where an action $a \in A$ is only available in a state $s \in S$ if $\delta(s, a)$ is defined. $Dist(S)$ denotes the set of discrete probability distributions on $S$.
+    \end{itemize} 
+\end{definition}
+
+
+
+
+
+As a motivating example, we consider a game of chess:
+
+
 
 Playing a game is represented as an infinite \emph{path}, denoted as a sequence $\omega = s_0 \xrightarrow{a_0} s1 \xrightarrow{a_1} \dots$ where $\delta(s_k, a_k)(s_{k+1})>0$ for all $k\geq0$, or in other words where each action is possible.
 

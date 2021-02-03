@@ -1,4 +1,4 @@
-# Week 16 Status Report - 01/02/21
+# Week 16 Status Report - 02/02/21
 
 This week, I have started preprocessing work for 26.2, starting writing some background information in my dissertation, and investigated memory issues during model checking.
 
