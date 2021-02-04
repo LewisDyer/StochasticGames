@@ -149,5 +149,7 @@ Date | Duration | Summary
 Date | Duration | Summary
 ---- | -------- | -------
 01/02/21 | 3.5 hours | Refactored dissertation template to only show chapters I'm working on (plus dummy intro to fix page numbering). Started preprocessing, currently completed all formula definitions. Added questions for supervisor meeting
-02/02/21 | 1 hours | Added minutes from supervisor meeting
+02/02/21 | 1 hour | Added minutes from supervisor meeting.
+03/02/21 | 1 hour | Refactored background work in dissertation, added environments and moved chess example
+04/02/21 | 0.5 hours | Discussed troubleshooting model with Gethin, refactored to CSG with independent player labels. Found possible solution to state space issue, will include during preprocessing work
 

@@ -3,6 +3,14 @@
 
 csg
 
+player p1
+    player1
+endplayer
+
+player p2
+    player2
+endplayer
+
 const int no_spaces = 262; // goal space to win game
 const int no_dice = 4; // max no of dice players can roll a turn
 const int no_sides = 6; // number of sides per die
@@ -93,12 +101,12 @@ module player2
     p2_5s : [0..no_dice] init 0;
     p2_6s : [0..no_dice] init 0;
 
-    [pick_dice] state=0 ->
+    [p2_pick_dice] state=0 ->
         1/2 : (p2_chosen_dice' = 3) +
         1/2 : (p2_chosen_dice' = 4);
 
 
-    [roll_d1] state=1 & p2_chosen_dice >= 1 ->
+    [p2_roll_d1] state=1 & p2_chosen_dice >= 1 ->
         1/6 : (p2_1s' = min(p2_1s + 1, no_dice)) +
         1/6 : (p2_2s' = min(p2_2s + 1, no_dice)) + 
         1/6 : (p2_3s' = min(p2_3s + 1, no_dice)) +
@@ -106,7 +114,7 @@ module player2
         1/6 : (p2_5s' = min(p2_5s + 1, no_dice)) +
         1/6 : (p2_6s' = min(p2_6s + 1, no_dice));
 
-    [roll_d2] state=2 & p2_chosen_dice >= 2 ->
+    [p2_roll_d2] state=2 & p2_chosen_dice >= 2 ->
         1/6 : (p2_1s' = min(p2_1s + 1, no_dice)) +
         1/6 : (p2_2s' = min(p2_2s + 1, no_dice)) + 
         1/6 : (p2_3s' = min(p2_3s + 1, no_dice)) +
@@ -114,9 +122,9 @@ module player2
         1/6 : (p2_5s' = min(p2_5s + 1, no_dice)) +
         1/6 : (p2_6s' = min(p2_6s + 1, no_dice));
 
-    [roll_d2] state=2 & p2_chosen_dice < 2 -> true;
+    [p2_roll_d2] state=2 & p2_chosen_dice < 2 -> true;
 
-    [roll_d3] state=3 & p2_chosen_dice >= 3 ->
+    [p2_roll_d3] state=3 & p2_chosen_dice >= 3 ->
         1/6 : (p2_1s' = min(p2_1s + 1, no_dice)) +
         1/6 : (p2_2s' = min(p2_2s + 1, no_dice)) + 
         1/6 : (p2_3s' = min(p2_3s + 1, no_dice)) +
@@ -124,9 +132,9 @@ module player2
         1/6 : (p2_5s' = min(p2_5s + 1, no_dice)) +
         1/6 : (p2_6s' = min(p2_6s + 1, no_dice));
 
-    [roll_d3] state=3 & p2_chosen_dice < 3 -> true;
+    [p2_roll_d3] state=3 & p2_chosen_dice < 3 -> true;
 
-    [roll_d4] state=4 & p2_chosen_dice >= 4 ->
+    [p2_roll_d4] state=4 & p2_chosen_dice >= 4 ->
         1/6 : (p2_1s' = min(p2_1s + 1, no_dice)) +
         1/6 : (p2_2s' = min(p2_2s + 1, no_dice)) + 
         1/6 : (p2_3s' = min(p2_3s + 1, no_dice)) +
@@ -134,11 +142,11 @@ module player2
         1/6 : (p2_5s' = min(p2_5s + 1, no_dice)) +
         1/6 : (p2_6s' = min(p2_6s + 1, no_dice));
     
-    [roll_d4] state=4 & p2_chosen_dice < 4 -> true;
+    [p2_roll_d4] state=4 & p2_chosen_dice < 4 -> true;
 
-    [move_roll] state=5 -> (p2_pos' = mod(p2_pos + (p2_bust ? 0 : p2_move), no_spaces));
+    [p2_move_roll] state=5 -> (p2_pos' = mod(p2_pos + (p2_bust ? 0 : p2_move), no_spaces));
 
-    [pick_wins] state=6 -> (p2_1s' = 0) & (p2_2s' = 0) & (p2_3s' = 0) & (p2_4s' = 0) & (p2_5s' = 0) & (p2_6s' = 0); // need to reset after win decision to make sure we terminate
+    [p2_pick_wins] state=6 -> (p2_1s' = 0) & (p2_2s' = 0) & (p2_3s' = 0) & (p2_4s' = 0) & (p2_5s' = 0) & (p2_6s' = 0); // need to reset after win decision to make sure we terminate
 
 endmodule
 
@@ -168,7 +176,7 @@ module board
     [pick_wins] state=6 & game_over & (p1_pos = p2_pos) -> (winner' = (p1_move >= p2_move ? ((p1_move = p2_move) ? 3 : 1) : 2)) & (state' = 7); // if there's a tie, whoever was ahead last round wins
     [pick_wins] state=6 & game_over & (p1_pos != p2_pos) -> (winner' = (((p1_end ? no_spaces : 0) + p1_pos) > ((p2_end ? no_spaces : 0) + p2_pos)) ? 1 : 2) & (state' = 7);
 
-    [game_over] state=7 -> (state'=7);
+    [] state=7 -> (state'=7);
 
 
 endmodule
