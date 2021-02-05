@@ -151,5 +151,6 @@ Date | Duration | Summary
 01/02/21 | 3.5 hours | Refactored dissertation template to only show chapters I'm working on (plus dummy intro to fix page numbering). Started preprocessing, currently completed all formula definitions. Added questions for supervisor meeting
 02/02/21 | 1 hour | Added minutes from supervisor meeting.
 03/02/21 | 1 hour | Refactored background work in dissertation, added environments and moved chess example
-04/02/21 | 0.5 hours | Discussed troubleshooting model with Gethin, refactored to CSG with independent player labels. Found possible solution to state space issue, will include during preprocessing work
+04/02/21 | 1 hour | Discussed troubleshooting model with Gethin, refactored to CSG with independent player labels. Found possible solution to state space issue, will include during preprocessing work. Decided to change TSG definition to DTMC, should link better with future definitions
+05/02/21 | 0.5 hours | Finished reworking TSG definition to DTMC. Started writing about probabilistic model checking, but realised this would fit better in the introduction
 

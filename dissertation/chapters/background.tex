@@ -20,38 +20,36 @@ In order to begin formal analysis of a game, we must first formally define a mod
 
 \section{Stochastic games}
 
-We first introduce a turn based multiplayer stochastic game (TSG), as described by \cite{kavanagh_balancing_2019}. This model is refined and adapted in each case study to develop a different type of model suited to different types of games.
+We first introduce a discrete-time Markov chain (or DTMC), as described by \cite{kwiatkowska_stochastic_2007}. This model is refined and adapted in each case study to develop a different type of model suited to different types of games.
 
 \begin{definition}
-\label{back:tsg}
-    A turn based multiplayer stochastic game (TSG) is defined as a tuple $(\Pi, S, A, \langle S_i \rangle_{i \in \Pi}, \delta)$ such that:
+\label{back:dtmc}
+    Given a set of atomic propositions, denoted $AP$, a discrete-time Markov chain (DTMC) is defined as a tuple $(S, \bar{s}, \mathbf{P})$ such that:
 
     \begin{itemize}
-        \item $\Pi$ is a finite set of players;
-        \item $S$ is a finite set of states for a game;
-        \item $A$ is a finite set of actions;
-        \item $\langle S_i \rangle_{i \in \Pi}$ is a partition, such that every state is controlled by exactly one player;
-        \item $\delta : S \times A \rightarrow Dist(S)$ is a partial transition function denoting the probability of taking an action in a particular state, where an action $a \in A$ is only available in a state $s \in S$ if $\delta(s, a)$ is defined. $Dist(S)$ denotes the set of discrete probability distributions on $S$.
+        \item $S$ is a finite set of states;
+        \item $\bar{s}$ is the initial state for the DTMC;
+        \item $\mathbf{P} : S \times S \rightarrow [0,1]$ is the \emph{transition probability matrix}, where $P(s, s')$ is the probability of transitioning from state $s$ to state $s'$, such that the sum of probabilities outgoing transitions from each state is $1$.
+        \item $L: S \rightarrow 2^{AP}$ is a \emph{labelling function}, where for $s \in S$ a state, $L(s)$ denotes the subset of atomic propositions which hold at that state.
     \end{itemize}
 
 \end{definition}
 
-As a motivating example, we define a classic board game using a TSG:
+As a motivating example, we define a classic board game using a DTMC:
 
 \begin{example}
 \label{back:chess}
 
-    A game of chess can be defined as a TSG from Definition \ref{back:tsg} as follows:
+    A game of chess can be defined as a DTMC from Definition \ref{back:dtmc} as follows:
 
     \begin{itemize}
-        \item $\Pi$ is a set of players with two elements, where we denote $p_w$ as the player controlling white pieces and $p_b$ as the player controlling black pieces.
         \item $S$ is the set of states for the game, representing all possible board positions throughout a game of chess, along with the current player's turn (since a given board position could be obtained where either black or white could be the current player).
-        \item $A$ is the set of all possible moves in a game of chess, regardless of whether these moves are possible in the current board position.
-        \item $\langle S_i \rangle_{i \in \Pi}$ partitions the set of states into two parts, denoting the current player's turn (since clearly $p_w$ cannot choose a piece to move during $p_w$'s turn)
-        \item The partial transition function $\delta : S \times A \rightarrow Dist(S)$ partially maps a board position and an action to the probability that this action is chosen by the current player. Note that not all actions are possible at every board position - for instance, a pawn cannot be moved from \texttt{d2} if there is no pawn on that space - so these probability distributions are not defined.
+        \item $\bar{s}$ is the initial board position of a standard game of chess.
+        \item $\mathbf{P}$ assigns each valid move a probability of being chosen at a particular board position.
+        \item $L$ labels each state with a set of propositions which are true at that state. For instance, if we let $\mathbf{C}$ be the atomic proposition that a player is in check in a given state, then for $s \in S$ a state, $\mathbf{C} \in L(s)$ means that a player is in check in state $s$.
     \end{itemize}
 
-    In this model, the key aspect in determining the skill level of a player is in the partial transition function. In theory, there is always an optimal move to make in chess, so for each board position, an optimal player's partial transition function will return $1$ for precisely one action, and return $0$ or be undefined for all other actions. But in practice chess is far too complex for players, human or computer alike, to compute this optimal strategy. Hence strategies may be probabilistic, such as a chess player who occasionally "blunders", making a move which places them in a disadvantageous position.
+    In this model, the key aspect in determining the skill level of a player is in the transition probability matrix. In theory, there is always an optimal move to make in chess, so for each board position, an optimal player's transition probability matrix will return $1$ for precisely one action, and return $0$ for all other actions. But in practice chess is far too complex for players, human or computer alike, to compute this optimal strategy. Hence strategies may be probabilistic, such as a chess player who occasionally "blunders", making a move which places them in a disadvantageous position.
 
 \end{example}
 
@@ -59,7 +57,7 @@ As a motivating example, we define a classic board game using a TSG:
 
 
 
-Playing a game is represented as an infinite \emph{path}, denoted as a sequence $\omega = s_0 \xrightarrow{a_0} s1 \xrightarrow{a_1} \dots$ where $\delta(s_k, a_k)(s_{k+1})>0$ for all $k\geq0$, or in other words where each action is possible.
+Playing a game is represented as an infinite \emph{path}, denoted as a sequence $\omega = s_0 \rightarrow s1 \rightarrow \dots$ where $\mathbf{P}(s_k, s_{k+1})>0$ for all $k\geq0$, or in other words where each action is possible.
 
 We may also augment this TSG with a set of \emph{reward structures}, which are each comprised of a \emph{state reward function} $\rho : S \rightarrow \mathbb{N}$, associating each state with the value of a reward, and a \emph{state transition function} $\iota : S \times S \rightarrow \mathbb{N}$ which associates each transition with the value of a reward. For instance, in chess, we may define a reward structure where $\iota$ returns $0$ for all transitions, and $\rho$ returns $1$ for all states where a player is in check. Note that the reward values may be continuous (though they may never be negative), but we only consider reward values in $\mathbb{N}$.
 
@@ -70,3 +68,16 @@ When analysing stochastic games, we consider two main types of properties: \emph
 For probabilistic reachability properties, we also include the $\mathbf{P}$ operator, which considers the probability of a particular property holding, including its proposition and any temporal operators, across all possible executions of the TSG. For instance, if we define $\mathtt{game\_over}$ as the proposition that the game is considered to be completed in the current state, the property $\mathbf{P}_{=?} [\mathbf{F}\ \mathtt{game\_over}]$ represents the probability that the game eventually terminates.
 
 For reward-based properties, PRISM defines an extension to PCTL introducing the $\mathbf{R}$ operator, which allows for properties where the value of a reward is taken into account. For the purposes of this dissertation we only consider one type of reward-based property, namely the \emph{reachability reward} property, referring to the expected cumulative value of a reward along a path, until a state satisfying a particular proposition is reached. As an example, using our previous definition of $\mathtt{game\_over}$, the property $\mathbf{R}_{=?} [\mathbf{F}\ \mathtt{game\_over}]$ represents the expected value of a particular reward (such as the number of rounds in a game) before the game is completed.
+
+Having formally defined a game, and questions we wish to answer about said game, we now introduce our main class of techniques in order to answer these questions.
+
+\section{Probabilistic model checking}
+
+% This is good, but definitely more like introduction/motivation
+
+%As we have established, many games exhibit probabilistic behaviour. For instance, board games frequently make use of dice in order to introduce random elements into a game, in order to improve the game's replayability. Moreover, the strategies employed while playing these games are often probabilistic. For instance, games with a high degree of non-transitivity encourage probabilstic strategies, since the lack of optimal action means that non-probabilistic strategies are relatively simple to exploit. To give an example, in the game of rock paper scissors, the strategy of always playing scissors will always lose against the strategy of always playing rock.
+
+%As a result of this, typical verification techniques relying on random samples, such as Monte Carlo methods, can be unreliable when considering properties of stochastic games. Statistical methods can only ever provide \emph{probabilistic} guarantees about the game, since the series of samples taken may be entirely unrepresentative of typical gameplay. Moreover, when considering the optimal behaviour of a game, we frequently encounter cases of nondeterminism, where a choice must be made. Most statistical techniques currently resolve nondeterminism uniformly, which amounts to making choices at random, without any particular rationale or analysis behind these choices. Hence we require a more sophisticated class of techniques for analysing stochastic games.
+
+
+Probabilistic model checking is a process for considering a model,

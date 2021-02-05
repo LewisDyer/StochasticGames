@@ -7,11 +7,16 @@
 % put any additional packages here
 \usepackage{blindtext}
 \usepackage{amsmath}
+\let\openbox\relax
+\usepackage{amsthm}
 
 % theorem environments
+
+\theoremstyle{definition}
+
 \newtheorem{definition}{Definition}[chapter]
 
-\newtheorem{example}{Example}[chapter]
+\newtheorem{example}[definition]{Example}
 
 \begin{document}
 
