@@ -154,4 +154,10 @@ Date | Duration | Summary
 04/02/21 | 1 hour | Discussed troubleshooting model with Gethin, refactored to CSG with independent player labels. Found possible solution to state space issue, will include during preprocessing work. Decided to change TSG definition to DTMC, should link better with future definitions
 05/02/21 | 5 hours | Finished reworking TSG definition to DTMC. Started writing about probabilistic model checking, but realised this would fit better in the introduction. Completed significant portion of preprocessing work, refactored dice selection to get counts in one step without intermediate values
 
+## Week 17
+
+Date | Duration | Summary
+---- | -------- | -------
+08/02/21 | 1 hour | Writing status report
+
 
