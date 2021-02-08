@@ -3,6 +3,7 @@
 
 csg
 
+// need to update these later
 player p1
     player1
 endplayer

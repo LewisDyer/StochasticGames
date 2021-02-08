@@ -152,5 +152,6 @@ Date | Duration | Summary
 02/02/21 | 1 hour | Added minutes from supervisor meeting.
 03/02/21 | 1 hour | Refactored background work in dissertation, added environments and moved chess example
 04/02/21 | 1 hour | Discussed troubleshooting model with Gethin, refactored to CSG with independent player labels. Found possible solution to state space issue, will include during preprocessing work. Decided to change TSG definition to DTMC, should link better with future definitions
-05/02/21 | 0.5 hours | Finished reworking TSG definition to DTMC. Started writing about probabilistic model checking, but realised this would fit better in the introduction
+05/02/21 | 5 hours | Finished reworking TSG definition to DTMC. Started writing about probabilistic model checking, but realised this would fit better in the introduction. Completed significant portion of preprocessing work, refactored dice selection to get counts in one step without intermediate values
+
 
