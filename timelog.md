@@ -159,5 +159,6 @@ Date | Duration | Summary
 Date | Duration | Summary
 ---- | -------- | -------
 08/02/21 | 1 hour | Writing status report
+09/02/21 | 1 hour | Supervisor meeting, added minutes
 
 
