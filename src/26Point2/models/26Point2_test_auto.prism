@@ -259,6 +259,10 @@ p1_6s : [0..no_dice] init 0;
 1/1296 : (p1_1s'=0) & (p1_2s'=0) & (p1_3s'=0) & (p1_4s'=0) & (p1_5s'=0) & (p1_6s'=4);
 
 
+[p1_move_roll] state=2 -> (p1_pos' = mod(p1_pos + (p1_bust ? 0 : p1_move), no_spaces));
+
+[p1_pick_wins] state=3 -> (p1_1s' = 0) & (p1_2s' = 0) & (p1_3s' = 0) & (p1_4s' = 0) & (p1_5s' = 0) & (p1_6s' = 0);
+
 endmodule
 
 module player2
@@ -496,8 +500,23 @@ p2_6s : [0..no_dice] init 0;
 1/1296 : (p2_1s'=0) & (p2_2s'=0) & (p2_3s'=0) & (p2_4s'=0) & (p2_5s'=0) & (p2_6s'=4);
 
 
+[p2_move_roll] state=2 -> (p2_pos' = mod(p2_pos + (p2_bust ? 0 : p2_move), no_spaces));
+
+[p2_pick_wins] state=3 -> (p2_1s' = 0) & (p2_2s' = 0) & (p2_3s' = 0) & (p2_4s' = 0) & (p2_5s' = 0) & (p2_6s' = 0);
+
 endmodule
 
 
 module board
+
+
+    // Local state:
+    // 0: choosing how many dice to roll
+    // 1: rolling dice
+    // 2: Moving (if allowed!)
+    // 3: Deciding if there's a winner
+    // 4: game over
+    state : [0..4] init 0;
+    
+    winner : [0..2] init 0;
 

@@ -51,7 +51,7 @@ def def_player(p, no_sides, no_dice, strategy, newLine):
     
     output.append("")
 
-    output.append(f"{newLine}".join(die_counts(p, no_sides, newLine)))
+    output.append(f"{newLine}".join(die_counts(p, no_sides)))
 
     output.append("")
 
@@ -61,12 +61,15 @@ def def_player(p, no_sides, no_dice, strategy, newLine):
 
     output.append(die_rolling(p, no_dice, no_sides, newLine))
 
+    output.append("")
+
+    output.append(move_roll(p))
+
+    output.append("")
+
+    output.append(player_win(p, no_sides))
+
     inner_output=f"{newLine}".join(output)
-
-    
-
-
-
 
     final_output = [f"module player{p}", "", inner_output, "", "endmodule"]
 
@@ -81,13 +84,9 @@ def die_rolling(p, no_dice, no_sides, newLine):
         output.append(one_step_rolls(p, no_chose, no_sides, newLine))
     
         output.append("")
-    
-    print(output)
+
     
     return newLine.join(output)
-
-
-
 
 def partitions(n):
     # all partitions, allowing repetition (e.g multiple ones)
@@ -114,7 +113,6 @@ def roll_n_dice(no_dice, no_sides):
 
     perms.sort(reverse=True)
     
-    print(perms)
     return perms
 
 def one_step_rolls(p, no_rolled, no_sides, newLine):
@@ -137,15 +135,6 @@ def one_step_rolls(p, no_rolled, no_sides, newLine):
 
     return newLine.join(output)
 
-
-
-
-
-
-
-#pe = roll_n_dice(3, 6)
-#one_step_rolls(1, pe, 3, 6, "")
-
 def pick_die(p, no_dice, strategy, newLine):
     strategy_lookup = {1: random}
 
@@ -153,26 +142,32 @@ def pick_die(p, no_dice, strategy, newLine):
     output.append(strategy_lookup[strategy](p, no_dice, newLine))
     return f"{newLine}\t".join(output)
 
-
-
 def random(p, no_dice, newLine):
     # choose a random number of dice to roll from 1 to no_dice
-    print("start random")
     choices = []
 
     for i in range(1, no_dice+1):
         choices.append(f"1/{no_dice} : (p{p}_chosen_dice' = {i})")
     return f" + {newLine}\t".join(choices) + ";"
-    
-    
-def die_counts(p, no_sides, newLine):
+        
+def die_counts(p, no_sides):
     output = []
     for i in range(1, no_sides+1):
         output.append(f"p{p}_{i}s : [0..no_dice] init 0;")
     return output
 
+def move_roll(p):
+    return f"[p{p}_move_roll] state=2 -> (p{p}_pos' = mod(p{p}_pos + (p{p}_bust ? 0 : p{p}_move), no_spaces));"
 
+def player_win(p, no_sides):
+
+    reset_counts = " & ".join([f"(p{p}_{i}s' = 0)" for i in range(1, no_sides+1)])
+
+    return f"[p{p}_pick_wins] state=3 -> {reset_counts};"
+
+def winner(players, newLine):
+    return f"winner : [0..{players}] init 0;"
 
 def lookup(fname):
-    functions = {"end_formulas": end_formulas, "pair_formulas": pair_formulas, "bust_formulas": bust_formulas, "move_formulas": move_formulas, "endpos_formulas": endpos_formulas, "def_player": def_player}
+    functions = {"end_formulas": end_formulas, "pair_formulas": pair_formulas, "bust_formulas": bust_formulas, "move_formulas": move_formulas, "endpos_formulas": endpos_formulas, "def_player": def_player, "winner": winner}
     return functions[fname]

@@ -25,11 +25,20 @@ const int no_sides; // number of sides per die
 
 module board
 
-    @26Point2/states no_dice@
+
+    // Local state:
+    // 0: choosing how many dice to roll
+    // 1: rolling dice
+    // 2: Moving (if allowed!)
+    // 3: Deciding if there's a winner
+    // 4: game over
+    state : [0..4] init 0;
     
     @26Point2/winner players@
 
-    @26Point2/states no_dice@
+    [pick_dice] state=0 -> (state'=1);
+    [roll] state=1 -> (state'=2);
+    [move] state=2 -> (state'=3);
 
 
     @26Point2/pick_wins no_dice players@
