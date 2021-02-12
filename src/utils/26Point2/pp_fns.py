@@ -9,6 +9,9 @@ def end_formulas(players, newLine):
         output.append(f"formula p{p}_end = p{p}_move > p{p}_pos;")
     output.append(f"formula game_over = {' | '.join([f'p{p}_end' for p in range(1, players+1)])};")
 
+
+    player_list = ", ".join([f"p{p}_end_pos" for p in range(1, players+1)])
+    output.append(f"formula max_space = max({player_list});")
     return newLine.join(output)
 
 def pair_formulas(players, no_sides, newLine):
@@ -168,6 +171,40 @@ def player_win(p, no_sides):
 def winner(players, newLine):
     return f"winner : [0..{players}] init 0;"
 
+def pick_wins(players, newLine):
+    output = []
+    for p in range(1, players+1):
+        output.append(f"[p{p}_wins] state=3 & game_over & p{p}_end_pos=max_space -> (state'=4) & (winner'={p});")
+    
+    print(output)
+    return newLine.join(output)
+
+def winner_labels(players, newLine):
+    output = []
+    for p in range(1, players+1):
+        output.append(f'label "p{p}_wins" = ((state=4) & (winner={p}));')
+    return newLine.join(output)
+
+def bust_labels(players, newLine):
+    output = []
+    for p in range(1, players+1):
+        output.append(f'label "p{p}_bust" = p{p}_bust;')
+
+    return newLine.join(output)
+
+def bust_rewards(players, newLine):
+    output = []
+    
+    for p in range(1, players+1):
+        rew_output = []
+        rew_output.append(f'rewards "p{p}_busts"')
+        rew_output.append(f'\t(state=2) & (p{p}_bust) : 1;')
+        rew_output.append('endrewards')
+        rew_output.append('\n')
+        output.append(newLine.join(rew_output))
+    
+    return newLine.join(output)
+
 def lookup(fname):
-    functions = {"end_formulas": end_formulas, "pair_formulas": pair_formulas, "bust_formulas": bust_formulas, "move_formulas": move_formulas, "endpos_formulas": endpos_formulas, "def_player": def_player, "winner": winner}
+    functions = {"end_formulas": end_formulas, "pair_formulas": pair_formulas, "bust_formulas": bust_formulas, "move_formulas": move_formulas, "endpos_formulas": endpos_formulas, "def_player": def_player, "winner": winner, "pick_wins": pick_wins, "winner_labels": winner_labels, "bust_labels": bust_labels, "bust_rewards": bust_rewards}
     return functions[fname]

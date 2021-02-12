@@ -24,8 +24,6 @@ const int no_sides; // number of sides per die
 
 
 module board
-
-
     // Local state:
     // 0: choosing how many dice to roll
     // 1: rolling dice
@@ -39,16 +37,18 @@ module board
     [pick_dice] state=0 -> (state'=1);
     [roll] state=1 -> (state'=2);
     [move] state=2 -> (state'=3);
+    [pick_wins] state=3 & !game_over -> (state'=0);
 
-
-    @26Point2/pick_wins no_dice players@
+    @26Point2/pick_wins players@
     
-    [game_over] state=7 -> (state'=7);
+    [game_over] state=4 -> (state'=4);
 
 endmodule
 
 
-@26Point2/winner_labels players no_dice@
+@26Point2/winner_labels players@
+
+label "game_over" = (state=4);
 
 @26Point2/bust_labels players@
 
@@ -57,4 +57,4 @@ rewards "no_rounds"
 endrewards
 
 
-@26Point2/bust_rewards players no_dice@
+@26Point2/bust_rewards players@

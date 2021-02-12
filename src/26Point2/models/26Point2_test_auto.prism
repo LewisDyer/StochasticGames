@@ -10,6 +10,7 @@ const int no_sides; // number of sides per die
 formula p1_end = p1_move > p1_pos;
 formula p2_end = p2_move > p2_pos;
 formula game_over = p1_end | p2_end;
+formula max_space = max(p1_end_pos, p2_end_pos);
 
 formula p1_pairs = ((p1_1s >= 2) ? 1 : 0) + ((p1_2s >= 2) ? 1 : 0) + ((p1_3s >= 2) ? 1 : 0) + ((p1_4s >= 2) ? 1 : 0) + ((p1_5s >= 2) ? 1 : 0) + ((p1_6s >= 2) ? 1 : 0)
 formula p2_pairs = ((p2_1s >= 2) ? 1 : 0) + ((p2_2s >= 2) ? 1 : 0) + ((p2_3s >= 2) ? 1 : 0) + ((p2_4s >= 2) ? 1 : 0) + ((p2_5s >= 2) ? 1 : 0) + ((p2_6s >= 2) ? 1 : 0)
@@ -508,8 +509,6 @@ endmodule
 
 
 module board
-
-
     // Local state:
     // 0: choosing how many dice to roll
     // 1: rolling dice
@@ -519,4 +518,40 @@ module board
     state : [0..4] init 0;
     
     winner : [0..2] init 0;
+
+    [pick_dice] state=0 -> (state'=1);
+    [roll] state=1 -> (state'=2);
+    [move] state=2 -> (state'=3);
+    [pick_wins] state=3 & !game_over -> (state'=0);
+
+    [p1_wins] state=3 & game_over & p1_end_pos=max_space -> (state'=4) & (winner'=1);
+    [p2_wins] state=3 & game_over & p2_end_pos=max_space -> (state'=4) & (winner'=2);
+    
+    [game_over] state=4 -> (state'=4);
+
+endmodule
+
+
+label "p1_wins" = ((state=4) & (winner=1));
+label "p2_wins" = ((state=4) & (winner=2));
+
+label "game_over" = (state=4);
+
+label "p1_bust" = p1_bust;
+label "p2_bust" = p2_bust;
+
+rewards "no_rounds"
+	[pick_dice] true: 1;
+endrewards
+
+
+rewards "p1_busts"
+	(state=2) & (p1_bust) : 1;
+endrewards
+
+
+rewards "p2_busts"
+	(state=2) & (p2_bust) : 1;
+endrewards
+
 
