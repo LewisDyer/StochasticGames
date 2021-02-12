@@ -161,4 +161,4 @@ Date | Duration | Summary
 08/02/21 | 1 hour | Writing status report
 09/02/21 | 1 hour | Supervisor meeting, added minutes
 10/02/21 | 1.5 hours | More preprocessing done, player modules complete and made a start on board module
-
+12/02/21 | 2 hours | Finished initial attempt at preprocessing entire model, now need to bugfix + try model checking
