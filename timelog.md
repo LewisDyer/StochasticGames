@@ -166,4 +166,4 @@ Date | Duration | Summary
 ## Week 18 (Reading week)
 
 16/02/21 | 1 hour | Brief discussion with Gethin regarding model size, suggested fix for tie-breaking problem (still to implement).
-17/02/21 | 1 hour | Prepared properties/parameters for test run on cluster.
+17/02/21 | 4 hour | Prepared properties/parameters for test run on cluster. Identified issue with model size, scaled down to 4 sided dice. Developed probabilistic model checking section of dissertation
