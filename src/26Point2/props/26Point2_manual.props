@@ -1,5 +1,3 @@
-const int rounds;
-
 // probability that player 1 wins - expect to be 50/50 since same behaviour
 Pmax=? [F "p1_wins"];
 
@@ -7,7 +5,7 @@ Pmax=? [F "p1_wins"];
 Pmax=? [F "p2_wins"];
 
 // probability of both players ending on the same position - should we be concerned about this edgecase?
-Pmax=? [F "players_tied"];
+Pmax=? [F "players_tie"];
 
 Pmax=? [F "game_over"];
 

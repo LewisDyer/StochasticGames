@@ -162,3 +162,8 @@ Date | Duration | Summary
 09/02/21 | 1 hour | Supervisor meeting, added minutes
 10/02/21 | 1.5 hours | More preprocessing done, player modules complete and made a start on board module
 12/02/21 | 2 hours | Finished initial attempt at preprocessing entire model, now need to bugfix + try model checking
+
+## Week 18 (Reading week)
+
+16/02/21 | 1 hour | Brief discussion with Gethin regarding model size, suggested fix for tie-breaking problem (still to implement).
+17/02/21 | 1 hour | Prepared properties/parameters for test run on cluster.

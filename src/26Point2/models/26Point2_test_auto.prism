@@ -3,17 +3,24 @@
 
 csg
 
-const int no_space; // goal space to win game
-const int no_dice; // max no of dice players can roll a turn
-const int no_sides; // number of sides per die
+player p1
+	 player1
+endplayer
+
+player p2
+	 player2
+endplayer
+
+
+const int no_spaces; // goal space to win game
 
 formula p1_end = p1_move > p1_pos;
 formula p2_end = p2_move > p2_pos;
 formula game_over = p1_end | p2_end;
 formula max_space = max(p1_end_pos, p2_end_pos);
 
-formula p1_pairs = ((p1_1s >= 2) ? 1 : 0) + ((p1_2s >= 2) ? 1 : 0) + ((p1_3s >= 2) ? 1 : 0) + ((p1_4s >= 2) ? 1 : 0) + ((p1_5s >= 2) ? 1 : 0) + ((p1_6s >= 2) ? 1 : 0)
-formula p2_pairs = ((p2_1s >= 2) ? 1 : 0) + ((p2_2s >= 2) ? 1 : 0) + ((p2_3s >= 2) ? 1 : 0) + ((p2_4s >= 2) ? 1 : 0) + ((p2_5s >= 2) ? 1 : 0) + ((p2_6s >= 2) ? 1 : 0)
+formula p1_pairs = ((p1_1s >= 2) ? 1 : 0) + ((p1_2s >= 2) ? 1 : 0) + ((p1_3s >= 2) ? 1 : 0) + ((p1_4s >= 2) ? 1 : 0) + ((p1_5s >= 2) ? 1 : 0) + ((p1_6s >= 2) ? 1 : 0);
+formula p2_pairs = ((p2_1s >= 2) ? 1 : 0) + ((p2_2s >= 2) ? 1 : 0) + ((p2_3s >= 2) ? 1 : 0) + ((p2_4s >= 2) ? 1 : 0) + ((p2_5s >= 2) ? 1 : 0) + ((p2_6s >= 2) ? 1 : 0);
 
 formula p1_bust = (p1_pairs >= 2) | (p1_1s >= 3) | (p1_2s >= 3) | (p1_3s >= 3) | (p1_4s >= 3) | (p1_5s >= 3) | (p1_6s >= 3);
 formula p2_bust = (p2_pairs >= 2) | (p2_1s >= 3) | (p2_2s >= 3) | (p2_3s >= 3) | (p2_4s >= 3) | (p2_5s >= 3) | (p2_6s >= 3);
@@ -27,14 +34,15 @@ formula p2_end_pos = p2_pos + (p2_end ? no_spaces : 0);
 
 module player1
 
-p1_chosen_dice : [1..no_dice] init 1;
+p1_pos : [0..no_spaces] init 0;
+p1_chosen_dice : [1..4] init 1;
 
-p1_1s : [0..no_dice] init 0;
-p1_2s : [0..no_dice] init 0;
-p1_3s : [0..no_dice] init 0;
-p1_4s : [0..no_dice] init 0;
-p1_5s : [0..no_dice] init 0;
-p1_6s : [0..no_dice] init 0;
+p1_1s : [0..4] init 0;
+p1_2s : [0..4] init 0;
+p1_3s : [0..4] init 0;
+p1_4s : [0..4] init 0;
+p1_5s : [0..4] init 0;
+p1_6s : [0..4] init 0;
 
 [p1_pick_dice] state=0 ->
 	1/4 : (p1_chosen_dice' = 1) + 
@@ -268,14 +276,15 @@ endmodule
 
 module player2
 
-p2_chosen_dice : [1..no_dice] init 1;
+p2_pos : [0..no_spaces] init 0;
+p2_chosen_dice : [1..4] init 1;
 
-p2_1s : [0..no_dice] init 0;
-p2_2s : [0..no_dice] init 0;
-p2_3s : [0..no_dice] init 0;
-p2_4s : [0..no_dice] init 0;
-p2_5s : [0..no_dice] init 0;
-p2_6s : [0..no_dice] init 0;
+p2_1s : [0..4] init 0;
+p2_2s : [0..4] init 0;
+p2_3s : [0..4] init 0;
+p2_4s : [0..4] init 0;
+p2_5s : [0..4] init 0;
+p2_6s : [0..4] init 0;
 
 [p2_pick_dice] state=0 ->
 	1/4 : (p2_chosen_dice' = 1) + 
@@ -519,15 +528,16 @@ module board
     
     winner : [0..2] init 0;
 
-    [pick_dice] state=0 -> (state'=1);
-    [roll] state=1 -> (state'=2);
-    [move] state=2 -> (state'=3);
-    [pick_wins] state=3 & !game_over -> (state'=0);
+    [] state=0 -> (state'=1);
+    [] state=1 -> (state'=2);
+    [] state=2 -> (state'=3);
+    [] state=3 & !game_over -> (state'=0);
 
-    [p1_wins] state=3 & game_over & p1_end_pos=max_space -> (state'=4) & (winner'=1);
-    [p2_wins] state=3 & game_over & p2_end_pos=max_space -> (state'=4) & (winner'=2);
+    [] state=3 & game_over & p1_end_pos=max_space & !p2_end_pos=max_space -> (state'=4) & (winner'=1);
+    [] state=3 & game_over & p2_end_pos=max_space & !p1_end_pos=max_space -> (state'=4) & (winner'=2);
+    [] state=3 & game_over & p1_end_pos=max_space & p2_end_pos=max_space -> 0.5 : (state'=4) & (winner'=1) + 0.5 :(state'=4) & (winner'=2);
     
-    [game_over] state=4 -> (state'=4);
+    [] state=4 -> (state'=4);
 
 endmodule
 
@@ -540,8 +550,10 @@ label "game_over" = (state=4);
 label "p1_bust" = p1_bust;
 label "p2_bust" = p2_bust;
 
+label "players_tie" = (state=4) & (p1_end_pos = p2_end_pos);
+
 rewards "no_rounds"
-	[pick_dice] true: 1;
+	(state=1) : 1;
 endrewards
 
 

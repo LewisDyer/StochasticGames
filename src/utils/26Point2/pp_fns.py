@@ -3,6 +3,15 @@ from collections import defaultdict
 from math import factorial
 from functools import reduce
 
+def csg_players(players, newLine):
+    output = []
+    for p in range(1, players+1):
+        output.append(f"player p{p}")
+        output.append(f"\t player{p}")
+        output.append("endplayer")
+        output.append("")
+    return newLine.join(output)
+
 def end_formulas(players, newLine):
     output = []
     for p in range(1, players+1):
@@ -17,7 +26,7 @@ def end_formulas(players, newLine):
 def pair_formulas(players, no_sides, newLine):
     output = []
     for p in range(1, players+1):
-        output.append(f"formula p{p}_pairs = {' + '.join([f'((p{p}_{i}s >= 2) ? 1 : 0)' for i in range(1, no_sides+1)])}")
+        output.append(f"formula p{p}_pairs = {' + '.join([f'((p{p}_{i}s >= 2) ? 1 : 0)' for i in range(1, no_sides+1)])};")
     
     return newLine.join(output)
 
@@ -50,11 +59,13 @@ def def_player(p, no_sides, no_dice, strategy, newLine):
     output = []
     # initially add all indented content - get other content later
 
-    output.append(f"p{p}_chosen_dice : [1..no_dice] init 1;")
+    output.append(f"p{p}_pos : [0..no_spaces] init 0;")
+
+    output.append(f"p{p}_chosen_dice : [1..{no_dice}] init 1;")
     
     output.append("")
 
-    output.append(f"{newLine}".join(die_counts(p, no_sides)))
+    output.append(f"{newLine}".join(die_counts(p, no_dice, no_sides)))
 
     output.append("")
 
@@ -153,10 +164,10 @@ def random(p, no_dice, newLine):
         choices.append(f"1/{no_dice} : (p{p}_chosen_dice' = {i})")
     return f" + {newLine}\t".join(choices) + ";"
         
-def die_counts(p, no_sides):
+def die_counts(p, no_dice, no_sides):
     output = []
     for i in range(1, no_sides+1):
-        output.append(f"p{p}_{i}s : [0..no_dice] init 0;")
+        output.append(f"p{p}_{i}s : [0..{no_dice}] init 0;")
     return output
 
 def move_roll(p):
@@ -174,7 +185,7 @@ def winner(players, newLine):
 def pick_wins(players, newLine):
     output = []
     for p in range(1, players+1):
-        output.append(f"[p{p}_wins] state=3 & game_over & p{p}_end_pos=max_space -> (state'=4) & (winner'={p});")
+        output.append(f"[] state=3 & game_over & p{p}_end_pos=max_space -> (state'=4) & (winner'={p});")
     
     print(output)
     return newLine.join(output)
@@ -206,5 +217,5 @@ def bust_rewards(players, newLine):
     return newLine.join(output)
 
 def lookup(fname):
-    functions = {"end_formulas": end_formulas, "pair_formulas": pair_formulas, "bust_formulas": bust_formulas, "move_formulas": move_formulas, "endpos_formulas": endpos_formulas, "def_player": def_player, "winner": winner, "pick_wins": pick_wins, "winner_labels": winner_labels, "bust_labels": bust_labels, "bust_rewards": bust_rewards}
+    functions = {"csg_players": csg_players,"end_formulas": end_formulas, "pair_formulas": pair_formulas, "bust_formulas": bust_formulas, "move_formulas": move_formulas, "endpos_formulas": endpos_formulas, "def_player": def_player, "winner": winner, "pick_wins": pick_wins, "winner_labels": winner_labels, "bust_labels": bust_labels, "bust_rewards": bust_rewards}
     return functions[fname]

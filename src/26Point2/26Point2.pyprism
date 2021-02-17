@@ -3,9 +3,9 @@
 
 csg
 
-const int no_space; // goal space to win game
-const int no_dice; // max no of dice players can roll a turn
-const int no_sides; // number of sides per die
+@26Point2/csg_players players@
+
+const int no_spaces; // goal space to win game
 
 @26Point2/end_formulas players@
 
@@ -34,14 +34,14 @@ module board
     
     @26Point2/winner players@
 
-    [pick_dice] state=0 -> (state'=1);
-    [roll] state=1 -> (state'=2);
-    [move] state=2 -> (state'=3);
-    [pick_wins] state=3 & !game_over -> (state'=0);
+    [] state=0 -> (state'=1);
+    [] state=1 -> (state'=2);
+    [] state=2 -> (state'=3);
+    [] state=3 & !game_over -> (state'=0);
 
     @26Point2/pick_wins players@
     
-    [game_over] state=4 -> (state'=4);
+    [] state=4 -> (state'=4);
 
 endmodule
 
@@ -53,7 +53,7 @@ label "game_over" = (state=4);
 @26Point2/bust_labels players@
 
 rewards "no_rounds"
-	[pick_dice] true: 1;
+	(state=1) : 1;
 endrewards
 
 

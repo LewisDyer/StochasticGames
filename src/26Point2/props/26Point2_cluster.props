@@ -1,0 +1,8 @@
+// probability that player 1 wins - expect to be 50/50 with new tiebreaking behaviour
+Pmax=? [F "p1_wins"];
+
+// probability of both players ending on the same position - expect to be low, and very low as no. of spaces increases
+Pmax=? [F "players_tie"];
+
+// expected no. of rounds before game ends, with current strategy I expect the ratio of rounds to spaces to be pretty constant
+R{"no_rounds"}max=? [F "game_over"];
