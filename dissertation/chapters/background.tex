@@ -19,21 +19,33 @@ The very key points I need to mention:
 In order to begin formal analysis of a game, we must first formally define a model of a game, along with properties of this game we wish to consider.
 
 \section{Stochastic games}
+\label{back:stoc_game}
 
 We first introduce a discrete-time Markov chain (or DTMC), as described by \cite{kwiatkowska_stochastic_2007}. This model is refined and adapted in each case study to develop a different type of model suited to different types of games.
 
 \begin{definition}
 \label{back:dtmc}
-    Given a set of atomic propositions, denoted $AP$, a discrete-time Markov chain (DTMC) is defined as a tuple $(S, \bar{s}, \mathbf{P})$ such that:
+    Given a set of atomic propositions, denoted $AP$, a discrete-time Markov chain (DTMC) is defined as a tuple $\mathcal{D} = (S, \bar{s}, \mathbf{P}, L)$ such that:
 
     \begin{itemize}
         \item $S$ is a finite set of states;
         \item $\bar{s}$ is the initial state for the DTMC;
-        \item $\mathbf{P} : S \times S \rightarrow [0,1]$ is the \emph{transition probability matrix}, where $P(s, s')$ is the probability of transitioning from state $s$ to state $s'$, such that the sum of probabilities outgoing transitions from each state is $1$.
+        \item $\mathbf{P} : S \times S \rightarrow [0,1]$ is the \emph{transition probability matrix}, where $P(s, s')$ is the probability of transitioning from state $s$ to state $s'$, such that the sum of probabilities of outgoing transitions from each state is $1$.
         \item $L: S \rightarrow 2^{AP}$ is a \emph{labelling function}, where for $s \in S$ a state, $L(s)$ denotes the subset of atomic propositions which hold at that state.
     \end{itemize}
 
 \end{definition}
+
+
+From this definition of a DTMC, we also define the states where an atomic proposition holds.
+
+\begin{definition}
+\label{back:sat}
+
+    For $\Phi \in AP$ an a set of states $S$ as in Definition \ref{back:dtmc}, denote $Sat(\Phi) = {s \in S | \Phi \in L(s)}$.
+
+\end{definition}
+
 
 As a motivating example, we define a classic board game using a DTMC:
 
@@ -53,25 +65,23 @@ As a motivating example, we define a classic board game using a DTMC:
 
 \end{example}
 
-
-
-
-
 Playing a game is represented as an infinite \emph{path}, denoted as a sequence $\omega = s_0 \rightarrow s1 \rightarrow \dots$ where $\mathbf{P}(s_k, s_{k+1})>0$ for all $k\geq0$, or in other words where each action is possible.
 
-We may also augment this TSG with a set of \emph{reward structures}, which are each comprised of a \emph{state reward function} $\rho : S \rightarrow \mathbb{N}$, associating each state with the value of a reward, and a \emph{state transition function} $\iota : S \times S \rightarrow \mathbb{N}$ which associates each transition with the value of a reward. For instance, in chess, we may define a reward structure where $\iota$ returns $0$ for all transitions, and $\rho$ returns $1$ for all states where a player is in check. Note that the reward values may be continuous (though they may never be negative), but we only consider reward values in $\mathbb{N}$.
+We may also augment this DTMC with a set of \emph{reward structures}, which are each comprised of a \emph{state reward function} $\rho : S \rightarrow \mathbb{N}$, associating each state with the value of a reward, and a \emph{state transition function} $\iota : S \times S \rightarrow \mathbb{N}$ which associates each transition with the value of a reward. For instance, in chess, we may define a reward structure where $\iota$ returns $0$ for all transitions, and $\rho$ returns $1$ for all states where a player is in check. Note that the reward values may be continuous (though they may never be negative), but we only consider reward values in $\mathbb{N}$.
 
 \section{Property specification}
+\label{back:prop_spec}
 
-When analysing stochastic games, we consider two main types of properties: \emph{probabilistic reachability} properties and \emph{reward-based} properties. We may define properties in terms of \emph{Probabilistic Computation Tree Logic} (PCTL), as defined by \cite{hansson_logic_1994}. These properties are comprised of path quantifiers and temporal operators, though for the purposes of this dissertation we only consider one temporal operator. In particular, the $\mathbf{F}$ operator considers whether a particular proposition \emph{eventually} holds at some state on a given path.
+When analysing stochastic games, we consider two main types of properties: \emph{probabilistic reachability} properties and \emph{reward-based} properties. We may define properties in terms of \emph{Probabilistic Computation Tree Logic} (PCTL), as defined by \cite{hansson_logic_1994}. These properties are comprised of path quantifiers and temporal operators, though for the purposes of this dissertation we only consider one temporal operator. In particular, the $\mathbf{F}$ operator considers whether a particular proposition \emph{eventually} always holds after some state on a given path.
+
+A closely related operator is the $\mathbf{U}$ operator, which considers two propositions, say $\Phi_1$ and $\Phi_2$, and determines whether, for a given path $\Phi_1$ always holds before some state, then $\Phi_2$ holds for some state after that point. Indeed, the $\mathbf{F}$ operator is actually equivalent to $\mathbf{U}$ with $\Phi_1$ as the proposition which always holds. We use this equivalence in \ref{back:prob_mod_check} in order to perform model checking on probabilistic reachability properties.
 
 For probabilistic reachability properties, we also include the $\mathbf{P}$ operator, which considers the probability of a particular property holding, including its proposition and any temporal operators, across all possible executions of the TSG. For instance, if we define $\mathtt{game\_over}$ as the proposition that the game is considered to be completed in the current state, the property $\mathbf{P}_{=?} [\mathbf{F}\ \mathtt{game\_over}]$ represents the probability that the game eventually terminates.
 
 For reward-based properties, PRISM defines an extension to PCTL introducing the $\mathbf{R}$ operator, which allows for properties where the value of a reward is taken into account. For the purposes of this dissertation we only consider one type of reward-based property, namely the \emph{reachability reward} property, referring to the expected cumulative value of a reward along a path, until a state satisfying a particular proposition is reached. As an example, using our previous definition of $\mathtt{game\_over}$, the property $\mathbf{R}_{=?} [\mathbf{F}\ \mathtt{game\_over}]$ represents the expected value of a particular reward (such as the number of rounds in a game) before the game is completed.
 
-Having formally defined a game, and questions we wish to answer about said game, we now introduce our main class of techniques in order to answer these questions.
-
 \section{Probabilistic model checking}
+\label{back:prob_mod_check}
 
 % This is good, but definitely more like introduction/motivation
 
@@ -80,4 +90,49 @@ Having formally defined a game, and questions we wish to answer about said game,
 %As a result of this, typical verification techniques relying on random samples, such as Monte Carlo methods, can be unreliable when considering properties of stochastic games. Statistical methods can only ever provide \emph{probabilistic} guarantees about the game, since the series of samples taken may be entirely unrepresentative of typical gameplay. Moreover, when considering the optimal behaviour of a game, we frequently encounter cases of nondeterminism, where a choice must be made. Most statistical techniques currently resolve nondeterminism uniformly, which amounts to making choices at random, without any particular rationale or analysis behind these choices. Hence we require a more sophisticated class of techniques for analysing stochastic games.
 
 
-Probabilistic model checking is a process for considering a model,
+Now that we have defined a model of a game, along with defining properties of that game to consider, we now define probabilistic model checking - the class of methods for verifying the probability of some event occurring during the process of playing a game. Compared to non-probabilistic model checking, this presents some unique challenges, such as in the following example:
+
+\begin{example}
+\label{back:chess-reachability}
+    Consider a game of chess, defined in Example \ref{back:chess}, and define $\mathbf{M}$ as the atomic proposition that a player is in checkmate in a particular position. In non-probabilistic model checking, we may consider the reachability of $\mathbf{M}$ - in other words, we consider whether we can always reach a state where a player is in checkmate, regardless of which reachable board position we start in.
+    
+    In particular this result is binary - either we can always reach a state where $\mathbf{M}$ holds, or there exists a board position where we can never end a game via checkmate. Indeed, in chess the latter holds - for instance, if each player has no pieces apart from their king, then there is no way to reach checkmate, since both players have insufficient material. And since our model is essentially a directed graph, we can employ standard widely-known algorithms such as a breadth first search in order to verify these reachability properties.
+
+    However, if we consider probabilistic model checking, then we can consider the \emph{probability} that a game ends in checkmate from a particular board position. In PCTL, this may be expressed as the property $\mathbf{P}_{=?} [\mathbf{F} \quad \mathbf{M}]$. This is a far more general and powerful property - for instance, an advanced chess player who is in significant disadvantage may seek to reach states where the game is unlikely to end in checkmate, maximising the probability of a draw. However calculating this probability is more complex than for non-probabilistic reachability problems, since we must also consider every possible path that can be taken in order to reach a particular state.
+
+\end{example}
+
+Evaluating probabilistic reachability properties is a recursive process, since we need to consider the probabilistic reachability of each state that a given state can reach. Hence we need to define the "base cases" of this recursion, which are described below as in \cite{kwiatkowska_stochastic_2007}, with slightly different notation:
+
+\begin{definition}
+\label{back:S_yes}
+
+    For a DTMC $\mathcal{D}$, with a set of states $S$ and a given property $\Phi$, we can partition the state space into three subsets as so:
+
+    \begin{itemize}
+        
+        \item $S^{yes} = Sat(\mathbb{P}_{\geq 1}[F \: \Phi])$, the set of all states where $\Phi$ holds in every subsequent reachable state.
+        \item $S^{no} = Sat(\mathbb{P}_{\leq 0}[F \: \Phi])$, the set of all states where $\Phi$ never holds in any subsequent reachable state.
+        \item $S^{?} = S \setminus (S_{yes} \cup S_{no})$ the set of all states where the probability of $\Phi$ holding eventually is neither 0 nor 1.
+
+    \end{itemize}
+
+\end{definition}
+
+The sets $S^{yes}$ and $S^{no}$ are fairly straightforward to compute. The precise details of their construction are described further in \cite{kwiatkowska_stochastic_2007}, but $S^{no}$ is constructed via a simple reverse traversal of the DTMC, starting from $Sat(\Phi)$ and obtaining all states that can reach a state in $Sat(\Phi)$, then removing these states from $S$. $S^{yes}$ is constructed very similarly, except this construction starts with $S^{no}$ and traverses the DTMC to find all states where the probability of reaching a state in $Sat{\Phi}$ is less than 1, then removing these states from $S$.
+
+After this precomputation process, we can now calculate the probability of a probabilistic reachability property holding across a set of states:
+
+\begin{definition}
+\label{back:F_operator}
+
+    For a DTMC $\mathcal{D}$, with a set of states $S$, a partition of $S$ as in Definition \ref{back:S_yes}, and an atomic proposition $\Phi$, we denote $Prob^{\mathcal{D}}(s, \mathbf{F} \: \Phi)$ as the probability that an execution of $\mathcal{D}$ starting at state $s$ eventually reaches a state where $\Phi$ holds. Furthermore,
+
+    \begin{equation*}
+        Prob^{\mathcal{D}}(s, \mathbf{F} \: \Phi) = \sum_{s' \in S^{?}} \mathbf{P}(s, s') \cdot Prob^{\mathcal{D}}(s, \mathbf{F} \: \Phi) \: + \sum_{s' \in S^{yes}} \mathbf{P}(s, s')
+    \end{equation*}
+    
+
+\end{definition}
+
+
