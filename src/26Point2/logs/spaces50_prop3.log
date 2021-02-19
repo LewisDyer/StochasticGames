@@ -1,0 +1,70 @@
+PRISM-games
+===========
+
+Version: 3.0.dev (based on PRISM 4.6)
+Date: Wed Feb 17 19:02:50 GMT 2021
+Hostname: sand
+Memory limits: cudd=1g, java(heap)=622.2g
+Command line: prism-games 26Point2_test_auto.prism 26Point2_cluster.props -javamaxmem 700g -const no_spaces=50 -prop 3
+
+Parsing model file "26Point2_test_auto.prism"...
+
+Type:        CSG
+Modules:     player1 player2 board 
+Variables:   p1_pos p1_chosen_dice p1_1s p1_2s p1_3s p1_4s p2_pos p2_chosen_dice p2_1s p2_2s p2_3s p2_4s state winner 
+
+Switching to explicit engine, which supports CSGs...
+
+Parsing properties file "26Point2_cluster.props"...
+
+3 properties:
+(1) <<p1>>Pmax=? [ F "p1_wins" ]
+(2) <<p1>>Pmax=? [ F "players_tie" ]
+(3) <<p1>>R{"no_rounds"}max=? [ F "game_over" ]
+
+---------------------------------------------------------------------
+
+Model checking: <<p1>>R{"no_rounds"}max=? [ F "game_over" ]
+Model constants: no_spaces=50
+
+Building model...
+Model constants: no_spaces=50
+
+Computing reachable states... 11587 13115 216417 484834 763108 989825 1265044 1488337 1765008 1877718 1879763 1881050 1883060 1884330 1938674 2229756 2480156 2768998 3047257 3336998 3625546 3873129 4154944 4440975 4709503 4940295 5214357 5492445 5770612 5960498 6239473 6513679 6790371 6965322 6974924 6976892 6978348 6980312 6982276 6983815 6985576 7056012 7339064 7624996 7848149 8002569 8294407 8585177 8875926 9162281 9443570 9720439 10006685 10122387 10405115 10671883 10946414 11225862 11497784 11771333 11935593 12196260 12469197 12742660 13022116 13281581 13349763 13602193 13869888 14139632 14408368 14674115 14927445 14938663 15196348 15298902 15300857 15302847 15303726 15305729 15307613 15309617 15311275 15312218 15572386 15868393 16169846 16459551 16739825 17036086 17337011 17633089 17929830 18109880 18393545 18679377 18966310 19244610 19531613 19792015 20039451 20251416 20466875 20599518 20825027 21055630 21279165 21497663 21714256 21926066 22133729 22341381 22472232 22686259 22904109 23117916 23321800 23529654 23735711 23898202 states
+Reachable states exploration and model construction done in 458.888 secs.
+Sorting reachable states list...
+
+Time for model construction: 544.529 seconds.
+
+Type:        CSG
+States:      23898202 (1 initial)
+Transitions: 36353066
+Choices:     23898202
+Max/avg:     1/1.00
+Building reward structure...
+
+Starting expected reachability...
+Max/avg (actions): (1,1)/(1.00,1.00)
+Max/avg (actions): (1,1)/(1.00,1.00)
+target=14392, inf=0, rest=23883810
+Computing the upper bound where 0.01 is used instead of 0.0
+
+Starting value iteration...
+
+Value iteration converged after 73 iterations.
+Value iteration took 2622.476 seconds.
+Computed an over-approximation of the solution (in 2622.536 seconds), this will now be used to get the solution
+
+Starting value iteration...
+
+Value iteration converged after 67 iterations.
+Value iteration took 2358.987 seconds.
+Expected reachability took 5703.435 seconds.
+Precomputation took 715.27 seconds.
+
+Value in the initial state: 8.958425309022047
+
+Time for model checking: 5707.55 seconds.
+
+Result: 8.958425309022047 (value in the initial state)
+
