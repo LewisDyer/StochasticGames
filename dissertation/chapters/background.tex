@@ -132,7 +132,57 @@ After this precomputation process, we can now calculate the probability of a pro
         Prob^{\mathcal{D}}(s, \mathbf{F} \: \Phi) = \sum_{s' \in S^{?}} \mathbf{P}(s, s') \cdot Prob^{\mathcal{D}}(s, \mathbf{F} \: \Phi) \: + \sum_{s' \in S^{yes}} \mathbf{P}(s, s')
     \end{equation*}
     
-
 \end{definition}
 
+Hence calculating these probabilities requires solving a system of linear equations containing $|S^{?}|$ unknowns. There are many different methods for solving these equations, but in practice iterative methods (such as the Gauss-Siedel method) are preferred to direct methods (such as power iteration) - iterative methods generally do not give exact solutions, opting for values which eventually converge to an exact solution, but direct methods can take infeasibly many steps to compute an exact solution.
+
+\section{The PRISM model checker}
+\label{back:PRISM}
+
+PRISM is a software tool which implements probabilistic model checking on a wide variety of models. In particular, PRISM defines two languages in order to facilitate model checking: the \emph{PRISM language} for formally defining models, along with the \emph{PRISM property specification language} for formally defining PCTL properties (or rather, an extension of PCTL adding reward-based properties).
+
+\subsection{The PRISM modelling language}
+\label{back:PRISM-modelling}
+
+Some stuff about modelling language
+
+\subsection{The PRISM property specification language}
+\label{back:PRISM-prop}
+
+When specifying properties of a model to be evaluated, PRISM defines a property specification language which supports and extends a variety of probabilistic temporal logics, although for the purposes of this dissertation we only consider the extension of PCTL with reward-based properties, as described in \ref{back:prop_spec}. As a simple example, consider the following property in PRISM:
+
+\begin{verbatim*}
+    P=? [ F game_over&score=10 ]
+\end{verbatim*}
+
+The main difference between the PRISM modelling language and "pure" PCTL syntax is the definition of the atomic proposition. Here, we refer to labels and variables from within a PRISM module in order to define an atomic proposition, allowing us to easily define a set of states where this proposition holds, namely where the game is over and the current score is 10. Reward-based properties can also be defined in a similar manner:
+
+\begin{verbatim*}
+    R{"total_boards"}=? [ F game_over ]
+\end{verbatim*}
+
+Note that PRISM models may contain many possible reward structures, so we specify the particular reward structure considered here using braces.
+
+The PRISM modelling language provides a convenient way to express properties in PCTL, but one particular syntactic benefit of the PRISM modelling language is the use of undefined constants. For instance, consider adapting the above probabilistic reachability property in order to use an undefined constant for the score:
+
+\begin{verbatim*}
+    const int k;
+    P=? [ F game_over&score=k ]
+\end{verbatim*}
+
+When model checking is performed, an \emph{experiment} can be defined, where different values of \verb+k+ may be considered. For instance, if the value of \verb+score+ is bounded, then allowing \verb+k+ to vary over all possible values of \verb+score+ can be utilised in order to produce a probability distribution of \verb+score+ when the model terminates.
+
+In addition, later on in the case studies, we define nondeterministic models, along with coalitions. Hence, properties may look more similar to this:
+
+\begin{verbatim*}
+    <<p1>>Pmax=? [ F game_over&score=k ]
+\end{verbatim*}
+
+In this property, \verb+<<p1>>+ denotes the set of players in the \emph{coalition} - in other words, players whose actions may be directly controlled. Moreover, \verb+Pmax+ means that the maximum probability is considered \emph{under all possible resolutions of nondeterminism}. In particular, care must be taken when computing conditional probabilities, since in general the decisions made in order to obtain the lower bound and the upper bounds of a particular probability are rather different. 
+
+\section{Related work}
+
+% just copying over RMT for now, will probably edit a fair bit
+
+\label{back:related}
 

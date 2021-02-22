@@ -165,6 +165,14 @@ Date | Duration | Summary
 
 ## Week 18 (Reading week)
 
+Date | Duration | Summary
+---- | -------- | -------
 16/02/21 | 1 hour | Brief discussion with Gethin regarding model size, suggested fix for tie-breaking problem (still to implement).
 17/02/21 | 4 hour | Prepared properties/parameters for test run on cluster. Identified issue with model size, scaled down to 4 sided dice. Developed probabilistic model checking section of dissertation
-18/02/21 | 0.5 hours | Received initial logs and results from cluster
+18/02/21 | 2 hours | Received initial logs and results from cluster, took longer than expected but results seem sensible. Planned out some future property evaluation - aim to avoid large models as much as possible. Started work on PRISM model checking background.
+
+## Week 19
+
+Date | Duration | Summary
+---- | -------- | -------
+22/02/21 | 1 hour | More work on PRISM property specification.
