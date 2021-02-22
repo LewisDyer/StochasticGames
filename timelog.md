@@ -175,4 +175,4 @@ Date | Duration | Summary
 
 Date | Duration | Summary
 ---- | -------- | -------
-22/02/21 | 1 hour | More work on PRISM property specification.
+22/02/21 | 2.5 hours | More work on PRISM property specification, and describing the PRISM modelling language.

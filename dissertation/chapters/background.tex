@@ -144,7 +144,50 @@ PRISM is a software tool which implements probabilistic model checking on a wide
 \subsection{The PRISM modelling language}
 \label{back:PRISM-modelling}
 
-Some stuff about modelling language
+PRISM provides a modelling language in order to formally specify probabilistic models. In particular, many probabilistic models exhibit \emph{emergent complexity}, where simple descriptions of behaviour can lead to complex models. Hence, a modelling language is essential to allow describing the behaviour of a model, rather than a more complicated model specification. Note that we do not provide a full description of the PRISM modelling language here, instead focusing on the key features used in the various case studies - more details are available in the PRISM manual, along with additional examples.
+
+PRISM models are defined as a set of \emph{modules}, where each module consists of a set of \emph{variables} and a set of \emph{commands}. Variables may be either integers or boolean values, and in particular integers must be bounded, since otherwise the state space of a model is unbounded. Variables can be accessed by any module, but modules can only alter their own variables.
+
+The key structure of a PRISM model is a \emph{command}, of the following form:
+
+\begin{verbatim*}
+    [] guard -> prob_1 : update_1 + ... + prob_n : update_n;
+\end{verbatim*}
+
+A \emph{guard} represents a proposition, identifying the set of states where the command is applicable. The command here has $n$ transitions, with a probability of each transition occurring such that the probabilities sum to $1$. Each update is comprised of a set of variable updates, representing a different state of a model.
+
+Note that guards may overlap, including between modules. This behaviour is handled differently depending on the type of model being constructed. For a DTMC each command which is enabled has an equal probability of being selected, but for other model types overlapping guards induce nondeterministic choice - a key aspect of defining strategies for games, as described further in the case studies.
+
+In some cases, there may be a desire for modules to synchronise commands together - for instance, two players making a decision simultaneously. This behaviour is supported via the use of \emph{action labels}. As an example, consider the following PRISM command:
+
+\begin{verbatim}
+    [cover_1] b1=0 -> (b1'=1);
+\end{verbatim}
+
+Here, very little logic is given for when the variable \verb+b1+ is updated. However, the \verb+cover_1+ action label allows this command to synchronise with another command with the same action label in another module. This is especially useful for defining "updater" modules - modules which control a particular variable and perform updates, but make no contribution towards the decision making of a particular model. We also note that action labels may be used even where no explicit synchronisation takes place. Indeed, action labels are frequently used in order to describe an execution of a model, which is particularly useful when debugging a model via manual simulation.
+
+For convenience, PRISM models also define \emph{formulas} and \emph{labels}. Formulas act as shorthand for a particular expression, allowing for a complex expressed to be referred to on multiple occasions without needless code duplication. A simple example of a formula is given below:
+
+\begin{verbatim*}
+    formula score = b1*1 + b2*2 + b3*3 + b4*4 + b5*5 + b6*6;
+\end{verbatim*}
+
+Labels serve a very similar purpose, but they are boolean expressions which define a set of states satisfying a particular proposition, which are frequently used when specifying properties. For instance, the following label shows how labels can be utilised to define a particular characteristic of states of a model:
+
+\begin{verbatim*}
+    label "game_over" = (phase>=6);
+\end{verbatim*}
+
+Finally, PRISM allows for specifying reward structures. Reward structures comprise of a guard specifying when the reward is applicable, along with the value of a reward when this guard is satisfied, as in the following example:
+
+
+\begin{verbatim*}
+    rewards "no_rolls"
+        state=0: 1;
+    ndrewards
+\end{verbatim*}
+
+Note that PRISM supports two main types of rewards - instantaneous rewards, considering the value of a reward in a specific state, and cumulative rewards considering the total value of a reward throughout an execution of the model. This distinction is applied at the property specification stage, rather than model construction.
 
 \subsection{The PRISM property specification language}
 \label{back:PRISM-prop}
