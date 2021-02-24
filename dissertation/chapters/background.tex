@@ -18,7 +18,7 @@ The very key points I need to mention:
 
 In order to begin formal analysis of a game, we must first formally define a model of a game, along with properties of this game we wish to consider.
 
-\section{Stochastic games}
+\section{Discrete-time Markov chains}
 \label{back:stoc_game}
 
 We first introduce a discrete-time Markov chain (or DTMC), as described by \cite{kwiatkowska_stochastic_2007}. This model is refined and adapted in each case study to develop a different type of model suited to different types of games.
@@ -42,7 +42,7 @@ From this definition of a DTMC, we also define the states where an atomic propos
 \begin{definition}
 \label{back:sat}
 
-    For $\Phi \in AP$ an a set of states $S$ as in Definition \ref{back:dtmc}, denote $Sat(\Phi) = {s \in S | \Phi \in L(s)}$.
+    For $\Phi \in AP$ an a set of states $S$ as in Definition \ref{back:dtmc}, denote $Sat(\Phi) = \{s \in S | \Phi \in L(s)\}$.
 
 \end{definition}
 
@@ -56,25 +56,25 @@ As a motivating example, we define a classic board game using a DTMC:
 
     \begin{itemize}
         \item $S$ is the set of states for the game, representing all possible board positions throughout a game of chess, along with the current player's turn (since a given board position could be obtained where either black or white could be the current player).
-        \item $\bar{s}$ is the initial board position of a standard game of chess.
-        \item $\mathbf{P}$ assigns each valid move a probability of being chosen at a particular board position.
-        \item $L$ labels each state with a set of propositions which are true at that state. For instance, if we let $\mathbf{C}$ be the atomic proposition that a player is in check in a given state, then for $s \in S$ a state, $\mathbf{C} \in L(s)$ means that a player is in check in state $s$.
+        \item $\bar{s}$ is the initial board position of a standard game of chess, where white makes the first move.
+        \item $\mathbf{P}$ assigns each valid move a probability of being chosen at a particular board position. More precisely, a transition to a board position is only valid if the transition can be presented by one legal move according to the rules of chess (for instance, the white player can only move white pieces, can only move one piece per move with the exception of castling, and cannot move a piece if the black player can capture the white king in the following turn).
+        \item $L$ labels each state with a set of propositions which are true at that state. For instance, if we let $\mathbf{C_w}$ be the atomic proposition that the white player is in check in a given state, then for $s \in S$ a state, $\mathbf{C_w} \in L(s)$ means that the white player is in check in state $s$.
     \end{itemize}
 
     In this model, the key aspect in determining the skill level of a player is in the transition probability matrix. In theory, there is always an optimal move to make in chess, so for each board position, an optimal player's transition probability matrix will return $1$ for precisely one action, and return $0$ for all other actions. But in practice chess is far too complex for players, human or computer alike, to compute this optimal strategy. Hence strategies may be probabilistic, such as a chess player who occasionally "blunders", making a move which places them in a disadvantageous position.
 
 \end{example}
 
-Playing a game is represented as an infinite \emph{path}, denoted as a sequence $\omega = s_0 \rightarrow s1 \rightarrow \dots$ where $\mathbf{P}(s_k, s_{k+1})>0$ for all $k\geq0$, or in other words where each action is possible.
+Playing a game is represented as an infinite \emph{path}, denoted as a sequence $\omega = s_0 \rightarrow s_1 \rightarrow \dots$ where $\mathbf{P}(s_k, s_{k+1})>0$ for all $k\geq0$, or in other words where each action is possible. Note that in states where a game terminates (for instance, states where either the white or black player is in checkmate, or where the game ends by stalemate), we typically define a self-loop in each of these states with probability 1 to ensure the path remains infinite.
 
 We may also augment this DTMC with a set of \emph{reward structures}, which are each comprised of a \emph{state reward function} $\rho : S \rightarrow \mathbb{N}$, associating each state with the value of a reward, and a \emph{state transition function} $\iota : S \times S \rightarrow \mathbb{N}$ which associates each transition with the value of a reward. For instance, in chess, we may define a reward structure where $\iota$ returns $0$ for all transitions, and $\rho$ returns $1$ for all states where a player is in check. Note that the reward values may be continuous (though they may never be negative), but we only consider reward values in $\mathbb{N}$.
 
 \section{Property specification}
 \label{back:prop_spec}
 
-When analysing stochastic games, we consider two main types of properties: \emph{probabilistic reachability} properties and \emph{reward-based} properties. We may define properties in terms of \emph{Probabilistic Computation Tree Logic} (PCTL), as defined by \cite{hansson_logic_1994}. These properties are comprised of path quantifiers and temporal operators, though for the purposes of this dissertation we only consider one temporal operator. In particular, the $\mathbf{F}$ operator considers whether a particular proposition \emph{eventually} always holds after some state on a given path.
+When analysing probabilistic models, including DTMCs, we consider two main types of properties: \emph{probabilistic reachability} properties and \emph{reward-based} properties. We may define properties in terms of \emph{Probabilistic Computation Tree Logic} (PCTL), as defined by \cite{hansson_logic_1994}. These properties are comprised of path quantifiers and temporal operators, though for the purposes of this dissertation we only consider one temporal operator. In particular, the future operator, denoted $\mathbf{F}$, considers whether a particular proposition \emph{eventually} always holds after some state on a given path.
 
-A closely related operator is the $\mathbf{U}$ operator, which considers two propositions, say $\Phi_1$ and $\Phi_2$, and determines whether, for a given path $\Phi_1$ always holds before some state, then $\Phi_2$ holds for some state after that point. Indeed, the $\mathbf{F}$ operator is actually equivalent to $\mathbf{U}$ with $\Phi_1$ as the proposition which always holds. We use this equivalence in \ref{back:prob_mod_check} in order to perform model checking on probabilistic reachability properties.
+A closely related operator is the until operator, denoted  $\mathbf{U}$, which considers two propositions, say $\Phi_1$ and $\Phi_2$, and determines whether for a given path, $\Phi_1$ always holds before some state, then $\Phi_2$ holds for the given state. Indeed, the future operator is actually equivalent to the until operator when $\Phi_1$ is the proposition which always holds, denoted \verb+true+. We use this equivalence in \ref{back:prob_mod_check} in order to perform model checking on probabilistic reachability properties.
 
 For probabilistic reachability properties, we also include the $\mathbf{P}$ operator, which considers the probability of a particular property holding, including its proposition and any temporal operators, across all possible executions of the TSG. For instance, if we define $\mathtt{game\_over}$ as the proposition that the game is considered to be completed in the current state, the property $\mathbf{P}_{=?} [\mathbf{F}\ \mathtt{game\_over}]$ represents the probability that the game eventually terminates.
 
