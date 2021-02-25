@@ -177,4 +177,5 @@ Date | Duration | Summary
 ---- | -------- | -------
 22/02/21 | 3.5 hours | More work on PRISM property specification, and describing the PRISM modelling language. Updated status report
 23/02/21 | 1 hour | Supervisor meeting + minutes
-24/02/21 | 1 hour | Addressed comments on background section (up to definition 2.5)
+24/02/21 | 2 hours | Addressed comments on background section (up to definition 2.5)
+25/02/21 | 1.5 hours | Finished comments on background section, started changing bibliography style (still a few issues to iron out)
