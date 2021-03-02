@@ -179,3 +179,10 @@ Date | Duration | Summary
 23/02/21 | 1 hour | Supervisor meeting + minutes
 24/02/21 | 2 hours | Addressed comments on background section (up to definition 2.5)
 25/02/21 | 1.5 hours | Finished comments on background section, started changing bibliography style (still a few issues to iron out)
+26/02/21 | 1 hour | Made a start on the development environment (not much work at this stage, just structuring things).
+
+## Week 20
+
+Date | Duration | Summary
+---- | -------- | -------
+01/03/21 | 2.5 hours | Defined a few extra strategies for third game, planned out some properties, made system to bulk/build models. Starting setting up properties to place in cluster log and for statistical model checking. Added status report + a few questions.

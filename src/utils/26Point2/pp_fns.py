@@ -150,19 +150,46 @@ def one_step_rolls(p, no_rolled, no_sides, newLine):
     return newLine.join(output)
 
 def pick_die(p, no_dice, strategy, newLine):
-    strategy_lookup = {1: random}
+    strategy_lookup = {1: random, 2: pick_two, 3: pick_three, 4: pick_four, 5: pick_three_four}
 
-    output = [f"[p{p}_pick_dice] state=0 ->"]
+    output = []
     output.append(strategy_lookup[strategy](p, no_dice, newLine))
-    return f"{newLine}\t".join(output)
+    return f"{newLine}".join(output)
 
 def random(p, no_dice, newLine):
     # choose a random number of dice to roll from 1 to no_dice
-    choices = []
+    choices = [f"[p{p}_pick_dice] state=0 ->"]
 
+    options = []
     for i in range(1, no_dice+1):
-        choices.append(f"1/{no_dice} : (p{p}_chosen_dice' = {i})")
-    return f" + {newLine}\t".join(choices) + ";"
+        options.append(f"1/{no_dice} : (p{p}_chosen_dice' = {i})")
+    choices.append(f" + {newLine}\t".join(options) + ";")
+    
+    return f"{newLine}\t".join(choices)
+
+def pick_two(p, no_dice, newLine):
+    # always roll two dice - it's impossible to go bust with 2 dice!
+
+    return f"[p{p}_pick_dice] state=0 -> (p{p}_chosen_dice' = 2);"
+
+def pick_three(p, no_dice, newLine):
+    # always roll three dice - bust prob. is 1/36
+
+    return f"[p{p}_pick_dice] state=0 -> (p{p}_chosen_dice' = 3);"
+
+def pick_four(p, no_dice, newLine):
+    # always roll four dice - bust prob. is more complex
+
+    return f"[p{p}_pick_dice] state=0 -> (p{p}_chosen_dice' = 4);"
+
+def pick_three_four(p, no_dice, newLine):
+    # pick 4 dice if you're behind and 3 dice if you're ahead/tied
+
+    other_p = 2 if p == 1 else 1
+    choices = [f"[p{p}_pick_dice] state=0 & (p{p}_pos >= p{other_p}_pos) -> (p{p}_chosen_dice' = 3);"]
+    choices.append(f"[p{p}_pick_dice] state=0 & (p{p}_pos < p{other_p}_pos) -> (p{p}_chosen_dice' = 4);")
+
+    return newLine.join(choices)
         
 def die_counts(p, no_dice, no_sides):
     output = []

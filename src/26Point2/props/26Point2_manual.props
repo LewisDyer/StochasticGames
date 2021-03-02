@@ -1,13 +1,8 @@
 // probability that player 1 wins - expect to be 50/50 since same behaviour
 Pmax=? [F "p1_wins"];
 
-// probability that player 2 wins - should be complement of p1 wins
-Pmax=? [F "p2_wins"];
-
 // probability of both players ending on the same position - should we be concerned about this edgecase?
 Pmax=? [F "players_tie"];
-
-Pmax=? [F "game_over"];
 
 R{"no_rounds"}max=? [F "game_over"];
 

@@ -39,7 +39,9 @@ module board
     [] state=2 -> (state'=3);
     [] state=3 & !game_over -> (state'=0);
 
-    @26Point2/pick_wins players@
+    [] state=3 & game_over & p1_end_pos=max_space & !p2_end_pos=max_space -> (state'=4) & (winner'=1);
+    [] state=3 & game_over & p2_end_pos=max_space & !p1_end_pos=max_space -> (state'=4) & (winner'=2);
+    [] state=3 & game_over & p1_end_pos=max_space & p2_end_pos=max_space -> 0.5 : (state'=4) & (winner'=1) + 0.5 :(state'=4) & (winner'=2);
     
     [] state=4 -> (state'=4);
 
@@ -49,6 +51,8 @@ endmodule
 @26Point2/winner_labels players@
 
 label "game_over" = (state=4);
+
+label "players_tie" = (state=4) & (p1_end_pos=p2_end_pos);
 
 @26Point2/bust_labels players@
 
