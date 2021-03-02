@@ -36,7 +36,6 @@ We first introduce a discrete-time Markov chain (or DTMC), as described by Kwiat
 
 \end{definition}
 
-
 From this definition of a DTMC, we also define the states where an atomic proposition holds.
 
 \begin{definition}
@@ -102,6 +101,11 @@ Now that we have defined a DTMC, along with defining properties of that DTMC to 
 
 \end{example}
 
+As we defined reachability and reward-based properties separately, we also define model checking rechability and reward-based properties separately, although the methods used in each type of property are similar.
+
+\subsection{Model checking probabilistic reachability properties}
+\label{back:check-reach}
+
 Evaluating probabilistic reachability properties is a recursive process, since we need to consider the probabilistic reachability of each state that a given state can reach. Hence we need to define the "base cases" of this recursion, which are described below as in \cite{kwiatkowska_stochastic_2007}, with slightly different notation:
 
 \begin{definition}
@@ -135,6 +139,46 @@ After this precomputation process, we can now calculate the probability of a pro
 \end{definition}
 
 From Definition \ref{back:F_operator}, calculating reachability probabilities requires solving a system of linear equations containing $|S^{?}|$ unknowns. There are many different methods for solving these equations, but in practice iterative methods (such as the Gauss-Siedel method) are preferred to direct methods (such as power iteration) - iterative methods generally do not give exact solutions, opting for values which eventually converge to an exact solution, but direct methods can take infeasibly many steps to compute an exact solution.
+
+\subsection{Model checking reward-based properties}
+\label{back:check_rewards}
+
+Our approach to model checking reward-based properties is similar in spirit to checking reachability properties, in that we recursively construct a series of linear equations, which may be solved using any standard method. However, a key remark is that, when evaluating the expected cumulative reward value until a state where some proposition $a$ holds, we assume that a state where $a$ holds is always eventually reached with probability 1. If this does not occur for some path in a DTMC, then a reward can accumulate infinitely often. Hence, the expected reward value in this case is considered to be infinite.
+
+In order to evaluate reward-based properties, we first define a random variable representing the cumulative reward value of an arbitrary infinite path.
+
+\begin{definition}
+\label{back:reach_reward}
+
+Let $Path(s)$ be the set of all paths of some DTMC, starting in some stats $s$, and let $T$ be the set of states in the DTMC where some proposition $a$ holds, along with denoting $\rho$ and $\iota$ as state and transition reward functions respectively. Then $X_{Reach(T)} : Path(s) \Rightarrow \mathbb{R}_{\geq 0}$ is a random variable where, for any infinite path $\omega = s_{0} s_{1} s_{2} \dots$,
+
+    \begin{equation*} 
+        X_{Reach(T)}(\omega) = 
+            \begin{cases}
+                0 & s_0 \in T \\
+                \infty & s_i \notin T \forall i \geq 0 \\
+                \sum_{i=0}^{k_{T} - 1} \rho(s_i) + \iota(s_i, s_{i+1}) & \text{otherwise}
+            \end{cases}
+    \end{equation*}
+
+where $k_T = min(j | s_j \in T)$, the first state in the path where $a$ holds.
+
+From this, we then define $ExpReach(s, T) = \mathbb{E}(X_{Reach(T)})$, the expected value of the cumulative reward value over all possible infinite paths through the DTMC, starting from state $s$.
+
+\end{definition}
+
+Model checking reward-based properties consists precisely of calculating $ExpReach(T)$, which can be expressed as the solution of a system of linear equations using the above definition:
+
+\begin{equation*}
+    ExpReach(s, T) = 
+        \begin{cases}
+            \infty & \text{there exists a path} \omega \in Path(s) \text{where} T \text{is never reached} \\
+            0 & s \in T \\
+            \rho(s_i) + \sum_{s' \in S} \mathbf{P}(s, s') \cdot (\iota(s_i, s_{i+1} + ExpReach(s', T)) & \text{otherwise}
+        \end{cases}
+\end{equation*}
+
+
 
 \section{The PRISM model checker}
 \label{back:PRISM}

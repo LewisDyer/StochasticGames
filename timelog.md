@@ -186,4 +186,4 @@ Date | Duration | Summary
 Date | Duration | Summary
 ---- | -------- | -------
 01/03/21 | 2.5 hours | Defined a few extra strategies for third game, planned out some properties, made system to bulk/build models. Starting setting up properties to place in cluster log and for statistical model checking. Added status report + a few questions.
-02/03/21 | 1 hour | Related work section drafted (mainly tweaked from RMT coursework for now). Supervisor meeting + minutes
+02/03/21 | 2 hours | Related work section drafted (mainly tweaked from RMT coursework for now). Supervisor meeting + minutes. Added section on model checking reward-based properties (details done, might need to tidy up periphery)
