@@ -49,8 +49,7 @@
 \usepackage[style]{abstract} % abstract styling
 
 % set bibliography styling
-\usepackage{natbib}
-\bibpunct{(}{)}{;}{a}{}{;}
+\usepackage[square,numbers]{natbib}
 
 
 \usepackage{etoolbox}
