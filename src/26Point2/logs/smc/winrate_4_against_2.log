@@ -1,0 +1,52 @@
+PRISM-games
+===========
+
+Version: 3.0 (based on PRISM 4.6)
+Date: Mon Mar 08 10:46:12 GMT 2021
+Hostname: DESKTOP-LDYER
+Memory limits: cudd=1g, java(heap)=910.5m
+Command line: prism-games 26Point2/models/26Point2_4_2.prism 26Point2/props/26Point2_manual.props -const no_spaces=50 -prop 1 -sim -simmethod ci -simsamples 10000
+
+Parsing model file "26Point2/models/26Point2_4_2.prism"...
+
+Type:        CSG
+Modules:     player1 player2 board 
+Variables:   p1_pos p1_chosen_dice p1_1s p1_2s p1_3s p1_4s p2_pos p2_chosen_dice p2_1s p2_2s p2_3s p2_4s state winner 
+
+Switching to explicit engine, which supports CSGs...
+
+Parsing properties file "26Point2/props/26Point2_manual.props"...
+
+5 properties:
+(1) Pmax=? [ F "p1_wins" ]
+(2) Pmax=? [ F "players_tie" ]
+(3) R{"no_rounds"}max=? [ F "game_over" ]
+(4) R{"p1_busts"}max=? [ F "game_over" ]
+(5) R{"p1_busts"}max=? [ F "game_over" ]/R{"no_rounds"}max=? [ F "game_over" ]
+
+---------------------------------------------------------------------
+
+Simulating: Pmax=? [ F "p1_wins" ]
+Model constants: no_spaces=50
+
+Warning: For simulation, nondeterminism in CSG is resolved uniformly (resulting in DTMC).
+
+Simulation method: CI (Confidence Interval)
+Simulation method parameters: width=unknown, confidence=0.01, number of samples=10000
+Simulation parameters: max path length=10000
+
+Sampling progress: [ 10% 20% 30% 40% 50% 60% 70% 80% 90% 100% ]
+
+Sampling complete: 10000 iterations in 6.812 seconds (average 0.00068)
+Path length statistics: average 32, min 16, max 57
+
+Simulation method parameters: width=0.009223189126175261, confidence=0.01, number of samples=10000
+
+Simulation result details: confidence interval is 0.849 +/- 0.009223189126175261, based on 99.0% confidence level
+
+Result: 0.849 (with nondeterminism in CSG being resolved uniformly)
+
+---------------------------------------------------------------------
+
+Note: There was 1 warning during computation.
+

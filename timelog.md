@@ -188,3 +188,10 @@ Date | Duration | Summary
 01/03/21 | 2.5 hours | Defined a few extra strategies for third game, planned out some properties, made system to bulk/build models. Starting setting up properties to place in cluster log and for statistical model checking. Added status report + a few questions.
 02/03/21 | 2 hours | Related work section drafted (mainly tweaked from RMT coursework for now). Supervisor meeting + minutes. Added section on model checking reward-based properties (details done, might need to tidy up periphery)
 03/03/21 | 3.5 hours | Fixed bibliography, added game description of Shut the Box, started background work of MDPs (up to/including adversary definition). Worked on cover choice diagram on main PC, should import that in when I can transfer things over.
+05/03/21 | 0.5 hours | Set up Overleaf project for easier feedback, uploaded current work onto Overleaf (I don't intend to complete most work on Overleaf).
+
+## Week 21
+
+Date | Duration | Summary
+---- | -------- | -------
+08/03/21 | 2.5 hours | Continued development environment, now export cluster shell file and statistical model checking logs. Debugged logs, fixed issue with new parameters file not being used. Results seem sensible so far, just need to filter logs to get meaningful results.

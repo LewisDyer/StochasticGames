@@ -1,1 +1,7 @@
-players, 2no_sides, 4no_dice, 4p1, 1p2, 2strategy1, 5strategy2, 1
+players, 2
+no_sides, 4
+no_dice, 4
+p1, 1
+p2, 2
+strategy1, 5
+strategy2, 1

@@ -42,7 +42,8 @@ p1_2s : [0..4] init 0;
 p1_3s : [0..4] init 0;
 p1_4s : [0..4] init 0;
 
-[p1_pick_dice] state=0 -> (p1_chosen_dice' = 3);
+[p1_pick_dice] state=0 & (p1_pos >= p2_pos) -> (p1_chosen_dice' = 3);
+[p1_pick_dice] state=0 & (p1_pos < p2_pos) -> (p1_chosen_dice' = 4);
 
 [p1_roll_1_dice] state=1 & p1_chosen_dice=1 ->
 1/4 : (p1_1s'=1) & (p1_2s'=0) & (p1_3s'=0) & (p1_4s'=0) + 
@@ -138,11 +139,7 @@ p2_2s : [0..4] init 0;
 p2_3s : [0..4] init 0;
 p2_4s : [0..4] init 0;
 
-[p2_pick_dice] state=0 ->
-	1/4 : (p2_chosen_dice' = 1) + 
-	1/4 : (p2_chosen_dice' = 2) + 
-	1/4 : (p2_chosen_dice' = 3) + 
-	1/4 : (p2_chosen_dice' = 4);
+[p2_pick_dice] state=0 -> (p2_chosen_dice' = 4);
 
 [p2_roll_1_dice] state=1 & p2_chosen_dice=1 ->
 1/4 : (p2_1s'=1) & (p2_2s'=0) & (p2_3s'=0) & (p2_4s'=0) + 

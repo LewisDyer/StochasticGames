@@ -7,7 +7,14 @@ Shut the Box is a single player game, where the player aims to cover as many boa
 
 Throughout the case study, unless otherwise stated, we consider the variant of Shut the Box where there are 12 boards, and the player rolls two six-sided dice each round.
 
-When playing Shut the Box, it soon becomes clear that some configurations of boards are highly desirable, while others are more challenging. For instance, if the only remaining uncovered board is board 10, then the player must roll a 10 in order to continue the game, which occurs with probability $\frac{1}/{12}$. However, if the remaining uncovered boards are boards 1, 2, 3 and 4, then the player may continue with any roll from 2 to 10 inclusive, which occurs with probability $\frac{11}{12}$. Hence, even though each set of uncovered boards currently has the same score, a higher expected score can be obtained starting in the latter configuration. 
+When playing Shut the Box, it soon becomes clear that some configurations of boards are highly desirable, while others are more challenging. For instance, consider the situation in Figure \ref{cs1:cover_choice}, where 4 boards are remaining and a 7 is rolled. Two possible coverings are available, but leaving boards 1 and 2 uncovered is more valuable than leaving board 3 uncovered - in particular, if a 3 is rolled then every board can be covered in both cases, but if a 2 is rolled then board 2 may be covered in the former case, while no valid covering exists in the latter case. Hence covering boards 3 and 4 leads to a higher expected score at the end of the game than covering boards 1, 2 and 4.
+
+\begin{figure}
+\label{cs1:cover_choice}
+    \centering
+    \includegraphics[width=0.5\linewidth]{images/cover_choice.pdf}
+    \caption{When boards 1 to 4 are all uncovered, and a 7 is rolled, there are two possible valid coverings - covering boards 1, 2 and 4 (on the left), and covering boards 3 and 4 (on the right).}
+\end{figure}
 
 Intuitively, this suggests that lower numbered boards are more valuable later in the game, since they increase the set of possible die rolls that a player can roll without ending the game. From this intuition, we develop two potential strategies for playing Shut the Box. The \emph{high-board strategy} is the strategy where the player always elects to cover the highest number board at each stage, while the \emph{low-board strategy} is the converse, where the player always elects to cover the lowest numbered boards at each stage.
 
