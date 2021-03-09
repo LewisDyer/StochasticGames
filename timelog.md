@@ -195,3 +195,4 @@ Date | Duration | Summary
 Date | Duration | Summary
 ---- | -------- | -------
 08/03/21 | 3 hours | Continued development environment, now export cluster shell file and statistical model checking logs. Debugged logs, fixed issue with new parameters file not being used. Results seem sensible so far, just need to filter logs to get meaningful results. Added status report + some questions
+09/03/21 | 0.5 hours | Supervisor meeting + minutes.
