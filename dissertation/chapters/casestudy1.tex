@@ -7,23 +7,25 @@ Shut the Box is a single player game, where the player aims to cover as many boa
 
 Throughout the case study, unless otherwise stated, we consider the variant of Shut the Box where there are 12 boards, and the player rolls two six-sided dice each round.
 
+
 When playing Shut the Box, it soon becomes clear that some configurations of boards are highly desirable, while others are more challenging. For instance, consider the situation in Figure \ref{cs1:cover_choice}, where 4 boards are remaining and a 7 is rolled. Two possible coverings are available, but leaving boards 1 and 2 uncovered is more valuable than leaving board 3 uncovered - in particular, if a 3 is rolled then every board can be covered in both cases, but if a 2 is rolled then board 2 may be covered in the former case, while no valid covering exists in the latter case. Hence covering boards 3 and 4 leads to a higher expected score at the end of the game than covering boards 1, 2 and 4.
 
+% \begin{figure}[t]
 \begin{figure}
-\label{cs1:cover_choice}
     \centering
     \includegraphics[width=0.5\linewidth]{images/cover_choice.pdf}
     \caption{When boards 1 to 4 are all uncovered, and a 7 is rolled, there are two possible valid coverings - covering boards 1, 2 and 4 (on the left), and covering boards 3 and 4 (on the right).}
+    \label{cs1:cover_choice}
 \end{figure}
 
 Intuitively, this suggests that lower numbered boards are more valuable later in the game, since they increase the set of possible die rolls that a player can roll without ending the game. From this intuition, we develop two potential strategies for playing Shut the Box. The \emph{high-board strategy} is the strategy where the player always elects to cover the highest number board at each stage, while the \emph{low-board strategy} is the converse, where the player always elects to cover the lowest numbered boards at each stage.
 
-When evaluating the effectiveness of these strategies, model checking is a suitable strategy. Since these strategies are deterministic, we may define DTMCs that model Shut the Box under these strategies, define the score of the game as a reward structure, and evaluate the expected score when the game terminates. However, we are also interested in the \emph{optimal} strategy - that is, the strategy which maximises the expected score of Shut the Box. Trying to enumerate and consider every possible strategy would be challenging, both conceptually and computationally. Instead, we consider the case where \emph{no} strategy is defined - in other words, an entirely nondeterministic strategy. In order to achieve this, we consider a generalisation of a DTMC.
+When evaluating the effectiveness of these strategies, model checking is a suitable strategy. Since these strategies are deterministic, we may define DTMCs that model Shut the Box under these strategies, define the score of the game as a reward structure, and evaluate the expected score when the game terminates. However, we are also interested in the \emph{optimal} strategy - that is, the strategy which maximises the expected score of Shut the Box. Trying to enumerate and consider every possible strategy would be challenging, both conceptually and computationally. Instead, we consider the case where \emph{no} strategy is defined - in other words, an entirely nondeterministic strategy - and derive an optimal strategy from here. In order to achieve this, we consider a generalisation of a DTMC which supports nondeterminism.
 
 \section{Background}
 \label{cs1:stb_background}
 
-We start by introducing Markov decision processes (MDPs), which are generalisations of DTMCs allowing for actions to be taken at each state, each leading to different probabilistic transitions between states. We then consider adversaries - resolutions of nondeterministic choice in MDPs - then briefly discuss how optimal adversaries are computed.
+We start by introducing Markov decision processes (MDPs) as described in \cite{FKNP11}, which are generalisations of DTMCs allowing for actions to be taken at each state, each leading to different probabilistic transitions between states. We then consider adversaries - resolutions of nondeterministic choice in MDPs - and briefly discuss how optimal adversaries are computed.
 
 \subsection{Markov decision processes}
 \label{cs1:mdps}
@@ -47,7 +49,7 @@ Given a \emph{finite} path $\omega = s_0 \rightarrow s_1 \rightarrow \dots \righ
 
 \end{definition}
 
-A key remark on this definition is that adversaries make decisions depending on the entire execution history up to a state $s_n$, not just the state $s_n$ itself. However, we primarily consider $memoryless adversaries$, where the adversary always picks the same choice in a given state. In particular, this adversary can be viewed as a map from states to action-distribution pairs, as opposed to a map from finite paths to action-distribution pairs. Throughout the remainder of the dissertation, we only consider memoryless adversaries unless stated otherwise.
+A key remark on this definition is that adversaries make decisions depending on the entire execution history up to and including the state $s_n$, not just the state $s_n$ itself. However, we primarily consider \emph{memoryless adversaries}, where the adversary always picks the same choice in a given state. In particular, this adversary can be viewed as a map from states to action-distribution pairs, as opposed to a map from finite paths to action-distribution pairs. Throughout the remainder of the dissertation, we only consider memoryless adversaries unless stated otherwise.
 
 When an MDP is considered under an adversary, nondeterministic choice is resolved, and a DTMC is obtained. Hence, under a specific adversary, we can apply the model checking techniques introduced in Section \ref{back:prob_mod_check} to evaluate properties of an MDP.
 
