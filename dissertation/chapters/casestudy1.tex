@@ -25,7 +25,7 @@ When evaluating the effectiveness of these strategies, model checking is a suita
 \section{Background}
 \label{cs1:stb_background}
 
-We start by introducing Markov decision processes (MDPs) as described in \cite{FKNP11}, which are generalisations of DTMCs allowing for actions to be taken at each state, each leading to different probabilistic transitions between states. We then consider adversaries - resolutions of nondeterministic choice in MDPs - and briefly discuss how optimal adversaries are computed.
+We start by introducing Markov decision processes (MDPs) as described in \cite{forejt_automated_2011}, which are generalisations of DTMCs allowing for actions to be taken at each state, each leading to different probabilistic transitions between states. We then consider adversaries - resolutions of nondeterministic choice in MDPs - and briefly discuss how optimal adversaries are computed.
 
 \subsection{Markov decision processes}
 \label{cs1:mdps}
@@ -52,6 +52,66 @@ Given a \emph{finite} path $\omega = s_0 \rightarrow s_1 \rightarrow \dots \righ
 A key remark on this definition is that adversaries make decisions depending on the entire execution history up to and including the state $s_n$, not just the state $s_n$ itself. However, we primarily consider \emph{memoryless adversaries}, where the adversary always picks the same choice in a given state. In particular, this adversary can be viewed as a map from states to action-distribution pairs, as opposed to a map from finite paths to action-distribution pairs. Throughout the remainder of the dissertation, we only consider memoryless adversaries unless stated otherwise.
 
 When an MDP is considered under an adversary, nondeterministic choice is resolved, and a DTMC is obtained. Hence, under a specific adversary, we can apply the model checking techniques introduced in Section \ref{back:prob_mod_check} to evaluate properties of an MDP.
+
+Note that adversaries are often referred to using other names, depending on context, such as schedulers or policies. Throughout this dissertation, by convention we refer to adversaries when discussing the concept over general MDPs, and refer to strategies in the context of a particular game (analogous to a human developing a strategy while playing a game).
+
+We defer discussion on how adversaries are generated until Section \ref{cs1:adversary_gen}. For now, we discuss how optimal values of probabilistic reachability properties are computed, then modify this process in order to provide an adversary which obtains this optimal value.
+
+\subsection{Probabilistic reachability in MDPs}
+\label{cs1:prob_reach_mdps}
+
+In a similar manner to Section \ref{back:check-reach}, given an atomic proposition $a$, we define $T$ to be the set of states in some MDP $\mathcal{M}$ where $a$ holds.
+
+Since MDPs allow for nondeterminism, we must consider a minimum and maximum probability of reaching $T$, over all possible resolutions of nondeterminism. More precisely, for some atomic proposition $a$, we denote these probabilities as $\mathbf{P}_{min}=? [\mathbf{F} \; a]$ and $\mathbf{P}_{max}=? [\mathbf{F} \; a]$ respectively. In order to calculate these probabilities, we introduce a method known as \emph{value iteration}. This method computes a sequence $(x^n_s)_{n \in \mathbb{N}}$, denoting the probability of reaching $T$ from a given state $s$ within $n$ steps. This sequence then converges to an optimal value, yielding a reasonable approximation of the optimal value for large enough $n$.
+
+First, we perform precomputation of several sets of states, very similarly to precomputation of $S^{yes}$ and $S^{no}$ in Definition \ref{back:S_yes}, where the minimum or maximum reachability probabilities are either 0 or 1. The details of these constructions are omitted and described further in Section 4.1 of \cite{forejt_automated_2011}. More formally, these precomputed sets are defined as follows:
+
+\begin{definition}
+\label{cs1:yes_no}
+
+For a given MDP $\mathcal{M}$, with state space $S$ and atomic proposition $a$:
+
+\begin{itemize}
+    \item $S^{yes}_{min}$ is the set of states where $a$ eventually holds with probability 1, regardless of any nondeterministic choice.
+    \item $S^{no}_{min}$ is the state of states where $a$ never holds in any subsequent reachable state, for some resolution of nondeterminism.
+    \item $S^{yes}_{max}$ is the set of states where $a$ eventually holds with probability 1, for some resolution of nondeterminism.
+    \item $S^{no}_{max}$ is the state of states where $a$ never holds in any subsequent reachable state, regardless of any nondeterministic choice.
+\end{itemize}
+\end{definition}
+
+For convenience, we also introduce alternative notation for describing the probability of a transition under a given action.
+
+\begin{definition}
+\label{cs1:alt_trans_fn}
+
+For an MDP $\mathcal{M}$, where $s$ and $s'$ are states in $mathcal{M}$, $a$ is an action, and $Steps$ is the transition probability function, denote $\delta (s, a)(s')$ as the probability of transitioning from $s$ to $s'$ under action $a$.
+\end{definition}
+
+We are now ready to define value iteration for calculating the minimum reachability probability for a set of target states $T$, via defining each element in the sequence $(x^n_s)_{n \in \mathbb{N}}$.
+
+\begin{definition}
+\label{cs1:value_iteration}
+
+Given an MDP $\mathcal{M}$, with precomputed sets of states as described in Definition \ref{cs1:yes_no}, we have that:
+
+\begin{equation*}
+x^n_s = \begin{cases}
+        1 & s \in S^{yes}_{min} \\
+        0 & s \in S^{no}_{min} \\
+        0 & s \notin (S^{yes}_{min} \cup S^{no}_{min}) \; \text{and} \; n=0 \\
+        min_{a \in Act} \sum_{s' \in S}\delta(s,a)(s') \cdot x^{n-1}_{s'} & \text{otherwise} \\
+    \end{cases}
+\end{equation*}
+
+This sequence may be modified to calculate the maximum reachability property via replacing "min" with "max".
+\end{definition}
+
+Using this method,
+
+\subsection{Adversary generation}
+\label{cs1:adversary_gen}
+
+When generating adversaries for optimal values of a particular property, we utilise slightly different methods for computing maximum and minimum values. In both cases, since we consider memoryless adversaries, we can generate adversaries by mapping each state to a particular action.
 
 \section{Analysis (3 pages)}
 

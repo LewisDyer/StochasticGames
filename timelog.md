@@ -195,4 +195,5 @@ Date | Duration | Summary
 Date | Duration | Summary
 ---- | -------- | -------
 08/03/21 | 3 hours | Continued development environment, now export cluster shell file and statistical model checking logs. Debugged logs, fixed issue with new parameters file not being used. Results seem sensible so far, just need to filter logs to get meaningful results. Added status report + some questions
-09/03/21 | 1.5 hours | Supervisor meeting + minutes. Reviewed feedback on remainder of background section, implemented revisions and sent to local files. Still need to add MDPs reference to Zotero
+09/03/21 | 1.5 hours | Supervisor meeting + minutes. Reviewed feedback on remainder of background section, implemented revisions and sent to local files. Still need to add MDPs reference to Zotero.
+10/03/21 | 1.5 hours | Added probabilistic reachability in MDPs, defined value iteration - setting up preliminary information for adversary generation... Also added MDPs reference to Zotero
