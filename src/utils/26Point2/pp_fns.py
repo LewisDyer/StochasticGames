@@ -150,11 +150,20 @@ def one_step_rolls(p, no_rolled, no_sides, newLine):
     return newLine.join(output)
 
 def pick_die(p, no_dice, strategy, newLine):
-    strategy_lookup = {1: random, 2: pick_two, 3: pick_three, 4: pick_four, 5: pick_three_four}
+    strategy_lookup = {0: nondet, 1: random, 2: pick_two, 3: pick_three, 4: pick_four, 5: pick_three_four}
 
     output = []
     output.append(strategy_lookup[strategy](p, no_dice, newLine))
     return f"{newLine}".join(output)
+
+def nondet(p, no_dice, newLine):
+    # entirely nondeterministic strategy
+    choices = []
+    for i in range(1, no_dice+1):
+        choices.append(f"[p{p}_pick_{i}_dice] state=0-> (p{p}_chosen_dice' = {i});")
+
+    return newLine.join(choices)
+
 
 def random(p, no_dice, newLine):
     # choose a random number of dice to roll from 1 to no_dice
