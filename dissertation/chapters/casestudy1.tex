@@ -62,7 +62,7 @@ We defer discussion on how adversaries are generated until Section \ref{cs1:adve
 
 In a similar manner to Section \ref{back:check-reach}, given an atomic proposition $a$, we define $T$ to be the set of states in some MDP $\mathcal{M}$ where $a$ holds.
 
-Since MDPs allow for nondeterminism, we must consider a minimum and maximum probability of reaching $T$, over all possible resolutions of nondeterminism. More precisely, for some atomic proposition $a$, we denote these probabilities as $\mathbf{P}_{min}=? [\mathbf{F} \; a]$ and $\mathbf{P}_{max}=? [\mathbf{F} \; a]$ respectively. In order to calculate these probabilities, we introduce a method known as \emph{value iteration}. This method computes a sequence $(x^n_s)_{n \in \mathbb{N}}$, denoting the probability of reaching $T$ from a given state $s$ within $n$ steps. This sequence then converges to an optimal value, yielding a reasonable approximation of the optimal value for large enough $n$.
+Since MDPs allow for nondeterminism, we must consider a minimum and maximum probability of reaching $T$, over all possible resolutions of nondeterminism. More precisely, for some atomic proposition $a$, and some initial state $s$ (which may not necessarily be an initial state of the associated MDP) we denote these probabilities as $\mathbf{P}^{s}_{min}=? [\mathbf{F} \; a]$ and $\mathbf{P}^{s}_{max}=? [\mathbf{F} \; a]$ respectively. In order to calculate these probabilities, we introduce a method known as \emph{value iteration}. This method computes a sequence $(x^n_s)_{n \in \mathbb{N}}$, denoting the probability of reaching $T$ from a given state $s$ within $n$ steps. This sequence then converges to an optimal value, yielding a reasonable approximation of the optimal value for large enough $n$.
 
 First, we perform precomputation of several sets of states, very similarly to precomputation of $S^{yes}$ and $S^{no}$ in Definition \ref{back:S_yes}, where the minimum or maximum reachability probabilities are either 0 or 1. The details of these constructions are omitted and described further in Section 4.1 of \cite{forejt_automated_2011}. More formally, these precomputed sets are defined as follows:
 
@@ -84,7 +84,7 @@ For convenience, we also introduce alternative notation for describing the proba
 \begin{definition}
 \label{cs1:alt_trans_fn}
 
-For an MDP $\mathcal{M}$, where $s$ and $s'$ are states in $mathcal{M}$, $a$ is an action, and $Steps$ is the transition probability function, denote $\delta (s, a)(s')$ as the probability of transitioning from $s$ to $s'$ under action $a$.
+For an MDP $\mathcal{M}$, where $s$ and $s'$ are states in $\mathcal{M}$, $a$ is an action, and $Steps$ is the transition probability function, denote $\delta (s, a)(s')$ as the probability of transitioning from $s$ to $s'$ under action $a$.
 \end{definition}
 
 We are now ready to define value iteration for calculating the minimum reachability probability for a set of target states $T$, via defining each element in the sequence $(x^n_s)_{n \in \mathbb{N}}$.
@@ -99,19 +99,37 @@ x^n_s = \begin{cases}
         1 & s \in S^{yes}_{min} \\
         0 & s \in S^{no}_{min} \\
         0 & s \notin (S^{yes}_{min} \cup S^{no}_{min}) \; \text{and} \; n=0 \\
-        min_{a \in Act} \sum_{s' \in S}\delta(s,a)(s') \cdot x^{n-1}_{s'} & \text{otherwise} \\
+        min_{A \in Act} \left( \sum_{s' \in S}\delta(s,A)(s') \cdot x^{n-1}_{s'} \right) & \text{otherwise} \\
     \end{cases}
 \end{equation*}
 
 This sequence may be modified to calculate the maximum reachability property via replacing "min" with "max".
 \end{definition}
 
-Using this method,
+Using this method, optimal values can be obtained using an iterative process, and in particular the number of iterations required for a reasonable level of convergence can be determined during the algorithm's execution, such as terminating when the difference between two consecutive terms in the sequence is less than some pre-defined $\epsilon$.
+
+We now have a method of approximating $\mathbf{P}^{s}_{min =?} [\mathbf{F} \; a]$ and $\mathbf{P}^{s}_{max =?} [\mathbf{F} \; a]$, which we can then modify to produce not just the optimal values themselves, but a method for producing these optimal values.
 
 \subsection{Adversary generation}
 \label{cs1:adversary_gen}
 
-When generating adversaries for optimal values of a particular property, we utilise slightly different methods for computing maximum and minimum values. In both cases, since we consider memoryless adversaries, we can generate adversaries by mapping each state to a particular action.
+In definition \ref{cs1:value_iteration}, the inductive step is relatively simple: to find the maximum or minimum obtainable probability of reaching a state where $a$ holds within $n$ steps, we consider each possible action, consider each state it can transition to, then consider the probability of reaching a state where $a$ holds from each of these states, and finally choose the action where this value is minimised or maximised.
+
+Hence, to compute the optimal adversary itself, we simply need to select the \emph{action} leading to the optimal value, rather than considering the value itself. Since our adversaries are memoryless, and hence defined as a mapping from states to actions, corresponding closely with value iteration. An example of this derivation is given below for calculating a minimum strategy - the maximum strategy case is very similar.
+
+\begin{definition}
+\label{cs1:min_adv_generation}
+
+Denote $Act(s)$ as the set of actions which are possible within a given state $s$. Then the strategy obtaining the minimum probability of reaching a state where some atomic proposition $a$ holds is given by
+
+\begin{equation*}
+    \sigma^{min}(s) = \text{arg min}_{A \in Act(s)} \left( \sum_{s' \in S} \delta(s, a)(s') \cdot \mathbf{P}^{s'}_{min =?} [\mathbf{F} \; a]\right)
+\end{equation*}
+
+\end{definition}
+
+Given a specific optimal adversary $\sigma$, computing the reachability probability of an MDP under the adversary is fairly simple, by considering the DTMC induced by $\sigma$ and using the techniques introduced in Section \ref{back:check-reach}. But the converse, that we have shown in this section, is potentially more surprising - given an optimal value for a reachability probability, an adversary can be constructed that obtains this optimal value, during the process of value iteration, with minimal additional computation. 
+
 
 \section{Analysis (3 pages)}
 

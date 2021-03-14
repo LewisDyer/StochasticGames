@@ -198,3 +198,4 @@ Date | Duration | Summary
 09/03/21 | 1.5 hours | Supervisor meeting + minutes. Reviewed feedback on remainder of background section, implemented revisions and sent to local files. Still need to add MDPs reference to Zotero.
 10/03/21 | 1.5 hours | Added probabilistic reachability in MDPs, defined value iteration - setting up preliminary information for adversary generation... Also added MDPs reference to Zotero
 11/03/21 | 1.5 hours | Added nondet strategy for choosing number of dice, refined some statistical model checking results. Sent over shell file with required models to run
+14/03/21 | 2.5 hours | Added section on adversary generation, will add work on reward-based adversary generation but probably keep it brief.
