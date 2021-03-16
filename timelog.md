@@ -205,4 +205,4 @@ Date | Duration | Summary
 Date | Duration | Summary
 ---- | -------- | -------
 15/03/21 | 1 hour | Uploaded most recent dissertation version on Overleaf, wrote up status report with a few questions.
-16/03/21 | 1 hour | Supervisor meeting + minutes.
+16/03/21 | 3.5 hour | Supervisor meeting + minutes. Made most revisions on Overleaf, still need to update citations.

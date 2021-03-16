@@ -16,7 +16,10 @@
 
 \newtheorem{definition}{Definition}[chapter]
 
-\newtheorem{example}[definition]{Example}
+\newtheorem{examp}[definition]{Example}
+
+\newenvironment{example}{\begin{examp}}{\hfill$\qed$\end{examp}}
+
 
 \newcommand{\gethin}[1]{\marginpar{\footnotesize \color{blue} {\bf G:} \textsf{#1}}}
 
