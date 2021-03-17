@@ -18,7 +18,6 @@
 	abstract = {Probabilistic model checking can overcome much of the complexity inherent in balancing games. Game balancing is the careful maintenance of relationships between the ways in which a game can be played, to ensure no single way is strictly better than all others and that players are offered a wide variety of ways to play successfully. We introduce a novel approach towards automating game balancing using probabilistic model checking called chained strategy generation (CSG). This involves generating chains of adversarial strategies which mimic the way players adapt their approach during repeated plays of a game. We use CSG to map out the evolving metagame. The trends identified can allow game developers to identify strategies which will be too strong and ways of playing the game which a player may want to use, but are never viable for successful competitive play. We introduce a case study, a game called RPGLite, and use CSG to compare five candidate configurations for the game. We show how to determine which configurations of RPGLite lead to a more fair and interesting experience for players. We also identify unexpected trends in how the strategies evolve. Our approach introduces a new technique for improving game development and player experience.},
 	author = {Kavanagh, W. and Miller, A. and Norman, G. and Andrei, Oana},
 	year = {2019},
-	booktitle={IEEE Transactions on Games},
 	file = {Full Text PDF:C\:\\Users\\Lewis\\Zotero\\storage\\VEBIMRZZ\\Kavanagh et al. - 2019 - Balancing Turn-Based Games with Chained Strategy G.pdf:application/pdf}
 }
 
@@ -105,4 +104,63 @@
 	year = {2011},
 	pages = {53--113},
 	file = {Full Text:C\:\\Users\\Lewis\\Zotero\\storage\\BMTURA8B\\Forejt et al. - 2011 - Automated verification techniques for probabilisti.pdf:application/pdf;Snapshot:C\:\\Users\\Lewis\\Zotero\\storage\\R987GJX8\\978-3-642-21455-4_3.html:text/html}
+}
+
+@article{kavanagh_gameplay_2020,
+	title = {Gameplay {Analysis} of {Multiplayer} {Games} with {Verified} {Action}-{Costs}},
+	journal = {The Computer Games Journal},
+	author = {Kavanagh, William and Miller, Alice},
+	year = {2020},
+	note = {Publisher: Springer},
+	pages = {1--22},
+	file = {Full Text:C\:\\Users\\Lewis\\Zotero\\storage\\76QPFVRT\\s40869-020-00121-5.html:text/html}
+}
+
+@misc{wikipedia_deutsch_2006,
+	title = {Deutsch:  {Shut} the {Box}},
+	copyright = {Public domain},
+	shorttitle = {Deutsch},
+	url = {https://commons.wikimedia.org/wiki/File:Shut_the_box.jpg},
+	urldate = {2021-03-16},
+	author = {Wikipedia, Roland Scheicher / Roland Scheicher at German},
+	month = jul,
+	year = {2006},
+	file = {Wikimedia Snapshot:C\:\\Users\\Lewis\\Zotero\\storage\\CK7PSLYL\\FileShut_the_box.html:text/html}
+}
+
+@incollection{chatterjee_value_2008,
+	address = {Berlin, Heidelberg},
+	series = {Lecture {Notes} in {Computer} {Science}},
+	title = {Value {Iteration}},
+	isbn = {978-3-540-69850-0},
+	url = {https://doi.org/10.1007/978-3-540-69850-0_7},
+	abstract = {We survey value iteration algorithms on graphs. Such algorithms can be used for determining the existence of certain paths (model checking), the existence of certain strategies (game solving), and the probabilities of certain events (performance analysis). We classify the algorithms according to the value domain (boolean, probabilistic, or quantitative); according to the graph structure (nondeterministic, probabilistic, or multi-player); according to the desired property of paths (Borel level 1, 2, or 3); and according to the alternation depth and convergence rate of fixpoint computations.},
+	language = {en},
+	urldate = {2021-03-16},
+	booktitle = {25 {Years} of {Model} {Checking}: {History}, {Achievements}, {Perspectives}},
+	publisher = {Springer},
+	author = {Chatterjee, Krishnendu and Henzinger, Thomas A.},
+	editor = {Grumberg, Orna and Veith, Helmut},
+	year = {2008},
+	doi = {10.1007/978-3-540-69850-0_7},
+	keywords = {Improvement Function, Linear Temporal Logic, Model Check, Reward Function, Stochastic Game},
+	pages = {107--138},
+	file = {Springer Full Text PDF:C\:\\Users\\Lewis\\Zotero\\storage\\AJE6ULG9\\Chatterjee and Henzinger - 2008 - Value Iteration.pdf:application/pdf}
+}
+
+@article{haddad_interval_2018,
+	title = {Interval {Iteration} {Algorithm} for {MDPs} and {IMDPs}},
+	volume = {735},
+	url = {https://hal.archives-ouvertes.fr/hal-01809094},
+	doi = {10.1016/j.tcs.2016.12.003},
+	abstract = {Markov Decision Processes (MDP) are a widely used model including both non-deterministic and probabilistic choices. Minimal and maximal probabilities to reach a target set of states, with respect to a policy resolving non-determinism, may be computed by several methods including value iteration. This algorithm, easy to implement and efficient in terms of space complexity, iteratively computes the probabilities of paths of increasing length. However, it raises three issues: (1) defining a stopping criterion ensuring a bound on the approximation, (2) analysing the rate of convergence, and (3) specifying an additional procedure to obtain the exact values once a sufficient number of iterations has been performed. The first two issues are still open and, for the third one, an upper bound on the number of iterations has been proposed. Based on a graph analysis and transformation of MDPs, we address these problems. First we introduce an interval iteration algorithm, for which the stopping criterion is straightforward. Then we exhibit its convergence rate. Finally we significantly improve the upper bound on the number of iterations required to get the exact values. We extend our approach to also deal with Interval Markov Decision Processes (IMDP) that can be seen as symbolic representations of MDPs.},
+	urldate = {2021-03-17},
+	journal = {Theoretical Computer Science},
+	author = {Haddad, Serge and Monmege, Benjamin},
+	month = jul,
+	year = {2018},
+	note = {Publisher: Elsevier},
+	keywords = {Markov decision processes, stochastic verification, value iteration},
+	pages = {111 -- 131},
+	file = {HAL PDF Full Text:C\:\\Users\\Lewis\\Zotero\\storage\\I62JAAWE\\Haddad and Monmege - 2018 - Interval Iteration Algorithm for MDPs and IMDPs.pdf:application/pdf}
 }
