@@ -206,4 +206,4 @@ Date | Duration | Summary
 ---- | -------- | -------
 15/03/21 | 1 hour | Uploaded most recent dissertation version on Overleaf, wrote up status report with a few questions.
 16/03/21 | 3.5 hour | Supervisor meeting + minutes. Made most revisions on Overleaf, still need to update citations.
-17/03/21 | 1.5 hours | Finished most tweaks on case study 1, added citations and example on weakness of max adversary generation.
+17/03/21 | 6 hours | Finished most tweaks on case study 1, added citations and example on weakness of max adversary generation. Starting reformatting graphs to pdfs, changed graph layout to fit better in dissertation. Added writeup on first results from Shut the Box, up to using strategy generation.
