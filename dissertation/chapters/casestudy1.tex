@@ -159,18 +159,66 @@ We may still use a similar idea as for minimum adversary generation, but in orde
 
 Given a specific optimal adversary $\sigma$, computing the reachability probability of an MDP under the adversary is fairly simple, by considering the DTMC induced by $\sigma$ and using the techniques introduced in Section \ref{back:check-reach}. But the converse, that we have shown in this section, is potentially more surprising - given an optimal value for a reachability probability, an adversary can be constructed that obtains this optimal value, during the process of value iteration, with minimal additional computation.
 
+As a final remark, adversary generation for reward-based properties is analogous to adversary generation for reachability properties, using almost identical applications of value iteration and precomputation. For this reason, precise details of constructing these adversaries are omitted.
 
-\section{Analysis (3 pages)}
 
-Collect some data, show the results.
+\section{Results and Analysis (3 pages)}
+\label{cs1:stb_results}
 
-\hrule
+In Section \ref{cs1:stb_description}, the high-board and low-board strategies were defined. Our main aim in this study is to analyse these strategies, compare them to the optimal and suboptimal strategies for Shut the Box across different variants, and evaluate the design of Shut the Box based on this information.
 
-\Blindtext
+\subsection{The one-dice variant}
+\label{cs1:stb_one_dice}
 
-\Blindtext
+Before we examine the standard variant of Shut the Box, we briefly consider the one dice variant with 12 boards, with uniform probability of rolling any number from 1 to 12 inclusive. The probability of obtaining each possible score under each strategy is given in Figure \ref{cs1:stb12_1d12_prob_score}. In particular, we note that the high-board strategy, which we expect to be effective, starts close to the minimum strategy for low scores, then approaches the maximum strategy for high scores. This indicates an important point about strategies - while the minimum and maximum strategies are represented by continuous lines, they do not represent the same strategy for each score. Rather, they each represent a strategy generated in order to minimise or maximise the probability of obtaining precisely that score. Hence, we would expect an ideal strategy for Shut the Box to have a low probability of obtaining a low score, and a high probability of obtaining a high score.
 
-\Blindtext
+However, this variant of the game has some flaws. In particular, the probability of achieving a very low score is somewhat high, even for very good strategies. Since each value on a die is equally likely, a succession of low values early on means a low score. In the extreme case, rolling 1 twice in a row means a guaranteed score of 1, regardless of strategy. While this specific example is rare, games should differentiate players based on their strategy, and players can feel frustrated if their strategy makes no difference to the result of the game.
+
+One possible method to alleviate this issue is to alter the probability distribution of a die roll, to reduce the probability of rolling extreme values. This can be simulated by rolling two dice with half as many faces, as a crude approximation of a normal distribution. This is the standard variant of Shut the Box, which is addressed in the next section.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{images/ShutTheBox/stb12_1d12_prob_score.pdf}
+    \caption{The probability of obtaining each score in Shut the Box, using one dice, under different strategies.}
+\label{cs1:stb12_1d12_prob_score}
+\end{figure}
+
+\subsection{The standard variant}
+\label{cs1:stb_standard}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{images/ShutTheBox/stb12_2d6_prob_score.pdf}
+    \caption{The probability of obtaining each score in Shut the Box under different strategies.}
+\label{cs1:stb12_2d6_prob_score}
+\end{figure}
+
+Figure \ref{cs1:stb12_2d6_prob_score} shows the probability of obtaining each possible score in the standard variant of Shut the Box. Immediately we note that the main flaw with the one-die variant of Shut the Box has been mostly resolved, and the probability of obtaining a very low score has been reduced, especially for good strategies. 
+
+In a more abstract sense, the difference between the minimum and maximum strategies represents the impact that strategy can have on the game. For instance, several peaks on strategies occur at triangular numbers, since these present opportunities for bad strategy to significantly impair future rolls. To take a basic example, when no boards are covered, rolling a 10 in the standard variant means that the high-board strategy will cover board 10, while the low-board strategy will cover boards 1, 2, 3 and 4. The former case still allows the game to continue regardless of the value of the next roll, whereas the low-board strategy means that any future rolls between 2 and 4 will always cause the game to end. Therefore, while players can be unlucky regardless of their strategy (for instance, rolling a 2 twice in a row will always lead to the game ending), sound strategy can leave more options open in later rounds.
+
+
+This initial analysis suggests that the high-board strategy is effective, and even close to optimal for obtaining high scores. We investigate this further in two main directions. We first consider the relative importance of high boards compared to low boards, then generate and compare the optimal strategy with the high board strategy to ascertain their differences.
+
+\subsection{Quantifying the value of high boards}
+
+Intuitively, we expect high boards to be more important than low boards, for several reasons. Firstly, they clearly contribute more to the final score of the game. But more importantly, due to their higher value, there are fewer possible die rolls which can cover high boards, which suggests that an opportunity to cover a high board should be prioritised over covering lower value boards. In essence, this is the key idea behind the high-board strategy. 
+
+To exemplify this, we consider each board in turn, assume that board is covered, and consider the probability of obtaining each score given this covering. The results of this are given in Figure \ref{cs1:stb12_2d6_cond_prob}. In particular, all boards have a positive correlation between the final score and the probability that board is covered, which is unsurprising given that larger scores naturally involve covering more boards but this correlation is far stronger for higher value boards, suggesting that covering high boards should be prioritised where possible.
+
+% I know this figure is very messy, need to refine this!
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{images/ShutTheBox/stb12_2d6_score_given_board_12.pdf}
+    \caption{The conditional probability of each score in Shut the Box given board $n$ is covered.}
+\label{cs1:stb12_2d6_cond_prob}
+\end{figure}
+
+This idea can also be considered from a more combinatorial point of view. Given a dice roll of value $n$, each possible covering is a partition of $n$ into distinct parts, also known as a \emph{strict partition} of $n$. For instance, there are 27 possible coverings which cover board 1, but only 2 coverings which cover board 11, further exemplifying that opportunities to cover high boards are rare. This difference is exacerbated when multiple dice are used, including in the standard variant, since especially high dice rolls are rarer to obtain, compared to using one dice with uniform probability of rolling each possible value.
+
+\subsection{Making comparisons using strategy generation}
+
+While the high-board strategy is quite similar to the 
 
 \section{Evaluation(2 pages)}
 
