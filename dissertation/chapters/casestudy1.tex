@@ -217,15 +217,12 @@ To exemplify this, we consider each board in turn, assume that board is covered,
 This idea can also be considered from a more combinatorial point of view. Given a dice roll of value $n$, each possible covering is a partition of $n$ into distinct parts, also known as a \emph{strict partition} of $n$. For instance, there are 27 possible coverings which cover board 1, but only 2 coverings which cover board 11, further exemplifying that opportunities to cover high boards are rare. This difference is exacerbated when multiple dice are used, including in the standard variant, since especially high dice rolls are rarer to obtain, compared to using one dice with uniform probability of rolling each possible value.
 
 \subsection{Making comparisons using strategy generation}
+\label{cs1:compare-strats}
 
-While the high-board strategy is quite similar to the 
+While the high-board strategy is quite similar to the optimal strategy
 
-\section{Evaluation(2 pages)}
+\section{Evaluating the design of Shut the Box}
 
-The key section - use the results from model checking to answer questions about the game (for instance, to examine the difficulty and/or complexity of a game).
+Overall, the above section indicates the main flaw with Shut the Box. When designing games, optimal strategies should be sufficiently complex so that human players cannot feasibly recreate this strategy. Optimal strategies may be seen as less enjoyable for players to play with, since decisions at various points throughout a game are effectively defined beforehand, rather than the player making decisions during the game.
 
-\hrule
-
-\Blindtext
-
-\Blindtext
+While the optimal strategy for Shut the Box is somewhat complex, Section \ref{cs1:compare-strats} shows that a very simple strategy is very close to optimal. This shows that Shut the Box is flawed, because the additional complexity involved in learning a more optimal strategy does not lead to a significant improvement in the overall outcome of the game.
