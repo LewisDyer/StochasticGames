@@ -1,10 +1,8 @@
-
 // Modelling Shut the Box with 12 boards and 2d6
 // Automatically generated
 
 // turn-based stochastic game
 csg
-
 
 player p1
 	player1,
@@ -23,7 +21,6 @@ player p1
 endplayer
 
 formula game_over = (state=3);
-
 formula score = b1*1 + b2*2 + b3*3 + b4*4 + b5*5 + b6*6 + b7*7 + b8*8 + b9*9 + b10*10 + b11*11 + b12*12;
 
 module player1
@@ -34,12 +31,10 @@ module player1
     // 2: no more valid choices to cover, halt
     state: [0..2] init 0;
     // current value on die (with initial 0 state)
-
     die: [0..6] init 0;
 
     // boards (0 if uncovered, 1 if covered)
     // note that we use ints instead of bools to make it easier to count the payoffs later
-
 
     [die_toss] state=0 -> 1/36:(die'=2) & (state'=1)
     					+ 2/36:(die'=3) & (state'=1)
@@ -52,7 +47,6 @@ module player1
     					+ 3/36:(die'=10) & (state'=1)
     					+ 2/36:(die'=11) & (state'=1)
     					+ 1/36:(die'=12) & (state'=1);
-
 
     [cover_2] state=1 & die=2 & (b2=0) -> (state'=0);
     [ncover] state=1 & die=2 &  !((b2=0)) -> (state'=2);
@@ -149,7 +143,6 @@ module player1
     [halts] state=3 -> true;
 
 endmodule
-
 
 module board1
 

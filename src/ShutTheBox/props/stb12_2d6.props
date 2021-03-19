@@ -26,7 +26,6 @@ const int k;
 // max rolls
 <<p1>>R{"no_rolls"}min=? [ F game_over ]
 
-
 // Probability of 1 being covered given the score is k
 <<p1>>Pmin=? [ F game_over&b1=1&score=k ]
 

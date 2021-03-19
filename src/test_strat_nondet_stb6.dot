@@ -1,0 +1,1992 @@
+digraph MDP {
+node [label="",shape="box"];
+0 [label="(0,0,0,0,0,0,0,0)"];
+0 -> n0_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n0_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n0_0 -> 224 [label="1/6"];
+n0_0 -> 1 [label="1/6"];
+n0_0 -> 273 [label="1/6"];
+n0_0 -> 275 [label="1/6"];
+n0_0 -> 269 [label="1/6"];
+n0_0 -> 271 [label="1/6"];
+1 [label="(1,1,0,0,0,0,0,0)"];
+1 -> n1_0 [label="0:1.0: [cover_1]--",arrowhead="none"];
+n1_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n1_0 -> 2 [label="1.0"];
+2 [label="(0,1,1,0,0,0,0,0)"];
+2 -> n2_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n2_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n2_0 -> 146 [label="1/6"];
+n2_0 -> 3 [label="1/6"];
+n2_0 -> 4 [label="1/6"];
+n2_0 -> 199 [label="1/6"];
+n2_0 -> 220 [label="1/6"];
+n2_0 -> 222 [label="1/6"];
+3 [label="(1,1,1,0,0,0,0,0)"];
+4 [label="(1,2,1,0,0,0,0,0)"];
+4 -> n4_0 [label="0:1.0: [cover_2]--",arrowhead="none"];
+n4_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n4_0 -> 5 [label="1.0"];
+5 [label="(0,2,1,1,0,0,0,0)"];
+5 -> n5_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n5_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n5_0 -> 82 [label="1/6"];
+n5_0 -> 116 [label="1/6"];
+n5_0 -> 6 [label="1/6"];
+n5_0 -> 7 [label="1/6"];
+n5_0 -> 135 [label="1/6"];
+n5_0 -> 8 [label="1/6"];
+6 [label="(1,1,1,1,0,0,0,0)"];
+7 [label="(1,2,1,1,0,0,0,0)"];
+8 [label="(1,3,1,1,0,0,0,0)"];
+8 -> n8_0 [label="0:1.0: [cover_3]--",arrowhead="none"];
+n8_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n8_0 -> 9 [label="1.0"];
+9 [label="(0,3,1,1,1,0,0,0)"];
+9 -> n9_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n9_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n9_0 -> 52 [label="1/6"];
+n9_0 -> 69 [label="1/6"];
+n9_0 -> 70 [label="1/6"];
+n9_0 -> 71 [label="1/6"];
+n9_0 -> 72 [label="1/6"];
+n9_0 -> 10 [label="1/6"];
+10 [label="(1,5,1,1,1,0,0,0)"];
+10 -> n10_0 [label="0:1.0: [cover_5]--",arrowhead="none"];
+n10_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n10_0 -> 11 [label="1.0"];
+11 [label="(0,5,1,1,1,0,1,0)"];
+11 -> n11_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n11_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n11_0 -> 50 [label="1/6"];
+n11_0 -> 51 [label="1/6"];
+n11_0 -> 40 [label="1/6"];
+n11_0 -> 41 [label="1/6"];
+n11_0 -> 12 [label="1/6"];
+n11_0 -> 13 [label="1/6"];
+12 [label="(1,3,1,1,1,0,1,0)"];
+13 [label="(1,4,1,1,1,0,1,0)"];
+13 -> n13_0 [label="0:1.0: [cover_4]--",arrowhead="none"];
+n13_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n13_0 -> 14 [label="1.0"];
+14 [label="(0,4,1,1,1,1,1,0)"];
+14 -> n14_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n14_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n14_0 -> 16 [label="1/6"];
+n14_0 -> 36 [label="1/6"];
+n14_0 -> 37 [label="1/6"];
+n14_0 -> 38 [label="1/6"];
+n14_0 -> 39 [label="1/6"];
+n14_0 -> 15 [label="1/6"];
+15 [label="(1,5,1,1,1,1,1,0)"];
+16 [label="(1,6,1,1,1,1,1,0)"];
+16 -> n16_0 [label="0:1.0: [cover_6]--",arrowhead="none"];
+n16_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n16_0 -> 17 [label="1.0"];
+17 [label="(0,6,1,1,1,1,1,1)"];
+17 -> n17_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n17_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n17_0 -> 33 [label="1/6"];
+n17_0 -> 18 [label="1/6"];
+n17_0 -> 21 [label="1/6"];
+n17_0 -> 24 [label="1/6"];
+n17_0 -> 27 [label="1/6"];
+n17_0 -> 30 [label="1/6"];
+18 [label="(1,1,1,1,1,1,1,1)"];
+18 -> n18_0 [label="0:1.0: [ncover]--",arrowhead="none"];
+n18_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n18_0 -> 19 [label="1.0"];
+19 [label="(2,1,1,1,1,1,1,1)"];
+19 -> n19_0 [label="0:1.0: [count]--",arrowhead="none"];
+n19_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n19_0 -> 20 [label="1.0"];
+20 [label="(3,1,1,1,1,1,1,1)"];
+20 -> n20_0 [label="0:Sat",arrowhead="none"];
+n20_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n20_0 -> 20 [label="1.0"];
+21 [label="(1,2,1,1,1,1,1,1)"];
+21 -> n21_0 [label="0:1.0: [ncover]--",arrowhead="none"];
+n21_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n21_0 -> 22 [label="1.0"];
+22 [label="(2,2,1,1,1,1,1,1)"];
+22 -> n22_0 [label="0:1.0: [count]--",arrowhead="none"];
+n22_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n22_0 -> 23 [label="1.0"];
+23 [label="(3,2,1,1,1,1,1,1)"];
+23 -> n23_0 [label="0:Sat",arrowhead="none"];
+n23_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n23_0 -> 23 [label="1.0"];
+24 [label="(1,3,1,1,1,1,1,1)"];
+24 -> n24_0 [label="0:1.0: [ncover]--",arrowhead="none"];
+n24_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n24_0 -> 25 [label="1.0"];
+25 [label="(2,3,1,1,1,1,1,1)"];
+25 -> n25_0 [label="0:1.0: [count]--",arrowhead="none"];
+n25_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n25_0 -> 26 [label="1.0"];
+26 [label="(3,3,1,1,1,1,1,1)"];
+26 -> n26_0 [label="0:Sat",arrowhead="none"];
+n26_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n26_0 -> 26 [label="1.0"];
+27 [label="(1,4,1,1,1,1,1,1)"];
+27 -> n27_0 [label="0:1.0: [ncover]--",arrowhead="none"];
+n27_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n27_0 -> 28 [label="1.0"];
+28 [label="(2,4,1,1,1,1,1,1)"];
+28 -> n28_0 [label="0:1.0: [count]--",arrowhead="none"];
+n28_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n28_0 -> 29 [label="1.0"];
+29 [label="(3,4,1,1,1,1,1,1)"];
+29 -> n29_0 [label="0:Sat",arrowhead="none"];
+n29_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n29_0 -> 29 [label="1.0"];
+30 [label="(1,5,1,1,1,1,1,1)"];
+30 -> n30_0 [label="0:1.0: [ncover]--",arrowhead="none"];
+n30_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n30_0 -> 31 [label="1.0"];
+31 [label="(2,5,1,1,1,1,1,1)"];
+31 -> n31_0 [label="0:1.0: [count]--",arrowhead="none"];
+n31_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n31_0 -> 32 [label="1.0"];
+32 [label="(3,5,1,1,1,1,1,1)"];
+32 -> n32_0 [label="0:Sat",arrowhead="none"];
+n32_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n32_0 -> 32 [label="1.0"];
+33 [label="(1,6,1,1,1,1,1,1)"];
+33 -> n33_0 [label="0:1.0: [ncover]--",arrowhead="none"];
+n33_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n33_0 -> 34 [label="1.0"];
+34 [label="(2,6,1,1,1,1,1,1)"];
+34 -> n34_0 [label="0:1.0: [count]--",arrowhead="none"];
+n34_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n34_0 -> 35 [label="1.0"];
+35 [label="(3,6,1,1,1,1,1,1)"];
+35 -> n35_0 [label="0:Sat",arrowhead="none"];
+n35_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n35_0 -> 35 [label="1.0"];
+36 [label="(1,1,1,1,1,1,1,0)"];
+37 [label="(1,2,1,1,1,1,1,0)"];
+38 [label="(1,3,1,1,1,1,1,0)"];
+39 [label="(1,4,1,1,1,1,1,0)"];
+40 [label="(1,5,1,1,1,0,1,0)"];
+41 [label="(1,6,1,1,1,0,1,0)"];
+41 -> n41_0 [label="0:1.0: [cover_6]--",arrowhead="none"];
+n41_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n41_0 -> 42 [label="1.0"];
+42 [label="(0,6,1,1,1,0,1,1)"];
+42 -> n42_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n42_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n42_0 -> 48 [label="1/6"];
+n42_0 -> 49 [label="1/6"];
+n42_0 -> 43 [label="1/6"];
+n42_0 -> 44 [label="1/6"];
+n42_0 -> 45 [label="1/6"];
+n42_0 -> 46 [label="1/6"];
+43 [label="(1,1,1,1,1,0,1,1)"];
+44 [label="(1,2,1,1,1,0,1,1)"];
+45 [label="(1,3,1,1,1,0,1,1)"];
+46 [label="(1,4,1,1,1,0,1,1)"];
+46 -> n46_0 [label="0:1.0: [cover_4]--",arrowhead="none"];
+n46_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n46_0 -> 47 [label="1.0"];
+47 [label="(0,4,1,1,1,1,1,1)"];
+47 -> n47_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n47_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n47_0 -> 33 [label="1/6"];
+n47_0 -> 18 [label="1/6"];
+n47_0 -> 21 [label="1/6"];
+n47_0 -> 24 [label="1/6"];
+n47_0 -> 27 [label="1/6"];
+n47_0 -> 30 [label="1/6"];
+48 [label="(1,5,1,1,1,0,1,1)"];
+49 [label="(1,6,1,1,1,0,1,1)"];
+50 [label="(1,1,1,1,1,0,1,0)"];
+51 [label="(1,2,1,1,1,0,1,0)"];
+52 [label="(1,6,1,1,1,0,0,0)"];
+52 -> n52_0 [label="0:1.0: [cover_6]--",arrowhead="none"];
+n52_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n52_0 -> 53 [label="1.0"];
+53 [label="(0,6,1,1,1,0,0,1)"];
+53 -> n53_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n53_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n53_0 -> 66 [label="1/6"];
+n53_0 -> 68 [label="1/6"];
+n53_0 -> 54 [label="1/6"];
+n53_0 -> 55 [label="1/6"];
+n53_0 -> 56 [label="1/6"];
+n53_0 -> 57 [label="1/6"];
+54 [label="(1,1,1,1,1,0,0,1)"];
+55 [label="(1,2,1,1,1,0,0,1)"];
+56 [label="(1,3,1,1,1,0,0,1)"];
+57 [label="(1,4,1,1,1,0,0,1)"];
+57 -> n57_0 [label="0:1.0: [cover_4]--",arrowhead="none"];
+n57_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n57_0 -> 58 [label="1.0"];
+58 [label="(0,4,1,1,1,1,0,1)"];
+58 -> n58_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n58_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n58_0 -> 65 [label="1/6"];
+n58_0 -> 59 [label="1/6"];
+n58_0 -> 60 [label="1/6"];
+n58_0 -> 61 [label="1/6"];
+n58_0 -> 62 [label="1/6"];
+n58_0 -> 63 [label="1/6"];
+59 [label="(1,1,1,1,1,1,0,1)"];
+60 [label="(1,2,1,1,1,1,0,1)"];
+61 [label="(1,3,1,1,1,1,0,1)"];
+62 [label="(1,4,1,1,1,1,0,1)"];
+63 [label="(1,5,1,1,1,1,0,1)"];
+63 -> n63_0 [label="0:1.0: [cover_5]--",arrowhead="none"];
+n63_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n63_0 -> 64 [label="1.0"];
+64 [label="(0,5,1,1,1,1,1,1)"];
+64 -> n64_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n64_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n64_0 -> 33 [label="1/6"];
+n64_0 -> 18 [label="1/6"];
+n64_0 -> 21 [label="1/6"];
+n64_0 -> 24 [label="1/6"];
+n64_0 -> 27 [label="1/6"];
+n64_0 -> 30 [label="1/6"];
+65 [label="(1,6,1,1,1,1,0,1)"];
+66 [label="(1,5,1,1,1,0,0,1)"];
+66 -> n66_0 [label="0:1.0: [cover_5]--",arrowhead="none"];
+n66_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n66_0 -> 67 [label="1.0"];
+67 [label="(0,5,1,1,1,0,1,1)"];
+67 -> n67_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n67_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n67_0 -> 48 [label="1/6"];
+n67_0 -> 49 [label="1/6"];
+n67_0 -> 43 [label="1/6"];
+n67_0 -> 44 [label="1/6"];
+n67_0 -> 45 [label="1/6"];
+n67_0 -> 46 [label="1/6"];
+68 [label="(1,6,1,1,1,0,0,1)"];
+69 [label="(1,1,1,1,1,0,0,0)"];
+70 [label="(1,2,1,1,1,0,0,0)"];
+71 [label="(1,3,1,1,1,0,0,0)"];
+72 [label="(1,4,1,1,1,0,0,0)"];
+72 -> n72_0 [label="0:1.0: [cover_4]--",arrowhead="none"];
+n72_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n72_0 -> 73 [label="1.0"];
+73 [label="(0,4,1,1,1,1,0,0)"];
+73 -> n73_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n73_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n73_0 -> 80 [label="1/6"];
+n73_0 -> 81 [label="1/6"];
+n73_0 -> 74 [label="1/6"];
+n73_0 -> 75 [label="1/6"];
+n73_0 -> 76 [label="1/6"];
+n73_0 -> 78 [label="1/6"];
+74 [label="(1,3,1,1,1,1,0,0)"];
+75 [label="(1,4,1,1,1,1,0,0)"];
+76 [label="(1,5,1,1,1,1,0,0)"];
+76 -> n76_0 [label="0:1.0: [cover_5]--",arrowhead="none"];
+n76_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n76_0 -> 77 [label="1.0"];
+77 [label="(0,5,1,1,1,1,1,0)"];
+77 -> n77_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n77_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n77_0 -> 16 [label="1/6"];
+n77_0 -> 36 [label="1/6"];
+n77_0 -> 37 [label="1/6"];
+n77_0 -> 38 [label="1/6"];
+n77_0 -> 39 [label="1/6"];
+n77_0 -> 15 [label="1/6"];
+78 [label="(1,6,1,1,1,1,0,0)"];
+78 -> n78_0 [label="0:1.0: [cover_6]--",arrowhead="none"];
+n78_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n78_0 -> 79 [label="1.0"];
+79 [label="(0,6,1,1,1,1,0,1)"];
+79 -> n79_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n79_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n79_0 -> 65 [label="1/6"];
+n79_0 -> 59 [label="1/6"];
+n79_0 -> 60 [label="1/6"];
+n79_0 -> 61 [label="1/6"];
+n79_0 -> 62 [label="1/6"];
+n79_0 -> 63 [label="1/6"];
+80 [label="(1,1,1,1,1,1,0,0)"];
+81 [label="(1,2,1,1,1,1,0,0)"];
+82 [label="(1,4,1,1,0,0,0,0)"];
+82 -> n82_0 [label="0:1.0: [cover_4]--",arrowhead="none"];
+n82_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n82_0 -> 83 [label="1.0"];
+83 [label="(0,4,1,1,0,1,0,0)"];
+83 -> n83_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n83_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n83_0 -> 84 [label="1/6"];
+n83_0 -> 85 [label="1/6"];
+n83_0 -> 86 [label="1/6"];
+n83_0 -> 88 [label="1/6"];
+n83_0 -> 89 [label="1/6"];
+n83_0 -> 106 [label="1/6"];
+84 [label="(1,1,1,1,0,1,0,0)"];
+85 [label="(1,2,1,1,0,1,0,0)"];
+86 [label="(1,3,1,1,0,1,0,0)"];
+86 -> n86_0 [label="0:1.0: [cover_3]--",arrowhead="none"];
+n86_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n86_0 -> 87 [label="1.0"];
+87 [label="(0,3,1,1,1,1,0,0)"];
+87 -> n87_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n87_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n87_0 -> 80 [label="1/6"];
+n87_0 -> 81 [label="1/6"];
+n87_0 -> 74 [label="1/6"];
+n87_0 -> 75 [label="1/6"];
+n87_0 -> 76 [label="1/6"];
+n87_0 -> 78 [label="1/6"];
+88 [label="(1,4,1,1,0,1,0,0)"];
+89 [label="(1,5,1,1,0,1,0,0)"];
+89 -> n89_0 [label="0:1.0: [cover_5]--",arrowhead="none"];
+n89_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n89_0 -> 90 [label="1.0"];
+90 [label="(0,5,1,1,0,1,1,0)"];
+90 -> n90_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n90_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n90_0 -> 96 [label="1/6"];
+n90_0 -> 97 [label="1/6"];
+n90_0 -> 91 [label="1/6"];
+n90_0 -> 92 [label="1/6"];
+n90_0 -> 93 [label="1/6"];
+n90_0 -> 95 [label="1/6"];
+91 [label="(1,1,1,1,0,1,1,0)"];
+92 [label="(1,2,1,1,0,1,1,0)"];
+93 [label="(1,3,1,1,0,1,1,0)"];
+93 -> n93_0 [label="0:1.0: [cover_3]--",arrowhead="none"];
+n93_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n93_0 -> 94 [label="1.0"];
+94 [label="(0,3,1,1,1,1,1,0)"];
+94 -> n94_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n94_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n94_0 -> 16 [label="1/6"];
+n94_0 -> 36 [label="1/6"];
+n94_0 -> 37 [label="1/6"];
+n94_0 -> 38 [label="1/6"];
+n94_0 -> 39 [label="1/6"];
+n94_0 -> 15 [label="1/6"];
+95 [label="(1,4,1,1,0,1,1,0)"];
+96 [label="(1,5,1,1,0,1,1,0)"];
+97 [label="(1,6,1,1,0,1,1,0)"];
+97 -> n97_0 [label="0:1.0: [cover_6]--",arrowhead="none"];
+n97_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n97_0 -> 98 [label="1.0"];
+98 [label="(0,6,1,1,0,1,1,1)"];
+98 -> n98_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n98_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n98_0 -> 99 [label="1/6"];
+n98_0 -> 100 [label="1/6"];
+n98_0 -> 101 [label="1/6"];
+n98_0 -> 103 [label="1/6"];
+n98_0 -> 104 [label="1/6"];
+n98_0 -> 105 [label="1/6"];
+99 [label="(1,1,1,1,0,1,1,1)"];
+100 [label="(1,2,1,1,0,1,1,1)"];
+101 [label="(1,3,1,1,0,1,1,1)"];
+101 -> n101_0 [label="0:1.0: [cover_3]--",arrowhead="none"];
+n101_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n101_0 -> 102 [label="1.0"];
+102 [label="(0,3,1,1,1,1,1,1)"];
+102 -> n102_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n102_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n102_0 -> 33 [label="1/6"];
+n102_0 -> 18 [label="1/6"];
+n102_0 -> 21 [label="1/6"];
+n102_0 -> 24 [label="1/6"];
+n102_0 -> 27 [label="1/6"];
+n102_0 -> 30 [label="1/6"];
+103 [label="(1,4,1,1,0,1,1,1)"];
+104 [label="(1,5,1,1,0,1,1,1)"];
+105 [label="(1,6,1,1,0,1,1,1)"];
+106 [label="(1,6,1,1,0,1,0,0)"];
+106 -> n106_0 [label="0:1.0: [cover_6]--",arrowhead="none"];
+n106_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n106_0 -> 107 [label="1.0"];
+107 [label="(0,6,1,1,0,1,0,1)"];
+107 -> n107_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n107_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n107_0 -> 113 [label="1/6"];
+n107_0 -> 114 [label="1/6"];
+n107_0 -> 108 [label="1/6"];
+n107_0 -> 109 [label="1/6"];
+n107_0 -> 110 [label="1/6"];
+n107_0 -> 111 [label="1/6"];
+108 [label="(1,6,1,1,0,1,0,1)"];
+109 [label="(1,1,1,1,0,1,0,1)"];
+110 [label="(1,2,1,1,0,1,0,1)"];
+111 [label="(1,3,1,1,0,1,0,1)"];
+111 -> n111_0 [label="0:1.0: [cover_3]--",arrowhead="none"];
+n111_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n111_0 -> 112 [label="1.0"];
+112 [label="(0,3,1,1,1,1,0,1)"];
+112 -> n112_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n112_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n112_0 -> 65 [label="1/6"];
+n112_0 -> 59 [label="1/6"];
+n112_0 -> 60 [label="1/6"];
+n112_0 -> 61 [label="1/6"];
+n112_0 -> 62 [label="1/6"];
+n112_0 -> 63 [label="1/6"];
+113 [label="(1,4,1,1,0,1,0,1)"];
+114 [label="(1,5,1,1,0,1,0,1)"];
+114 -> n114_0 [label="0:1.0: [cover_5]--",arrowhead="none"];
+n114_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n114_0 -> 115 [label="1.0"];
+115 [label="(0,5,1,1,0,1,1,1)"];
+115 -> n115_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n115_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n115_0 -> 99 [label="1/6"];
+n115_0 -> 100 [label="1/6"];
+n115_0 -> 101 [label="1/6"];
+n115_0 -> 103 [label="1/6"];
+n115_0 -> 104 [label="1/6"];
+n115_0 -> 105 [label="1/6"];
+116 [label="(1,5,1,1,0,0,0,0)"];
+116 -> n116_0 [label="0:1.0: [cover_5]--",arrowhead="none"];
+n116_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n116_0 -> 117 [label="1.0"];
+117 [label="(0,5,1,1,0,0,1,0)"];
+117 -> n117_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n117_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n117_0 -> 118 [label="1/6"];
+n117_0 -> 119 [label="1/6"];
+n117_0 -> 120 [label="1/6"];
+n117_0 -> 122 [label="1/6"];
+n117_0 -> 124 [label="1/6"];
+n117_0 -> 125 [label="1/6"];
+118 [label="(1,1,1,1,0,0,1,0)"];
+119 [label="(1,2,1,1,0,0,1,0)"];
+120 [label="(1,3,1,1,0,0,1,0)"];
+120 -> n120_0 [label="0:1.0: [cover_3]--",arrowhead="none"];
+n120_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n120_0 -> 121 [label="1.0"];
+121 [label="(0,3,1,1,1,0,1,0)"];
+121 -> n121_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n121_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n121_0 -> 50 [label="1/6"];
+n121_0 -> 51 [label="1/6"];
+n121_0 -> 40 [label="1/6"];
+n121_0 -> 41 [label="1/6"];
+n121_0 -> 12 [label="1/6"];
+n121_0 -> 13 [label="1/6"];
+122 [label="(1,4,1,1,0,0,1,0)"];
+122 -> n122_0 [label="0:1.0: [cover_4]--",arrowhead="none"];
+n122_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n122_0 -> 123 [label="1.0"];
+123 [label="(0,4,1,1,0,1,1,0)"];
+123 -> n123_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n123_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n123_0 -> 96 [label="1/6"];
+n123_0 -> 97 [label="1/6"];
+n123_0 -> 91 [label="1/6"];
+n123_0 -> 92 [label="1/6"];
+n123_0 -> 93 [label="1/6"];
+n123_0 -> 95 [label="1/6"];
+124 [label="(1,5,1,1,0,0,1,0)"];
+125 [label="(1,6,1,1,0,0,1,0)"];
+125 -> n125_0 [label="0:1.0: [cover_6]--",arrowhead="none"];
+n125_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n125_0 -> 126 [label="1.0"];
+126 [label="(0,6,1,1,0,0,1,1)"];
+126 -> n126_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n126_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n126_0 -> 128 [label="1/6"];
+n126_0 -> 129 [label="1/6"];
+n126_0 -> 130 [label="1/6"];
+n126_0 -> 131 [label="1/6"];
+n126_0 -> 133 [label="1/6"];
+n126_0 -> 127 [label="1/6"];
+127 [label="(1,5,1,1,0,0,1,1)"];
+128 [label="(1,6,1,1,0,0,1,1)"];
+129 [label="(1,1,1,1,0,0,1,1)"];
+130 [label="(1,2,1,1,0,0,1,1)"];
+131 [label="(1,3,1,1,0,0,1,1)"];
+131 -> n131_0 [label="0:1.0: [cover_3]--",arrowhead="none"];
+n131_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n131_0 -> 132 [label="1.0"];
+132 [label="(0,3,1,1,1,0,1,1)"];
+132 -> n132_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n132_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n132_0 -> 48 [label="1/6"];
+n132_0 -> 49 [label="1/6"];
+n132_0 -> 43 [label="1/6"];
+n132_0 -> 44 [label="1/6"];
+n132_0 -> 45 [label="1/6"];
+n132_0 -> 46 [label="1/6"];
+133 [label="(1,4,1,1,0,0,1,1)"];
+133 -> n133_0 [label="0:1.0: [cover_4]--",arrowhead="none"];
+n133_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n133_0 -> 134 [label="1.0"];
+134 [label="(0,4,1,1,0,1,1,1)"];
+134 -> n134_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n134_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n134_0 -> 99 [label="1/6"];
+n134_0 -> 100 [label="1/6"];
+n134_0 -> 101 [label="1/6"];
+n134_0 -> 103 [label="1/6"];
+n134_0 -> 104 [label="1/6"];
+n134_0 -> 105 [label="1/6"];
+135 [label="(1,6,1,1,0,0,0,0)"];
+135 -> n135_0 [label="0:1.0: [cover_6]--",arrowhead="none"];
+n135_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n135_0 -> 136 [label="1.0"];
+136 [label="(0,6,1,1,0,0,0,1)"];
+136 -> n136_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n136_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n136_0 -> 145 [label="1/6"];
+n136_0 -> 137 [label="1/6"];
+n136_0 -> 138 [label="1/6"];
+n136_0 -> 139 [label="1/6"];
+n136_0 -> 141 [label="1/6"];
+n136_0 -> 143 [label="1/6"];
+137 [label="(1,1,1,1,0,0,0,1)"];
+138 [label="(1,2,1,1,0,0,0,1)"];
+139 [label="(1,3,1,1,0,0,0,1)"];
+139 -> n139_0 [label="0:1.0: [cover_3]--",arrowhead="none"];
+n139_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n139_0 -> 140 [label="1.0"];
+140 [label="(0,3,1,1,1,0,0,1)"];
+140 -> n140_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n140_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n140_0 -> 66 [label="1/6"];
+n140_0 -> 68 [label="1/6"];
+n140_0 -> 54 [label="1/6"];
+n140_0 -> 55 [label="1/6"];
+n140_0 -> 56 [label="1/6"];
+n140_0 -> 57 [label="1/6"];
+141 [label="(1,4,1,1,0,0,0,1)"];
+141 -> n141_0 [label="0:1.0: [cover_4]--",arrowhead="none"];
+n141_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n141_0 -> 142 [label="1.0"];
+142 [label="(0,4,1,1,0,1,0,1)"];
+142 -> n142_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n142_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n142_0 -> 113 [label="1/6"];
+n142_0 -> 114 [label="1/6"];
+n142_0 -> 108 [label="1/6"];
+n142_0 -> 109 [label="1/6"];
+n142_0 -> 110 [label="1/6"];
+n142_0 -> 111 [label="1/6"];
+143 [label="(1,5,1,1,0,0,0,1)"];
+143 -> n143_0 [label="0:1.0: [cover_5]--",arrowhead="none"];
+n143_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n143_0 -> 144 [label="1.0"];
+144 [label="(0,5,1,1,0,0,1,1)"];
+144 -> n144_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n144_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n144_0 -> 128 [label="1/6"];
+n144_0 -> 129 [label="1/6"];
+n144_0 -> 130 [label="1/6"];
+n144_0 -> 131 [label="1/6"];
+n144_0 -> 133 [label="1/6"];
+n144_0 -> 127 [label="1/6"];
+145 [label="(1,6,1,1,0,0,0,1)"];
+146 [label="(1,3,1,0,0,0,0,0)"];
+146 -> n146_0 [label="0:1.0: [cover_3]--",arrowhead="none"];
+n146_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n146_0 -> 147 [label="1.0"];
+147 [label="(0,3,1,0,1,0,0,0)"];
+147 -> n147_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n147_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n147_0 -> 148 [label="1/6"];
+n147_0 -> 149 [label="1/6"];
+n147_0 -> 197 [label="1/6"];
+n147_0 -> 151 [label="1/6"];
+n147_0 -> 152 [label="1/6"];
+n147_0 -> 186 [label="1/6"];
+148 [label="(1,1,1,0,1,0,0,0)"];
+149 [label="(1,2,1,0,1,0,0,0)"];
+149 -> n149_0 [label="0:1.0: [cover_2]--",arrowhead="none"];
+n149_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n149_0 -> 150 [label="1.0"];
+150 [label="(0,2,1,1,1,0,0,0)"];
+150 -> n150_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n150_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n150_0 -> 52 [label="1/6"];
+n150_0 -> 69 [label="1/6"];
+n150_0 -> 70 [label="1/6"];
+n150_0 -> 71 [label="1/6"];
+n150_0 -> 72 [label="1/6"];
+n150_0 -> 10 [label="1/6"];
+151 [label="(1,3,1,0,1,0,0,0)"];
+152 [label="(1,4,1,0,1,0,0,0)"];
+152 -> n152_0 [label="0:1.0: [cover_4]--",arrowhead="none"];
+n152_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n152_0 -> 153 [label="1.0"];
+153 [label="(0,4,1,0,1,1,0,0)"];
+153 -> n153_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n153_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n153_0 -> 181 [label="1/6"];
+n153_0 -> 182 [label="1/6"];
+n153_0 -> 184 [label="1/6"];
+n153_0 -> 185 [label="1/6"];
+n153_0 -> 154 [label="1/6"];
+n153_0 -> 171 [label="1/6"];
+154 [label="(1,5,1,0,1,1,0,0)"];
+154 -> n154_0 [label="0:1.0: [cover_5]--",arrowhead="none"];
+n154_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n154_0 -> 155 [label="1.0"];
+155 [label="(0,5,1,0,1,1,1,0)"];
+155 -> n155_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n155_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n155_0 -> 160 [label="1/6"];
+n155_0 -> 161 [label="1/6"];
+n155_0 -> 162 [label="1/6"];
+n155_0 -> 156 [label="1/6"];
+n155_0 -> 157 [label="1/6"];
+n155_0 -> 159 [label="1/6"];
+156 [label="(1,1,1,0,1,1,1,0)"];
+157 [label="(1,2,1,0,1,1,1,0)"];
+157 -> n157_0 [label="0:1.0: [cover_2]--",arrowhead="none"];
+n157_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n157_0 -> 158 [label="1.0"];
+158 [label="(0,2,1,1,1,1,1,0)"];
+158 -> n158_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n158_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n158_0 -> 16 [label="1/6"];
+n158_0 -> 36 [label="1/6"];
+n158_0 -> 37 [label="1/6"];
+n158_0 -> 38 [label="1/6"];
+n158_0 -> 39 [label="1/6"];
+n158_0 -> 15 [label="1/6"];
+159 [label="(1,3,1,0,1,1,1,0)"];
+160 [label="(1,4,1,0,1,1,1,0)"];
+161 [label="(1,5,1,0,1,1,1,0)"];
+162 [label="(1,6,1,0,1,1,1,0)"];
+162 -> n162_0 [label="0:1.0: [cover_6]--",arrowhead="none"];
+n162_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n162_0 -> 163 [label="1.0"];
+163 [label="(0,6,1,0,1,1,1,1)"];
+163 -> n163_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n163_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n163_0 -> 164 [label="1/6"];
+n163_0 -> 165 [label="1/6"];
+n163_0 -> 167 [label="1/6"];
+n163_0 -> 168 [label="1/6"];
+n163_0 -> 169 [label="1/6"];
+n163_0 -> 170 [label="1/6"];
+164 [label="(1,1,1,0,1,1,1,1)"];
+165 [label="(1,2,1,0,1,1,1,1)"];
+165 -> n165_0 [label="0:1.0: [cover_2]--",arrowhead="none"];
+n165_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n165_0 -> 166 [label="1.0"];
+166 [label="(0,2,1,1,1,1,1,1)"];
+166 -> n166_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n166_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n166_0 -> 33 [label="1/6"];
+n166_0 -> 18 [label="1/6"];
+n166_0 -> 21 [label="1/6"];
+n166_0 -> 24 [label="1/6"];
+n166_0 -> 27 [label="1/6"];
+n166_0 -> 30 [label="1/6"];
+167 [label="(1,3,1,0,1,1,1,1)"];
+168 [label="(1,4,1,0,1,1,1,1)"];
+169 [label="(1,5,1,0,1,1,1,1)"];
+170 [label="(1,6,1,0,1,1,1,1)"];
+171 [label="(1,6,1,0,1,1,0,0)"];
+171 -> n171_0 [label="0:1.0: [cover_6]--",arrowhead="none"];
+n171_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n171_0 -> 172 [label="1.0"];
+172 [label="(0,6,1,0,1,1,0,1)"];
+172 -> n172_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n172_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n172_0 -> 176 [label="1/6"];
+n172_0 -> 177 [label="1/6"];
+n172_0 -> 178 [label="1/6"];
+n172_0 -> 180 [label="1/6"];
+n172_0 -> 173 [label="1/6"];
+n172_0 -> 174 [label="1/6"];
+173 [label="(1,1,1,0,1,1,0,1)"];
+174 [label="(1,2,1,0,1,1,0,1)"];
+174 -> n174_0 [label="0:1.0: [cover_2]--",arrowhead="none"];
+n174_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n174_0 -> 175 [label="1.0"];
+175 [label="(0,2,1,1,1,1,0,1)"];
+175 -> n175_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n175_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n175_0 -> 65 [label="1/6"];
+n175_0 -> 59 [label="1/6"];
+n175_0 -> 60 [label="1/6"];
+n175_0 -> 61 [label="1/6"];
+n175_0 -> 62 [label="1/6"];
+n175_0 -> 63 [label="1/6"];
+176 [label="(1,3,1,0,1,1,0,1)"];
+177 [label="(1,4,1,0,1,1,0,1)"];
+178 [label="(1,5,1,0,1,1,0,1)"];
+178 -> n178_0 [label="0:1.0: [cover_5]--",arrowhead="none"];
+n178_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n178_0 -> 179 [label="1.0"];
+179 [label="(0,5,1,0,1,1,1,1)"];
+179 -> n179_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n179_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n179_0 -> 164 [label="1/6"];
+n179_0 -> 165 [label="1/6"];
+n179_0 -> 167 [label="1/6"];
+n179_0 -> 168 [label="1/6"];
+n179_0 -> 169 [label="1/6"];
+n179_0 -> 170 [label="1/6"];
+180 [label="(1,6,1,0,1,1,0,1)"];
+181 [label="(1,1,1,0,1,1,0,0)"];
+182 [label="(1,2,1,0,1,1,0,0)"];
+182 -> n182_0 [label="0:1.0: [cover_2]--",arrowhead="none"];
+n182_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n182_0 -> 183 [label="1.0"];
+183 [label="(0,2,1,1,1,1,0,0)"];
+183 -> n183_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n183_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n183_0 -> 80 [label="1/6"];
+n183_0 -> 81 [label="1/6"];
+n183_0 -> 74 [label="1/6"];
+n183_0 -> 75 [label="1/6"];
+n183_0 -> 76 [label="1/6"];
+n183_0 -> 78 [label="1/6"];
+184 [label="(1,3,1,0,1,1,0,0)"];
+185 [label="(1,4,1,0,1,1,0,0)"];
+186 [label="(1,5,1,0,1,0,0,0)"];
+186 -> n186_0 [label="0:1.0: [cover_5]--",arrowhead="none"];
+n186_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n186_0 -> 187 [label="1.0"];
+187 [label="(0,5,1,0,1,0,1,0)"];
+187 -> n187_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n187_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n187_0 -> 192 [label="1/6"];
+n187_0 -> 194 [label="1/6"];
+n187_0 -> 195 [label="1/6"];
+n187_0 -> 188 [label="1/6"];
+n187_0 -> 189 [label="1/6"];
+n187_0 -> 191 [label="1/6"];
+188 [label="(1,1,1,0,1,0,1,0)"];
+189 [label="(1,2,1,0,1,0,1,0)"];
+189 -> n189_0 [label="0:1.0: [cover_2]--",arrowhead="none"];
+n189_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n189_0 -> 190 [label="1.0"];
+190 [label="(0,2,1,1,1,0,1,0)"];
+190 -> n190_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n190_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n190_0 -> 50 [label="1/6"];
+n190_0 -> 51 [label="1/6"];
+n190_0 -> 40 [label="1/6"];
+n190_0 -> 41 [label="1/6"];
+n190_0 -> 12 [label="1/6"];
+n190_0 -> 13 [label="1/6"];
+191 [label="(1,3,1,0,1,0,1,0)"];
+192 [label="(1,4,1,0,1,0,1,0)"];
+192 -> n192_0 [label="0:1.0: [cover_4]--",arrowhead="none"];
+n192_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n192_0 -> 193 [label="1.0"];
+193 [label="(0,4,1,0,1,1,1,0)"];
+193 -> n193_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n193_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n193_0 -> 160 [label="1/6"];
+n193_0 -> 161 [label="1/6"];
+n193_0 -> 162 [label="1/6"];
+n193_0 -> 156 [label="1/6"];
+n193_0 -> 157 [label="1/6"];
+n193_0 -> 159 [label="1/6"];
+194 [label="(1,5,1,0,1,0,1,0)"];
+195 [label="(1,6,1,0,1,0,1,0)"];
+195 -> n195_0 [label="0:1.0: [cover_4_2]--",arrowhead="none"];
+n195_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n195_0 -> 196 [label="1.0"];
+196 [label="(0,6,1,1,1,1,1,0)"];
+196 -> n196_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n196_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n196_0 -> 16 [label="1/6"];
+n196_0 -> 36 [label="1/6"];
+n196_0 -> 37 [label="1/6"];
+n196_0 -> 38 [label="1/6"];
+n196_0 -> 39 [label="1/6"];
+n196_0 -> 15 [label="1/6"];
+197 [label="(1,6,1,0,1,0,0,0)"];
+197 -> n197_0 [label="0:1.0: [cover_4_2]--",arrowhead="none"];
+n197_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n197_0 -> 198 [label="1.0"];
+198 [label="(0,6,1,1,1,1,0,0)"];
+198 -> n198_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n198_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n198_0 -> 80 [label="1/6"];
+n198_0 -> 81 [label="1/6"];
+n198_0 -> 74 [label="1/6"];
+n198_0 -> 75 [label="1/6"];
+n198_0 -> 76 [label="1/6"];
+n198_0 -> 78 [label="1/6"];
+199 [label="(1,4,1,0,0,0,0,0)"];
+199 -> n199_0 [label="0:1.0: [cover_4]--",arrowhead="none"];
+n199_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n199_0 -> 200 [label="1.0"];
+200 [label="(0,4,1,0,0,1,0,0)"];
+200 -> n200_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n200_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n200_0 -> 201 [label="1/6"];
+n200_0 -> 217 [label="1/6"];
+n200_0 -> 218 [label="1/6"];
+n200_0 -> 203 [label="1/6"];
+n200_0 -> 204 [label="1/6"];
+n200_0 -> 206 [label="1/6"];
+201 [label="(1,3,1,0,0,1,0,0)"];
+201 -> n201_0 [label="0:1.0: [cover_3]--",arrowhead="none"];
+n201_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n201_0 -> 202 [label="1.0"];
+202 [label="(0,3,1,0,1,1,0,0)"];
+202 -> n202_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n202_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n202_0 -> 181 [label="1/6"];
+n202_0 -> 182 [label="1/6"];
+n202_0 -> 184 [label="1/6"];
+n202_0 -> 185 [label="1/6"];
+n202_0 -> 154 [label="1/6"];
+n202_0 -> 171 [label="1/6"];
+203 [label="(1,4,1,0,0,1,0,0)"];
+204 [label="(1,5,1,0,0,1,0,0)"];
+204 -> n204_0 [label="0:1.0: [cover_3_2]--",arrowhead="none"];
+n204_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n204_0 -> 205 [label="1.0"];
+205 [label="(0,5,1,1,1,1,0,0)"];
+205 -> n205_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n205_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n205_0 -> 80 [label="1/6"];
+n205_0 -> 81 [label="1/6"];
+n205_0 -> 74 [label="1/6"];
+n205_0 -> 75 [label="1/6"];
+n205_0 -> 76 [label="1/6"];
+n205_0 -> 78 [label="1/6"];
+206 [label="(1,6,1,0,0,1,0,0)"];
+206 -> n206_0 [label="0:1.0: [cover_6]--",arrowhead="none"];
+n206_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n206_0 -> 207 [label="1.0"];
+207 [label="(0,6,1,0,0,1,0,1)"];
+207 -> n207_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n207_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n207_0 -> 208 [label="1/6"];
+n207_0 -> 209 [label="1/6"];
+n207_0 -> 211 [label="1/6"];
+n207_0 -> 213 [label="1/6"];
+n207_0 -> 214 [label="1/6"];
+n207_0 -> 216 [label="1/6"];
+208 [label="(1,1,1,0,0,1,0,1)"];
+209 [label="(1,2,1,0,0,1,0,1)"];
+209 -> n209_0 [label="0:1.0: [cover_2]--",arrowhead="none"];
+n209_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n209_0 -> 210 [label="1.0"];
+210 [label="(0,2,1,1,0,1,0,1)"];
+210 -> n210_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n210_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n210_0 -> 113 [label="1/6"];
+n210_0 -> 114 [label="1/6"];
+n210_0 -> 108 [label="1/6"];
+n210_0 -> 109 [label="1/6"];
+n210_0 -> 110 [label="1/6"];
+n210_0 -> 111 [label="1/6"];
+211 [label="(1,3,1,0,0,1,0,1)"];
+211 -> n211_0 [label="0:1.0: [cover_3]--",arrowhead="none"];
+n211_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n211_0 -> 212 [label="1.0"];
+212 [label="(0,3,1,0,1,1,0,1)"];
+212 -> n212_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n212_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n212_0 -> 176 [label="1/6"];
+n212_0 -> 177 [label="1/6"];
+n212_0 -> 178 [label="1/6"];
+n212_0 -> 180 [label="1/6"];
+n212_0 -> 173 [label="1/6"];
+n212_0 -> 174 [label="1/6"];
+213 [label="(1,4,1,0,0,1,0,1)"];
+214 [label="(1,5,1,0,0,1,0,1)"];
+214 -> n214_0 [label="0:1.0: [cover_3_2]--",arrowhead="none"];
+n214_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n214_0 -> 215 [label="1.0"];
+215 [label="(0,5,1,1,1,1,0,1)"];
+215 -> n215_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n215_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n215_0 -> 65 [label="1/6"];
+n215_0 -> 59 [label="1/6"];
+n215_0 -> 60 [label="1/6"];
+n215_0 -> 61 [label="1/6"];
+n215_0 -> 62 [label="1/6"];
+n215_0 -> 63 [label="1/6"];
+216 [label="(1,6,1,0,0,1,0,1)"];
+217 [label="(1,1,1,0,0,1,0,0)"];
+218 [label="(1,2,1,0,0,1,0,0)"];
+218 -> n218_0 [label="0:1.0: [cover_2]--",arrowhead="none"];
+n218_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n218_0 -> 219 [label="1.0"];
+219 [label="(0,2,1,1,0,1,0,0)"];
+219 -> n219_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n219_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n219_0 -> 84 [label="1/6"];
+n219_0 -> 85 [label="1/6"];
+n219_0 -> 86 [label="1/6"];
+n219_0 -> 88 [label="1/6"];
+n219_0 -> 89 [label="1/6"];
+n219_0 -> 106 [label="1/6"];
+220 [label="(1,5,1,0,0,0,0,0)"];
+220 -> n220_0 [label="0:1.0: [cover_3_2]--",arrowhead="none"];
+n220_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n220_0 -> 221 [label="1.0"];
+221 [label="(0,5,1,1,1,0,0,0)"];
+221 -> n221_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n221_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n221_0 -> 52 [label="1/6"];
+n221_0 -> 69 [label="1/6"];
+n221_0 -> 70 [label="1/6"];
+n221_0 -> 71 [label="1/6"];
+n221_0 -> 72 [label="1/6"];
+n221_0 -> 10 [label="1/6"];
+222 [label="(1,6,1,0,0,0,0,0)"];
+222 -> n222_0 [label="0:1.0: [cover_4_2]--",arrowhead="none"];
+n222_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n222_0 -> 223 [label="1.0"];
+223 [label="(0,6,1,1,0,1,0,0)"];
+223 -> n223_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n223_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n223_0 -> 84 [label="1/6"];
+n223_0 -> 85 [label="1/6"];
+n223_0 -> 86 [label="1/6"];
+n223_0 -> 88 [label="1/6"];
+n223_0 -> 89 [label="1/6"];
+n223_0 -> 106 [label="1/6"];
+224 [label="(1,2,0,0,0,0,0,0)"];
+224 -> n224_0 [label="0:1.0: [cover_2]--",arrowhead="none"];
+n224_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n224_0 -> 225 [label="1.0"];
+225 [label="(0,2,0,1,0,0,0,0)"];
+225 -> n225_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n225_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n225_0 -> 226 [label="1/6"];
+n225_0 -> 228 [label="1/6"];
+n225_0 -> 229 [label="1/6"];
+n225_0 -> 263 [label="1/6"];
+n225_0 -> 265 [label="1/6"];
+n225_0 -> 267 [label="1/6"];
+226 [label="(1,1,0,1,0,0,0,0)"];
+226 -> n226_0 [label="0:1.0: [cover_1]--",arrowhead="none"];
+n226_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n226_0 -> 227 [label="1.0"];
+227 [label="(0,1,1,1,0,0,0,0)"];
+227 -> n227_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n227_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n227_0 -> 82 [label="1/6"];
+n227_0 -> 116 [label="1/6"];
+n227_0 -> 6 [label="1/6"];
+n227_0 -> 7 [label="1/6"];
+n227_0 -> 135 [label="1/6"];
+n227_0 -> 8 [label="1/6"];
+228 [label="(1,2,0,1,0,0,0,0)"];
+229 [label="(1,3,0,1,0,0,0,0)"];
+229 -> n229_0 [label="0:1.0: [cover_3]--",arrowhead="none"];
+n229_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n229_0 -> 230 [label="1.0"];
+230 [label="(0,3,0,1,1,0,0,0)"];
+230 -> n230_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n230_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n230_0 -> 260 [label="1/6"];
+n230_0 -> 261 [label="1/6"];
+n230_0 -> 231 [label="1/6"];
+n230_0 -> 233 [label="1/6"];
+n230_0 -> 234 [label="1/6"];
+n230_0 -> 235 [label="1/6"];
+231 [label="(1,1,0,1,1,0,0,0)"];
+231 -> n231_0 [label="0:1.0: [cover_1]--",arrowhead="none"];
+n231_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n231_0 -> 232 [label="1.0"];
+232 [label="(0,1,1,1,1,0,0,0)"];
+232 -> n232_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n232_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n232_0 -> 52 [label="1/6"];
+n232_0 -> 69 [label="1/6"];
+n232_0 -> 70 [label="1/6"];
+n232_0 -> 71 [label="1/6"];
+n232_0 -> 72 [label="1/6"];
+n232_0 -> 10 [label="1/6"];
+233 [label="(1,2,0,1,1,0,0,0)"];
+234 [label="(1,3,0,1,1,0,0,0)"];
+235 [label="(1,4,0,1,1,0,0,0)"];
+235 -> n235_0 [label="0:1.0: [cover_4]--",arrowhead="none"];
+n235_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n235_0 -> 236 [label="1.0"];
+236 [label="(0,4,0,1,1,1,0,0)"];
+236 -> n236_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n236_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n236_0 -> 256 [label="1/6"];
+n236_0 -> 257 [label="1/6"];
+n236_0 -> 259 [label="1/6"];
+n236_0 -> 237 [label="1/6"];
+n236_0 -> 238 [label="1/6"];
+n236_0 -> 239 [label="1/6"];
+237 [label="(1,3,0,1,1,1,0,0)"];
+238 [label="(1,4,0,1,1,1,0,0)"];
+239 [label="(1,5,0,1,1,1,0,0)"];
+239 -> n239_0 [label="0:1.0: [cover_5]--",arrowhead="none"];
+n239_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n239_0 -> 240 [label="1.0"];
+240 [label="(0,5,0,1,1,1,1,0)"];
+240 -> n240_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n240_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n240_0 -> 241 [label="1/6"];
+n240_0 -> 242 [label="1/6"];
+n240_0 -> 243 [label="1/6"];
+n240_0 -> 244 [label="1/6"];
+n240_0 -> 253 [label="1/6"];
+n240_0 -> 255 [label="1/6"];
+241 [label="(1,3,0,1,1,1,1,0)"];
+242 [label="(1,4,0,1,1,1,1,0)"];
+243 [label="(1,5,0,1,1,1,1,0)"];
+244 [label="(1,6,0,1,1,1,1,0)"];
+244 -> n244_0 [label="0:1.0: [cover_6]--",arrowhead="none"];
+n244_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n244_0 -> 245 [label="1.0"];
+245 [label="(0,6,0,1,1,1,1,1)"];
+245 -> n245_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n245_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n245_0 -> 246 [label="1/6"];
+n245_0 -> 248 [label="1/6"];
+n245_0 -> 249 [label="1/6"];
+n245_0 -> 250 [label="1/6"];
+n245_0 -> 251 [label="1/6"];
+n245_0 -> 252 [label="1/6"];
+246 [label="(1,1,0,1,1,1,1,1)"];
+246 -> n246_0 [label="0:1.0: [cover_1]--",arrowhead="none"];
+n246_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n246_0 -> 247 [label="1.0"];
+247 [label="(0,1,1,1,1,1,1,1)"];
+247 -> n247_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n247_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n247_0 -> 33 [label="1/6"];
+n247_0 -> 18 [label="1/6"];
+n247_0 -> 21 [label="1/6"];
+n247_0 -> 24 [label="1/6"];
+n247_0 -> 27 [label="1/6"];
+n247_0 -> 30 [label="1/6"];
+248 [label="(1,2,0,1,1,1,1,1)"];
+249 [label="(1,3,0,1,1,1,1,1)"];
+250 [label="(1,4,0,1,1,1,1,1)"];
+251 [label="(1,5,0,1,1,1,1,1)"];
+252 [label="(1,6,0,1,1,1,1,1)"];
+253 [label="(1,1,0,1,1,1,1,0)"];
+253 -> n253_0 [label="0:1.0: [cover_1]--",arrowhead="none"];
+n253_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n253_0 -> 254 [label="1.0"];
+254 [label="(0,1,1,1,1,1,1,0)"];
+254 -> n254_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n254_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n254_0 -> 16 [label="1/6"];
+n254_0 -> 36 [label="1/6"];
+n254_0 -> 37 [label="1/6"];
+n254_0 -> 38 [label="1/6"];
+n254_0 -> 39 [label="1/6"];
+n254_0 -> 15 [label="1/6"];
+255 [label="(1,2,0,1,1,1,1,0)"];
+256 [label="(1,6,0,1,1,1,0,0)"];
+256 -> n256_0 [label="0:1.0: [cover_5_1]--",arrowhead="none"];
+n256_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n256_0 -> 196 [label="1.0"];
+257 [label="(1,1,0,1,1,1,0,0)"];
+257 -> n257_0 [label="0:1.0: [cover_1]--",arrowhead="none"];
+n257_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n257_0 -> 258 [label="1.0"];
+258 [label="(0,1,1,1,1,1,0,0)"];
+258 -> n258_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n258_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n258_0 -> 80 [label="1/6"];
+n258_0 -> 81 [label="1/6"];
+n258_0 -> 74 [label="1/6"];
+n258_0 -> 75 [label="1/6"];
+n258_0 -> 76 [label="1/6"];
+n258_0 -> 78 [label="1/6"];
+259 [label="(1,2,0,1,1,1,0,0)"];
+260 [label="(1,5,0,1,1,0,0,0)"];
+260 -> n260_0 [label="0:1.0: [cover_4_1]--",arrowhead="none"];
+n260_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n260_0 -> 205 [label="1.0"];
+261 [label="(1,6,0,1,1,0,0,0)"];
+261 -> n261_0 [label="0:1.0: [cover_5_1]--",arrowhead="none"];
+n261_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n261_0 -> 262 [label="1.0"];
+262 [label="(0,6,1,1,1,0,1,0)"];
+262 -> n262_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n262_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n262_0 -> 50 [label="1/6"];
+n262_0 -> 51 [label="1/6"];
+n262_0 -> 40 [label="1/6"];
+n262_0 -> 41 [label="1/6"];
+n262_0 -> 12 [label="1/6"];
+n262_0 -> 13 [label="1/6"];
+263 [label="(1,4,0,1,0,0,0,0)"];
+263 -> n263_0 [label="0:1.0: [cover_3_1]--",arrowhead="none"];
+n263_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n263_0 -> 264 [label="1.0"];
+264 [label="(0,4,1,1,1,0,0,0)"];
+264 -> n264_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n264_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n264_0 -> 52 [label="1/6"];
+n264_0 -> 69 [label="1/6"];
+n264_0 -> 70 [label="1/6"];
+n264_0 -> 71 [label="1/6"];
+n264_0 -> 72 [label="1/6"];
+n264_0 -> 10 [label="1/6"];
+265 [label="(1,5,0,1,0,0,0,0)"];
+265 -> n265_0 [label="0:1.0: [cover_4_1]--",arrowhead="none"];
+n265_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n265_0 -> 266 [label="1.0"];
+266 [label="(0,5,1,1,0,1,0,0)"];
+266 -> n266_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n266_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n266_0 -> 84 [label="1/6"];
+n266_0 -> 85 [label="1/6"];
+n266_0 -> 86 [label="1/6"];
+n266_0 -> 88 [label="1/6"];
+n266_0 -> 89 [label="1/6"];
+n266_0 -> 106 [label="1/6"];
+267 [label="(1,6,0,1,0,0,0,0)"];
+267 -> n267_0 [label="0:1.0: [cover_5_1]--",arrowhead="none"];
+n267_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n267_0 -> 268 [label="1.0"];
+268 [label="(0,6,1,1,0,0,1,0)"];
+268 -> n268_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n268_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n268_0 -> 118 [label="1/6"];
+n268_0 -> 119 [label="1/6"];
+n268_0 -> 120 [label="1/6"];
+n268_0 -> 122 [label="1/6"];
+n268_0 -> 124 [label="1/6"];
+n268_0 -> 125 [label="1/6"];
+269 [label="(1,3,0,0,0,0,0,0)"];
+269 -> n269_0 [label="0:1.0: [cover_2_1]--",arrowhead="none"];
+n269_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n269_0 -> 270 [label="1.0"];
+270 [label="(0,3,1,1,0,0,0,0)"];
+270 -> n270_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n270_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n270_0 -> 82 [label="1/6"];
+n270_0 -> 116 [label="1/6"];
+n270_0 -> 6 [label="1/6"];
+n270_0 -> 7 [label="1/6"];
+n270_0 -> 135 [label="1/6"];
+n270_0 -> 8 [label="1/6"];
+271 [label="(1,4,0,0,0,0,0,0)"];
+271 -> n271_0 [label="0:1.0: [cover_3_1]--",arrowhead="none"];
+n271_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n271_0 -> 272 [label="1.0"];
+272 [label="(0,4,1,0,1,0,0,0)"];
+272 -> n272_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n272_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n272_0 -> 148 [label="1/6"];
+n272_0 -> 149 [label="1/6"];
+n272_0 -> 197 [label="1/6"];
+n272_0 -> 151 [label="1/6"];
+n272_0 -> 152 [label="1/6"];
+n272_0 -> 186 [label="1/6"];
+273 [label="(1,5,0,0,0,0,0,0)"];
+273 -> n273_0 [label="0:1.0: [cover_4_1]--",arrowhead="none"];
+n273_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n273_0 -> 274 [label="1.0"];
+274 [label="(0,5,1,0,0,1,0,0)"];
+274 -> n274_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n274_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n274_0 -> 201 [label="1/6"];
+n274_0 -> 217 [label="1/6"];
+n274_0 -> 218 [label="1/6"];
+n274_0 -> 203 [label="1/6"];
+n274_0 -> 204 [label="1/6"];
+n274_0 -> 206 [label="1/6"];
+275 [label="(1,6,0,0,0,0,0,0)"];
+275 -> n275_0 [label="0:1.0: [cover_3_2_1]--",arrowhead="none"];
+n275_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n275_0 -> 276 [label="1.0"];
+276 [label="(0,6,1,1,1,0,0,0)"];
+276 -> n276_0 [label="0:1.0: [die_toss]--",arrowhead="none"];
+n276_0 [ shape=point,width=0.1,height=0.1,label="" ];
+n276_0 -> 52 [label="1/6"];
+n276_0 -> 69 [label="1/6"];
+n276_0 -> 70 [label="1/6"];
+n276_0 -> 71 [label="1/6"];
+n276_0 -> 72 [label="1/6"];
+n276_0 -> 10 [label="1/6"];
+}
+
+/*
+ -- Transitions --  
+277 277 672
+0 0 1 0.166666666667 1.0: [die_toss]--
+0 0 224 0.166666666667 1.0: [die_toss]--
+0 0 269 0.166666666667 1.0: [die_toss]--
+0 0 271 0.166666666667 1.0: [die_toss]--
+0 0 273 0.166666666667 1.0: [die_toss]--
+0 0 275 0.166666666667 1.0: [die_toss]--
+1 0 2 1 1.0: [cover_1]--
+2 0 3 0.166666666667 1.0: [die_toss]--
+2 0 4 0.166666666667 1.0: [die_toss]--
+2 0 146 0.166666666667 1.0: [die_toss]--
+2 0 199 0.166666666667 1.0: [die_toss]--
+2 0 220 0.166666666667 1.0: [die_toss]--
+2 0 222 0.166666666667 1.0: [die_toss]--
+5 0 7 0.166666666667 1.0: [die_toss]--
+5 0 8 0.166666666667 1.0: [die_toss]--
+5 0 82 0.166666666667 1.0: [die_toss]--
+5 0 116 0.166666666667 1.0: [die_toss]--
+5 0 135 0.166666666667 1.0: [die_toss]--
+9 0 10 0.166666666667 1.0: [die_toss]--
+9 0 52 0.166666666667 1.0: [die_toss]--
+9 0 69 0.166666666667 1.0: [die_toss]--
+9 0 70 0.166666666667 1.0: [die_toss]--
+9 0 71 0.166666666667 1.0: [die_toss]--
+9 0 72 0.166666666667 1.0: [die_toss]--
+10 0 11 1 1.0: [cover_5]--
+11 0 12 0.166666666667 1.0: [die_toss]--
+11 0 13 0.166666666667 1.0: [die_toss]--
+11 0 40 0.166666666667 1.0: [die_toss]--
+11 0 41 0.166666666667 1.0: [die_toss]--
+11 0 50 0.166666666667 1.0: [die_toss]--
+11 0 51 0.166666666667 1.0: [die_toss]--
+14 0 16 0.166666666667 1.0: [die_toss]--
+14 0 36 0.166666666667 1.0: [die_toss]--
+14 0 37 0.166666666667 1.0: [die_toss]--
+14 0 38 0.166666666667 1.0: [die_toss]--
+14 0 39 0.166666666667 1.0: [die_toss]--
+17 0 21 0.166666666667 1.0: [die_toss]--
+17 0 24 0.166666666667 1.0: [die_toss]--
+17 0 27 0.166666666667 1.0: [die_toss]--
+17 0 30 0.166666666667 1.0: [die_toss]--
+17 0 33 0.166666666667 1.0: [die_toss]--
+18 0 19 1 1.0: [ncover]--
+19 0 20 1 1.0: [count]--
+20 0 20 1 Sat
+21 0 22 1 1.0: [ncover]--
+22 0 23 1 1.0: [count]--
+23 0 23 1 Sat
+24 0 25 1 1.0: [ncover]--
+25 0 26 1 1.0: [count]--
+26 0 26 1 Sat
+27 0 28 1 1.0: [ncover]--
+28 0 29 1 1.0: [count]--
+29 0 29 1 Sat
+30 0 31 1 1.0: [ncover]--
+31 0 32 1 1.0: [count]--
+32 0 32 1 Sat
+33 0 34 1 1.0: [ncover]--
+34 0 35 1 1.0: [count]--
+35 0 35 1 Sat
+42 0 43 0.166666666667 1.0: [die_toss]--
+42 0 44 0.166666666667 1.0: [die_toss]--
+42 0 45 0.166666666667 1.0: [die_toss]--
+42 0 46 0.166666666667 1.0: [die_toss]--
+42 0 48 0.166666666667 1.0: [die_toss]--
+42 0 49 0.166666666667 1.0: [die_toss]--
+46 0 47 1 1.0: [cover_4]--
+47 0 18 0.166666666667 1.0: [die_toss]--
+47 0 21 0.166666666667 1.0: [die_toss]--
+47 0 24 0.166666666667 1.0: [die_toss]--
+47 0 27 0.166666666667 1.0: [die_toss]--
+47 0 30 0.166666666667 1.0: [die_toss]--
+47 0 33 0.166666666667 1.0: [die_toss]--
+53 0 55 0.166666666667 1.0: [die_toss]--
+53 0 56 0.166666666667 1.0: [die_toss]--
+53 0 57 0.166666666667 1.0: [die_toss]--
+53 0 66 0.166666666667 1.0: [die_toss]--
+53 0 68 0.166666666667 1.0: [die_toss]--
+57 0 58 1 1.0: [cover_4]--
+58 0 59 0.166666666667 1.0: [die_toss]--
+58 0 60 0.166666666667 1.0: [die_toss]--
+58 0 61 0.166666666667 1.0: [die_toss]--
+58 0 62 0.166666666667 1.0: [die_toss]--
+58 0 63 0.166666666667 1.0: [die_toss]--
+58 0 65 0.166666666667 1.0: [die_toss]--
+64 0 21 0.166666666667 1.0: [die_toss]--
+64 0 24 0.166666666667 1.0: [die_toss]--
+64 0 27 0.166666666667 1.0: [die_toss]--
+64 0 30 0.166666666667 1.0: [die_toss]--
+64 0 33 0.166666666667 1.0: [die_toss]--
+67 0 44 0.166666666667 1.0: [die_toss]--
+67 0 45 0.166666666667 1.0: [die_toss]--
+67 0 46 0.166666666667 1.0: [die_toss]--
+67 0 48 0.166666666667 1.0: [die_toss]--
+67 0 49 0.166666666667 1.0: [die_toss]--
+73 0 75 0.166666666667 1.0: [die_toss]--
+73 0 76 0.166666666667 1.0: [die_toss]--
+73 0 78 0.166666666667 1.0: [die_toss]--
+73 0 80 0.166666666667 1.0: [die_toss]--
+73 0 81 0.166666666667 1.0: [die_toss]--
+77 0 15 0.166666666667 1.0: [die_toss]--
+77 0 16 0.166666666667 1.0: [die_toss]--
+77 0 36 0.166666666667 1.0: [die_toss]--
+77 0 37 0.166666666667 1.0: [die_toss]--
+77 0 38 0.166666666667 1.0: [die_toss]--
+77 0 39 0.166666666667 1.0: [die_toss]--
+78 0 79 1 1.0: [cover_6]--
+79 0 59 0.166666666667 1.0: [die_toss]--
+79 0 60 0.166666666667 1.0: [die_toss]--
+79 0 61 0.166666666667 1.0: [die_toss]--
+79 0 62 0.166666666667 1.0: [die_toss]--
+79 0 63 0.166666666667 1.0: [die_toss]--
+79 0 65 0.166666666667 1.0: [die_toss]--
+83 0 84 0.166666666667 1.0: [die_toss]--
+83 0 85 0.166666666667 1.0: [die_toss]--
+83 0 86 0.166666666667 1.0: [die_toss]--
+83 0 88 0.166666666667 1.0: [die_toss]--
+83 0 89 0.166666666667 1.0: [die_toss]--
+83 0 106 0.166666666667 1.0: [die_toss]--
+87 0 74 0.166666666667 1.0: [die_toss]--
+87 0 75 0.166666666667 1.0: [die_toss]--
+87 0 76 0.166666666667 1.0: [die_toss]--
+87 0 78 0.166666666667 1.0: [die_toss]--
+87 0 80 0.166666666667 1.0: [die_toss]--
+87 0 81 0.166666666667 1.0: [die_toss]--
+90 0 92 0.166666666667 1.0: [die_toss]--
+90 0 93 0.166666666667 1.0: [die_toss]--
+90 0 95 0.166666666667 1.0: [die_toss]--
+90 0 96 0.166666666667 1.0: [die_toss]--
+90 0 97 0.166666666667 1.0: [die_toss]--
+94 0 15 0.166666666667 1.0: [die_toss]--
+94 0 16 0.166666666667 1.0: [die_toss]--
+94 0 36 0.166666666667 1.0: [die_toss]--
+94 0 37 0.166666666667 1.0: [die_toss]--
+94 0 38 0.166666666667 1.0: [die_toss]--
+94 0 39 0.166666666667 1.0: [die_toss]--
+98 0 99 0.166666666667 1.0: [die_toss]--
+98 0 100 0.166666666667 1.0: [die_toss]--
+98 0 101 0.166666666667 1.0: [die_toss]--
+98 0 103 0.166666666667 1.0: [die_toss]--
+98 0 104 0.166666666667 1.0: [die_toss]--
+98 0 105 0.166666666667 1.0: [die_toss]--
+102 0 18 0.166666666667 1.0: [die_toss]--
+102 0 21 0.166666666667 1.0: [die_toss]--
+102 0 24 0.166666666667 1.0: [die_toss]--
+102 0 27 0.166666666667 1.0: [die_toss]--
+102 0 30 0.166666666667 1.0: [die_toss]--
+102 0 33 0.166666666667 1.0: [die_toss]--
+106 0 107 1 1.0: [cover_6]--
+107 0 108 0.166666666667 1.0: [die_toss]--
+107 0 109 0.166666666667 1.0: [die_toss]--
+107 0 110 0.166666666667 1.0: [die_toss]--
+107 0 111 0.166666666667 1.0: [die_toss]--
+107 0 113 0.166666666667 1.0: [die_toss]--
+107 0 114 0.166666666667 1.0: [die_toss]--
+111 0 112 1 1.0: [cover_3]--
+112 0 59 0.166666666667 1.0: [die_toss]--
+112 0 60 0.166666666667 1.0: [die_toss]--
+112 0 61 0.166666666667 1.0: [die_toss]--
+112 0 62 0.166666666667 1.0: [die_toss]--
+112 0 63 0.166666666667 1.0: [die_toss]--
+112 0 65 0.166666666667 1.0: [die_toss]--
+115 0 100 0.166666666667 1.0: [die_toss]--
+115 0 101 0.166666666667 1.0: [die_toss]--
+115 0 103 0.166666666667 1.0: [die_toss]--
+115 0 104 0.166666666667 1.0: [die_toss]--
+115 0 105 0.166666666667 1.0: [die_toss]--
+116 0 117 1 1.0: [cover_5]--
+117 0 118 0.166666666667 1.0: [die_toss]--
+117 0 119 0.166666666667 1.0: [die_toss]--
+117 0 120 0.166666666667 1.0: [die_toss]--
+117 0 122 0.166666666667 1.0: [die_toss]--
+117 0 124 0.166666666667 1.0: [die_toss]--
+117 0 125 0.166666666667 1.0: [die_toss]--
+121 0 12 0.166666666667 1.0: [die_toss]--
+121 0 13 0.166666666667 1.0: [die_toss]--
+121 0 40 0.166666666667 1.0: [die_toss]--
+121 0 41 0.166666666667 1.0: [die_toss]--
+121 0 50 0.166666666667 1.0: [die_toss]--
+121 0 51 0.166666666667 1.0: [die_toss]--
+122 0 123 1 1.0: [cover_4]--
+123 0 91 0.166666666667 1.0: [die_toss]--
+123 0 92 0.166666666667 1.0: [die_toss]--
+123 0 93 0.166666666667 1.0: [die_toss]--
+123 0 95 0.166666666667 1.0: [die_toss]--
+123 0 96 0.166666666667 1.0: [die_toss]--
+123 0 97 0.166666666667 1.0: [die_toss]--
+126 0 128 0.166666666667 1.0: [die_toss]--
+126 0 129 0.166666666667 1.0: [die_toss]--
+126 0 130 0.166666666667 1.0: [die_toss]--
+126 0 131 0.166666666667 1.0: [die_toss]--
+126 0 133 0.166666666667 1.0: [die_toss]--
+132 0 44 0.166666666667 1.0: [die_toss]--
+132 0 45 0.166666666667 1.0: [die_toss]--
+132 0 46 0.166666666667 1.0: [die_toss]--
+132 0 48 0.166666666667 1.0: [die_toss]--
+132 0 49 0.166666666667 1.0: [die_toss]--
+133 0 134 1 1.0: [cover_4]--
+134 0 99 0.166666666667 1.0: [die_toss]--
+134 0 100 0.166666666667 1.0: [die_toss]--
+134 0 101 0.166666666667 1.0: [die_toss]--
+134 0 103 0.166666666667 1.0: [die_toss]--
+134 0 104 0.166666666667 1.0: [die_toss]--
+134 0 105 0.166666666667 1.0: [die_toss]--
+135 0 136 1 1.0: [cover_6]--
+136 0 137 0.166666666667 1.0: [die_toss]--
+136 0 138 0.166666666667 1.0: [die_toss]--
+136 0 139 0.166666666667 1.0: [die_toss]--
+136 0 141 0.166666666667 1.0: [die_toss]--
+136 0 143 0.166666666667 1.0: [die_toss]--
+136 0 145 0.166666666667 1.0: [die_toss]--
+140 0 54 0.166666666667 1.0: [die_toss]--
+140 0 55 0.166666666667 1.0: [die_toss]--
+140 0 56 0.166666666667 1.0: [die_toss]--
+140 0 57 0.166666666667 1.0: [die_toss]--
+140 0 66 0.166666666667 1.0: [die_toss]--
+140 0 68 0.166666666667 1.0: [die_toss]--
+141 0 142 1 1.0: [cover_4]--
+142 0 108 0.166666666667 1.0: [die_toss]--
+142 0 109 0.166666666667 1.0: [die_toss]--
+142 0 110 0.166666666667 1.0: [die_toss]--
+142 0 111 0.166666666667 1.0: [die_toss]--
+142 0 113 0.166666666667 1.0: [die_toss]--
+142 0 114 0.166666666667 1.0: [die_toss]--
+143 0 144 1 1.0: [cover_5]--
+144 0 127 0.166666666667 1.0: [die_toss]--
+144 0 128 0.166666666667 1.0: [die_toss]--
+144 0 129 0.166666666667 1.0: [die_toss]--
+144 0 130 0.166666666667 1.0: [die_toss]--
+144 0 131 0.166666666667 1.0: [die_toss]--
+144 0 133 0.166666666667 1.0: [die_toss]--
+147 0 149 0.166666666667 1.0: [die_toss]--
+147 0 151 0.166666666667 1.0: [die_toss]--
+147 0 152 0.166666666667 1.0: [die_toss]--
+147 0 186 0.166666666667 1.0: [die_toss]--
+147 0 197 0.166666666667 1.0: [die_toss]--
+150 0 52 0.166666666667 1.0: [die_toss]--
+150 0 69 0.166666666667 1.0: [die_toss]--
+150 0 70 0.166666666667 1.0: [die_toss]--
+150 0 71 0.166666666667 1.0: [die_toss]--
+150 0 72 0.166666666667 1.0: [die_toss]--
+153 0 171 0.166666666667 1.0: [die_toss]--
+153 0 181 0.166666666667 1.0: [die_toss]--
+153 0 182 0.166666666667 1.0: [die_toss]--
+153 0 184 0.166666666667 1.0: [die_toss]--
+153 0 185 0.166666666667 1.0: [die_toss]--
+154 0 155 1 1.0: [cover_5]--
+155 0 156 0.166666666667 1.0: [die_toss]--
+155 0 157 0.166666666667 1.0: [die_toss]--
+155 0 159 0.166666666667 1.0: [die_toss]--
+155 0 160 0.166666666667 1.0: [die_toss]--
+155 0 161 0.166666666667 1.0: [die_toss]--
+155 0 162 0.166666666667 1.0: [die_toss]--
+158 0 16 0.166666666667 1.0: [die_toss]--
+158 0 36 0.166666666667 1.0: [die_toss]--
+158 0 37 0.166666666667 1.0: [die_toss]--
+158 0 38 0.166666666667 1.0: [die_toss]--
+158 0 39 0.166666666667 1.0: [die_toss]--
+162 0 163 1 1.0: [cover_6]--
+163 0 164 0.166666666667 1.0: [die_toss]--
+163 0 165 0.166666666667 1.0: [die_toss]--
+163 0 167 0.166666666667 1.0: [die_toss]--
+163 0 168 0.166666666667 1.0: [die_toss]--
+163 0 169 0.166666666667 1.0: [die_toss]--
+163 0 170 0.166666666667 1.0: [die_toss]--
+166 0 21 0.166666666667 1.0: [die_toss]--
+166 0 24 0.166666666667 1.0: [die_toss]--
+166 0 27 0.166666666667 1.0: [die_toss]--
+166 0 30 0.166666666667 1.0: [die_toss]--
+166 0 33 0.166666666667 1.0: [die_toss]--
+172 0 174 0.166666666667 1.0: [die_toss]--
+172 0 176 0.166666666667 1.0: [die_toss]--
+172 0 177 0.166666666667 1.0: [die_toss]--
+172 0 178 0.166666666667 1.0: [die_toss]--
+172 0 180 0.166666666667 1.0: [die_toss]--
+175 0 60 0.166666666667 1.0: [die_toss]--
+175 0 61 0.166666666667 1.0: [die_toss]--
+175 0 62 0.166666666667 1.0: [die_toss]--
+175 0 63 0.166666666667 1.0: [die_toss]--
+175 0 65 0.166666666667 1.0: [die_toss]--
+179 0 164 0.166666666667 1.0: [die_toss]--
+179 0 165 0.166666666667 1.0: [die_toss]--
+179 0 167 0.166666666667 1.0: [die_toss]--
+179 0 168 0.166666666667 1.0: [die_toss]--
+179 0 169 0.166666666667 1.0: [die_toss]--
+179 0 170 0.166666666667 1.0: [die_toss]--
+183 0 74 0.166666666667 1.0: [die_toss]--
+183 0 75 0.166666666667 1.0: [die_toss]--
+183 0 76 0.166666666667 1.0: [die_toss]--
+183 0 78 0.166666666667 1.0: [die_toss]--
+183 0 80 0.166666666667 1.0: [die_toss]--
+183 0 81 0.166666666667 1.0: [die_toss]--
+187 0 188 0.166666666667 1.0: [die_toss]--
+187 0 189 0.166666666667 1.0: [die_toss]--
+187 0 191 0.166666666667 1.0: [die_toss]--
+187 0 192 0.166666666667 1.0: [die_toss]--
+187 0 194 0.166666666667 1.0: [die_toss]--
+187 0 195 0.166666666667 1.0: [die_toss]--
+190 0 13 0.166666666667 1.0: [die_toss]--
+190 0 40 0.166666666667 1.0: [die_toss]--
+190 0 41 0.166666666667 1.0: [die_toss]--
+190 0 50 0.166666666667 1.0: [die_toss]--
+190 0 51 0.166666666667 1.0: [die_toss]--
+193 0 157 0.166666666667 1.0: [die_toss]--
+193 0 159 0.166666666667 1.0: [die_toss]--
+193 0 160 0.166666666667 1.0: [die_toss]--
+193 0 161 0.166666666667 1.0: [die_toss]--
+193 0 162 0.166666666667 1.0: [die_toss]--
+196 0 16 0.166666666667 1.0: [die_toss]--
+196 0 36 0.166666666667 1.0: [die_toss]--
+196 0 37 0.166666666667 1.0: [die_toss]--
+196 0 38 0.166666666667 1.0: [die_toss]--
+196 0 39 0.166666666667 1.0: [die_toss]--
+197 0 198 1 1.0: [cover_4_2]--
+198 0 74 0.166666666667 1.0: [die_toss]--
+198 0 75 0.166666666667 1.0: [die_toss]--
+198 0 76 0.166666666667 1.0: [die_toss]--
+198 0 78 0.166666666667 1.0: [die_toss]--
+198 0 80 0.166666666667 1.0: [die_toss]--
+198 0 81 0.166666666667 1.0: [die_toss]--
+199 0 200 1 1.0: [cover_4]--
+200 0 201 0.166666666667 1.0: [die_toss]--
+200 0 203 0.166666666667 1.0: [die_toss]--
+200 0 204 0.166666666667 1.0: [die_toss]--
+200 0 206 0.166666666667 1.0: [die_toss]--
+200 0 217 0.166666666667 1.0: [die_toss]--
+200 0 218 0.166666666667 1.0: [die_toss]--
+201 0 202 1 1.0: [cover_3]--
+202 0 154 0.166666666667 1.0: [die_toss]--
+202 0 171 0.166666666667 1.0: [die_toss]--
+202 0 181 0.166666666667 1.0: [die_toss]--
+202 0 182 0.166666666667 1.0: [die_toss]--
+202 0 184 0.166666666667 1.0: [die_toss]--
+202 0 185 0.166666666667 1.0: [die_toss]--
+205 0 75 0.166666666667 1.0: [die_toss]--
+205 0 76 0.166666666667 1.0: [die_toss]--
+205 0 78 0.166666666667 1.0: [die_toss]--
+205 0 80 0.166666666667 1.0: [die_toss]--
+205 0 81 0.166666666667 1.0: [die_toss]--
+206 0 207 1 1.0: [cover_6]--
+207 0 208 0.166666666667 1.0: [die_toss]--
+207 0 209 0.166666666667 1.0: [die_toss]--
+207 0 211 0.166666666667 1.0: [die_toss]--
+207 0 213 0.166666666667 1.0: [die_toss]--
+207 0 214 0.166666666667 1.0: [die_toss]--
+207 0 216 0.166666666667 1.0: [die_toss]--
+210 0 109 0.166666666667 1.0: [die_toss]--
+210 0 110 0.166666666667 1.0: [die_toss]--
+210 0 111 0.166666666667 1.0: [die_toss]--
+210 0 113 0.166666666667 1.0: [die_toss]--
+210 0 114 0.166666666667 1.0: [die_toss]--
+211 0 212 1 1.0: [cover_3]--
+212 0 173 0.166666666667 1.0: [die_toss]--
+212 0 174 0.166666666667 1.0: [die_toss]--
+212 0 176 0.166666666667 1.0: [die_toss]--
+212 0 177 0.166666666667 1.0: [die_toss]--
+212 0 178 0.166666666667 1.0: [die_toss]--
+212 0 180 0.166666666667 1.0: [die_toss]--
+215 0 60 0.166666666667 1.0: [die_toss]--
+215 0 61 0.166666666667 1.0: [die_toss]--
+215 0 62 0.166666666667 1.0: [die_toss]--
+215 0 63 0.166666666667 1.0: [die_toss]--
+215 0 65 0.166666666667 1.0: [die_toss]--
+219 0 84 0.166666666667 1.0: [die_toss]--
+219 0 85 0.166666666667 1.0: [die_toss]--
+219 0 86 0.166666666667 1.0: [die_toss]--
+219 0 88 0.166666666667 1.0: [die_toss]--
+219 0 89 0.166666666667 1.0: [die_toss]--
+219 0 106 0.166666666667 1.0: [die_toss]--
+220 0 221 1 1.0: [cover_3_2]--
+221 0 10 0.166666666667 1.0: [die_toss]--
+221 0 52 0.166666666667 1.0: [die_toss]--
+221 0 69 0.166666666667 1.0: [die_toss]--
+221 0 70 0.166666666667 1.0: [die_toss]--
+221 0 71 0.166666666667 1.0: [die_toss]--
+221 0 72 0.166666666667 1.0: [die_toss]--
+222 0 223 1 1.0: [cover_4_2]--
+223 0 84 0.166666666667 1.0: [die_toss]--
+223 0 85 0.166666666667 1.0: [die_toss]--
+223 0 86 0.166666666667 1.0: [die_toss]--
+223 0 88 0.166666666667 1.0: [die_toss]--
+223 0 89 0.166666666667 1.0: [die_toss]--
+223 0 106 0.166666666667 1.0: [die_toss]--
+224 0 225 1 1.0: [cover_2]--
+225 0 226 0.166666666667 1.0: [die_toss]--
+225 0 228 0.166666666667 1.0: [die_toss]--
+225 0 229 0.166666666667 1.0: [die_toss]--
+225 0 263 0.166666666667 1.0: [die_toss]--
+225 0 265 0.166666666667 1.0: [die_toss]--
+225 0 267 0.166666666667 1.0: [die_toss]--
+226 0 227 1 1.0: [cover_1]--
+227 0 6 0.166666666667 1.0: [die_toss]--
+227 0 7 0.166666666667 1.0: [die_toss]--
+227 0 8 0.166666666667 1.0: [die_toss]--
+227 0 82 0.166666666667 1.0: [die_toss]--
+227 0 116 0.166666666667 1.0: [die_toss]--
+227 0 135 0.166666666667 1.0: [die_toss]--
+230 0 233 0.166666666667 1.0: [die_toss]--
+230 0 234 0.166666666667 1.0: [die_toss]--
+230 0 235 0.166666666667 1.0: [die_toss]--
+230 0 260 0.166666666667 1.0: [die_toss]--
+230 0 261 0.166666666667 1.0: [die_toss]--
+231 0 232 1 1.0: [cover_1]--
+232 0 10 0.166666666667 1.0: [die_toss]--
+232 0 52 0.166666666667 1.0: [die_toss]--
+232 0 69 0.166666666667 1.0: [die_toss]--
+232 0 70 0.166666666667 1.0: [die_toss]--
+232 0 71 0.166666666667 1.0: [die_toss]--
+232 0 72 0.166666666667 1.0: [die_toss]--
+236 0 237 0.166666666667 1.0: [die_toss]--
+236 0 238 0.166666666667 1.0: [die_toss]--
+236 0 239 0.166666666667 1.0: [die_toss]--
+236 0 256 0.166666666667 1.0: [die_toss]--
+236 0 257 0.166666666667 1.0: [die_toss]--
+236 0 259 0.166666666667 1.0: [die_toss]--
+240 0 241 0.166666666667 1.0: [die_toss]--
+240 0 242 0.166666666667 1.0: [die_toss]--
+240 0 243 0.166666666667 1.0: [die_toss]--
+240 0 244 0.166666666667 1.0: [die_toss]--
+240 0 253 0.166666666667 1.0: [die_toss]--
+240 0 255 0.166666666667 1.0: [die_toss]--
+244 0 245 1 1.0: [cover_6]--
+245 0 246 0.166666666667 1.0: [die_toss]--
+245 0 248 0.166666666667 1.0: [die_toss]--
+245 0 249 0.166666666667 1.0: [die_toss]--
+245 0 250 0.166666666667 1.0: [die_toss]--
+245 0 251 0.166666666667 1.0: [die_toss]--
+245 0 252 0.166666666667 1.0: [die_toss]--
+246 0 247 1 1.0: [cover_1]--
+247 0 18 0.166666666667 1.0: [die_toss]--
+247 0 21 0.166666666667 1.0: [die_toss]--
+247 0 24 0.166666666667 1.0: [die_toss]--
+247 0 27 0.166666666667 1.0: [die_toss]--
+247 0 30 0.166666666667 1.0: [die_toss]--
+247 0 33 0.166666666667 1.0: [die_toss]--
+254 0 15 0.166666666667 1.0: [die_toss]--
+254 0 16 0.166666666667 1.0: [die_toss]--
+254 0 36 0.166666666667 1.0: [die_toss]--
+254 0 37 0.166666666667 1.0: [die_toss]--
+254 0 38 0.166666666667 1.0: [die_toss]--
+254 0 39 0.166666666667 1.0: [die_toss]--
+258 0 74 0.166666666667 1.0: [die_toss]--
+258 0 75 0.166666666667 1.0: [die_toss]--
+258 0 76 0.166666666667 1.0: [die_toss]--
+258 0 78 0.166666666667 1.0: [die_toss]--
+258 0 80 0.166666666667 1.0: [die_toss]--
+258 0 81 0.166666666667 1.0: [die_toss]--
+262 0 12 0.166666666667 1.0: [die_toss]--
+262 0 13 0.166666666667 1.0: [die_toss]--
+262 0 40 0.166666666667 1.0: [die_toss]--
+262 0 41 0.166666666667 1.0: [die_toss]--
+262 0 50 0.166666666667 1.0: [die_toss]--
+262 0 51 0.166666666667 1.0: [die_toss]--
+263 0 264 1 1.0: [cover_3_1]--
+264 0 10 0.166666666667 1.0: [die_toss]--
+264 0 52 0.166666666667 1.0: [die_toss]--
+264 0 69 0.166666666667 1.0: [die_toss]--
+264 0 70 0.166666666667 1.0: [die_toss]--
+264 0 71 0.166666666667 1.0: [die_toss]--
+264 0 72 0.166666666667 1.0: [die_toss]--
+265 0 266 1 1.0: [cover_4_1]--
+266 0 84 0.166666666667 1.0: [die_toss]--
+266 0 85 0.166666666667 1.0: [die_toss]--
+266 0 86 0.166666666667 1.0: [die_toss]--
+266 0 88 0.166666666667 1.0: [die_toss]--
+266 0 89 0.166666666667 1.0: [die_toss]--
+266 0 106 0.166666666667 1.0: [die_toss]--
+267 0 268 1 1.0: [cover_5_1]--
+268 0 118 0.166666666667 1.0: [die_toss]--
+268 0 119 0.166666666667 1.0: [die_toss]--
+268 0 120 0.166666666667 1.0: [die_toss]--
+268 0 122 0.166666666667 1.0: [die_toss]--
+268 0 124 0.166666666667 1.0: [die_toss]--
+268 0 125 0.166666666667 1.0: [die_toss]--
+269 0 270 1 1.0: [cover_2_1]--
+270 0 6 0.166666666667 1.0: [die_toss]--
+270 0 7 0.166666666667 1.0: [die_toss]--
+270 0 8 0.166666666667 1.0: [die_toss]--
+270 0 82 0.166666666667 1.0: [die_toss]--
+270 0 116 0.166666666667 1.0: [die_toss]--
+270 0 135 0.166666666667 1.0: [die_toss]--
+271 0 272 1 1.0: [cover_3_1]--
+272 0 148 0.166666666667 1.0: [die_toss]--
+272 0 149 0.166666666667 1.0: [die_toss]--
+272 0 151 0.166666666667 1.0: [die_toss]--
+272 0 152 0.166666666667 1.0: [die_toss]--
+272 0 186 0.166666666667 1.0: [die_toss]--
+272 0 197 0.166666666667 1.0: [die_toss]--
+273 0 274 1 1.0: [cover_4_1]--
+274 0 201 0.166666666667 1.0: [die_toss]--
+274 0 203 0.166666666667 1.0: [die_toss]--
+274 0 204 0.166666666667 1.0: [die_toss]--
+274 0 206 0.166666666667 1.0: [die_toss]--
+274 0 217 0.166666666667 1.0: [die_toss]--
+274 0 218 0.166666666667 1.0: [die_toss]--
+275 0 276 1 1.0: [cover_3_2_1]--
+276 0 10 0.166666666667 1.0: [die_toss]--
+276 0 52 0.166666666667 1.0: [die_toss]--
+276 0 69 0.166666666667 1.0: [die_toss]--
+276 0 70 0.166666666667 1.0: [die_toss]--
+276 0 71 0.166666666667 1.0: [die_toss]--
+276 0 72 0.166666666667 1.0: [die_toss]--
+
+ -- States --  
+(state,die,b1,b2,b3,b4,b5,b6)
+0:(0,0,0,0,0,0,0,0)
+1:(1,1,0,0,0,0,0,0)
+2:(0,1,1,0,0,0,0,0)
+3:(1,1,1,0,0,0,0,0)
+4:(1,2,1,0,0,0,0,0)
+5:(0,2,1,1,0,0,0,0)
+6:(1,1,1,1,0,0,0,0)
+7:(1,2,1,1,0,0,0,0)
+8:(1,3,1,1,0,0,0,0)
+9:(0,3,1,1,1,0,0,0)
+10:(1,5,1,1,1,0,0,0)
+11:(0,5,1,1,1,0,1,0)
+12:(1,3,1,1,1,0,1,0)
+13:(1,4,1,1,1,0,1,0)
+14:(0,4,1,1,1,1,1,0)
+15:(1,5,1,1,1,1,1,0)
+16:(1,6,1,1,1,1,1,0)
+17:(0,6,1,1,1,1,1,1)
+18:(1,1,1,1,1,1,1,1)
+19:(2,1,1,1,1,1,1,1)
+20:(3,1,1,1,1,1,1,1)
+21:(1,2,1,1,1,1,1,1)
+22:(2,2,1,1,1,1,1,1)
+23:(3,2,1,1,1,1,1,1)
+24:(1,3,1,1,1,1,1,1)
+25:(2,3,1,1,1,1,1,1)
+26:(3,3,1,1,1,1,1,1)
+27:(1,4,1,1,1,1,1,1)
+28:(2,4,1,1,1,1,1,1)
+29:(3,4,1,1,1,1,1,1)
+30:(1,5,1,1,1,1,1,1)
+31:(2,5,1,1,1,1,1,1)
+32:(3,5,1,1,1,1,1,1)
+33:(1,6,1,1,1,1,1,1)
+34:(2,6,1,1,1,1,1,1)
+35:(3,6,1,1,1,1,1,1)
+36:(1,1,1,1,1,1,1,0)
+37:(1,2,1,1,1,1,1,0)
+38:(1,3,1,1,1,1,1,0)
+39:(1,4,1,1,1,1,1,0)
+40:(1,5,1,1,1,0,1,0)
+41:(1,6,1,1,1,0,1,0)
+42:(0,6,1,1,1,0,1,1)
+43:(1,1,1,1,1,0,1,1)
+44:(1,2,1,1,1,0,1,1)
+45:(1,3,1,1,1,0,1,1)
+46:(1,4,1,1,1,0,1,1)
+47:(0,4,1,1,1,1,1,1)
+48:(1,5,1,1,1,0,1,1)
+49:(1,6,1,1,1,0,1,1)
+50:(1,1,1,1,1,0,1,0)
+51:(1,2,1,1,1,0,1,0)
+52:(1,6,1,1,1,0,0,0)
+53:(0,6,1,1,1,0,0,1)
+54:(1,1,1,1,1,0,0,1)
+55:(1,2,1,1,1,0,0,1)
+56:(1,3,1,1,1,0,0,1)
+57:(1,4,1,1,1,0,0,1)
+58:(0,4,1,1,1,1,0,1)
+59:(1,1,1,1,1,1,0,1)
+60:(1,2,1,1,1,1,0,1)
+61:(1,3,1,1,1,1,0,1)
+62:(1,4,1,1,1,1,0,1)
+63:(1,5,1,1,1,1,0,1)
+64:(0,5,1,1,1,1,1,1)
+65:(1,6,1,1,1,1,0,1)
+66:(1,5,1,1,1,0,0,1)
+67:(0,5,1,1,1,0,1,1)
+68:(1,6,1,1,1,0,0,1)
+69:(1,1,1,1,1,0,0,0)
+70:(1,2,1,1,1,0,0,0)
+71:(1,3,1,1,1,0,0,0)
+72:(1,4,1,1,1,0,0,0)
+73:(0,4,1,1,1,1,0,0)
+74:(1,3,1,1,1,1,0,0)
+75:(1,4,1,1,1,1,0,0)
+76:(1,5,1,1,1,1,0,0)
+77:(0,5,1,1,1,1,1,0)
+78:(1,6,1,1,1,1,0,0)
+79:(0,6,1,1,1,1,0,1)
+80:(1,1,1,1,1,1,0,0)
+81:(1,2,1,1,1,1,0,0)
+82:(1,4,1,1,0,0,0,0)
+83:(0,4,1,1,0,1,0,0)
+84:(1,1,1,1,0,1,0,0)
+85:(1,2,1,1,0,1,0,0)
+86:(1,3,1,1,0,1,0,0)
+87:(0,3,1,1,1,1,0,0)
+88:(1,4,1,1,0,1,0,0)
+89:(1,5,1,1,0,1,0,0)
+90:(0,5,1,1,0,1,1,0)
+91:(1,1,1,1,0,1,1,0)
+92:(1,2,1,1,0,1,1,0)
+93:(1,3,1,1,0,1,1,0)
+94:(0,3,1,1,1,1,1,0)
+95:(1,4,1,1,0,1,1,0)
+96:(1,5,1,1,0,1,1,0)
+97:(1,6,1,1,0,1,1,0)
+98:(0,6,1,1,0,1,1,1)
+99:(1,1,1,1,0,1,1,1)
+100:(1,2,1,1,0,1,1,1)
+101:(1,3,1,1,0,1,1,1)
+102:(0,3,1,1,1,1,1,1)
+103:(1,4,1,1,0,1,1,1)
+104:(1,5,1,1,0,1,1,1)
+105:(1,6,1,1,0,1,1,1)
+106:(1,6,1,1,0,1,0,0)
+107:(0,6,1,1,0,1,0,1)
+108:(1,6,1,1,0,1,0,1)
+109:(1,1,1,1,0,1,0,1)
+110:(1,2,1,1,0,1,0,1)
+111:(1,3,1,1,0,1,0,1)
+112:(0,3,1,1,1,1,0,1)
+113:(1,4,1,1,0,1,0,1)
+114:(1,5,1,1,0,1,0,1)
+115:(0,5,1,1,0,1,1,1)
+116:(1,5,1,1,0,0,0,0)
+117:(0,5,1,1,0,0,1,0)
+118:(1,1,1,1,0,0,1,0)
+119:(1,2,1,1,0,0,1,0)
+120:(1,3,1,1,0,0,1,0)
+121:(0,3,1,1,1,0,1,0)
+122:(1,4,1,1,0,0,1,0)
+123:(0,4,1,1,0,1,1,0)
+124:(1,5,1,1,0,0,1,0)
+125:(1,6,1,1,0,0,1,0)
+126:(0,6,1,1,0,0,1,1)
+127:(1,5,1,1,0,0,1,1)
+128:(1,6,1,1,0,0,1,1)
+129:(1,1,1,1,0,0,1,1)
+130:(1,2,1,1,0,0,1,1)
+131:(1,3,1,1,0,0,1,1)
+132:(0,3,1,1,1,0,1,1)
+133:(1,4,1,1,0,0,1,1)
+134:(0,4,1,1,0,1,1,1)
+135:(1,6,1,1,0,0,0,0)
+136:(0,6,1,1,0,0,0,1)
+137:(1,1,1,1,0,0,0,1)
+138:(1,2,1,1,0,0,0,1)
+139:(1,3,1,1,0,0,0,1)
+140:(0,3,1,1,1,0,0,1)
+141:(1,4,1,1,0,0,0,1)
+142:(0,4,1,1,0,1,0,1)
+143:(1,5,1,1,0,0,0,1)
+144:(0,5,1,1,0,0,1,1)
+145:(1,6,1,1,0,0,0,1)
+146:(1,3,1,0,0,0,0,0)
+147:(0,3,1,0,1,0,0,0)
+148:(1,1,1,0,1,0,0,0)
+149:(1,2,1,0,1,0,0,0)
+150:(0,2,1,1,1,0,0,0)
+151:(1,3,1,0,1,0,0,0)
+152:(1,4,1,0,1,0,0,0)
+153:(0,4,1,0,1,1,0,0)
+154:(1,5,1,0,1,1,0,0)
+155:(0,5,1,0,1,1,1,0)
+156:(1,1,1,0,1,1,1,0)
+157:(1,2,1,0,1,1,1,0)
+158:(0,2,1,1,1,1,1,0)
+159:(1,3,1,0,1,1,1,0)
+160:(1,4,1,0,1,1,1,0)
+161:(1,5,1,0,1,1,1,0)
+162:(1,6,1,0,1,1,1,0)
+163:(0,6,1,0,1,1,1,1)
+164:(1,1,1,0,1,1,1,1)
+165:(1,2,1,0,1,1,1,1)
+166:(0,2,1,1,1,1,1,1)
+167:(1,3,1,0,1,1,1,1)
+168:(1,4,1,0,1,1,1,1)
+169:(1,5,1,0,1,1,1,1)
+170:(1,6,1,0,1,1,1,1)
+171:(1,6,1,0,1,1,0,0)
+172:(0,6,1,0,1,1,0,1)
+173:(1,1,1,0,1,1,0,1)
+174:(1,2,1,0,1,1,0,1)
+175:(0,2,1,1,1,1,0,1)
+176:(1,3,1,0,1,1,0,1)
+177:(1,4,1,0,1,1,0,1)
+178:(1,5,1,0,1,1,0,1)
+179:(0,5,1,0,1,1,1,1)
+180:(1,6,1,0,1,1,0,1)
+181:(1,1,1,0,1,1,0,0)
+182:(1,2,1,0,1,1,0,0)
+183:(0,2,1,1,1,1,0,0)
+184:(1,3,1,0,1,1,0,0)
+185:(1,4,1,0,1,1,0,0)
+186:(1,5,1,0,1,0,0,0)
+187:(0,5,1,0,1,0,1,0)
+188:(1,1,1,0,1,0,1,0)
+189:(1,2,1,0,1,0,1,0)
+190:(0,2,1,1,1,0,1,0)
+191:(1,3,1,0,1,0,1,0)
+192:(1,4,1,0,1,0,1,0)
+193:(0,4,1,0,1,1,1,0)
+194:(1,5,1,0,1,0,1,0)
+195:(1,6,1,0,1,0,1,0)
+196:(0,6,1,1,1,1,1,0)
+197:(1,6,1,0,1,0,0,0)
+198:(0,6,1,1,1,1,0,0)
+199:(1,4,1,0,0,0,0,0)
+200:(0,4,1,0,0,1,0,0)
+201:(1,3,1,0,0,1,0,0)
+202:(0,3,1,0,1,1,0,0)
+203:(1,4,1,0,0,1,0,0)
+204:(1,5,1,0,0,1,0,0)
+205:(0,5,1,1,1,1,0,0)
+206:(1,6,1,0,0,1,0,0)
+207:(0,6,1,0,0,1,0,1)
+208:(1,1,1,0,0,1,0,1)
+209:(1,2,1,0,0,1,0,1)
+210:(0,2,1,1,0,1,0,1)
+211:(1,3,1,0,0,1,0,1)
+212:(0,3,1,0,1,1,0,1)
+213:(1,4,1,0,0,1,0,1)
+214:(1,5,1,0,0,1,0,1)
+215:(0,5,1,1,1,1,0,1)
+216:(1,6,1,0,0,1,0,1)
+217:(1,1,1,0,0,1,0,0)
+218:(1,2,1,0,0,1,0,0)
+219:(0,2,1,1,0,1,0,0)
+220:(1,5,1,0,0,0,0,0)
+221:(0,5,1,1,1,0,0,0)
+222:(1,6,1,0,0,0,0,0)
+223:(0,6,1,1,0,1,0,0)
+224:(1,2,0,0,0,0,0,0)
+225:(0,2,0,1,0,0,0,0)
+226:(1,1,0,1,0,0,0,0)
+227:(0,1,1,1,0,0,0,0)
+228:(1,2,0,1,0,0,0,0)
+229:(1,3,0,1,0,0,0,0)
+230:(0,3,0,1,1,0,0,0)
+231:(1,1,0,1,1,0,0,0)
+232:(0,1,1,1,1,0,0,0)
+233:(1,2,0,1,1,0,0,0)
+234:(1,3,0,1,1,0,0,0)
+235:(1,4,0,1,1,0,0,0)
+236:(0,4,0,1,1,1,0,0)
+237:(1,3,0,1,1,1,0,0)
+238:(1,4,0,1,1,1,0,0)
+239:(1,5,0,1,1,1,0,0)
+240:(0,5,0,1,1,1,1,0)
+241:(1,3,0,1,1,1,1,0)
+242:(1,4,0,1,1,1,1,0)
+243:(1,5,0,1,1,1,1,0)
+244:(1,6,0,1,1,1,1,0)
+245:(0,6,0,1,1,1,1,1)
+246:(1,1,0,1,1,1,1,1)
+247:(0,1,1,1,1,1,1,1)
+248:(1,2,0,1,1,1,1,1)
+249:(1,3,0,1,1,1,1,1)
+250:(1,4,0,1,1,1,1,1)
+251:(1,5,0,1,1,1,1,1)
+252:(1,6,0,1,1,1,1,1)
+253:(1,1,0,1,1,1,1,0)
+254:(0,1,1,1,1,1,1,0)
+255:(1,2,0,1,1,1,1,0)
+256:(1,6,0,1,1,1,0,0)
+257:(1,1,0,1,1,1,0,0)
+258:(0,1,1,1,1,1,0,0)
+259:(1,2,0,1,1,1,0,0)
+260:(1,5,0,1,1,0,0,0)
+261:(1,6,0,1,1,0,0,0)
+262:(0,6,1,1,1,0,1,0)
+263:(1,4,0,1,0,0,0,0)
+264:(0,4,1,1,1,0,0,0)
+265:(1,5,0,1,0,0,0,0)
+266:(0,5,1,1,0,1,0,0)
+267:(1,6,0,1,0,0,0,0)
+268:(0,6,1,1,0,0,1,0)
+269:(1,3,0,0,0,0,0,0)
+270:(0,3,1,1,0,0,0,0)
+271:(1,4,0,0,0,0,0,0)
+272:(0,4,1,0,1,0,0,0)
+273:(1,5,0,0,0,0,0,0)
+274:(0,5,1,0,0,1,0,0)
+275:(1,6,0,0,0,0,0,0)
+276:(0,6,1,1,1,0,0,0)
+*/
