@@ -208,4 +208,10 @@ Date | Duration | Summary
 16/03/21 | 3.5 hour | Supervisor meeting + minutes. Made most revisions on Overleaf, still need to update citations.
 17/03/21 | 6 hours | Finished most tweaks on case study 1, added citations and example on weakness of max adversary generation. Starting reformatting graphs to pdfs, changed graph layout to fit better in dissertation. Added writeup on first results from Shut the Box, up to using strategy generation.
 18/03/21 | 1.5 hours | Tidied up yesterday's writeup, added a short conclusion to case study (still need to fill in strategy generation comparison...)
-19/03/21 | 2.5 hours | Finished off most of Case Study 1, will look over and polish a b it over weekend
+19/03/21 | 2.5 hours | Finished off most of Case Study 1, will look over and polish a bit over weekend
+
+## Week 22
+
+Date | Duration | Summary
+---- | -------- | -------
+22/03/21 | 2 hours | Uploaded dissertation draft to Overleaf, added a few comments/questions on there. Created status report and added more general questions there
