@@ -2,23 +2,7 @@
 // Automatically generated
 
 // turn-based stochastic game
-csg
-
-player p1
-	player1,
-	[cover_2],
-	[cover_3], [cover_2_1],
-	[cover_4], [cover_3_1],
-	[cover_5], [cover_4_1], [cover_3_2],
-	[cover_6], [cover_5_1], [cover_4_2], [cover_3_2_1],
-	[cover_7], [cover_6_1], [cover_5_2], [cover_4_3], [cover_4_2_1],
-	[cover_8], [cover_7_1], [cover_6_2], [cover_5_3], [cover_5_2_1], [cover_4_3_1],
-	[cover_9], [cover_8_1], [cover_7_2], [cover_6_3], [cover_6_2_1], [cover_5_4], [cover_5_3_1], [cover_4_3_2],
-	[cover_10], [cover_9_1], [cover_8_2], [cover_7_3], [cover_7_2_1], [cover_6_4], [cover_6_3_1], [cover_5_4_1], [cover_5_3_2], [cover_4_3_2_1],
-	[cover_11], [cover_10_1], [cover_9_2], [cover_8_3], [cover_8_2_1], [cover_7_4], [cover_7_3_1], [cover_6_5], [cover_6_4_1], [cover_6_3_2], [cover_5_4_2], [cover_5_3_2_1],
-	[cover_12], [cover_11_1], [cover_10_2], [cover_9_3], [cover_9_2_1], [cover_8_4], [cover_8_3_1], [cover_7_5], [cover_7_4_1], [cover_7_3_2], [cover_6_5_1], [cover_6_4_2], [cover_6_3_2_1], [cover_5_4_3], [cover_5_4_2_1],
-	[die_toss], [ncover], [count], [halts]
-endplayer
+mdp
 
 formula game_over = (state=3);
 formula score = b1*1 + b2*2 + b3*3 + b4*4 + b5*5 + b6*6 + b7*7 + b8*8 + b9*9 + b10*10 + b11*11 + b12*12;
@@ -29,9 +13,9 @@ module player1
     // 0: rolling dice
     // 1: choosing boards to cover
     // 2: no more valid choices to cover, halt
-    state: [0..2] init 0;
+    state: [0..3] init 0;
     // current value on die (with initial 0 state)
-    die: [0..6] init 0;
+    die: [0..12] init 0;
 
     // boards (0 if uncovered, 1 if covered)
     // note that we use ints instead of bools to make it easier to count the payoffs later

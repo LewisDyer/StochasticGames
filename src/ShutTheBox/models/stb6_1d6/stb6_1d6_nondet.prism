@@ -1,24 +1,10 @@
-
 // Modelling Shut the Box with 6 boards and 1d6
 // Automatically generated
 
 // turn-based stochastic game
-csg
-
-
-player p1
-	player1,
-	[cover_1],
-	[cover_2],
-	[cover_3], [cover_2_1],
-	[cover_4], [cover_3_1],
-	[cover_5], [cover_4_1], [cover_3_2],
-	[cover_6], [cover_5_1], [cover_4_2], [cover_3_2_1],
-	[die_toss], [ncover], [count], [halts]
-endplayer
+mdp
 
 formula game_over = (state=3);
-
 formula score = b1*1 + b2*2 + b3*3 + b4*4 + b5*5 + b6*6;
 
 module player1
@@ -27,14 +13,12 @@ module player1
     // 0: rolling dice
     // 1: choosing boards to cover
     // 2: no more valid choices to cover, halt
-    state: [0..2] init 0;
+    state: [0..3] init 0;
     // current value on die (with initial 0 state)
-
     die: [0..6] init 0;
 
     // boards (0 if uncovered, 1 if covered)
     // note that we use ints instead of bools to make it easier to count the payoffs later
-
 
     [die_toss] state=0 -> 1/6:(die'=1) & (state'=1)
     					+ 1/6:(die'=2) & (state'=1)
@@ -42,7 +26,6 @@ module player1
     					+ 1/6:(die'=4) & (state'=1)
     					+ 1/6:(die'=5) & (state'=1)
     					+ 1/6:(die'=6) & (state'=1);
-
 
     [cover_1] state=1 & die=1 & (b1=0) -> (state'=0);
     [ncover] state=1 & die=1 &  !((b1=0)) -> (state'=2);
@@ -74,7 +57,6 @@ module player1
     [halts] state=3 -> true;
 
 endmodule
-
 
 module board1
 
@@ -134,7 +116,6 @@ endmodule
 module board6
 
 	b6 : [0..1];
-
 	[cover_6] b6=0 -> (b6'=1);
 
 endmodule

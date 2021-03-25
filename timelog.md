@@ -216,3 +216,4 @@ Date | Duration | Summary
 ---- | -------- | -------
 22/03/21 | 2 hours | Uploaded dissertation draft to Overleaf, added a few comments/questions on there. Created status report and added more general questions there
 23/03/21 | 3 hours | Supervisor meeting, added minutes and made revisions from Overleaf(not finished, still to carry over)
+24/03/21 | 2 hours | More experimenting with strategy generation, got MDP generation working and compared optimal/highboard strats to get the singular difference between strategies...

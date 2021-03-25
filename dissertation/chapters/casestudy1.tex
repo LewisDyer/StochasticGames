@@ -216,7 +216,7 @@ To exemplify this, we consider each board in turn, assume that board is covered,
 
 This idea can also be considered from a more combinatorial point of view. Given a dice roll of value $n$, each possible covering is a partition of $n$ into distinct parts, also known as a \emph{strict partition} of $n$. For instance, there are 27 possible coverings which cover board 1, but only 2 coverings which cover board 11, further exemplifying that opportunities to cover high boards are rare. This difference is exacerbated when multiple dice are used, including in the standard variant, since especially high dice rolls are rarer to obtain, compared to using one dice with uniform probability of rolling each possible value.
 
-\subsection{Making comparisons using strategy generation}
+\subsection{Comparisons with optimal strategies}
 \label{cs1:compare-strats}
 
 Along with generating an optimal strategy, PRISM also provides support for exporting a graphical output of this optimal strategy, allowing potential comparisons between strategies. However, due to visualisation constraints, we only consider one variant of Shut the Box - the variant where 6 boards are used, and a single 6-sided die is rolled. While this variant is relatively small and simple, comparing the high-board strategy with the optimal strategy still leads to interesting behaviour. To exemplify this, consider the following example:
@@ -224,23 +224,18 @@ Along with generating an optimal strategy, PRISM also provides support for expor
 \begin{example}
 \label{cs1:greedy-optimal}
 
-Consider the strategy which maximises the expected score of Shut the Box, which is 21 for a 6-board variant. Now consider the situation presented in Figure \ref{cs1:optimal_high_board}, where boards 2, 4 and 6 are uncovered while a 6 is rolled. The optimal strategy chooses to cover boards 4 and 2, while the high-board strategy chooses to cover board 6.
+Consider the strategy which maximises the expected score of Shut the Box, which is 21 for a 6-board variant. Comparing this strategy with the high-board strategy shows that the strategies differ at only one position, highlighted Figure \ref{cs1:optimal_high_board}, where a 6 is rolled while only board 6 is covered. The optimal strategy chooses to cover boards 4 and 2, while the high-board strategy chooses to cover boards 5 and 1.
 
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{images/ShutTheBox/optimal_high_board.pdf}
-    \caption{The optimal strategy covers boards 4 and 2, while the high-board strategy covers board 6.}
+    \caption{The optimal strategy covers boards 4 and 2, while the high-board strategy covers board 5 and 1. Covering boards 1, 2 and 3 is also possible, but is not chosen by either strategy.}
 \label{cs1:optimal_high_board}
 \end{figure}
 
-The probability of attaining the maximum possible score is higher for the high-board strategy than the optimal strategy - while the optimal strategy will require rolling a 6 next turn to attain the maximum score, the high-board strategy can also attain the maxmimum score by rolling a 4 and a 2 within two rolls, along with rolling a 6 on the first roll.
+A modified version of the PRISM model for Shut the Box was produced, setting this position as the initial state of the model.
 
-However, the expected value of the optimal strategy from this point is higher than the high-board strategy. Since the final score is 15 with probability $\frac{5}{6}$ and 21 with probability $\frac{1}{6}$, the overall expected value is $16$. Similarly, the expected value of the high-board strategy from this point is
-
-\begin{equation*}
-    (15 \times \frac{1}{2}) + (17 \times \frac{5}{36}) + (19 \times \frac{5}{36}) + (21 \times (\frac{1}{6} + \frac{1}{18}) = \frac{103}{6} \approx 17.16
-\end{equation*}
-
+% this happened... difference between models?
 
 \end{example}
 

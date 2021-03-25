@@ -35,8 +35,8 @@ def score(n, newline):
     score_terms = " + ".join([f"b{i}*{i}"for i in range(1, n+1)])
     return(f"formula score = {score_terms};")
 
-def die(d, newline):
-    return(f"die: [0..{d}] init 0;\n")
+def die(d, ndie, newline):
+    return(f"die: [0..{d*ndie}] init 0;\n")
 
 def dietoss(d, ndie, newline):
     # defines PRISM code for rolling a given number of d-sided dice
@@ -186,7 +186,7 @@ def board_given_score(b, newline):
         # first the comment
         output.append(f"// Probability of {i} being covered given the score is k")
         # now the property
-        output.append(f"<<p1>>Pmin=? [ F game_over&b{i}=1&score=k ]")
+        output.append(f"Pmin=? [ F game_over&b{i}=1&score=k ]")
         output.append("")
     return newline.join(output)
 
