@@ -2,7 +2,8 @@
 \label{cs1}
 
 In this case study, we introduce a game called Shut the Box. We first introduce a new type of model, known as an MDP, allowing for decision making during a game. We then model Shut the Box using an MDP, analyse multiple variants of this game under different strategies, and use this analysis to evaluate the design of Shut the Box.
-\section{Game description (1/2 page)}
+
+\section{Shut the Box description}
 \label{cs1:stb_description}
 
 Shut the Box is a single player game, where the player aims to cover as many boards as possible through a series of dice rolls. The game starts with a series of \emph{boards}, which are wooden panel on hinges in the physical version, as shown in Figure \ref{cs1:physical_stb}, each numbered sequentially starting from 1, with each board originally uncovered. Each round, the player rolls a set of dice. The player must then cover a set of uncovered boards whose sum is equal to the sum of the dice. For instance, if the player rolls a 1 and a 2, then the player must either cover boards 1 and 2, or cover board 3. When a board is covered, it can no longer be considered when covering future boards. For instance, in the above example, if board 2 has already been covered, the player must cover  board 3, providing that board 3 is still uncovered. The game proceeds in this manner until the player cannot cover a set of uncovered boards which match the values of the dice rolled. A player's \emph{score} for a round of Shut the Box is then defined as the sum of all covered boards when the game ends.

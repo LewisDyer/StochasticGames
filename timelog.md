@@ -218,4 +218,4 @@ Date | Duration | Summary
 23/03/21 | 3 hours | Supervisor meeting, added minutes and made revisions from Overleaf(not finished, still to carry over)
 24/03/21 | 2 hours | More experimenting with strategy generation, got MDP generation working and compared optimal/highboard strats to get the singular difference between strategies...
 25/03/21 | 3 hours | More work with strategy visualisation, created variants of MDP to test difference between initial states.
-26/03/21 | 3 hours | Completed revision on Case Study 1, consider it finished at this point bar a few very minor things (will polish later)
+26/03/21 | 7 hours | Completed revision on Case Study 1, consider it finished at this point bar a few very minor things (will polish later). Started Case Study 2, up to adversary definition for POMDPs.
