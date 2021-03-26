@@ -16,6 +16,7 @@ module player1
     state: [0..3] init 0;
     // current value on die (with initial 0 state)
     die: [0..6] init 0;
+
     // boards (0 if uncovered, 1 if covered)
     // note that we use ints instead of bools to make it easier to count the payoffs later
 

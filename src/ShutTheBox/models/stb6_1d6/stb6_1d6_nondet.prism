@@ -116,6 +116,7 @@ endmodule
 module board6
 
 	b6 : [0..1];
+
 	[cover_6] b6=0 -> (b6'=1);
 
 endmodule
