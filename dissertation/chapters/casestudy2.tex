@@ -54,7 +54,7 @@ A key aspect of Liar's Dice is partial observability, which we now introduce in 
     \end{itemize}
 \end{definition}
 
-The last point in this definition indicates how POMDPs can represent hidden information. Rather than being able to directly access every state, decisions can only be made based on observations. For instance, in many card games, some cards may be visible for a particular player, while others are hidden. In order for two states to be observationally equivalent in a model of this game, we only require that the visible cards are the same in both states, while the hidden cards can range across any permutation of valid cards.
+The last point in this definition indicates how POMDPs can represent hidden information. Rather than being able to directly access every state, decisions can only be made based on observations. For instance, in many card games, some cards may be visible for a particular player, while others are hidden. In order for two states to be observationally equivalent in a model of this game, we only require that the visible cards are the same in both states, while the hidden cards can range across any permutation of valid cards. If a player could view the full state of the game, they would be able to view the value of hidden cards, which would render most of these games trivial.
 
 Since POMDPs are an extension of an MDP, adversaries for POMDPs are defined in terms of adversaries for the corresponding MDP. However, in order to reflect the added constraints that observations provide, we require that adversaries on observationally equivalent paths are equivalent:
 
@@ -65,9 +65,46 @@ For a POMDP $P$, an adversary of $P$ is a function $\sigma$ mapping all finite p
 
 \end{definition}
 
-This definition references a key difference in optimal adversary generation between MDPs and POMDPs. In MDPs, optimal adversaries are deterministic and memoryless, so in particular adversaries map states to actions. This allows for aforementioned methods such as value iteration to be applied, allowing for efficient computation of optimal values and adversaries attaining these optimal values.
+This definition references a key difference in optimal adversary generation between MDPs and POMDPs. In MDPs, optimal adversaries are deterministic and memoryless, so in particular adversaries map states to actions. This allows for aforementioned methods such as value iteration to be applied, allowing for efficient computation of optimal values and adversaries attaining these optimal values. By contrast, Madani et al. show in \cite{madani_undecidability_2003} that obtaining optimal values and adversaries, both for reachability properties and reward-based properties, is undecideable. We instead focus on approximate solutions, as discussed in the following section
 
+\subsection{Belief MDPs}
 
+First, we introduce the \emph{belief MDP}. Given a POMDP, we may construct an equivalent MDP, which consists of beliefs of which observationally equivalent state the player is in at any point.
+
+\begin{definition}
+    \label{cs2:belief_mdps}
+
+    Given a POMDP $\mathcal{P} = (S, \bar{s}, A, \delta, L, \mathcal{O}, obs)$, as in Definition \ref{cs2:def-pomdps}, the \emph{belief MDP} of $\mathcal{P}$ is given by $\mathcal{B}(\mathcal{P}) = (Dist(S), \delta_{\bar{s}}, A, \delta^\mathcal{B}, L)$. In particular the states of this MDP represent \emph{beliefs} about the state of the player in the corresponding POMDP, and the transition function becomes:
+
+    \begin{equation*}
+        \delta^{\mathcal{B}}(b, a)(b') = \sum_{s \in S} b(s) \cdot \left( \sum_{o \in \mathcal{O}, b^{a,o} = b'} \sum_{s' \in S, obs(s')=o} \delta(s, a)(s')\right)
+    \end{equation*}
+
+    In particular, $b^{a, o}$ represents the belief reached after performing action $a$ with observation $o$ in belief $b$, calculated using Bayes' Theorem as:
+
+    \begin{equation*}
+        b^{a, o}(s') =
+        \begin{cases}
+            \frac{\sum_{s \in S}\delta(s, a)(s') \cdot b(s)}{\sum_{s \in S} b(s) \cdot \left(\sum_{s'' \in S, obs(s'')=o} \delta(s,a)(s'')\right)} & obs(s') = 0 \\ 0 & \text{otherwise} \\
+        \end{cases}
+    \end{equation*}
+
+\end{definition}
+
+We also need to modify how state and transition rewards are calculated for a belief MDP.
+
+\begin{definition}
+    \label{cs2:belief_rewards}
+    Let $\rho$ be a state reward function and $\iota$ be an action reward function for some POMDP $\mathcal{P}$. For the corresponding belief MDP, we set:
+
+    \begin{align*}
+        \rho^{\mathcal{B}}(b) &= \sum_{s \in S} rho(s) \cdot b(s) \\
+        \iota^{\mathcal{B}}(b, a) &= \sum_{s \in S} \iota(s, a) \cdot b(s) \\ 
+    \end{align*}
+
+\end{definition}
+
+In particular, this modification of rewards ensures that reachability and reward-based properties coincide between the POMDP and its corresponding belief MDP.
 
 
 
