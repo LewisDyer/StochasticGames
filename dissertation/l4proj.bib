@@ -198,7 +198,40 @@
 	author = {Madani, Omid and Hanks, Steve and Condon, Anne},
 	month = jul,
 	year = {2003},
-	keywords = {Computability, Computational complexity, Discounted, Infinity-horizon, Markov decision processes, Partial observability, Probabilistic planning, Stochastic optimization, Undecidability, Unobservability},
+	keywords = {Markov decision processes, Computability, Computational complexity, Discounted, Infinity-horizon, Partial observability, Probabilistic planning, Stochastic optimization, Undecidability, Unobservability},
 	pages = {5--34},
 	file = {ScienceDirect Full Text PDF:C\:\\Users\\Lewis\\Zotero\\storage\\GHNHVBWN\\Madani et al. - 2003 - On the undecidability of probabilistic planning an.pdf:application/pdf;ScienceDirect Snapshot:C\:\\Users\\Lewis\\Zotero\\storage\\ELG96GXW\\S0004370202003788.html:text/html}
+}
+
+@article{bertsekas_approximate_2006,
+	title = {Approximate solution methods for partially observable markov and semi-markov decision processes},
+	url = {/paper/Approximate-solution-methods-for-partially-markov-Bertsekas-Yu/12ecec6e8443da78e922390b552b343406dc3079},
+	abstract = {We consider approximation methods for discrete-time infinite-horizon partially observable Markov and semi-Markov decision processes (POMDP and POSMDP). One of the main contributions of this thesis is a lower cost approximation method for finite-space POMDPs with the average cost criterion, and its extensions to semi-Markov partially observable problems and constrained POMDP problems, as well as to problems with the undiscounted total cost criterion. 
+Our method is an extension of several lower cost approximation schemes, proposed individually by various authors, for discounted POMDP problems. We introduce a unified framework for viewing all of these schemes together with some new ones. In particular, we establish that due to the special structure of hidden states in a POMDP, there is a class of approximating processes, which are either POMDPs or belief MDPs, that provide lower bounds to the optimal cost function of the original POMDP problem. 
+Theoretically, POMDPs with the long-run average cost criterion are still not fully understood. The major difficulties relate to the structure of the optimal solutions, such as conditions for a constant optimal cost function, the existence of solutions to the optimality equations, and the existence of optimal policies that are stationary and deterministic. Thus, our lower bound result is useful not only in providing a computational method, but also in characterizing the optimal solution. We show that regardless of these theoretical difficulties, lower bounds of the optimal liminf average cost function can be computed efficiently by solving modified problems using multichain MDP algorithms, and the approximating cost functions can be also used to obtain suboptimal stationary control policies. We prove the asymptotic convergence of the lower bounds under certain assumptions. 
+For semi-Markov problems and total cost problems, we show that the same method can be applied for computing lower bounds of the optimal cost function. For constrained average cost POMDPs, we show that lower bounds of the constrained optimal cost function can be computed by solving finite-dimensional LPs. 
+We also consider reinforcement learning methods for POMDPs and MDPs. We propose an actor-critic type policy gradient algorithm that uses a structured policy known as a finite-state controller. We thus provide an alternative to the earlier actor-only algorithm GPOMDP. Our work also clarifies the relationship between the reinforcement learning methods for POMDPs and those for MDPs. For average cost MDPs, we provide a convergence and convergence rate analysis for a least squares temporal difference (TD) algorithm, called LSPE, and previously proposed for discounted problems. We use this algorithm in the critic portion of the policy gradient algorithm for POMDPs with finite-state controllers. 
+Finally, we investigate the properties of the limsup and liminf average cost functions of various types of policies. We show various convexity and concavity properties of these cost functions, and we give a new necessary condition for the optimal liminf average cost to be constant. Based on this condition, we prove the near-optimality of the class of finite-state controllers under the assumption of a constant optimal liminf average cost. This result provides a theoretical guarantee for the finite-state controller approach. (Copies available exclusively from MIT Libraries, Rm. 14-0551, Cambridge, MA 02139-4307. Ph. 617-253-5668; Fax 617-253-1690.)},
+	language = {en},
+	urldate = {2021-03-28},
+	journal = {undefined},
+	author = {Bertsekas, D. and Yu, Huizhen},
+	year = {2006},
+	file = {Snapshot:C\:\\Users\\Lewis\\Zotero\\storage\\NHEQVBV8\\12ecec6e8443da78e922390b552b343406dc3079.html:text/html}
+}
+
+@article{lovejoy_computationally_1991,
+	title = {Computationally {Feasible} {Bounds} for {Partially} {Observed} {Markov} {Decision} {Processes}},
+	volume = {39},
+	issn = {0030-364X},
+	url = {https://www.jstor.org/stable/171496},
+	abstract = {A partially observed Markov decision process (POMDP) is a sequential decision problem where information concerning parameters of interest is incomplete, and possible actions include sampling, surveying, or otherwise collecting additional information. Such problems can theoretically be solved as dynamic programs, but the relevant state space is infinite, which inhibits algorithmic solution. This paper explains how to approximate the state space by a finite grid of points, and use that grid to construct upper and lower value function bounds, generate approximate nonstationary and stationary policies, and bound the value loss relative to optimal for using these policies in the decision problem. A numerical example illustrates the methodology.},
+	number = {1},
+	urldate = {2021-03-28},
+	journal = {Operations Research},
+	author = {Lovejoy, William S.},
+	year = {1991},
+	note = {Publisher: INFORMS},
+	pages = {162--175},
+	file = {JSTOR Full Text PDF:C\:\\Users\\Lewis\\Zotero\\storage\\3UB64MR5\\Lovejoy - 1991 - Computationally Feasible Bounds for Partially Obse.pdf:application/pdf}
 }

@@ -219,4 +219,5 @@ Date | Duration | Summary
 24/03/21 | 2 hours | More experimenting with strategy generation, got MDP generation working and compared optimal/highboard strats to get the singular difference between strategies...
 25/03/21 | 3 hours | More work with strategy visualisation, created variants of MDP to test difference between initial states.
 26/03/21 | 7 hours | Completed revision on Case Study 1, consider it finished at this point bar a few very minor things (will polish later). Started Case Study 2, up to adversary definition for POMDPs.
-27/03/21 | 2 hours | Added belief MDPs section
+27/03/21 | 2 hours | Added belief MDPs section.
+28/03/21 | 3 hours | Added section on property verification in POMDPs

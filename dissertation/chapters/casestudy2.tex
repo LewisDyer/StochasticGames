@@ -106,10 +106,27 @@ We also need to modify how state and transition rewards are calculated for a bel
 
 In particular, this modification of rewards ensures that reachability and reward-based properties coincide between the POMDP and its corresponding belief MDP.
 
+One key remark about this belief MDP is that its state space is now continuous, since the states of the belief MDP represent probability distributions of states in the POMDP. This means that the number of states in the belief MDP is infinite (indeed, uncountably infinite), so the techniques introduced from Section \ref{cs1:prob_reach_mdps} are no longer feasible. Instead, we use a finite set of grid points in order to obtain an upper bound of the property in question, then directly generate a strategy on the POMDP itself to obtain a lower bound. These steps are described in more detail in the following section.
 
+\subsection{Property verification in POMDPs}
 
-Describe POMDPs here - what makes them important and useful compared to MDPs? Explain why we add this additional complexity, but also mention trade offs in terms of the sorts of analysis we can perform.
+For simplicity, we only describe maximum reachability probabilities - the other cases, including minimum probabilities and expected rewards, are similar.
 
+First, we obtain an upper bound for the property in question. The key idea, as presented by Bertsekas and Yu in \cite{bertsekas_approximate_2006}, is to consider a finite set of states in the belief MDP, known as \emph{representative beliefs}, which form a convex hull of $Dist(S)$. Multiple methods are possible for choosing these representative beliefs, with the simplest method producing a uniform grid $G_M$ as follows:
+
+\begin{equation*}
+    G_M = \left\{\frac{1}{M} v \; | \; v \in \mathbb{N}^{|S|} , \sum_{i=1}^{|S|} v_i = M \right\}
+\end{equation*}
+
+In particular, we note that the beliefs in $G_M$ are a subset of $\mathbb{Q}_{\geq 0}^{|S|}$, which is countable but still infinite. Hence, this is an approximation of $Dist(S)$, since beliefs containing irrational probabilities can never be included in $G_M$ for any $M$.
+
+The resolution of the grid is denoted by $M$. The number of grid points in $G_M$ is the number of non-negative integer solutions to the equation $v_1 + \dots + v_{|S|} = M$, which is equal to ${M + |S| - 1 \choose M}$. Hence, the grid size is exponential in M.
+
+When this grid has been defined, value iteration is applied to the belief MDP, in the same manner as Section \ref{cs1:value_iteration}. However, for beliefs which are not in $G_M$, interpolation is applied, such as via Freudenthal triangulation as discussed further in \cite{lovejoy_computationally_1991}, in order to avoid computing values for all beliefs in the belief MDP.
+
+During this process of value iteration, in a very similar manner to Section \ref{cs1:adversary_gen}, an adversary $\sigma^*$ can be obtained, and the DTMC induced under $\sigma^*$ can be solved in order to obtain an approximation for the desired property. However, this adversary is a finite-memory adversary, and as previously discussed this will not always suffice for determining an optimal adversary for a POMDP. As a result, the value obtained under this strategy is a lower bound for the optimal value.
+
+Finally, the resolution of the grid $M$ can be increased in order to yield tighter bounds on the optimal value, with the caveat that, since grid size is exponential on M, care must be taken to ensure these bounds can still be computed in reasonable time.
 
 \section{Analysis (3 pages)}
 
