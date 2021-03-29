@@ -221,3 +221,9 @@ Date | Duration | Summary
 26/03/21 | 7 hours | Completed revision on Case Study 1, consider it finished at this point bar a few very minor things (will polish later). Started Case Study 2, up to adversary definition for POMDPs.
 27/03/21 | 2 hours | Added belief MDPs section.
 28/03/21 | 3 hours | Added section on property verification in POMDPs
+
+## Week 23
+
+Date | Duration | Summary
+---- | -------- | -------
+29/03/21 | 1 hour | Described game tree construction.

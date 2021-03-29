@@ -1,8 +1,10 @@
 \chapter{Case Study 2 (Liar's Dice)}
+\label{cs2:liars_dice}
 
 In this case study, we introduce Liar's Dice, a dice game utilising hidden information. We introduce partially observable MDPs (known as POMDPs) to represent this hidden information, model a small version of the game using a POMDP, and analyse the susceptibility of Liar's Dice to the snowball effect.
 
 \section{Liar's Dice description}
+\label{cs2:liars_dice_description}
 Liar's Dice is a dice game for multiple players, where each player must be able to bluff and detect opponent's bluffs in order to win. Liar's Dice takes place over a series of rounds, where each player rolls their dice, keeping the values on the dice hidden from other players. A player then makes a \emph{bid}, which is comprised of a face value ono a dice, and the number of dice that show that value. Players then rotate in turn, choosing to either make a higher bid (with either a higher face value, a higher quantity, or both), or challenge the previous bid. If a challenge is made, all dice are revealed. If the bid was correct, the challenging player loses a die. If the bid was incorrect, the bidding player loses a die. The player who lost starts the next round, and play continues until only one player has any remaining dice.
 
 In Liar's Dice, every player starts with the same amount of information, since every player starts with the same number of dice. However, as the game progresses, some players will have more dice than others, changing bidding behaviour, as demonstrated by the following example:
@@ -109,6 +111,7 @@ In particular, this modification of rewards ensures that reachability and reward
 One key remark about this belief MDP is that its state space is now continuous, since the states of the belief MDP represent probability distributions of states in the POMDP. This means that the number of states in the belief MDP is infinite (indeed, uncountably infinite), so the techniques introduced from Section \ref{cs1:prob_reach_mdps} are no longer feasible. Instead, we use a finite set of grid points in order to obtain an upper bound of the property in question, then directly generate a strategy on the POMDP itself to obtain a lower bound. These steps are described in more detail in the following section.
 
 \subsection{Property verification in POMDPs}
+\label{cs2:properties_pomdps}
 
 For simplicity, we only describe maximum reachability probabilities - the other cases, including minimum probabilities and expected rewards, are similar.
 
@@ -120,17 +123,40 @@ First, we obtain an upper bound for the property in question. The key idea, as p
 
 In particular, we note that the beliefs in $G_M$ are a subset of $\mathbb{Q}_{\geq 0}^{|S|}$, which is countable but still infinite. Hence, this is an approximation of $Dist(S)$, since beliefs containing irrational probabilities can never be included in $G_M$ for any $M$.
 
-The resolution of the grid is denoted by $M$. The number of grid points in $G_M$ is the number of non-negative integer solutions to the equation $v_1 + \dots + v_{|S|} = M$, which is equal to ${M + |S| - 1 \choose M}$. Hence, the grid size is exponential in M.
+The resolution of the grid is denoted by $M$. The number of grid points in $G_M$ is the number of non-negative integer solutions to the equation $v_1 + \dots + v_{|S|} = M$, which is equal to ${M + |S| - 1 \choose M}$. Hence, the grid size is exponential in $M$.
 
-When this grid has been defined, value iteration is applied to the belief MDP, in the same manner as Section \ref{cs1:value_iteration}. However, for beliefs which are not in $G_M$, interpolation is applied, such as via Freudenthal triangulation as discussed further in \cite{lovejoy_computationally_1991}, in order to avoid computing values for all beliefs in the belief MDP.
+When this grid has been defined, value iteration is applied to the belief MDP, in the same manner as Section \ref{cs1:value_iteration}. However, for beliefs which are not in $G_M$, interpolation is applied, such as via Freudenthal triangulation as discussed further in \cite{lovejoy_computationally_1991}, in order to avoid directly computing values for all beliefs in the belief MDP.
 
 During this process of value iteration, in a very similar manner to Section \ref{cs1:adversary_gen}, an adversary $\sigma^*$ can be obtained, and the DTMC induced under $\sigma^*$ can be solved in order to obtain an approximation for the desired property. However, this adversary is a finite-memory adversary, and as previously discussed this will not always suffice for determining an optimal adversary for a POMDP. As a result, the value obtained under this strategy is a lower bound for the optimal value.
 
 Finally, the resolution of the grid $M$ can be increased in order to yield tighter bounds on the optimal value, with the caveat that, since grid size is exponential on M, care must be taken to ensure these bounds can still be computed in reasonable time.
 
-\section{Analysis (3 pages)}
+We have now defined an extension to MDPs which allow us to model games which utilise hidden information. Now, we model and analyse Liar's Dice to show an example of such a game.
 
-Collect data, show results. Make sure to mention how game trees are constructed to infer results about games based on individual rounds.
+\section{Results and analysis}
+
+In this case study, our main aim is to analyse Liar's Dice in order to determine its susceptibility to the snowball effect, as discussed in Section \ref{cs2:liars_dice_description}. We also discuss the implications of POMDPs on model size.
+
+\subsection{State space reduction}
+
+As discussed in Section \ref{cs2:belief_mdps}, verifying properties of POMDPs involves constructing an infinite-state belief MDP, and in particular the size of the grid presented in \ref{cs2:properties_pomdps} increases exponentially with the number of states in the POMDP. Hence, in order to allow for efficient analysis, reducing the number of states in the POMDP is crucial.
+
+For Liar's Dice, the key method employed to reduce model size is to model each \emph{round}, as opposed to each \emph{game}. There are three main reasons why this construction is preferred:
+
+\begin{itemize}
+    \item Rounds in Liar's Dice are mostly independent - the main parameters of each game are the number of dice for each player, along with the starting player, which is always the loser of the previous round, or the first player in the first round of the game. Hence, transitioning between rounds is straightforward, since little to no information is maintained between rounds.
+    \item As a result of the previous point, some configurations may appear multiple times throughout a game. For instance, suppose each player starts with 3 dice. If player 1 loses the first round while player 2 loses the following two rounds, then player 1 has 2 dice, player 2 has 1 die, and player 2 starts the 4th round. This also occurs when player 2 loses the first and third rounds, while player 1 loses the second round. Hence, we would like to store the results of this round, in order to avoid computing this round on multiple occasions. In essence, this is a form of dynamic programming for model checking.
+    \item If user-defined strategies are employed, then the strategy used by each player can be freely exchanged between rounds. This is especially important for Liar's Dice, since we would expect that a player who has more dice than their opponents would play differently to a player with only one die.
+\end{itemize}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/LiarsDice/2_dice_game_tree.pdf}
+    \caption{A game tree of Liar's Dice. Each player starts with 2 dice, and each node represents the number of dice player 1 and player 2 have respectively, along with the starting player for that round.}
+    \label{cs2:2_dice_game_tree}
+\end{figure}
+
+This construction allows us to define a \emph{game tree}, as in Figure \ref{cs2:2_dice_game_tree}, where each node represents one round of the game.
 
 
 \section{Evaluation (2 pages)}
