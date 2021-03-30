@@ -227,3 +227,4 @@ Date | Duration | Summary
 Date | Duration | Summary
 ---- | -------- | -------
 29/03/21 | 4 hours | Described game tree construction. Reviewed work so far and uploaded to overleaf, written status report with some questions.
+30/03/21 | 2 hours | Reviewed Overleaf comments, supervisor meeting + writing up minutes.
