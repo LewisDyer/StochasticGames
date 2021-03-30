@@ -226,4 +226,4 @@ Date | Duration | Summary
 
 Date | Duration | Summary
 ---- | -------- | -------
-29/03/21 | 1 hour | Described game tree construction.
+29/03/21 | 4 hours | Described game tree construction. Reviewed work so far and uploaded to overleaf, written status report with some questions.

@@ -156,7 +156,19 @@ For Liar's Dice, the key method employed to reduce model size is to model each \
     \label{cs2:2_dice_game_tree}
 \end{figure}
 
-This construction allows us to define a \emph{game tree}, as in Figure \ref{cs2:2_dice_game_tree}, where each node represents one round of the game. Our approach now proceeds as follows: rather than 
+This construction allows us to define a \emph{game tree}, as in Figure \ref{cs2:2_dice_game_tree}, where each node represents one round of the game. This construction allows for simpler computation of the probability of a player winning a game. Rather than check a property for one large model, we check the winrate for each smaller model, then traverse the tree, obtaining a weighted sum based on the probability of winning each round.
+
+Another key implication of using game trees is that subgames can be considered very easily. For instance, in the game presented in Figure \ref{cs2:2_dice_game_tree}, a handicap can easily be considered, since the right child of the root node represents handicapping player 1 by moving one of their dice at the start of the game.
+
+\subsection{Model constraints}
+
+Due to the requirement to reduce model size, several assumptions and limitations were imposed on the model. In particular, rather than being able to make any bids, players are assumed to only either increase the face value by 1 or increase then quantity of the bid by 1. This limits the number of possible actions per bid, since there are now only two types of bids, plus the option of challenging. Another key limitation is that we only consider variants of Liar's Dice with two players, and at most 2 dice per player.
+
+
+
+\subsection{Pre-defined strategies}
+
+As with our first case study, we define some initial strategies in order to make comparisons to the optimal strategy. In Liar's Dice, there are two main types of decision making: deciding whether to make a bid or challenge the opponent's bid, and deciding which type of bid to make.
 
 
 \section{Evaluation (2 pages)}
