@@ -90,12 +90,22 @@ def roll_die(die_no, p, newLine):
     return newLine.join(output) + ";"
       
 def define_init_bid(strat, start_player, p1_die, p2_die, p, newLine):
-    strat_lookup = {0: bid_random, 1: bid_random_in_hand}
+    strat_lookup = {0: init_bid_nondet, 1: bid_random, 2: bid_random_in_hand}
 
     if start_player == p:
         return strat_lookup[strat](p, p1_die, p2_die, newLine)
     else:
         return ""
+
+def init_bid_nondet(p, p1_die, p2_die, newLine):
+    # list all possible bids, and allow any of them to be chosen nondeterministically.
+
+    output = []
+    for face in range(1, 7):
+        for quat in range(1, p1_die + p2_die + 1):
+            output.append(f"[p{p}_bid_init_{quat}_{face}] phase=1 -> (p{p}_bid_face' = {face}) & (p{p}_bid_quat' = {quat});")
+    
+    return newLine.join(output)
 
 def bid_random(p, p1_die, p2_die, newLine):
     # choose a totally random bid face and quantity, even if it's not in hand
@@ -123,35 +133,47 @@ def bid_random_in_hand(p, p1_die, p2_die, newLine):
 
     return newLine.join(output) + ';'
 
-def set_bids(strat, p, newLine):
-    strat_lookup = {0: bid_nondet, 1: face_first}
+def set_bids(strat, p, p1_die, p2_die, newLine):
+    strat_lookup = {0: bid_nondet, 1: face_first, 2: quantity_first}
 
-    return strat_lookup[strat](p, newLine)
+    return strat_lookup[strat](p, p1_die, p2_die, newLine)
 
 def init_bid(start_player, newLine):
     phase = 3 if start_player == 1 else 2
     return f"[p{start_player}_bid_init] phase=1 -> (phase' = {phase});"
 
-def bid_nondet(p, newLine):
+def bid_nondet(p, p1_die, p2_die, newLine):
     # nondeterministic: just set the guards for valid bids, without encouraging a particular decision
     other_p = 2 if p == 1 else 1
     output = []
 
     output.append(f"[p{p}_bid_face] phase=2 & p{other_p}_bid_face < 6 & !p{p}_challenge -> (p{p}_bid_face' = min(p{other_p}_bid_face + 1, 6)) & (p{p}_bid_quat' = current_bid_quat);")
     output.append("")
-    output.append(f"[p{p}_bid_quat] phase=2 & p{other_p}_bid_quat < 6 & !p{p}_challenge -> (p{p}_bid_quat' = min(p{other_p}_bid_quat + 1, 6)) & (p{p}_bid_face' = current_bid_face);")
+    output.append(f"[p{p}_bid_quat] phase=2 & p{other_p}_bid_quat < {p1_die + p2_die} & !p{p}_challenge -> (p{p}_bid_quat' = min(p{other_p}_bid_quat + 1, {p1_die + p2_die})) & (p{p}_bid_face' = current_bid_face);")
 
     return newLine.join(output)
 
-def face_first(p, newLine):
+def face_first(p, p1_die, p2_die, newLine):
     # very basic bidding strategy: always increment the face value until it reaches 6, then increment quantity.
     phase = 2 if p == 1 else 3
     other_p = 2 if p == 1 else 1
     output = []
 
-    output.append(f"[p{p}_bid_face] phase={phase} & p{other_p}_bid_face < 6 & p{p}_challenge -> (p{p}_bid_face' = min(p{other_p}_bid_face + 1, 6)) & (p{p}_bid_quat' = current_bid_quat);")
+    output.append(f"[p{p}_bid_face] phase={phase} & p{other_p}_bid_face < 6 & !p{p}_challenge -> (p{p}_bid_face' = min(p{other_p}_bid_face + 1, 6)) & (p{p}_bid_quat' = current_bid_quat);")
     output.append("")
-    output.append(f"[p{p}_bid_quat] phase={phase} & p{other_p}_bid_face = 6 & p{other_p}_bid_quat < 6 & p{p}_challenge -> (p{p}_bid_quat' = min(p{other_p}_bid_quat + 1, 6)) & (p{p}_bid_face' = current_bid_face);")
+    output.append(f"[p{p}_bid_quat] phase={phase} & p{other_p}_bid_face = 6 & p{other_p}_bid_quat < 6 & !p{p}_challenge -> (p{p}_bid_quat' = min(p{other_p}_bid_quat + 1,{p1_die + p2_die})) & (p{p}_bid_face' = current_bid_face);")
+
+    return newLine.join(output)
+
+def quantity_first(p, p1_die, p2_die, newLine):
+    # always increment quantity until it reaches the total no. of die, then increment face value.
+
+    phase = 2 if p == 1 else 3
+    other_p = 2 if p == 1 else 1
+    output = []
+    output.append(f"[p{p}_bid_quat] phase={phase} & p{other_p}_bid_quat < {p1_die + p2_die} & !p{p}_challenge -> (p{p}_bid_quat' = min(p{other_p}_bid_face+1, {p1_die + p2_die})) & (p{p}_bid_face' = current_bid_face);")
+    output.append("")
+    output.append(f"[p{p}_bid_face] phase={phase} & p{other_p}_bid_quat = {p1_die + p2_die} & p{other_p}_bid_face < 6 & !p{p}_challenge -> (p{p}_bid_face' = min(p{other_p}_bid_face + 1, 6)) & (p{p}_bid_quat' = current_bid_quat);")
 
     return newLine.join(output)
 

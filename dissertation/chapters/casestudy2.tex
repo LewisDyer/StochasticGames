@@ -175,9 +175,26 @@ As with our first case study, we define some initial strategies in order to make
 
 We now introduce two main types of player, exemplifying the different possibilities for each of these types of decisions. The \emph{risky player} makes a random bid at the start of the game, even where this bid may be initially incorrect. When bidding, they always increase the quantity of the bid where possible before increasing face value, and they always challenge when the sum of the face value and quantity is at least half the maximum possible sum. The \emph{safe player} makes a random bid at the start of the game, but only a bid which is guaranteed to appear in their hand. When bidding, they always prioritise increasing the face value of the bid rather than the quantity, and always challenge when the sum of the face value and quantity is at least 75\% of the maximum possible sum.
 
-It is important to note that these strategies are deliberately very simple, and unlikely to be effective. This is by design - here we are more interested in comparing various rounds of the game, as opposed to different strategies. These strategies are designed to represent the extremes of possible behaviour in Liar's Dice, in order to provide comparisons for optimal strategies.
+It is important to note that these strategies are deliberately very simple, and unlikely to be effective. This is by design - here we are more interested in comparing various rounds of the game, as opposed to different strategies. These strategies are designed to represent the extremes of possible behaviour in Liar's Dice, in order to provide comparisons for optimal strategies. Moreover, POMDPs do not allow for different sets of observable variables for different players, so we require that one player has a fixed strategy.
+
+\subsection{The two-dice variant}
+
+In order to analyse Liar's Dice, we consider the game tree of the two-dice version presented in Figure \ref{cs2:2_dice_game_tree}. To investigate the snowball effect, we consider the probability of player 1 winning at the root of the game tree, then consider the probability of player 1 winning at each child of the game tree. In particular, we fix the strategy of player 2 as either the safe or risky player, then generate the optimal strategy for player 1 at each step to generate the game tree.
 
 
+\begin{table}[]
+    \begin{tabular}{@{}lll@{}}
+    \toprule
+    Round                        & P1 loss probability (vs. safe player) & P1 loss probability (vs. risky player) \\ \midrule
+    \multicolumn{1}{l|}{2/2, P1} & \multicolumn{1}{l|}{x.xxxx}          & x.xxxx                                \\
+    \multicolumn{1}{l|}{2/1, P2} & \multicolumn{1}{l|}{x.xxxx}          & x.xxxx                                \\
+    \multicolumn{1}{l|}{1/2, P1} & \multicolumn{1}{l|}{x.xxxx}          & x.xxxx                                \\
+    \multicolumn{1}{l|}{1/1, P1} & \multicolumn{1}{l|}{x.xxxx}          & x.xxxx                                \\
+    \multicolumn{1}{l|}{1/1, P2} & \multicolumn{1}{l|}{x.xxxx}          & x.xxxx                               
+    \end{tabular}
+    \caption{The maximum loss probability for player 1 in each round of Liar's Dice in the game tree starting from 2 dice per player.}
+    \label{cs2:game_tree_table}
+    \end{table}
 
 \section{Evaluation (2 pages)}
 

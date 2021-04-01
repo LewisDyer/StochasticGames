@@ -28,7 +28,7 @@ module player1
 
     @ld/define_init_bid start_bid_strat start_player p1_die p2_die p1@
 	
-	@ld/set_bids p1_bid_strat p1@
+	@ld/set_bids p1_bid_strat p1 p1_die p2_die@
 
 endmodule
 
@@ -44,7 +44,7 @@ module player2
 
 	@ld/define_init_bid start_bid_strat start_player p1_die p2_die p2@
 
-	@ld/set_bids p2_bid_strat p2@
+	@ld/set_bids p2_bid_strat p2 p1_die p2_die@
 
 endmodule
 
