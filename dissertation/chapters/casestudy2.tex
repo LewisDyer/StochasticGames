@@ -142,6 +142,7 @@ We have now defined an extension to MDPs which allow us to model games which uti
 In this case study, our main aim is to analyse Liar's Dice in order to determine its susceptibility to the snowball effect, as discussed in Section \ref{cs2:liars_dice_description}. We also discuss the implications of POMDPs on model size.
 
 \subsection{State space reduction}
+\label{cs2:state_reduction}
 
 As discussed in Sections \ref{cs2:belief_mdps} and \ref{cs2:properties_pomdps}, verifying properties of POMDPs involves constructing an approximation of the belief MDP, and in particular the size of the grid presented in \ref{cs2:properties_pomdps} increases exponentially with the number of states in the POMDP. Hence, in order to allow for efficient analysis, reducing the number of states in the POMDP is crucial.
 
@@ -170,31 +171,37 @@ Another key implication of using game trees is that sub games can be considered 
 Due to the requirement to reduce model size, several assumptions and limitations were imposed on the model. In particular, rather than being able to make any bids, players are assumed to only either increase the face value by 1 or increase then quantity of the bid by 1. This limits the number of possible actions per bid, since there are now only two types of bids, plus the option of challenging the other player. Another key limitation is that we only consider variants of Liar's Dice with two players, and at most 2 dice per player.
 
 \subsection{Pre-defined strategies}
+\label{cs2:pre_def_strats}
 
 As with our first case study, we define some initial strategies in order to make comparisons to the optimal strategy. In Liar's Dice, there are three main types of decision to make. Firstly, the initial bid is important, since an aggressive opponent could start with a high bid and force an opponent to make an early decision about bluffing, without having enough time to gather information and form beliefs. Secondly, the decision to challenge is important - an overly aggressive strategy will lose frequently due to bidding on correct bids, while an overly conservative strategy will eventually make a bid that the opposing player can confidently challenge. Finally, the type of bid is also important - in general we expect increasing the quantity of a bid to be riskier than increasing the face value of a bid, since increasing the quantity provides more information for players to potentially challenge the bid.
 
 We now introduce two main types of player, exemplifying the different possibilities for each of these types of decisions. The \emph{risky player} makes a random bid at the start of the game, even where this bid may be initially incorrect. When bidding, they always increase the quantity of the bid where possible before increasing face value, and they always challenge when the sum of the face value and quantity is at least half the maximum possible sum. The \emph{safe player} makes a random bid at the start of the game, but only a bid which is guaranteed to appear in their hand. When bidding, they always prioritise increasing the face value of the bid rather than the quantity, and always challenge when the sum of the face value and quantity is at least 75\% of the maximum possible sum.
 
-It is important to note that these strategies are deliberately very simple, and unlikely to be effective. This is by design - here we are more interested in comparing various rounds of the game, as opposed to different strategies. These strategies are designed to represent the extremes of possible behaviour in Liar's Dice, in order to provide comparisons for optimal strategies. Moreover, POMDPs do not allow for different sets of observable variables for different players, so we require that one player has a fixed strategy.
+It is important to note that these strategies are deliberately very simple, and unlikely to be effective. This is by design - here we are more interested in comparing various rounds of the game, as opposed to different strategies. These strategies are designed to represent the extremes of possible behaviour in Liar's Dice, rather than representaing effective stategies for the game. Moreover, POMDPs do not allow for different sets of observable variables for different players, at least one of the players cannot include partial observability as part of their strategy. However this presents a key issue with adversary generation. In general, strategies which do not consider partial observability are simple, and easy to dominate via adversary generation. For this reason, we do not consider adversary generation for POMDPs, and instead focus on comparing two simpler strategies in order to analyse the overall structure of Liar's Dice.
 
 \subsection{The two-dice variant}
 
-In order to analyse Liar's Dice, we consider the game tree of the two-dice version presented in Figure \ref{cs2:2_dice_game_tree}. To investigate the snowball effect, we consider the probability of player 1 winning at the root of the game tree, then consider the probability of player 1 winning at each child of the game tree. In particular, we fix the strategy of player 2 as either the safe or risky player, then generate the optimal strategy for player 1 at each step to generate the game tree.
+In order to analyse Liar's Dice, we consider the game tree of the two-dice version presented in Figure \ref{cs2:2_dice_game_tree}. To investigate the snowball effect, we consider the probability of player 1 winning at the root of the game tree, then consider the probability of player 1 winning at each child of the game tree. We consider this for each permutation of the safe and risky strategies defined in Section \ref{cs2:pre_def_strats}, and the results are shown in Table \ref{cs2:game_tree_table}.
 
-
-\begin{table}[]
-    \begin{tabular}{@{}lll@{}}
-    \toprule
-    Round                        & P1 loss probability (vs. safe player) & P1 loss probability (vs. risky player) \\ \midrule
-    \multicolumn{1}{l|}{2/2, P1} & \multicolumn{1}{l|}{x.xxxx}          & x.xxxx                                \\
-    \multicolumn{1}{l|}{2/1, P2} & \multicolumn{1}{l|}{x.xxxx}          & x.xxxx                                \\
-    \multicolumn{1}{l|}{1/2, P1} & \multicolumn{1}{l|}{x.xxxx}          & x.xxxx                                \\
-    \multicolumn{1}{l|}{1/1, P1} & \multicolumn{1}{l|}{x.xxxx}          & x.xxxx                                \\
-    \multicolumn{1}{l|}{1/1, P2} & \multicolumn{1}{l|}{x.xxxx}          & x.xxxx                               
+\begin{table}[h]
+    \begin{tabular}{lllll}
+    \hline
+    Round                        & \begin{tabular}[c]{@{}l@{}}P1 loss probability\\ (safe vs. safe)\end{tabular} & \begin{tabular}[c]{@{}l@{}}P1 loss probability\\ (risky vs. risky)\end{tabular} & \begin{tabular}[c]{@{}l@{}}P1 loss probability\\ (safe vs. risky)\end{tabular} & \begin{tabular}[c]{@{}l@{}}P1 loss probability\\ (risky vs. safe)\end{tabular} \\ \hline
+    \multicolumn{1}{l|}{2/2, P1} & 0.1451                                                                        & 0.3403                                                                          & 0.5000                                                                         & 0.6972                                                                         \\
+    \multicolumn{1}{l|}{2/1, P2} & 0.6250                                                                        & 0.5780                                                                          & 0.3611                                                                         & 0.1806                                                                         \\
+    \multicolumn{1}{l|}{1/2, P1} & 0.3750                                                                        & 0.4210                                                                          & 0.5000                                                                         & 0.6389                                                                         \\
+    \multicolumn{1}{l|}{1/1, P1} & 0.5278                                                                        & 0.3611                                                                          & 0.6667                                                                         & 0.5718                                                                         \\
+    \multicolumn{1}{l|}{1/1, P2} & 0.4722                                                                        & 0.6389                                                                          & 0.4282                                                                         & 0.2500                                                                        
     \end{tabular}
-    \caption{The maximum loss probability for player 1 in each round of Liar's Dice in the game tree starting from 2 dice per player.}
+    \caption{The maximum loss probability for player 1 in Liar's Dice in the 2-dice variant with each possible permutation of the safe and risky strategies.}
     \label{cs2:game_tree_table}
     \end{table}
+
+This table exhibits some interesting behaviour. In particular, exchanging each player's set of dice, and changing the starting player, swaps the loss probability of each player. This is as expected for players with the same strategy, but this also means that symmetry could be exploited in these cases to reduce computation time, as suggested in Section \ref{cs2:state_reduction}. However, this does not occur when both players have different strategies, since the safe and risky strategies determine their initial bids differently.
+
+When player 1 utilises a risky strategy, their loss probability is considerably lower then they make the first move, comparing to going second. This can be explained by the risky player's strategy for initial bidding, which uniformly chooses any possible bid which is feasibly possible, regardless of whether the bid is correct. For instance, given 4 dice, the probability that at least three dice have the same value is $\frac{7}{72}$, or approximately $9.72\%$, while the probability of making a bid with quantity at least 3 is $50\%$. Hence, many initial bids will be incorrect to begin with. In addition, both players use a threshold-based challenge strategy, where a challenge is always made if the sum of the quantity and face value exceeds a given threshold. The thresholds used in the safe and risky strategies are $75\%$ and $50\%$ of the maximum possible sum respectively, and again since the initial bid is decided uniformly these thresholds may be crossed immediately following the initial bid.
+
+
 
 \section{Evaluation (2 pages)}
 

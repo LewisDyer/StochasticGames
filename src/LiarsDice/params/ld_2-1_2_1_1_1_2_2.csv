@@ -1,0 +1,10 @@
+p1_die, 2
+p1_bid_strat, 2
+p1_cha_strat, 1
+p2_die, 1
+p2_bid_strat, 1
+p2_cha_strat, 1
+start_player, 2
+start_bid_strat, 2
+p1, 1
+p2, 2

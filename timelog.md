@@ -229,3 +229,4 @@ Date | Duration | Summary
 29/03/21 | 4 hours | Described game tree construction. Reviewed work so far and uploaded to overleaf, written status report with some questions.
 30/03/21 | 2 hours | Reviewed Overleaf comments, supervisor meeting + writing up minutes.
 31/03/21 | 3 hours | Collecting more Liar's Dice data, noticed an issue with my current approach... will consider further tomorrow
+01/04/21 | 5 hours | Realised issues with optimising Liar's Dice with POMDPs, collected more data and added table to dissertation, starting discussion of data too.
