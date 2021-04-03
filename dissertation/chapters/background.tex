@@ -1,5 +1,5 @@
 
-\chapter{Background (3 pages)}
+sumchapter{Background (3 pages)}
 
 In order to begin formal analysis of a game, we must first formally define a model of a game, along with properties of this game we wish to consider.
 
@@ -131,10 +131,10 @@ After this precomputation process, we can now calculate the probability of a pro
 \begin{definition}
 \label{back:F_operator}
 
-    For a DTMC $\mathcal{D}$, with a set of states $S$, a partition of $S$ as in Definition \ref{back:S_yes}, and an atomic proposition $a$, we denote $Prob^{\mathcal{D}}(s, \mathbf{F} \: a)$ as the probability that an execution of $\mathcal{D}$ starting at state $s$ eventually reaches a state where $a$ holds. Furthermore, we have for any $s \in S^{?}$ that:
+    For a DTMC $\mathcal{D}$, with a set of states $S$, a partition of $S$ as in Definition \ref{back:S_yes}, and an atomic proposition $a$, we denote $Prob^{\mathcal{D}}(s, \mathbf{F} \: a)$ as the probability that an execution of $\mathcal{D}$ starting at state $s$ eventually reaches a state where $a$ holds. Furthermore, we have for any $s \in S^{?}$:
 
     \begin{equation*}
-        Prob^{\mathcal{D}}(s, \mathbf{F} \: \Phi) = \sum_{s' \in S^{?}} \mathbf{P}(s, s') \cdot Prob^{\mathcal{D}}(s, \mathbf{F} \: \Phi) \: + \sum_{s' \in S^{yes}} \mathbf{P}(s, s')
+        Prob^{\mathcal{D}}(s, \mathbf{F} \: \Phi) = \mbox{$\sum_{s' \in S^{?}}$} \mathbf{P}(s, s') \cdot Prob^{\mathcal{D}}(s, \mathbf{F} \: \Phi) \: + \mbox{$\sum_{s' \in S^{yes}}$} \mathbf{P}(s, s')
     \end{equation*}
     
 \end{definition}
