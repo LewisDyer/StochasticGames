@@ -1,0 +1,62 @@
+PRISM-games
+===========
+
+Version: 3.0.dev (based on PRISM 4.6.dev)
+Date: Fri Mar 12 17:45:55 GMT 2021
+Hostname: sand
+Memory limits: cudd=1g, java(heap)=622.2g
+Command line: prism-games 26Point2_0_3.prism 26Point2_manual.props -javamaxmem 700g -const no_spaces=30 -prop 1
+
+Parsing model file "26Point2_0_3.prism"...
+
+Type:        CSG
+Modules:     player1 player2 board 
+Variables:   p1_pos p1_chosen_dice p1_1s p1_2s p1_3s p1_4s p2_pos p2_chosen_dice p2_1s p2_2s p2_3s p2_4s state winner 
+
+Switching to explicit engine, which supports CSGs...
+
+Parsing properties file "26Point2_manual.props"...
+
+5 properties:
+(1) <<p1>>Pmax=? [ F "p1_wins" ]
+(2) <<p1>>Pmax=? [ F "players_tie" ]
+(3) <<p1>>R{"no_rounds"}max=? [ F "game_over" ]
+(4) <<p1>>R{"p1_busts"}max=? [ F "game_over" ]
+(5) <<p1>>R{"p1_busts"}max=? [ F "game_over" ]/<<p1>>R{"no_rounds"}max=? [ F "game_over" ]
+
+---------------------------------------------------------------------
+
+Model checking: <<p1>>Pmax=? [ F "p1_wins" ]
+Model constants: no_spaces=30
+
+Building model...
+Model constants: no_spaces=30
+
+Computing reachable states... 128112 350255 402071 646496 919957 1203298 1412525 1458308 1579422 1850938 2037693 2238906 2244375 states
+Reachable states exploration and model construction done in 36.305 secs.
+Sorting reachable states list...
+
+Time for model construction: 40.227 seconds.
+
+Type:        CSG
+States:      2244375 (1 initial)
+Transitions: 3372489
+Choices:     2253855
+Max/avg:     4/1.00
+
+Starting probabilistic reachability (until)...
+Max/avg (actions): (1,4)/(1.00,1.00)
+Max/avg (actions): (4,1)/(1.00,1.00)
+target=1056, yes=1056, no=455941, maybe=1787378
+
+Starting value iteration...
+
+Value iteration converged after 39 iterations.
+Precomputation took 45.288 seconds.
+
+Value in the initial state: 0.5640016678265884
+
+Time for model checking: 143.114 seconds.
+
+Result: 0.5640016678265884 (value in the initial state)
+

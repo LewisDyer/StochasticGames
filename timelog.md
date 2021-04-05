@@ -230,4 +230,11 @@ Date | Duration | Summary
 30/03/21 | 2 hours | Reviewed Overleaf comments, supervisor meeting + writing up minutes.
 31/03/21 | 3 hours | Collecting more Liar's Dice data, noticed an issue with my current approach... will consider further tomorrow
 01/04/21 | 5 hours | Realised issues with optimising Liar's Dice with POMDPs, collected more data and added table to dissertation, starting discussion of data too.
-02/04/21 | 7 hours | Received feedback on draft so far, made revisions and collected more data - the content of case study 2 should be done now
+02/04/21 | 7 hours | Received feedback on draft so far, made revisions and collected more data - the content of case study 2 should be done now.
+04/04/21 | 5 hours | Started case study 3, almost completed background up to matrix games.
+
+## Week 24 (Final Week)
+
+Date | Duration | Summary
+---- | -------- | -------
+05/04/21 | 6 hours | Continued writeup, finished case study 3 and added status report.

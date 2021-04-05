@@ -1,0 +1,60 @@
+PWD c:\Users\Lewis\OneDrive - University of Glasgow\Level 4\Individual Project\example_template\status_report
+INPUT C:\Users\Lewis\AppData\Local\MiKTeX\miktex\data\le\pdftex\pdflatex.fmt
+INPUT c:\Users\Lewis\OneDrive - University of Glasgow\Level 4\Individual Project\example_template\status_report\status_report_template.tex
+OUTPUT c:\Users\Lewis\OneDrive - University of Glasgow\Level 4\Individual Project\example_template\status_report\status_report_template.log
+INPUT C:\Users\Lewis\AppData\Local\Programs\MiKTeX\tex\latex\base\article.cls
+INPUT C:\Users\Lewis\AppData\Local\Programs\MiKTeX\tex\latex\base\article.cls
+INPUT C:\Users\Lewis\AppData\Local\Programs\MiKTeX\tex\latex\base\size11.clo
+INPUT C:\Users\Lewis\AppData\Local\Programs\MiKTeX\tex\latex\base\size11.clo
+INPUT C:\Users\Lewis\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmr10.tfm
+INPUT C:\Users\Lewis\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\times.sty
+INPUT C:\Users\Lewis\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\times.sty
+INPUT C:\Users\Lewis\AppData\Local\Programs\MiKTeX\tex\latex\preprint\fullpage.sty
+INPUT C:\Users\Lewis\AppData\Local\Programs\MiKTeX\tex\latex\preprint\fullpage.sty
+INPUT C:\Users\Lewis\AppData\Local\Programs\MiKTeX\tex\latex\l3backend\l3backend-pdfmode.def
+INPUT C:\Users\Lewis\AppData\Local\Programs\MiKTeX\tex\latex\l3backend\l3backend-pdfmode.def
+INPUT c:\Users\Lewis\OneDrive - University of Glasgow\Level 4\Individual Project\example_template\status_report\status_report_template.aux
+INPUT c:\Users\Lewis\OneDrive - University of Glasgow\Level 4\Individual Project\example_template\status_report\status_report_template.aux
+OUTPUT c:\Users\Lewis\OneDrive - University of Glasgow\Level 4\Individual Project\example_template\status_report\status_report_template.aux
+INPUT C:\Users\Lewis\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\ot1ptm.fd
+INPUT C:\Users\Lewis\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\ot1ptm.fd
+INPUT C:\Users\Lewis\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmr7t.tfm
+INPUT C:\Users\Lewis\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmr7t.tfm
+INPUT C:\Users\Lewis\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmr7t.tfm
+INPUT C:\Users\Lewis\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmr12.tfm
+INPUT C:\Users\Lewis\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmr8.tfm
+INPUT C:\Users\Lewis\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmr6.tfm
+INPUT C:\Users\Lewis\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmmi12.tfm
+INPUT C:\Users\Lewis\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmmi8.tfm
+INPUT C:\Users\Lewis\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmmi6.tfm
+INPUT C:\Users\Lewis\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmsy10.tfm
+INPUT C:\Users\Lewis\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmsy8.tfm
+INPUT C:\Users\Lewis\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmsy6.tfm
+INPUT C:\Users\Lewis\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmr7t.tfm
+INPUT C:\Users\Lewis\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmb7t.tfm
+INPUT C:\Users\Lewis\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmb7t.tfm
+INPUT C:\Users\Lewis\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmb7t.tfm
+INPUT C:\Users\Lewis\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\ts1ptm.fd
+INPUT C:\Users\Lewis\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\ts1ptm.fd
+INPUT C:\Users\Lewis\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmr8c.tfm
+OUTPUT c:\Users\Lewis\OneDrive - University of Glasgow\Level 4\Individual Project\example_template\status_report\status_report_template.pdf
+INPUT C:\Users\Lewis\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\ptmr7t.vf
+INPUT C:\Users\Lewis\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmr8r.tfm
+INPUT C:\Users\Lewis\AppData\Local\MiKTeX\pdftex\config\pdftex.map
+INPUT C:\Users\Lewis\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\ptmr7t.vf
+INPUT C:\Users\Lewis\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmr8r.tfm
+INPUT C:\Users\Lewis\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\ptmb7t.vf
+INPUT C:\Users\Lewis\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmb8r.tfm
+INPUT C:\Users\Lewis\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\ptmb7t.vf
+INPUT C:\Users\Lewis\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmb8r.tfm
+INPUT C:\Users\Lewis\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\ptmb7t.vf
+INPUT C:\Users\Lewis\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmb8r.tfm
+INPUT C:\Users\Lewis\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\ptmr7t.vf
+INPUT C:\Users\Lewis\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmr8r.tfm
+INPUT C:\Users\Lewis\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\ptmr8c.vf
+INPUT c:\Users\Lewis\OneDrive - University of Glasgow\Level 4\Individual Project\example_template\status_report\status_report_template.aux
+INPUT C:\Users\Lewis\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\base\8r.enc
+INPUT C:\Users\Lewis\AppData\Local\Programs\MiKTeX\fonts\type1\urw\times\utmb8a.pfb
+INPUT C:\Users\Lewis\AppData\Local\Programs\MiKTeX\fonts\type1\urw\times\utmb8a.pfb
+INPUT C:\Users\Lewis\AppData\Local\Programs\MiKTeX\fonts\type1\urw\times\utmr8a.pfb
+INPUT C:\Users\Lewis\AppData\Local\Programs\MiKTeX\fonts\type1\urw\times\utmr8a.pfb

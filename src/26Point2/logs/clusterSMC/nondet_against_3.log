@@ -1,0 +1,62 @@
+PRISM-games
+===========
+
+Version: 3.0.dev (based on PRISM 4.6.dev)
+Date: Fri Mar 12 17:34:15 GMT 2021
+Hostname: sand
+Memory limits: cudd=1g, java(heap)=622.2g
+Command line: prism-games 26Point2_0_3.prism 26Point2_manual.props -javamaxmem 700g -const no_spaces=50 -prop 1
+
+Parsing model file "26Point2_0_3.prism"...
+
+Type:        CSG
+Modules:     player1 player2 board 
+Variables:   p1_pos p1_chosen_dice p1_1s p1_2s p1_3s p1_4s p2_pos p2_chosen_dice p2_1s p2_2s p2_3s p2_4s state winner 
+
+Switching to explicit engine, which supports CSGs...
+
+Parsing properties file "26Point2_manual.props"...
+
+5 properties:
+(1) <<p1>>Pmax=? [ F "p1_wins" ]
+(2) <<p1>>Pmax=? [ F "players_tie" ]
+(3) <<p1>>R{"no_rounds"}max=? [ F "game_over" ]
+(4) <<p1>>R{"p1_busts"}max=? [ F "game_over" ]
+(5) <<p1>>R{"p1_busts"}max=? [ F "game_over" ]/<<p1>>R{"no_rounds"}max=? [ F "game_over" ]
+
+---------------------------------------------------------------------
+
+Model checking: <<p1>>Pmax=? [ F "p1_wins" ]
+Model constants: no_spaces=50
+
+Building model...
+Model constants: no_spaces=50
+
+Computing reachable states... 144896 350409 427878 691264 958127 1243186 1457020 1498834 1637937 1936108 2243228 2476332 2783039 3082899 3336560 3435647 3437607 3534441 3753626 4035705 4310035 4606029 4860521 4862469 5134969 5376134 5593212 5809439 5817179 6043742 6288181 6496819 6508635 states
+Reachable states exploration and model construction done in 114.222 secs.
+Sorting reachable states list...
+
+Time for model construction: 136.217 seconds.
+
+Type:        CSG
+States:      6508635 (1 initial)
+Transitions: 9774089
+Choices:     6536415
+Max/avg:     4/1.00
+
+Starting probabilistic reachability (until)...
+Max/avg (actions): (1,4)/(1.00,1.00)
+Max/avg (actions): (4,1)/(1.00,1.00)
+target=1776, yes=1776, no=788021, maybe=5718838
+
+Starting value iteration...
+
+Value iteration converged after 51 iterations.
+Precomputation took 158.901 seconds.
+
+Value in the initial state: 0.5607958854585698
+
+Time for model checking: 562.756 seconds.
+
+Result: 0.5607958854585698 (value in the initial state)
+
