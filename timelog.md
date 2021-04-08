@@ -238,3 +238,5 @@ Date | Duration | Summary
 Date | Duration | Summary
 ---- | -------- | -------
 05/04/21 | 6 hours | Continued writeup, finished case study 3 and added status report.
+06/04/21 | 6 hours | Supervisor meeting, reviewed comments on dissertation so far, wrote up minutes and started evaluation.
+07/04/21 | 7 hours | Finished abstract, introduction, evaluation and conclusion. Started reducing page counts, down to 31 pages. Started POMDP strategy generation, got a dot file but struggling to visualise/explain it. Started putting the presentation together
