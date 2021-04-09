@@ -1,16 +1,16 @@
 \chapter{Case Study 1: Shut the Box}
 \label{cs1}
 
-In this case study, we introduce a game called Shut the Box. We first introduce a new type of model, known as a Markov decision process (MDP), allowing for decision making during a game. We then model Shut the Box using an MDP, analyse multiple variants of this game under different strategies, and use this analysis to evaluate the design of Shut the Box.
+In this case study, we introduce a game called Shut the Box. We first introduce a n extension of DTMCs, called Markov decision processes (MDPs), allowing for the modelling of decision making during a game. We then model Shut the Box using MDPs, analyse multiple variants of this game under different strategies, and use this analysis to evaluate the design of Shut the Box.
 
 \section{Shut the Box description}
 \label{cs1:stb_description}
 
-Shut the Box is a single player game, where the player aims to cover as many \emph{boards} as possible through a series of dice rolls. The game starts with a series of boards, which are wooden panel on hinges in the physical version, as shown in Figure \ref{cs1:physical_stb}, each numbered sequentially starting from 1, with each board initially uncovered. In each round, the player rolls a set of dice values. The player must then cover a set of uncovered boards whose sum is equal to the sum of the dice. For instance, if the player rolls a 1 and a 2, then the player must either cover boards 1 and 2, or cover board 3. When a board is covered, it can no longer be considered when covering future boards. For instance, in the above example, if board 2 has already been covered, the player must cover  board 3, provided that board 3 was still uncovered. The game proceeds in this manner until the player cannot cover a set of uncovered boards which match the sum of the dice values rolled. A player's \emph{score} for a round of Shut the Box is then defined as the sum of all covered boards when the game ends, and a player's objective for Shut the Box is to maximise their score.
+Shut the Box is a single player game, where the player aims to cover as many \emph{boards} as possible through a series of dice rolls. The game starts with a series of boards, which are wooden panel on hinges in the physical version, as shown in Figure \ref{cs1:physical_stb}, each numbered sequentially starting from 1, with each board initially uncovered. In each round, a player rolls a set of dice values. The player must then cover a set of uncovered boards whose sum is equal to the sum of the dice. For instance, if the player rolls a 1 and a 2, then the player must either cover boards 1 and 2, or cover board 3. When a board is covered, it can no longer be considered when covering future boards. For instance, in the above example, if board 2 has already been covered, the player must cover  board 3, provided that board 3 was still uncovered. The game proceeds in this manner until the player cannot cover a set of uncovered boards which match the sum of the dice values rolled. A player's \emph{score} for a round of Shut the Box is then defined as the sum of all covered boards when the game ends, and a player's objective for Shut the Box is to maximise their score.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.5\textwidth]{images/shut_the_box.jpg}
+    \includegraphics[width=0.35\textwidth]{images/shut_the_box.jpg}
     \caption{A physical version of the 9-board variant of Shut the Box adapted from \cite{wikipedia_deutsch_2006}.}
     \label{cs1:physical_stb}
 \end{figure}
@@ -29,12 +29,12 @@ When playing Shut the Box, it soon becomes clear that some configurations of boa
 
 Intuitively, this suggests that lower numbered boards are more valuable later in the game, since they increase the set of possible die rolls that a player can roll without ending the game. From this intuition, we develop two potential strategies for playing Shut the Box. The \emph{high-board strategy} is the strategy where the player always elects to cover the highest numbered board in each round, while the \emph{low-board strategy} is the converse, where the player always elects to cover the lowest numbered boards in each round.
 
-To evaluate the effectiveness of these strategies, model checking is a suitable strategy. Since these strategies are deterministic, we may define DTMCs that model Shut the Box under these two strategies, define the score of the game as a reward structure, and evaluate the expected score when the game terminates. In addition to this analysis, we are also interested in the \emph{optimal} strategy - that is, the strategy which maximises the expected score of Shut the Box. Trying to enumerate and consider every possible strategy would be challenging, both conceptually and computationally. Instead, we model the nondeterministic variant of the game, where the player makes a nondeterministic choice between all possible coverings after each dice roll, and derive an optimal strategy from here by choosing a series of actions in order to induce an optimal deterministic strategy. In order to achieve this, in the next section we introduce MDPs a generalisation of DTMCs which supports nondeterminism.
+To evaluate the effectiveness of these strategies, model checking is a suitable strategy. Since these strategies are deterministic, we may define DTMCs that model Shut the Box under these two strategies, define the score of the game as a reward structure, and evaluate the expected score when the game terminates. In addition to this analysis, we are also interested in the \emph{optimal} strategy - that is, the strategy which maximises the expected score of Shut the Box. Trying to enumerate and consider every possible strategy would be challenging, both conceptually and computationally. Instead, we model the nondeterministic variant of the game, where the player makes a nondeterministic choice between all possible coverings after each dice roll, and derive an optimal strategy from here by choosing a series of actions in order to induce an optimal deterministic strategy. In order to achieve this, in the next section we introduce MDPs, a generalisation of DTMCs which support nondeterminism.
 
 \section{Background}
 \label{cs1:stb_background}
 
-We start by introducing Markov decision processes (MDPs) as described in \cite{forejt_automated_2011}, which are generalisations of DTMCs allowing for actions to be taken at each state, each leading to different probabilistic transitions from that state. We then consider adversaries - resolutions of nondeterministic choice in MDPs - and briefly discuss how optimal adversaries are computed.
+We now introduce Markov decision processes (MDPs) as described in \cite{forejt_automated_2011}, which are generalisations of DTMCs allowing for actions to be taken at each state, each leading to different probabilistic transitions from that state. We then consider adversaries - resolutions of nondeterministic choice in MDPs - and briefly discuss how optimal adversaries are computed.
 
 \subsection{Markov decision processes}
 \label{cs1:mdps}
@@ -43,25 +43,15 @@ First, we define an MDP as an extension of a DTMC.
 \begin{definition}
 \label{cs1:def_mdps}
 
-A Markov decision process (MDP) is a tuple $(S, \bar{s}, A, \delta, L)$, where $S$, $\bar{s}$ and $L$ have the same meanings as in Definition \ref{back:dtmc}. $A$ is the finite set of \emph{actions} on the MDP, while  $\mathbf{\delta} : S \times A \rightarrow Dist(S)$ is the new partial transition probability function, where pairs of states and actions are mapped to probability distributions denoting a transition to another state.
-
+A Markov decision process (MDP) is a tuple $(S, \bar{s}, A, \delta, L)$, where $S$, $\bar{s}$ and $L$ have the same meanings as in Definition \ref{back:dtmc}, $A$ is a finite set of \emph{actions} on the MDP and  $\mathbf{\delta} : S \times A \rightarrow Dist(S)$ is a partial transition probability function, where pairs of states and actions are mapped to probability distributions denoting a transition to another state. In particular, we denote $Act(s)$ as the set of actions at $s$ such that $\delta(s, a)$ is defined.
 \end{definition}
 
-In general, not all actions are available in every state. For convenience, we define the set of available actions for a state.
-
-\begin{definition}
-\label{cs1:available_actions}
-
-For an MDP $\mathcal{M}$ with action set $A$ and some state $s$, denote $Act(s)$ as the set of available actions at $a$, that is the set of actions such that $\delta(s, a)$ is defined.
-
-\end{definition}
-
-We must also modify our definition of reward structures, since transition rewards now also consider the action taken in order to undergo the transition.
+We must also modify our definition of reward structures, since transition rewards now also consider the action taken.
 
 \begin{definition}
 \label{cs1:mdp_rewards}
 
-A reward structure for an MDP $\mathcal{M}$ is a tuple $(\rho, \iota)$ where $\rho : S \rightarrow \mathbb{N}$ is a state reward function assigning each state to a reward and $\iota : (S {\times} A) \rightarrow \mathbb{N}$ is the partial action reward function, associating each transition from $s$ under action $a$ with a reward, under the constraint that $a \in Act(s)$.
+A reward structure for an MDP $\mathcal{M}$ is a tuple $(\rho, \iota)$ where $\rho : S \rightarrow \mathbb{N}$ is a state reward function assigning each state to a reward and $\iota : (S {\times} A) \rightarrow \mathbb{N}$ is a action reward function, associating each transition from $s$ under action $a$ with a reward.
 \end{definition}
 
 For example, in a game of Shut the Box, $A$ is the set of possible subsets of boards that the player can cover given the dice values rolled (such as the action of covering boards 3 and 5 simultaneously). Another possible action is rolling the dice, although there is no nondeterminism here. Hence, $\delta$ maps each state, including the current dice value and the current set of uncovered boards, to the set of all possible covering arrangements along with the associated state transition. If $s$ is the state where boards 1, 2 and 3 are covered, and a 3 is rolled, then the two elements of $Act(s)$ are the covering of boards 1 and 2, along with the covering of board 3.
@@ -76,7 +66,7 @@ An \emph{infinite path} through an MDP is a sequence $s_0 \xrightarrow{a_0} s_1 
 \end{definition}
 
 
-Note here that, in general, more than one action is available in a state. Indeed, this is where nondeterminism is introduced into the MDP. In order to resolve this nondeterminism, we introduce the concept of adversaries.
+In general, more than one action is available in a state. Indeed, this is where nondeterminism is introduced into the MDP. In order to resolve this nondeterminism, we introduce the concept of adversaries.
 
 \begin{definition}
 \label{cs1:adversaries}
@@ -86,7 +76,7 @@ An adversary is a function $\sigma$ which maps each finite path to an action ava
 
 \end{definition}
  
-A key remark on this definition is that, given a finite path $\omega = s_0 \xrightarrow{a_0} s_1 \xrightarrow{a_1} \dots \rightarrow{a_{n-1}} s_n$,  adversaries make decisions depending on the entire execution history up to and including the state $s_n$, not just the state $s_n$ itself. However, we primarily consider \emph{memoryless adversaries}, where the adversary always picks the same action in a given state. In particular, this adversary can be viewed as a map from states to actions. Throughout the remainder of the dissertation, we only consider memoryless adversaries unless stated otherwise, and for MDPs this is sufficient to obtain optimal strategies for probabilistic and expected reachability properties.  We also remark that optimal adversaries for MDPs are non-randomised, so given a particular state the same action is always chosen with probability 1. % However this is no longer the case for concurrent games which optimal strategies may require randomisation, which are discussed further in the third case study on Chapter~\ref{ch:cs3}.
+A key remark on this definition is that, given a finite path $\omega = s_0 \xrightarrow{a_0} s_1 \xrightarrow{a_1} \dots \xrightarrow{a_{n-1}} s_n$,  adversaries make decisions depending on the entire execution history up to and including the state $s_n$, not just the state $s_n$ itself. However, we primarily consider \emph{memoryless adversaries}, where the adversary always picks the same action in a given state. In particular, this adversary can be viewed as a map from states to available actions. For MDPs, these are sufficient to obtain optimal strategies for probabilistic and expected reachability properties.  We also remark that optimal adversaries for MDPs are non-randomised, so given a particular state the same action is always chosen with probability 1. % However this is no longer the case for concurrent games which optimal strategies may require randomisation, which are discussed further in the third case study on Chapter~\ref{ch:cs3}.
 
 When the behaviour of an MDP is considered under an adversary, the nondeterministic choices are resolved, and a DTMC is obtained. Hence, under a specific adversary, we can apply the model checking techniques introduced in Section \ref{back:prob_mod_check} to evaluate properties of an MDP.
 
@@ -97,13 +87,13 @@ We defer discussion on how optimal adversaries are generated until Section \ref{
 \subsection{Probabilistic reachability in MDPs}
 \label{cs1:prob_reach_mdps}
 
-In a similar manner to Section \ref{back:check-reach}, given an atomic proposition $a$, we define $T$ to be the set of states in some MDP $\mathcal{M}$ where $a$ holds.
+In a similar manner to Section \ref{back:check-reach}, given an atomic proposition $a$, we define $T$ to be the set of states in some MDP $\mathcal{M}$ where $a$ holds. We only consider the minimum case here - the maximum case is analogous.
 
-Since MDPs allow for nondeterminism, we must consider the minimum and maximum probability of reaching $T$ from each state $s$ of the MDP, over all possible resolutions of nondeterminism. More precisely, for some atomic proposition $a$, and state $s$ (which may not necessarily be an initial state of the associated MDP) we denote these probabilities as $\mathbf{P}^{s}_{min=?} [\mathbf{F} \; a]$ and $\mathbf{P}^{s}_{max=?} [\mathbf{F} \; a]$ respectively. In order to calculate these probabilities, we introduce a method known as \emph{value iteration}, as described in \cite{chatterjee_value_2008}. This method computes a sequence $(x^n_s)_{n \in \mathbb{N}}$, denoting the minimum or maximum probability of reaching $T$ from a given state $s$ within $n$ steps. This sequence converges to the optimal value, yielding an approximation of the optimal value for large enough $n$.
+Since MDPs allow for nondeterminism, we must consider the minimum probability of reaching $T$ from each state $s$ of the MDP, over all possible resolutions of nondeterminism. More precisely, for some atomic proposition $a$, and state $s$ (which may not necessarily be an initial state of the associated MDP) we denote this probability as $\mathbf{P}^{s}_{min=?} [\mathbf{F} \; a]$. In order to compute this probability, we introduce a method known as \emph{value iteration}, as described in \cite{chatterjee_value_2008}. This method computes a sequence $(x^n_s)_{n \in \mathbb{N}}$, denoting the minimum probability of reaching $T$ from a given state $s$ within $n$ steps. This sequence converges to the optimal value, yielding an approximation of the optimal value for large enough $n$.
 
 First, we perform precomputation of several sets of states, very similarly to precomputation of $S^{yes}$ and $S^{no}$ in Definition \ref{back:S_yes}.
 %, where the minimum or maximum reachability probabilities are either 0 or 1. 
-The details of these constructions are omitted and described further in \cite{forejt_automated_2011}. %More formally, these precomputed sets are defined as follows.
+The details of these constructions are omitted and described in \cite{forejt_automated_2011}. %More formally, these precomputed sets are defined as follows.
 
 \begin{definition}
 \label{cs1:yes_no}
@@ -111,10 +101,8 @@ The details of these constructions are omitted and described further in \cite{fo
 For a given MDP $\mathcal{M}$, with state space $S$ and atomic proposition $a$:
 
 \begin{itemize}
-    \item $S^{yes}_{min}$ is the set of states where $a$ eventually holds with probability 1, regardless of any nondeterministic choice.
+    \item $S^{yes}_{min}$ is the set of states where $a$ eventually holds with probability 1, regardless of the resolution of the nondeterminism.
     \item $S^{no}_{min}$ is the state of states where $a$ never holds in any subsequent reachable state, for some resolution of nondeterminism.
-    \item $S^{yes}_{max}$ is the set of states where $a$ eventually holds with probability 1, for some resolution of nondeterminism.
-    \item $S^{no}_{max}$ is the state of states where $a$ never holds in any subsequent reachable state, regardless of any nondeterministic choice.  
 \end{itemize}
 \end{definition}
 
@@ -123,27 +111,24 @@ We are now ready to define value iteration for calculating the minimum reachabil
 \begin{definition}
 \label{cs1:value_iteration}
 
-Given an MDP $\mathcal{M}$, with precomputed sets of states as described in Definition \ref{cs1:yes_no}, we have that:
-
+Given an MDP $\mathcal{M}$, with precomputed sets of states as described in Definition~\ref{cs1:yes_no}, we have that:
 \begin{equation*}
 x^n_s = \begin{cases}
         1 & s \in S^{yes}_{min} \\
         0 & s \in S^{no}_{min} \\
         0 & s \notin (S^{yes}_{min} \cup S^{no}_{min}) \; \text{and} \; n=0 \\
-        min_{a \in A(s)} \left\{ \sum_{s' \in S}\delta(s,a)(s') \cdot x^{n-1}_{s'} \right\} & \text{otherwise.} \\
+        \min_{a \in A(s)} \left\{ \sum_{s' \in S}\delta(s,a)(s') \cdot x^{n-1}_{s'} \right\} & \text{otherwise.} \\
     \end{cases}
 \end{equation*}
-
 \end{definition}
-
 Using this method, optimal values can be obtained using an iterative process, and in particular the number of iterations required for a reasonable level of convergence can be determined during the algorithm's execution, such as terminating when the difference between two consecutive terms in the sequence is less than some pre-defined convergence criterion $\epsilon>0$. However, this specific approach is somewhat flawed, particularly when probabilities are initially small, or the sequence converges slowly. Several pieces of recent work have proposed alternative notions of convergence which address these issues, including the interval iteration algorithm described in \cite{haddad_interval_2018}, which considers upper and lower bounds on value iteration and proceeds until these bounds are sufficiently close together.
 
-We now have a method of approximating $\mathbf{P}^{s}_{min =?} [\mathbf{F} \; a]$ and $\mathbf{P}^{s}_{max =?} [\mathbf{F} \; a]$, which we can then modify to produce not just an approximation of the optimal values themselves, but a method for producing the choices of actions which lead to these optimal values, known as adversary generation, which we discuss in the next section.
+We now have a method of approximating $\mathbf{P}^{s}_{min =?} [\mathbf{F} \; a]$, which we can then modify to produce not just an approximation of the optimal values themselves, but a method for producing the choices of actions which lead to these optimal values, known as adversary generation, which we discuss in the next section.
 
 \subsection{Adversary generation}
 \label{cs1:adversary_gen}
 
-In Definition \ref{cs1:value_iteration}, the inductive step is relatively simple: to find the maximum or minimum probability of reaching a state where $a$ holds within $n$ steps, we consider each possible action, consider each state it can transition to, then consider the probability of reaching a state where $a$ holds from each of these states, and finally choose the action where this value is minimised or maximised.
+In Definition \ref{cs1:value_iteration}, the inductive step is relatively simple: to find the minimum probability of reaching a state where $a$ holds within $n$ steps, we consider each possible action, consider each state it can transition to, then consider the probability of reaching a state where $a$ holds from each of these states, and finally choose the action where this value is minimised.
 
 Hence, to compute the optimal adversary itself, we simply need to select the \emph{action} leading to the optimal value, rather than considering the value itself. Since our adversaries are memoryless and deterministic, and hence defined as a mapping from states to actions, corresponding closely with value iteration. An example of this derivation is given below for calculating a minimum strategy.
 
@@ -189,32 +174,33 @@ Consider the MDP presented in Figure \ref{cs1:bad_mdp_figure}. While in state $s
 
 Given a specific optimal adversary $\sigma$, computing the reachability probability of an MDP under the adversary is fairly simple, by considering the DTMC induced by $\sigma$ and using the techniques introduced in Section \ref{back:check-reach}. But the converse, that we have shown in this section, is potentially more surprising - given an optimal value for a reachability probability, an adversary can be constructed that obtains this optimal value, during the process of value iteration, with minimal additional computation.
 
-As a final remark, adversary generation for reward-based properties is analogous to adversary generation for reachability properties, using almost identical applications of value iteration and precomputation to compute minimum and maximum expected values until reaching a state where a given atomic proposition holds. For this reason, precise details of constructing these adversaries are omitted. \gethin{add value iteration works similarly for reward props}
+As a final remark, adversary generation for reward-based properties is analogous to adversary generation for reachability properties, using almost identical applications of value iteration and precomputation to compute minimum and maximum expected values until reaching a state where a given atomic proposition holds. For this reason, precise details of constructing these adversaries are omitted.
 
 \section{Results and Analysis}
 \label{cs1:stb_results}
 
 In Section \ref{cs1:stb_description}, the high-board and low-board strategies were defined. Our main aim in this study is to analyse these strategies, compare them to the optimal and suboptimal strategies for Shut the Box across different variants, and evaluate the design of Shut the Box based on this information.
 
-\subsection{The one-dice variant}
-\label{cs1:stb_one_dice}
 
-Before we examine the standard variant of Shut the Box, we briefly consider the one dice variant with 12 boards, with uniform probability of rolling any number from 1 to 12 inclusive. The probability of obtaining each possible score under different strategy is given in Figure~\ref{cs1:stb12_1d12_prob_score}. These strategies are the high-board strategy, which continually chooses the available board with the largest value to cover, the low-board strategy which always chooses the lowest value available board to cover, and the optimal strategies for obtaining the maximum and minimum expected value for the score. The dotted lines in the figure represent the upper and lower bounds on the probability of obtaining each possible score, while the solid lines represent the probability distribution of each score under various strategies. 
+% \subsection{The one-dice variant}
+% \label{cs1:stb_one_dice}
 
-In Figure~\ref{cs1:stb12_1d12_prob_score} we see that the high-board strategy, which we expect to be effective, starts close to the lower bound of probabilities for low scores, then approaches the upper bound for high scores. This meets our expectations for strategies: we expect an ideal strategy for Shut the Box to have a low probability of obtaining a low score and a high probability of obtaining a high score. 
+% Before we examine the standard variant of Shut the Box, we briefly consider the one dice variant with 12 boards, with uniform probability of rolling any number from 1 to 12 inclusive. The probability of obtaining each possible score under different strategy is given in Figure~\ref{cs1:stb12_1d12_prob_score}. These strategies are the high-board strategy, which continually chooses the available board with the largest value to cover, the low-board strategy which always chooses the lowest value available board to cover, and the optimal strategies for obtaining the maximum and minimum expected value for the score. The dotted lines in the figure represent the upper and lower bounds on the probability of obtaining each possible score, while the solid lines represent the probability distribution of each score under various strategies. 
 
-\begin{figure}[h]
-    \centering
-    \vspace*{-0.4cm}    \includegraphics[width=0.7\textwidth]{images/ShutTheBox/stb12_1d12_prob_score.pdf}
-    \vspace*{-0.4cm}
-    \caption{Probability of each score in Shut the Box, using one dice, under different strategies.}
-\label{cs1:stb12_1d12_prob_score}
-    \vspace*{-0.2cm}
-\end{figure}
+% In Figure~\ref{cs1:stb12_1d12_prob_score} we see that the high-board strategy, which we expect to be effective, starts close to the lower bound of probabilities for low scores, then approaches the upper bound for high scores. This meets our expectations for strategies: we expect an ideal strategy for Shut the Box to have a low probability of obtaining a low score and a high probability of obtaining a high score. 
 
-However, this variant of the game has some flaws. In particular, the probability of achieving a very low score is somewhat high, even for very good strategies. Since each value on a die is equally likely, a succession of low values early on means a low score. In the extreme case, rolling 1 twice in a row means a guaranteed score of 1, regardless of strategy. While this specific example is rare, games should differentiate players based on their strategy, and players can feel frustrated if their strategy makes no difference to the result of the game.
+% \begin{figure}[h]
+%     \centering
+%     \vspace*{-0.4cm}    \includegraphics[width=0.7\textwidth]{images/ShutTheBox/stb12_1d12_prob_score.pdf}
+%     \vspace*{-0.4cm}
+%     \caption{Probability of each score in Shut the Box, using one dice, under different strategies.}
+% \label{cs1:stb12_1d12_prob_score}
+%     \vspace*{-0.2cm}
+% \end{figure}
 
-One possible method to alleviate this issue is to alter the probability distribution of a die roll, to reduce the probability of rolling extreme values. This can be simulated by rolling two dice with half as many faces, as a crude approximation of a normal distribution. This is the standard variant of Shut the Box, which is addressed in the next section.
+% However, this variant of the game has some flaws. In particular, the probability of achieving a very low score is somewhat high, even for very good strategies. Since each value on a die is equally likely, a succession of low values early on means a low score. In the extreme case, rolling 1 twice in a row means a guaranteed score of 1, regardless of strategy. While this specific example is rare, games should differentiate players based on their strategy, and players can feel frustrated if their strategy makes no difference to the result of the game.
+
+% One possible method to alleviate this issue is to alter the probability distribution of a die roll, to reduce the probability of rolling extreme values. This can be simulated by rolling two dice with half as many faces, as a crude approximation of a normal distribution. This is the standard variant of Shut the Box, which is addressed in the next section.
 
 \subsection{The standard variant}
 \label{cs1:stb_standard}
@@ -233,7 +219,8 @@ One possible method to alleviate this issue is to alter the probability distribu
     \label{cs1:exp_value_results}
 \end{table}
 
-Firstly, Table \ref{cs1:exp_value_results} shows the expected score for each of the strategies considered in Section \ref{cs1:stb_one_dice}. We note that the expected score for the pre-defined high-board strategy is close to the maximum possible expected score which is generated via value iteration, and similarly with the low-board strategy and the minimum possible expected score. Further information, in particular the probability distribution of the final score under each strategy, is included in Figure~\ref{cs1:stb12_2d6_prob_score}. Immediately we see that the main flaw with the one-die variant of Shut the Box has been mostly resolved, and the probability of obtaining a very low score has been reduced, especially for good strategies. Furthermore, Figure~\ref{cs1:stb12_2d6_prob_score} demonstrates that the high-board and low-board strategies are very similar to the maximum and minimum expected value strategies respectively.
+Table~\ref{cs1:exp_value_results} shows the expected score for the high-board and low-board strategies defined in Section~\ref{cs1:stb_description}, along with the optimal values generated by PRISM. % for the maximum and minimum expected score for Shut the Box, 
+We note that the expected score for the pre-defined high-board strategy is close to the maximum possible expected score, and similarly with the low-board strategy and the minimum possible expected score. Further information, in particular the probability distribution of the final score under each strategy, is included in Figure~\ref{cs1:stb12_2d6_prob_score} with dotted lines representing the minimum and maximum possible probabilities for attaining each score in Shut the Box. In addition, Figure~\ref{cs1:stb12_2d6_prob_score} demonstrates that the high-board and low-board strategies are very similar to the maximum and minimum expected value strategies respectively.
 
 
 \begin{figure}
@@ -248,22 +235,13 @@ Firstly, Table \ref{cs1:exp_value_results} shows the expected score for each of 
 
 %The strategies leading to the minimum and maximum expected scores of Shut the Box were generated using PRISM, and the score distributions under these strategies were obtained and visualised. 
 
-In a more abstract sense, the difference between the minimum and maximum strategies shown in  Figure~\ref{cs1:stb12_2d6_prob_score} represents the impact that strategy can have on the game. For instance, several peaks on the probabilities for different strategies occur at triangular numbers, which are the sum of the first $n$ natural numbers from some $n$, since these present opportunities for bad strategy to significantly impair future rolls. To take a basic example, when no boards are covered, rolling a 10 in the standard variant means that the high-board strategy will cover board 10, while the low-board strategy will cover boards 1, 2, 3 and 4. The former case still allows the game to continue regardless of the value of the next roll, whereas the low-board strategy means that any future rolls between 2 and 4 will always cause the game to end. Therefore, while players can be unlucky regardless of their strategy (for instance, rolling a 2 twice in a row will always lead to the game ending), sound strategy can leave more options open in later rounds.
+In a more abstract sense, the difference between the minimum and maximum strategies shown in  Figure~\ref{cs1:stb12_2d6_prob_score} represents the impact that strategy can have on the game. For instance, several peaks on the probabilities for different strategies occur at triangular numbers, which are the sum of the first $n$ natural numbers for some $n$, since these present opportunities for bad strategy to significantly impair future rolls. To take a basic example, when no boards are covered, rolling a 10 in the standard variant means that the high-board strategy will cover board 10, while the low-board strategy will cover boards 1, 2, 3 and 4. The former case still allows the game to continue regardless of the value of the next roll, whereas the low-board strategy means that any future rolls between 2 and 4 will always cause the game to end. Therefore, while players can be unlucky regardless of their strategy (for instance, rolling a 2 twice in a row will always lead to the game ending), sound strategy can leave more options open in later rounds.
 
 This initial analysis suggests that the high-board strategy is effective, and even close to optimal for obtaining high scores. We investigate this further in two main directions. We first consider the relative importance of high boards compared to low boards, then compare the choices of the optimal strategy with the high board strategy to ascertain their differences.
 
 \subsection{Quantifying the value of high boards}
 
-Intuitively, we expect high boards to be more important than low boards, for several reasons. Firstly, they clearly contribute more to the final score of the game. But more importantly, due to their higher value, there are fewer possible die rolls which can cover high boards, which suggests that an opportunity to cover a high board should be prioritised over covering lower value boards. In essence, this is the key idea behind the high-board strategy. 
-
-To exemplify this, we consider each possible score in turn and consider the probability of each board being covered given this score. The results of this are given in Figure~\ref{cs1:stb12_2d6_cond_prob}. In particular, all boards have a positive correlation between the final score and the probability that board is covered, which is unsurprising given that larger scores naturally involve covering more boards, but this correlation is far stronger for higher value boards, suggesting that covering high boards should be prioritised where possible.
-
-\begin{figure}
-    \centering
-    \includegraphics[width=\textwidth]{images/ShutTheBox/stb12_2d6_score_given_board_12.pdf}
-    \caption{The conditional probability of each board being covered in Shut the Box given the final score, in the standard variant under the high-board strategy.}
-\label{cs1:stb12_2d6_cond_prob}
-\end{figure}
+Intuitively, we expect high boards to be more important than low boards, for several reasons. Firstly, they clearly contribute more to the final score of the game. But more importantly, due to their higher value, there are fewer possible die rolls which can cover high boards, which suggests that an opportunity to cover a high board should be prioritised over covering lower value boards. In essence, this is the key idea behind the high-board strategy. This correlation is exemplified further in Appendix \ref{app:cond_prob_figure}.
 
 This idea can also be considered from a more combinatorial point of view. Given a dice roll of value $n$, each possible covering is a partition of $n$ into distinct parts, also known as a \emph{strict partition} of $n$. For instance, there are 27 possible coverings which cover board 1, but only 2 coverings which cover board 11, further exemplifying that opportunities to cover high boards are rare. This difference is exacerbated when multiple dice are used, including the standard variant, since especially high dice rolls are rarer to obtain, compared to using one dice with a uniform probability of rolling each possible value.
 
@@ -287,7 +265,7 @@ Two modified versions of the PRISM model of the 6-board variant of Shut the Box 
 
 From this position, the expected score of the high-board strategy is 16.4167, while the expected score of the optimal strategy is 16.4230. This is unsurprising, since the optimal strategy is specifically generated to attain the maximum possible expected score.
 
-However, the probability of attaining a perfect score is approximately 0.1389 under the high-board strategy, which is also the maximum possible probability of attaining a perfect score under the optimal strategy after covering boards 4 and 2. This suggests that the high board strategy is more likely to attain a perfect score, compared to the optimal strategy for attaining the maximum expected score, since a new optimal strategy is generated in order to calculate the maximum probability.
+However, the probability of attaining a perfect score is approximately 0.1389 underthe high-board strategy, while maximum possible probability of attaining a perfect score under the optimal strategy after covering boards 4 and 2 is approximately 0.0746. Hence the high board strategy is more likely to attain a perfect score, compared to the optimal strategy for attaining the maximum expected score.
 \end{example}
 
 This presents an interesting trade-off between strategies - while the optimal strategy aims to maximise the expected score of Shut the Box (by design), the high-board strategy performs better when considering the probability of attaining the maximum possible score as opposed to the maximum expected score.
@@ -297,10 +275,10 @@ Inherently, this suggests the impact of risk in comparing different strategies. 
 For instance, suppose two players play a round of Shut the Box sequentially, aiming to get a higher score than the other player. The first player's aim is to get the highest score possible, but the second player's objective is simply to earn more points than the first player, regardless of the margin of victory. If the first player scores 20 points on the 6-board variant, the second player should play the aforementioned high-board strategy, since this has a higher probability of gaining 21 points, the only possible score which can win outright. On the other hand, if the first player scores very few points, then a more consistent strategy, such as the optimal expected score strategy, may be preferred, in order to maximise the probability of winning. Alternatively, an additional incentive could be provided to encourage players to attain a perfect score, such as a "jackpot" if Shut the Box is played as a gambling game.
 
 \section{Evaluating the design of Shut the Box}
-
+\label{cs1:eval_stb}
 
 Overall, while we have shown the high-board strategy is successful (and conversely that the low-board strategy is unsuccessful), the results of Table \ref{cs1:exp_value_results} indicates the main flaw with Shut the Box. When designing games, optimal strategies should be sufficiently complex so that human players cannot feasibly recreate this strategy. Optimal strategies may be seen as less enjoyable for players to play with, since decisions at various points throughout a game are effectively defined beforehand, rather than the player making decisions and adapting during the game. 
 
 While the optimal strategy for Shut the Box is somewhat complex, Section \ref{cs1:compare-strats} shows that a simple strategy is very close to optimal. This shows that Shut the Box is flawed, because the additional complexity involved in learning a more optimal strategy does not lead to a significant improvement in the overall outcome of the game. While the trade-off between risk and reward is potentially interesting, in most cases the difference is fairly small, so the impact of this trade-off is minimal. We have also suggested several possible variants of Shut the Box to alter the balance between risk and reward, such as the addition of a "jackpot" to emphasise riskier strategies, given the lack of differentiation between strategies these variants are unlikely to lead to meaningful changes in strategy.
 
-Throughout this case study, we have introduced a perfect information game and compared manually created strategies to optimal strategies in order to evaluate the design of that game. Now we consider a different game, where the full state of the game is unknown to each player.
+Throughout this case study, we have analysed a perfect information game and compared manually created strategies to optimal strategies in order to evaluate the design of that game. Now we consider a different game, where the full state of the game is unknown to each player.

@@ -1,12 +1,17 @@
-\chapter{Introduction (2 pages?)}
+\chapter{Introduction}
+\label{introduction}
 
 % reset page numbering. Don't remove this!
 \pagenumbering{arabic}
 
-Motivate the project. Why is balancing games a challenging problem in the first place? Why is model checking an appropriate tool to examine game design/balance?
+In this section, we motivate the importance of game design, explain why model checking is a useful technique for determining game balance, and outline the structure the dissertation.
 
-\hrule
+A key aspect of game design is ascertaining the balance of a game, particularly in reference to different possible strategies for playing the game. As players repeatedly play a game, their aim is to employ better strategies at winning over time, eventually approaching the optimal strategy for a game. However, in practice, the optimal strategy for a game should be complex enough that human players cannot employ this strategy in practice, since a simple optimal strategy leads to a game which is predictable and no longer interesting for players. For instance, the game of Noughts and Crosses has an extremely simple optimal strategy which human players learn almost immediately. Conversely, games such as Chess and Go have optimal strategies, but their complexity makes them infeasible to compute, leading to complex strategic decisions over thousands of years of gameplay.
 
-\Blindtext
+While these games are entirely based on strategy, many games utilise random elements in order to encourage players to adapt their strategies as the game progresses, making games more interesting and enjoyable to play. One particularly common method for introducing random elements into a game is via the use of dice, which are cheap, satisfying to roll and well understood by the majority of players. Consequently, this dissertation focuses on games which use dice as a key mechanic in the game.
 
-\Blindtext
+Currently, the most common method of evaluating game balance is via manual \emph{playtesting}, where players repeatedly play early versions of games, providing feedback which designers can use in order to refine their games. However, this method is flawed for multiple reasons. Playtesting is resource intensive, requiring many people to spend significant amounts of time playing a game. In addition, for complex games with many possible actions, playtesting cannot consider all possible strategies. A more subtle issue is that playtesters are often experienced players, who may attempt to apply knowledge from other games in order to play effectively. This further limits the possible strategies that playtesters end up employing. These reasons motivate the use of an automated approach to analysing games, such as probabilistic model checking.
+
+In many systems, simulation and testing are the two primary methods for analysing the behaviour of a system. While these methods are generally simple to implement, a key issue with these methods is that the system is not exhaustively analysed, and in particular statistical methods may fail to accurately consider the probability of rare events occurring in a game. By contrast, probabilistic model checking exhaustively considers all possible actions at each point of a game, leading to more precise observations about a game.
+
+The remainder of the dissertation is outlined as follows. Chapter~\ref{background} discusses preliminary background information for the case studies presented in the dissertation, including an introduction to probabilistic model checking and the PRISM model checker. Chapters~\ref{cs1},~\ref{cs2:liars_dice} and~\ref{ch:cs3} present the case studies, discussing specific examples of games in more detail, including extending models in order to allow for more complex types of games. Chapter~\ref{evaluation} discusses several tools developed in order to improve the rigour of the experiments performed throughout the case studies, while Chapter~\ref{conclusion} summarises the project and offers multiple suggestions for future work.

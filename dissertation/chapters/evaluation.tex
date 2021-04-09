@@ -1,7 +1,18 @@
-\chapter{Evaluation (2 pages)} 
+\chapter{Evaluation} 
+\label{evaluation}
 
-Discuss the general process of conducting these case studies. What makes this rigorous research? What could have been improved? Use weighted dice analysis to compare and contrast games. (This is where I could mention experiment automation/preprocessing work to improve replicability)
+In this chapter, we briefly discuss multiple key tools which were developed during the process of conducting the case studies in project, in order to ensure these case studies were rigourously conducted.
 
-\Blindtext
+During the project, multiple PRISM models were constructed of each case study. However, a key challenge when creating PRISM models is that PRISM offers little functionality for automatically generating PRISM model code. PRISM does offer module renaming, which allows additional modules to be defined via renaming variables, but not commands within modules.
 
-\Blindtext
+In order to solve this problem, a preprocessor was implemented. This preprocessor allows for annotated PRISM models, containing a mixture of PRISM model code and preprocessor calls, surrounded by $@$ symbols. These calls provide parameters to the preprocessor, which allow for model code to be generated using other programming languages, in this case Python. This preprocessor has several key benefits when generating PRISM models.
+
+\begin{itemize}
+    \item More complex operations, such as obtaining the probability of each possible total after rolling multiple dice, can be calculated using a more familiar programming language, rather than manually defining PRISM models which is prone to error.
+    \item Parameterising models, such as altering the number of dice or the number of sides per dice, is far simpler to perform. PRISM allows for some parameterisation, such as varying the initial value of states, but the preprocessor allows for parameterisation that impacts the overall structure of the model.
+    \item The annotated PRISM model provides a clear picture of the high-level structure of a PRISM model, rather than focusing on many individual lines of PRISM code.
+\end{itemize}
+
+In order to ensure that experiments would be repeatable, a series of Jupyter notebooks were created in order to run experiments. These notebooks contain commands for constructing PRISM models using the preprocessor, performing model checking via the command line to obtain experiment results, storing the ensuring data logs, and creating visualisations using these logs. Beyond ensuring the replicability of experiments, this also allows for performance improvements, since the results of model checking can be computed once, then the resulting data can be used to produce a number of visualisations. This is in contrast to the graphical user interface provided with PRISM, which requires an experiment to be performed every time a new visualisation is generated.
+
+Alongside these tools to improve rigour, the process of probabilistic model checking is inherently rigorous. Other methods for analysing stochastic games, such as statistical model checking or Monte Carlo methods, generate numerous random samples in order to provide an estimate, or at best a probabilistic guarantee, of the required result. This can be unreliable, especially for rare properties, and requires quantifying the uncertainty of the result. By contrast, probabilistic model checking directly considers the probability of each transition, and operates an a deterministic manner. Hence, repeating probabilistic model checking will lead to the same result.

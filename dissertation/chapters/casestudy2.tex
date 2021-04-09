@@ -5,7 +5,7 @@ In this case study, we introduce Liar's Dice, a dice game utilising hidden infor
 
 \section{Liar's Dice description}
 \label{cs2:liars_dice_description}
-Liar's Dice is a dice game for multiple players, where each player must be able to bluff and detect opponent's bluffs in order to win. Liar's Dice takes place over a series of rounds, where each player rolls their dice, keeping the values on the dice hidden from other players. A player then makes a \emph{bid}, which is comprised of a face value on a dice, and the number of dice that show that value. Players then rotate in turn, choosing to either make a higher bid (with either a higher face value, a higher quantity, or both), or challenge the previous bid. If a challenge is made, all dice are revealed. If the bid was correct, the challenging player loses a die. If the bid was incorrect, the bidding player loses a die. The player who lost starts the next round, and play continues until only one player has any remaining dice.
+Liar's Dice is a dice game for multiple players, where each player must be able to bluff and detect opponent's bluffs in order to win. Liar's Dice takes place over a series of rounds, where each player rolls their dice, keeping the values on the dice hidden from other players. A player then makes a \emph{bid}, which is comprised of a face value on a die, and the number of dice that show that value. Players then rotate in turn, choosing to either make a higher bid (with either a higher face value, a higher number of dice, or both), or challenge the previous bid. If a challenge is made, all dice are revealed. If the bid was correct, the challenging player loses a die. If the bid was incorrect, the bidding player loses a die. The player who lost starts the next round, and play continues until only one player has any remaining dice.
 
 In Liar's Dice, every player starts with the same amount of information, since every player starts with the same number of dice. However, as the game progresses, some players will have more dice than others, changing bidding behaviour, as demonstrated by the following example.
 
@@ -16,9 +16,9 @@ Consider the situation presented in Figure \ref{cs2:uneven_information}, where t
 
 \begin{itemize}
 
-\item if the second player challenges the bid, they will lose a dice, and therefore lose the game;
-\item if the second player increases the face value of the bid, then the first player can immediately challenge the bid and win the game, since each bid will be 
-\item if the second player increases the quantity of the bid, to bidding that there are three 2s, the first player can challenge and win with probability $\frac{5}{6}$.
+\item If the second player challenges the bid, they will lose a dice, and therefore lose the game;
+\item If the second player increases the face value of the bid, then the first player can immediately challenge the bid and win the game. Since the first player knows the values of all dice except for one, they know that there cannot be a pair of dice in the game with face value higher than 2.
+\item If the second player increases the quantity of the bid, to bidding that there are three 2s, the first player can challenge and win with probability $1$, although the first player's belief is that they will win with probability $\frac{5}{6}$, since they do not know whether or not player 2 has a 2 on their dice.
 
 \end{itemize}
 
@@ -33,30 +33,30 @@ As a result, the first player is able to use their increased access to informati
     \vspace*{-0.2cm}
 \end{figure}
 
-This example represents a potential issue with the design of Liar's Dice. Initially we expect that the probability of either player losing a round is even, depending primarily on the strategies the players employ. However, as the game progresses, players with fewer dice are more likely to lose subsequent rounds, making it harder and harder for players to win from behind, a phenomenon known as the \emph{snowball effect} in game design. 
+This example represents a potential issue with the design of Liar's Dice. Initially we expect that the probability of either player losing a round is even, depending primarily on the strategies the players employ. However, as the game progresses, players with fewer dice are more likely to lose subsequent rounds, making it harder and harder for players to win from behind, a phenomenon known as the \emph{snowball effect} in game design, as discussed further in \cite{noauthor_snowball_nodate}.
 
-In particular, the snowball effect means that the overall results of games may be decided fairly early on, even if the games are long. This is frustrating for players - the players are still required to play several rounds of a game where the result is already a foregone conclusion. Moreover, with multiple players, this presents an opportunity for one player to be eliminated very early, since the game continues without their involvement.
+In particular, the snowball effect means that the overall results of games may be decided fairly early on, even if the games are long. This is frustrating for players --- the players are still required to play several rounds of a game where the result is already a foregone conclusion. Moreover, with multiple players, this presents an opportunity for one player to be eliminated very early, since the game continues without their involvement.
 
-Our aim when analysing Shut the Box will be to examine to what extent Liar's Dice exhibits the snowball effect, and whether this effect can be mitigated in some way. Firstly, we introduce a variant of MDPs which allows for partial observability, in order to model the hidden information present in Liar's Dice.
+Our aim when analysing Liar's Dice will be to examine to what extent Liar's Dice exhibits the snowball effect. Firstly, we introduce a variant of MDPs which allows for partial observability, in order to model the hidden information present in Liar's Dice.
 
 \section{Background}
 
-A key aspect of Liar's Dice is partial observability, which we now introduce in order to augment our existing MDPs, as described in \cite{norman_verification_2017}.
+A key aspect of Liar's Dice is partial observability, which we now introduce in order to augment MDPs, as described in \cite{norman_verification_2017}.
 
 \begin{definition}
     \label{cs2:def-pomdps}
 
-    A partially observable Markov decision process (or POMDP) is a tuple $\mathcal{P} = (S, \bar{s}, A, \delta, L, \mathcal{O}, obs)$ such that:
+    A partially observable Markov decision process (POMDP) is a tuple $\mathcal{P} = (S, \bar{s}, A, \delta, L, \mathcal{O}, obs)$ such that:
 
     \begin{itemize}
         \item $(S, \bar{s}, A, \delta, L)$ is an MDP, as in Definition \ref{cs1:def_mdps}.
         \item $\mathcal{O}$ is a finite set of \emph{observations}.
         \item $obs : S \rightarrow 2^{\mathcal{O}}$ labels each state with a subset of observations.
-        \item For any two states $s, s' \in S$, if $obs(s) = obs(s')$ then the available actions at $s$ and $s'$ must be identical. When this occurs, we say that states $s$ and $s'$ are \emph{observationally equivalent}.
+        \item For any states $s, s' \in S$, if $obs(s) = obs(s')$ then the available actions at $s$ and $s'$ must be identical. When this occurs, we say that states $s$ and $s'$ are \emph{observationally equivalent}.
     \end{itemize}
 \end{definition}
 
-The last point in this definition indicates how POMDPs can represent hidden information. Rather than being able to directly access every state, decisions can only be made based on observations. For instance, in many card games, some cards may be visible for a particular player, while others are hidden. In order for two states to be observationally equivalent in a model of this game, we only require that the visible cards are the same in both states, while the hidden cards can range across any permutation of valid cards. If a player could view the full state of the game, they would be able to view the value of hidden cards, which would render most of these hidden information games trivial. For Liar's Dice, a player can observe their own dice, the current bid and whether a challenge has been made, but not any opponent's dice.
+The last point in this definition indicates how POMDPs can represent hidden information. Rather than being able to directly access every state, decisions can only be made based on observations. For instance, in many card games, some cards will be visible to a particular player, while others are hidden. In order for two states to be observationally equivalent in a model of this game, we only require that the visible cards are the same in both states, while the hidden cards can range across any permutation of valid cards. If a player could view the full state of the game, they would be able to view the value of hidden cards, which would allow for strategies to be generated for models which break the rules of the games they are intended to represent. For Liar's Dice, a player can observe their own dice, the current bid and whether a challenge has been made, but not any opponent's dice.
 
 Since POMDPs are an extension of an MDP, adversaries for POMDPs are defined in terms of adversaries for the corresponding MDP. However, in order to reflect the added constraints that observations provide, we require that adversaries on observationally equivalent paths are equivalent:
 
@@ -64,7 +64,7 @@ Since POMDPs are an extension of an MDP, adversaries for POMDPs are defined in t
 \label{cs1:pomdp_strats}
 
 For a POMDP $P$, an adversary $\sigma$ of $P$ %is a function $\sigma$ mapping all finite paths through the POMDP to a discrete probability distribution over the set of actions. In particular, $\sigma$ is also an adversary of the corresponding MDP. Moreover, 
-is an adversary of the underlying MDP such for paths
+is an adversary of the underlying MDP such that for any paths:
 \[
 \pi = s_0 \xrightarrow{a_0} s_1 \xrightarrow{a_1} \dots s_n \;\;\ \mbox{and} \;\; \pi = s'_0 \xrightarrow{a'_0} s'_1 \xrightarrow{a'_1} \dots s'_n
 \]
@@ -72,80 +72,71 @@ if $obs(s_i) = obs(s'_i)$ and $a_i = a'_i$ for all $i \in \mathbb{N}$, then $\si
 
 \end{definition}
 
-This definition references a key difference in optimal adversary generation between MDPs and POMDPs. In MDPs, optimal adversaries are deterministic and memoryless, so in particular adversaries map states to actions. This allows for aforementioned methods such as value iteration to be applied, allowing for efficient computation of optimal values and adversaries attaining these optimal values. By contrast, Madani et al. show in \cite{madani_undecidability_2003} that obtaining optimal values and adversaries in POMDPs, both for reachability properties and reward-based properties, is undecideable. We instead focus on approximate solutions, as discussed in the following section.
+This definition references a key difference in optimal adversary generation between MDPs and POMDPs. In MDPs, optimal adversaries are deterministic and memoryless, so adversaries map states to actions. This allows for aforementioned methods such as value iteration to be applied, allowing for efficient computation of optimal values and adversaries attaining these optimal values. By contrast, Madani et al. show in \cite{madani_undecidability_2003} that obtaining optimal values and adversaries in POMDPs, both for reachability properties and reward-based properties, is undecidable. We instead focus on approximate solutions presented in the following section.
 
 \subsection{Belief MDPs}
+\label{cs2:intro_belief_mdps}
 
-First, we introduce the \emph{belief MDP}. Given a POMDP, we may construct an equivalent MDP, which consists of beliefs of which observationally equivalent state the player is in at any point.
+First, we introduce the \emph{belief MDP} of a POMDP. Given a POMDP, we may construct an equivalent MDP, which consists of beliefs, which are probability distributions representing which state the player believes they are currently in.
 
 \begin{definition}
     \label{cs2:belief_mdps}
 
     Given a POMDP $\mathcal{P} = (S, \bar{s}, A, \delta, L, \mathcal{O}, obs)$, as in Definition \ref{cs2:def-pomdps}, the \emph{belief MDP} of $\mathcal{P}$ is given by $\mathcal{B}(\mathcal{P}) = (Dist(S), \delta_{\bar{s}}, A, \delta^\mathcal{B}, L)$. The states of this MDP represent \emph{beliefs} about the state of the player in the corresponding POMDP, and the transition function becomes:
-
     \begin{equation*}
-        \delta^{\mathcal{B}}(b, a)(b') = \mbox{$\sum_{s \in S}$} b(s) \cdot \left( \mbox{$\sum_{o \in \mathcal{O} \wedge b^{a,o} = b'}$} \left(  \mbox{$\sum_{s' \in S \wedge obs(s')=o}$} \delta(s, a)(s') \right) \right)
+        \delta^{\mathcal{B}}(b, a)(b') = \mbox{$\sum_{s \in S}$} b(s) \cdot \left( \mbox{$\sum_{o \in \mathcal{O} \wedge b^{a,o} = b'}$} \left(  \mbox{$\sum_{s' \in S \wedge obs(s')=o}$} \delta(s, a)(s') \right) \right) \, .
     \end{equation*}
-
     In particular, $b^{a, o}$ represents the belief reached after performing action $a$ with observation $o$ in belief $b$, calculated as:
-
     \begin{equation*}
         b^{a, o}(s') =
         \begin{cases}
-            \frac{\displaystyle \mbox{$\sum\nolimits_{s \in S}$} \delta(s, a)(s') \cdot b(s)}{\displaystyle \mbox{$\sum\nolimits_{s \in S}$} b(s) \cdot \left(\mbox{$\sum_{s'' \in S \wedge obs(s'')=o}$} \delta(s,a)(s'')\right)} & obs(s') = o \\ 0 & \text{otherwise} \\
+            \frac{\displaystyle \mbox{$\sum\nolimits_{s \in S}$} \delta(s, a)(s') \cdot b(s)}{\displaystyle \mbox{$\sum\nolimits_{s \in S}$} b(s) \cdot \left(\mbox{$\sum_{s'' \in S \wedge obs(s'')=o}$} \delta(s,a)(s'')\right)} & obs(s') = o \\ 0 & \text{otherwise.}
         \end{cases}
     \end{equation*}
-
 \end{definition}
-
 We also need to modify how state and transition rewards are calculated for a belief MDP.
 
 \begin{definition}
     \label{cs2:belief_rewards}
     Let $\rho$ be a state reward function and $\iota$ be an action reward function for some POMDP $\mathcal{P}$. For the corresponding belief MDP, we set:
-
 \[        \rho^{\mathcal{B}}(b) = \mbox{$\sum_{s \in S}$} \rho(s) \cdot b(s) \quad \mbox{and} \quad
-        \iota^{\mathcal{B}}(b, a) = \mbox{$\sum_{s \in S}$} \iota(s, a) \cdot b(s) \\ 
+        \iota^{\mathcal{B}}(b, a) = \mbox{$\sum_{s \in S}$} \iota(s, a) \cdot b(s) \, .
 \]
 \end{definition}
-
-In particular, this modification of rewards ensures that reachability and reward-based properties coincide between the POMDP and its corresponding belief MDP, as shown in Proposition 2 of \cite{norman_verification_2017}.
+In particular, this modification of rewards ensures that reachability and reward-based properties coincide between a POMDP and its corresponding belief MDP as shown in~\cite{norman_verification_2017}.
 
 One key remark about this belief MDP is that its state space is now continuous, since the states of the belief MDP represent probability distributions of states in the POMDP. This means that the number of states in the belief MDP is infinite (indeed, uncountably infinite), so the techniques from Section~\ref{cs1:prob_reach_mdps} are no longer feasible. Instead, we use a finite set of grid points in order to obtain an upper bound of the property in question, then directly generate a strategy on the POMDP itself to obtain a lower bound. %These steps are described in more detail in the following section.
 
 \subsection{Property verification in POMDPs}
 \label{cs2:properties_pomdps}
 
-For simplicity, we only describe maximum reachability probabilities - the other cases, including minimum probabilities and expected rewards, are similar.
+For simplicity, we only describe maximum reachability probabilities - the other cases of minimum probabilities and expected rewards are similar.
 
 First, we obtain an upper bound for the property in question. The key idea, as presented by Bertsekas and Yu in \cite{bertsekas_approximate_2006}, is to consider a finite set of states in the belief MDP, known as \emph{representative beliefs}, which form a convex hull of $Dist(S)$. Multiple methods are possible for choosing these representative beliefs, with the simplest method producing a uniform grid $G_M$ as follows:
-
 \begin{equation*}
     G_M = \left\{\frac{1}{M} v \mid v \in \mathbb{N}^{|S|} \wedge \mbox{$\sum_{i=1}^{|S|}$} v_i = M \right\}
 \end{equation*}
-
-In particular, we note that the beliefs in $G_M$ are a subset of $\mathbb{Q}_{\geq 0}^{|S|}$, which is countable but still infinite. Hence, this is an approximation of $Dist(S)$, since beliefs containing irrational probabilities can never be included in $G_M$ for any $M$.
-
+%In particular, we note that the beliefs in $G_M$ are a subset of $\mathbb{Q}_{\geq 0}^{|S|}$, which is countable but still infinite. Hence, this is an approximation of $Dist(S)$, since beliefs containing irrational probabilities can never be included in $G_M$ for any $M$.
 The resolution of the grid is denoted by $M$. The number of grid points in $G_M$ is the number of non-negative integer solutions to the equation $v_1 + \dots + v_{|S|} = M$, which is equal to ${M + |S| - 1 \choose M}$. Hence, the grid size is exponential in $M$.
 
 When this grid has been defined, value iteration is applied to the belief MDP, in the same manner as Section \ref{cs1:value_iteration}. However, for beliefs which are not in $G_M$, interpolation is applied, such as via Freudenthal triangulation as discussed further in \cite{lovejoy_computationally_1991}, in order to avoid directly computing values for all beliefs in the belief MDP.
 
 During value iteration, in a very similar manner to Section \ref{cs1:adversary_gen}, an adversary $\sigma^*$ can be obtained, and the DTMC induced under $\sigma^*$ can be solved in order to obtain an approximation for the desired property. However, this adversary is a finite-memory adversary, and as previously discussed this will not always suffice for determining an optimal adversary for a POMDP. As a result, the value obtained under this strategy is a lower bound for the optimal value.
 
-Finally, the resolution of the grid $M$ can be increased in order to try and achieve tighter bounds on the optimal value, with the caveat that, since grid size is exponential on $M$, care must be taken to ensure these bounds can still be computed in reasonable time. In particular, due to the undecidability of property verification on POMDPs, increasing $M$ may make bounds worse rather than better, since lower resolution grids are in general not subsets of higher resolution grids.
+Finally, the resolution of the grid $M$ can be increased in order to try and achieve tighter bounds on the optimal value, with the caveat that, since grid size is exponential on $M$, care must be taken to ensure these bounds can still be computed in reasonable time. However, due to the undecidability of property verification of POMDPs, increasing $M$ may make bounds worse, since lower resolution grids are in general not subsets of higher resolution grids.
 
 We have now defined an extension to MDPs which allow us to model games which utilise hidden information. Now, we model and analyse Liar's Dice to show an example of such a game.
 
 \section{Results and analysis}
 
-In this case study, our main aim is to analyse Liar's Dice in order to determine its susceptibility to the snowball effect, as discussed in Section \ref{cs2:liars_dice_description}. We also discuss the implications of POMDPs on model size.
+In this case study, our main aim is to analyse Liar's Dice in order to determine its susceptibility to the snowball effect, as discussed in Section \ref{cs2:liars_dice_description}. We also discuss the how to limit the state-space of the POMDPs we consider.
 
 \subsection{State space reduction}
 \label{cs2:state_reduction}
 
-As discussed in Sections \ref{cs2:belief_mdps} and \ref{cs2:properties_pomdps}, verifying properties of POMDPs involves constructing an approximation of the belief MDP, and in particular the size of the grid presented in Section~\ref{cs2:properties_pomdps} increases exponentially with the number of states in the POMDP. Hence, in order to allow for efficient analysis, reducing the number of states in the POMDP is crucial.
+As discussed in Sections~\ref{cs2:intro_belief_mdps} and \ref{cs2:properties_pomdps}, verifying properties of POMDPs involves constructing an approximation of the belief MDP, and in particular the size of the grid presented in Section~\ref{cs2:properties_pomdps} increases exponentially with the number of states in the POMDP. Hence, in order to allow for efficient analysis, reducing the number of states in the POMDP is crucial.
 
-For Liar's Dice, the key method employed to reduce model size is to model each \emph{round}, as opposed to each \emph{game}. There are four main reasons why this construction is preferred:
+For Liar's Dice, the key method employed to reduce model size is to model each \emph{round}, as opposed to each \emph{game}. There are four main reasons why this construction is preferred.
 
 \begin{itemize}
     \item Rounds in Liar's Dice are mostly independent - the main parameters of each game are the number of dice for each player, along with the starting player, which is always the loser of the previous round, or the first player in the first round of the game. Hence, transitioning between rounds is straightforward. %, since little to no information is maintained between rounds.
@@ -163,24 +154,26 @@ For Liar's Dice, the key method employed to reduce model size is to model each \
 
 This construction allows us to define a \emph{game tree}, as in Figure \ref{cs2:2_dice_game_tree}, where each node represents one round of the game. This construction allows for simpler computation of the probability of a player winning a game. Rather than check a property for one large model, we check the win rate for each smaller model, then traverse the tree, obtaining a weighted sum based on the probability of winning each round.
 
-Another key implication of using game trees is that sub games can be considered very easily. For instance, in the game presented in Figure \ref{cs2:2_dice_game_tree}, a handicap can easily be considered, since the right child of the root node represents handicapping player 1 by removing one of their dice at the start of the game.
+Another key implication of using game trees is that sub-games can be considered very easily. For instance, in the game presented in Figure \ref{cs2:2_dice_game_tree}, a handicap can easily be considered, since the right child of the root node represents handicapping player 1 by removing one of their dice at the start of the game.
 
 \subsection{Model constraints}
 
-Due to the requirement to reduce model size, several assumptions and limitations were imposed on the model. In particular, rather than being able to make any bids, players are assumed to only either increase the face value by 1 or increase then quantity of the bid by 1. This limits the number of possible actions per bid, since there are now only two types of bids, plus the option of challenging the other player. Another key limitation is that we only consider variants of Liar's Dice with two players, and at most 2 dice per player.
+Due to the requirement to reduce model size, several assumptions and limitations were imposed on the model. In particular, rather than being able to make any bids, players are assumed to only either increase the face value by 1 or increase then quantity of the bid by 1. This limits the number of possible actions per bid, since there are now only two types of bids, plus the option of challenging the other player. In particular we note that increasing the bid value by at most one each turn is potentially problematic since the player may need to make several incorrect bids in order to reach a correct bid, but this limitation is required in order to allow the game to be modelled feasibly.  Another key limitation is that we only consider variants of Liar's Dice with two players, and at most 2 dice per player.
 
 \subsection{Pre-defined strategies}
 \label{cs2:pre_def_strats}
 
-As with our first case study, we define some initial strategies in order to make comparisons to the optimal strategy. In Liar's Dice, there are three main types of decision to make. Firstly, the initial bid is important, since an aggressive opponent could start with a high bid and force an opponent to make an early decision about bluffing, without having enough time to gather information and form beliefs. Secondly, the decision to challenge is important - an overly aggressive strategy will lose frequently due to bidding on correct bids, while an overly conservative strategy will eventually make a bid that the opposing player can confidently challenge. Finally, the type of bid is also important - in general we expect increasing the quantity of a bid to be riskier than increasing the face value of a bid, since increasing the quantity provides more information for players to potentially challenge the bid.
+%As with our first case study, we define some initial strategies in order to make comparisons to the optimal strategy. In Liar's Dice, there are three main types of decision to make. Firstly, the initial bid is important, since an aggressive opponent could start with a high bid and force an opponent to make an early decision about bluffing, without having enough time to gather information and form beliefs. Secondly, the decision to challenge is important - an overly aggressive strategy will lose frequently due to bidding on correct bids, while an overly conservative strategy will eventually make a bid that the opposing player can confidently challenge. Finally, the type of bid is also important - in general we expect increasing the quantity of a bid to be riskier than increasing the face value of a bid, since increasing the quantity provides more information for players to potentially challenge the bid.
 
-We now introduce two main types of player, exemplifying the different possibilities for each of these types of decisions. The \emph{risky player} makes a random bid at the start of the game, even where this bid may be initially incorrect. When bidding, they always increase the quantity of the bid where possible before increasing face value, and they always challenge when the sum of the face value and quantity is at least half the maximum possible sum. The \emph{safe player} makes a random bid at the start of the game, but only a bid which is guaranteed to appear in their hand. When bidding, they always prioritise increasing the face value of the bid rather than the quantity, and always challenge when the sum of the face value and quantity is at least 75\% of the maximum possible sum.
+%We now introduce two main types of player, exemplifying the different possibilities for each of these types of decisions. The \emph{risky player} makes a random bid at the start of the game, even where this bid may be initially incorrect. When bidding, they always increase the quantity of the bid where possible before increasing face value, and they always challenge when the sum of the face value and quantity is at least half the maximum possible sum. The \emph{safe player} makes a random bid at the start of the game, but only a bid which is guaranteed to appear in their hand. When bidding, they always prioritise increasing the face value of the bid rather than the quantity, and always challenge when the sum of the face value and quantity is at least 75\% of the maximum possible sum.
 
-It is important to note that these strategies are deliberately very simple, and unlikely to be effective. This is by design - here we are more interested in comparing various rounds of the game, as opposed to different strategies. These strategies are designed to represent the extremes of possible behaviour in Liar's Dice, rather than representing effective strategies for the game. Moreover, POMDPs do not allow for different sets of observable variables for different players, at least one of the players cannot include partial observability as part of their strategy. However this presents a key issue with adversary generation. In general, strategies which do not consider partial observability are simple, and easy to dominate via adversary generation - for all of these rounds and strategies, generating the optimal win probability using PRISM shows that an optimal adversary will win with probability 1. For this reason, we do not consider optimal values and strategies, and instead focus on comparing the above two simpler strategies in order to analyse the overall structure of Liar's Dice.
+As with our first case study, we define some initial strategies in order to make comparisons to the optimal strategy. We now introduce two main types of player, exemplifying the different possibilities for each of these types of decisions. The \emph{risky player} makes a random bid at the start of the game, even where this bid may be initially incorrect. When bidding, they always increase the quantity of the bid where possible before increasing face value, and they always challenge when the sum of the face value and quantity is at least half the maximum possible sum. The \emph{safe player} makes a random bid at the start of the game, but only a bid which is guaranteed to appear in their hand. When bidding, they always prioritise increasing the face value of the bid rather than the quantity, and always challenge when the sum of the face value and quantity is at least 75\% of the maximum possible sum.
+
+It is important to note that these strategies are deliberately very simple, and unlikely to be effective. This is by design - here we are more interested in comparing various rounds of the game, as opposed to different strategies. These strategies are designed to represent the extremes of possible behaviour in Liar's Dice, rather than representing effective strategies for the game, so adversary generation is unlikely to add additional insight on the design of Liar's Dice. For this reason, we do not consider optimal values and strategies, and instead focus on comparing the above two simpler strategies in order to analyse the overall structure of Liar's Dice.
 
 \subsection{The two-dice variant}
 
-In order to analyse Liar's Dice, we consider the game tree of the two-dice version presented in Figure \ref{cs2:2_dice_game_tree}. To investigate the snowball effect, we consider the probability of player 1 winning at the root of the game tree, then consider the probability of player 1 winning at each child of the game tree. We consider this for each permutation of the safe and risky strategies defined in Section \ref{cs2:pre_def_strats}, and the results are shown in Table \ref{cs2:game_tree_table}. In this table, a probability of below 0.5 indicates an advantage for player 1, while a probability of above 0.5 indicates an advantage for player 2
+In order to analyse Liar's Dice, we consider the game tree of the two-dice version presented in Figure \ref{cs2:2_dice_game_tree}. To investigate the snowball effect, we consider the probability of player 1 winning at the root of the game tree, then consider the probability of player 1 winning at each child of the game tree. We consider this for each permutation of the safe and risky strategies defined in Section \ref{cs2:pre_def_strats}, and the results are shown in Table \ref{cs2:game_tree_table}. In this table, a probability of below 0.5 indicates an advantage for player 1, while a probability of above 0.5 indicates an advantage for player 2.
 
 \begin{table}[h]
     \begin{tabular}{lllll}
@@ -192,25 +185,25 @@ In order to analyse Liar's Dice, we consider the game tree of the two-dice versi
     \multicolumn{1}{l|}{1/1, P1} & 0.5278                                                                        & 0.3611                                                                          & 0.6667                                                                         & 0.5718                                                                         \\
     \multicolumn{1}{l|}{1/1, P2} & 0.4722                                                                        & 0.6389                                                                          & 0.4282                                                                         & 0.2500                                                                        
     \end{tabular}
+    \vspace*{0.1cm}
     \caption{The loss probability for player 1 in Liar's Dice in the 2-dice variant with each possible permutation of the safe and risky strategies.}
     \label{cs2:game_tree_table}
-    \end{table}
+     \vspace*{-0.2cm}
+     \end{table}
 
-This table exhibits some interesting behaviour. In particular, exchanging each player's set of dice, and changing the starting player, swaps the loss probability of each player. This is as expected for players with the same strategy, but this also means that symmetry could be exploited in these cases to reduce computation time, as suggested in Section \ref{cs2:state_reduction}. However, this does not occur when both players have different strategies, since the safe and risky strategies determine their bids differently.
+This table exhibits some interesting results. In particular, exchanging each player's set of dice, and changing the starting player, swaps the loss probability of each player. This is as expected for players with the same strategy, but this also means that symmetry could be exploited in these cases to reduce computation time, as suggested in Section \ref{cs2:state_reduction}. However, this does not occur when both players have different strategies, since the safe and risky strategies determine their bids differently.
 
-When player 1 utilises a risky strategy, their loss probability is considerably lower when they make the first move, compared to going second. This can be explained by the risky player's strategy for initial bidding, which uniformly chooses any possible bid which is feasibly possible, regardless of whether the bid is correct. For instance, given 4 dice, the probability that at least three dice have the same value is $\frac{7}{72}$, or approximately $9.72\%$, while the probability of making a bid with quantity at least 3 is $50\%$. Hence, many initial bids will be incorrect to begin with. In addition, both players use a threshold-based challenge strategy, where a challenge is always made if the sum of the quantity and face value exceeds a given threshold. The thresholds used in the safe and risky strategies are $75\%$ and $50\%$ of the maximum possible sum respectively, and again since the initial bid is decided uniformly these thresholds may be crossed immediately following the initial bid.
+When player 1 utilises a risky strategy, their loss probability is considerably lower when they make the first move, compared to going second. This can be explained by the risky player's strategy for initial bidding, which uniformly chooses any possible bid which is feasibly possible, regardless of whether the bid is correct. For instance, given 4 dice, the probability that at least three dice have the same value is $\frac{7}{72}$, or approximately $9.72\%$, while the probability of making a bid with quantity at least 3 is $50\%$. Hence, many initial bids will be incorrect to begin with. In addition, both players use a threshold-based challenge strategy, where a challenge is always made if the sum of the quantity and face value exceeds a given threshold. The thresholds used in the safe and risky strategies are $75\%$ and $50\%$ of the maximum possible sum respectively, and again since the initial bid is decided uniformly these thresholds may be crossed immediately following an initial bid.
 
 Another interesting point of comparison arises between cases where both players employ the same strategy, and cases where players employ different strategies. In particular, we note that when both players use the same strategy, a player is more likely to win immediately after losing a die, since they gain the ability to make the first move next round. For instance, when both players employ the safe strategy, player 1 has two dice, player 2 has one die, and player 2 makes the initial bid, player 1 will lose the round with probability 0.6250. If player 1 loses, then they will lose the following round (and hence lose the game) with probability 0.5278. This suggests that being able to choose the initial bid is more beneficial than the additional information gained by having more dice than the opponent.
 
-In addition, multiple cases arise when player 1 adopts the safe strategy while player 2 adopts the risky strategy where the probability of player 1 losing is 0.5, so neither player has an advantage. In these cases, after player 1's initial bid, each player alternates increasing the face value and quantity of the bid respectively, until the challenge threshold of $50\%$ is reached. The number of steps required to each this threshold has a uniform probability of being even or odd, giving the probability of $0.5$.
+In addition, multiple cases arise when player 1 adopts the safe strategy while player 2 adopts the risky strategy where the probability of player 1 losing is 0.5, so neither player has an advantage. In these cases, after player 1's initial bid, each player alternates increasing the face value and quantity of the bid respectively, until the challenge threshold of $75\%$ is reached. The number of steps required to each this threshold has a uniform probability of being even or odd, giving the probability of $0.5$.
 
-These results can be combined with the game tree in Figure \ref{cs2:2_dice_game_tree} in order to determine the probability of the first player winning the game. In general, for a given round $r$, the probability of player 1 winning the game starting at round $r$ is the weighted sum of the probability of winning each possible subsequent round multiplied by the probability of reaching that round. In this case, we suppose that the starting player chooses to play either the safe or risky strategy, then the other player may choose their strategy based on this, although we note that in practice the exact strategy chosen will not necessarily be known. In this case, player 1 aims to minimise their loss probability while player 2 aims to maximise it. For instance, in the starting round, player 1 should not choose the risky strategy, since player 2 can then use the safe strategy to attain a loss probability of 0.6972, the highest across each permutation of these two strategies. Hence player 1 chooses the safe strategy, and player 2 chooses the risky strategy. In this manner, the probability of player 1 winning is obtained as
-
+The results of Table~\ref{cs2:game_tree_table} can be combined with the game tree in Figure \ref{cs2:2_dice_game_tree} in order to determine the probability of the first player winning the game. In general, for a given round $r$, the probability of player 1 winning the game starting at round $r$ is the weighted sum of the probability of winning each possible subsequent round multiplied by the probability of reaching that round. In this case, we suppose that the starting player chooses to play either the safe or risky strategy, then the other player may choose their strategy based on this, although we note that in practice the exact strategy chosen will not necessarily be known. In this case, player 1 aims to minimise their loss probability while player 2 aims to maximise it. For instance, in the starting round, player 1 should not choose the risky strategy, since player 2 can then use the safe strategy to attain a loss probability of 0.6972, the highest across each permutation of these two strategies. Hence player 1 chooses the safe strategy, and player 2 chooses the risky strategy. In this manner, the probability of player 1 winning is obtained as:
 \begin{equation*}
-    \left( 0.5000 \times 0.6389 \right) + \left(0.500 \times 0.3611 \times 0.4282 \right) + \left( 0.500 \times 0.500 \times 0.5718 \right) \approx 0.5397
+    \left( 0.5000 \cdot 0.6389 \right) + \left(0.500 \cdot 0.3611 \cdot 0.4282 \right) + \left( 0.500 \cdot 0.500 \cdot 0.5718 \right) \approx 0.5397
 \end{equation*}
-
-In a very similar manner, winning probabilities can be obtained for every starting round, as shown in Table \ref{cs2:game_tree_overall_table}
+In a very similar manner, winning probabilities can be obtained for every starting round, as shown in Table \ref{cs2:game_tree_overall_table}.
 
 \begin{table}[h]
 \centering
@@ -223,18 +216,20 @@ Round                        & \begin{tabular}[c]{@{}l@{}}Probability of\\ P1 wi
 \multicolumn{1}{l|}{1/1, P1} & 0.4281                                                                   \\
 \multicolumn{1}{l|}{1/1, P2} & 0.5718                                                                  
 \end{tabular}
-\caption{The probability of player 1 winning eventually from each round in the 2-dice variant of Liar's Dice, with optimal selection between the safe and risky strategies.}
+    \vspace*{0.1cm}
+    \caption{The probability of player 1 winning eventually from each round in the 2-dice variant of Liar's Dice, with optimal selection between the safe and risky strategies.}
 \label{cs2:game_tree_overall_table}
-\end{table}
+    \vspace*{-0.2cm}
+    \end{table}
 
-Immediately, this shows a clear issue with Liar's Dice. If the starting player loses the first round, their probability of winning is approximately $29\%$, while if they win the first round their probability of winning is approximately $79\%$. This is despite the overall probability of each player winning being fairly even at the outset of the game, showing the impact of the snowball effect on Liar's Dice. Another interesting paradox occurs when each player has exactly 1 dice left. In this case, player 1 is actually more likely to win if they go second compared to going first. This is a consequence of each player only knowing two strategies, and having to commit to a strategy on their first move. In practice, players will adapt their strategy over time based on their opponent's actions. For instance, a player making a high initial bid may elicit a different strategy, compared to starting with a low bid and repeatedly increasing the bid over time.
+The results of  Table \ref{cs2:game_tree_overall_table} demonstrates a clear issue with Liar's Dice. If the starting player loses the first round, then their probability of winning is approximately $29\%$, while if they win the first round their probability of winning is approximately $79\%$. This is despite the overall probability of each player winning being fairly even at the outset of the game, showing the impact of the snowball effect on Liar's Dice. Another interesting paradox occurs when each player has exactly 1 die left. In this case, player 1 is actually more likely to win if they go second compared to going first. This is a consequence of each player only knowing two strategies, and having to commit to a strategy on their first move. In practice, players will adapt their strategy over time based on their opponent's actions. For instance, a player making a high initial bid may elicit a different strategy, compared to starting with a low bid and repeatedly increasing the bid over time.
 
 \section{Evaluating the design of Liar's Dice}
 \label{cs2:evaluation}
 
 Overall, our analysis of a small variant of Liar's Dice suggests that while the starting player has a small advantage overall, the snowball effect is present in Liar's Dice, meaning the game is too dependent on the results of the first round compared to subsequent rounds. While Liar's Dice attempts to mitigate this via allowing the player who just lost a dice to make the next initial bid, the added information by having more dice than the opponent outweighs this potential advantage.
 
-However, this case study has also presented several limitations of modelling hidden information games using POMDPs. In particular, the key issue is that observable variables cannot be defined individually for each player, meaning that only one player can employ belief-based strategies, which dominate strategies which are not belief-based. An extension of POMDPs, known as partially observable stochastic games (POSGs, described further in \cite{hansen_dynamic_nodate}), allows for different observations for each player, but in practice these models are even harder to solve than POMDPs. As a result of this, POMDPs are best suited to single-player hidden information games. For instance, POMDPs could be an effective tool in order to model the game of blackjack, since in blackjack the player only competes against the dealer, rather than other players. In addition, the dealer employs a simple strategy that is known to all players, so the dealer cannot employ a belief-based strategy in the first place.
+This case study has also presented several limitations of modelling hidden information games using POMDPs. In particular, the key issue is that observable variables cannot be defined individually for each player, meaning that only one player can employ belief-based strategies, which dominate strategies which are not belief-based. An extension of POMDPs, known as partially observable stochastic, described further in \cite{hansen_dynamic_nodate}, allows for different observations for each player, but in practice these models are even harder to solve than POMDPs. As a result of this, POMDPs are best suited to single-player hidden information games. For instance, POMDPs could be an effective tool in order to model the game of blackjack, since in blackjack the player only competes against the dealer, rather than other players. In addition, the dealer employs a simple strategy that is known to all players, so the dealer cannot employ a belief-based strategy in the first place.
 
-Moreover, as discussed further in Section \ref{cs2:properties_pomdps}, the size of the abstraction of the associated belief MDP means that analysis of larger variants of Liar's Dice, such as those which include multiple players or those which start with multiple dice, were not viable to consider for this case study. However, the principle of a game tree presented in Section \ref{cs2:state_reduction} can still be employed for larger variants of Liar's Dice to help reduce the state space of each model, and in particular this technique could also be applied to many other applications of model checking, most notably those that occur over multiple "rounds" where the size of the model decreases each round, and each round can be parameterised by a small set of variables.
+As discussed further in Section \ref{cs2:properties_pomdps}, the size of the abstraction of the associated belief MDP means that analysis of larger variants of Liar's Dice, such as those which include multiple players or those which start with multiple dice, were not viable to consider for this case study. However, the principle of a game tree presented in Section \ref{cs2:state_reduction} can still be employed for larger variants of Liar's Dice to help reduce the state space of each model, and in particular this technique could also be applied to many other applications of model checking, most notably those that occur over multiple "rounds" where the size of the model decreases each round, and each round can be parameterised by a small set of variables.
 

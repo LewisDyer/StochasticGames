@@ -240,3 +240,5 @@ Date | Duration | Summary
 05/04/21 | 6 hours | Continued writeup, finished case study 3 and added status report.
 06/04/21 | 6 hours | Supervisor meeting, reviewed comments on dissertation so far, wrote up minutes and started evaluation.
 07/04/21 | 7 hours | Finished abstract, introduction, evaluation and conclusion. Started reducing page counts, down to 31 pages. Started POMDP strategy generation, got a dot file but struggling to visualise/explain it. Started putting the presentation together
+08/04/21 | 6 hours | Finished presentation, did a rehearsal run to get an idea of timing. Received feedback on dissertation - completed final sections, will review tomorrow before submission.
+09/04/21 | 4 hours | Final read through dissertation, updated README in src folder. Recorded presentation and submitted!

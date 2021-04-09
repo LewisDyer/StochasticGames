@@ -1,58 +1,58 @@
 \chapter{Case Study 3 (26.2)}
 \label{ch:cs3}
 
-In this section we introduce 26.2, a dice game where players make decisions simultaneously. A new model type is developed in order to facilitate this behaviour, and analyse 26.2 in order to... 
+In this section we introduce 26.2, a dice game where players make decisions simultaneously. A new model type is introduced in order to facilitate this behaviour, and analyse of 26.2. % in order to determine how the addition of concurrency changes the game.
 
-\section{Game description (1/2 page)}
+\section{Game description}
 
-The game of 26.2 takes place over a series of rounds, where players choose how many dice they wish to roll, up to a maximum of ten dice. These dice are all rolled simultaneously, and their values are examined. If three or more of a player's dice have the same face value, or two pairs of two dice have the same face value, the player is said to have \emph{gone bust}, and does not move this round. Otherwise, the player moves forward a number of spaces equal to the sum of each of their dice. When a player reaches space 262 or later, the game ends, and the winner is the player who has travelled the furthest. If this results in a tie, a winner is randomly selected from the players who have tied.
+The game of 26.2 takes place over a series of rounds, where players choose how many dice they wish to roll, up to a maximum of ten dice. These dice are all rolled simultaneously, and their values are examined. If three or more of a player's dice have the same face value, or two pairs of two dice have the same face value, the player is said to have \emph{gone bust}, and does not move in this round. Otherwise, the player moves forward a number of spaces equal to the sum of each of their dice. When a player reaches space 262 or greater (representing 26.2 miles, the length of a marathon), the game ends, and the winner is the player who has travelled the furthest. If this results in a tie, a winner is randomly selected from the players who have tied. In general, players are motivated to roll more dice per turn, in order to move further and reach the end of the game before their opponent, but this also increases a player's risk, since they may end up going bust and not moving at all in a given turn.
 
-One key aspect of this game is that players simultaneously choose how many dice they roll. This allows for some interesting decision making, as discussed in the following example:
+One key aspect of this game is that players simultaneously choose how many dice they roll. This allows for some interesting decision making, as discussed in the following example.
 
 \begin{example}
 \label{cs3:example_concurrency}
 
-In a game of 26.2, suppose that player 1 and player 2 are both 5 spaces away from the goal. Broadly speaking, both players have two options - They can either roll a small number of dice, giving a low probability of going bust, or roll a large number dice, leading to a higher probability of going bust, but also moving more spaces. If 26.2 was not a concurrent game, then player 1 would choose how many dice to roll first, followed by player 2. If player 1 choose to roll a small number of dice, then player 2 could roll a slightly higher number of dice, since this would increase the probability of rolling more spaces than player 1, without substantially increasing the probability of going bust. However, if player 1 instead rolled a high number of dice, then player 2 could roll a small number of dice, anticipating that player 1 has a high probability of going bust.
-
-However, concurrency means that these decisions are made simultaneously, meaning player 2 would have to anticipate how many dice player 1 is going to roll, and make decisions accordingly.
-
+In a game of 26.2, suppose that player 1 and player 2 are both 5 spaces away from the goal. Broadly speaking, both players have two options: they can either roll a small number of dice, giving a low probability of going bust, or roll a large number dice, leading to a higher probability of going bust, but also moving more spaces. If 26.2 was not a concurrent game, then player 1 would choose how many dice to roll first, followed by player 2. If player 1 choose to roll a small number of dice, then player 2 could roll a slightly higher number of dice, since this would increase the probability of rolling more spaces than player 1, without substantially increasing the probability of going bust. However, if player 1 instead rolled a high number of dice, then player 2 could roll a small number of dice, anticipating that player 1 has a high probability of going bust.
+%
+%However, concurrency means that the players' decisions are made simultaneously, meaning player 2 would have to anticipate how many dice player 1 is going to roll, and make decisions accordingly.
 \end{example}
 
 In order to allow for concurrent decision making to be modelled, we need to introduce a new type of model.
 
 \section{Background}
 
+In this section, we introduce concurrent stochastic games, where property verification uses methods from game theory.
+
 \subsection{Concurrent stochastic games}
 
-As discussed in Example \ref{cs3:example_concurrency}, the addition of concurrency in 26.2 can alter the strategies players adopt. In order to account for this behaviour, we introduce models known as \emph{concurrent stochastic games}, as described in \cite{kwiatkowska_automated_2018}.
+As discussed in Example \ref{cs3:example_concurrency}, the addition of concurrency in 26.2 can alter the strategies players adopt. In order to account for this behaviour, we introduce \emph{concurrent stochastic games}, as described in \cite{kwiatkowska_automated_2018}.
 
 \begin{definition}
     \label{cs3:def_csgs}
 
-    A concurrent stochastic game (CSG) is a tuple $\mathcal{G} = (N, S, \bar{s}, A, Act, \delta, AP, L)$ such that:
+    A concurrent stochastic game (CSG) is a tuple $\mathcal{G} {=} (N, S, \bar{s}, A, Act, \delta, AP, L)$ where:
 
     \begin{itemize}
         \item $N = \{ 1, \dots, n \} $ is a finite set of players;
-        \item $S$ is a finite set of states;
-        \item $\bar{s}$ is the initial state;
-        \item $A = \left(A_1 \cup \{\perp\} \right) \times \dots \times \left(A_n \cup \{\perp \} \right)$ is the set of actions, where $A_i$ is a finite set of actions available to some player $i$, and $\perp$ represents an idle action which is disjoint from the actions of all other players.
-        \item $Act: S \rightarrow 2^{\cup_{i=1}^{n} A_{i}}$ is an action assignment function, where $Act(S)$ denotes the available combinations of actions across all players. In particular, some combinations of actions may be unavailable, even if the individual actions may be available for different players.
-        \item $\delta : S \times A \rightarrow Dist(S)$ is a partial transition function.
-        \item $AP$ is a set of atomic propositions where $L : S \rightarrow 2^{AP}$ labels each state with a subset of atomic propositions holding at that state.
+        \item $S$ is a finite set of states and $\bar{s}$ is the initial state;
+        \item $A = \left(A_1 \cup \{\perp\} \right) \times \dots \times \left(A_n \cup \{\perp \} \right)$ is the set of actions, where $A_i$ is a finite set of actions available to some player $i$, and $\perp$ represents an idle action which is disjoint from the actions of all players;
+        \item $Act: S \rightarrow 2^{\cup_{i=1}^{n} A_{i}}$ is an action assignment function, where $Act(s)$ denotes the available set of actions in state $s$; %In particular, some combinations of actions may be unavailable, even if the individual actions may be available for different players.
+        \item $\delta : S \times A \rightarrow Dist(S)$ is a partial transition function;
+        \item $AP$ is a set of atomic propositions and $L : S \rightarrow 2^{AP}$ labels each state with a subset of atomic propositions holding at that state.
     \end{itemize}
 \end{definition}
 
-This definition has a lot in common with Definition \ref{cs3:def_csgs} - the main difference is that players simultaneously choose actions, and the transition between states depends on the combination of actions chosen by all players. Indeed, an MDP can be considered as a subset of CSGs, specifically where for any state $s$, $A_i \neq \{ \perp \} $ for precisely one player $i$.
+This definition has a lot in common with Definition \ref{cs1:def_mdps} --- the main difference is that players simultaneously choose actions, and the transition between states depends on the combination of actions chosen by all players. Indeed, an MDP can be considered as a CSG with only one player.
 
-We also slightly adapt our definition of paths to accommodate this difference in action selection.
+% We also slightly adapt our definition of paths to accommodate this difference in action selection.
 
-\begin{definition}
-    \label{cs3:csgs_paths}
+% \begin{definition}
+%     \label{cs3:csgs_paths}
 
-    Given a CSG $\mathcal{G}$, a path $\pi$ is a sequence $s_0 \xrightarrow{\alpha_0} s_1 \xrightarrow{\alpha_1} \dots$, with $s_i \in S$ and $\alpha_i = (a^{i}_1, \dots, a^{i}_n) \in A$, $a^{i}_j \in A_{j}(s_i)$ for $j \in N$, and that $\delta(s_i, \alpha_i )(s_{i+1}) > 0$ for all $i$. A finite path is a truncation of an infinite path.
-\end{definition}
+%     Given a CSG $\mathcal{G}$, a path $\pi$ is a sequence $s_0 \xrightarrow{\alpha_0} s_1 \xrightarrow{\alpha_1} \dots$, with $s_i \in S$ and $\alpha_i = (a^{i}_1, \dots, a^{i}_n) \in A$, $a^{i}_j \in A_{j}(s_i)$ for $j \in N$, and that $\delta(s_i, \alpha_i )(s_{i+1}) > 0$ for all $i$. A finite path is a truncation of an infinite path.
+% \end{definition}
 
-And as in the previous case studies, adversaries are defined very similarly, though we must consider adversaries for all players at once.
+And as in the previous case studies, adversaries are defined very similarly, though we must consider adversaries for all players. We also remark that these strategies may be probabilistic, such as in the game of rock-paper-scissors, where the optimal strategy is to choose each symbol with probability $\frac{1}{3}$.
 
 \begin{definition}
     \label{cs3:csgs_strats}
@@ -63,83 +63,62 @@ And as in the previous case studies, adversaries are defined very similarly, tho
 
 We can also augment CSGs with reward structures as with previous model types, with action rewards and state rewards.
 
-We now introduce methods for computing reachability probablities and reward-based properties in CSGs. These methods are somewhat similar in spirit to those for DTMCs and MDPs, but the computation of specific values requires a new class of techniques.
+We now discuss computing reachability probabilities for CSGs (the case for reward properties follows similarly). These methods are somewhat similar in spirit to those for DTMCs and MDPs, but the computation of specific values requires a new class of techniques, which also allow players to form coalitions, and collaborate or compete with different players.
 
-\subsection{Normal form games and matrix games}
-\label{cs3:prop_ver_csgs}
+\subsection{Matrix games}
+\label{cs3:normal_form_matrix}
 
-We first discuss some preliminaries from game theory, specifically the idea of matrix games. We start by introducing a simplifed game, known as a \emph{normal form game}.
-
-\begin{definition}
-\label{cs3:normal_form_games}
-
-A normal form game $\mathcal{N}$ is a tuple $(N, A, u)$, where $N$ and $A$ are defined as in CSGS in Definition \ref{cs3:def_csgs}, and $u$ is a tuple $(u_i, \dots, u_n)$ where, for a given action $a \in A$, $u_i(a)$ assigns player $i$ a real number, which is the player's utility for the game.
-
-\end{definition}
-
-This game is simpler than the games we have considered in these case studies, since only one action is taken before the end of the game. In addition we only consider two-player zero sum games, which are games where the sum of utilities for each player sum to 0. This allows us to model games with one winner and one loser, by setting a player's utility to $-1$ if they lose and $1$ if they win. This also allows us to express the probability of a player eventually winning from a given position in a game. Given a win probability $p$, the corresponding utility is given by $2p - 1$.
-
-These games may also be represented as a matrix, as shown in the following definition.
+We first discuss some preliminaries from game theory, specifically the idea of matrix games. We can represent a simplified game as a matrix, as in the following definition.
 
 \begin{definition}
     \label{cs3:matrix_games}
 
-    Given a two-player zero game normal form game $\mathcal{N}$, the corresponding \emph{matrix game} $Z$ is the $l \times m$ matrix such that $A_1 = {a_1, \dots, a_l}$ and  $A_2 = {b_1, \dots, b_m}$ with $Z_{i, j} = u_{1}(a_i, b_j) = -u_{2}(a_i, b_j)$.
+    A \emph{matrix game} $Z$ is the $l \times m$ matrix such that $A_1 = {a_1, \dots, a_l}$ and  $A_2 = {b_1, \dots, b_m}$ where $Z_{i, j}$ represents the \emph{utility} of the game for player 1 if player 1 performs action $a_i$ and player 2 performs action $b_j$.
 \end{definition}
 
-We are interested in obtaining the \emph{value} of a matrix game, which represents the minimum total value a player can obtain from a game. More specifically, we say that for some matrix game $Z$, $val(Z) = v^*$ if player 1 has an optimal strategy such that the utility of the game is always at least $v^*$, and conversely if player 2 has an optimal strategy such that the utility of the game is at least $-v^*$. Every matrix game has a value, a consequence of the minimax theorem proved by von Neumann in \cite{v_neumann_zur_1928}. This value can be obtained as the solution to a linear programming problem, specifically maximising v subject to the following constraints:
+This game is simpler than the games we have considered in these case studies, since only one action is taken before the end of the game by each player. In addition we only consider two-player zero sum games, which are games where the sum of utilities for each player sum to 0. This allows us to model games with one winner and one loser, by setting a player's utility to $-1$ if they lose and $1$ if they win.
 
+%This also allows us to express the probability of a player eventually winning from a given position in a game. Given a win probability $p$, the corresponding utility is given by $2p - 1$. This represents a linear scaling from the interval $[0, 1]$ to the interval $[-1, 1]$, allowing for win probability to be expressed as a utility for a zero-sum game.
+
+We are interested in obtaining the \emph{value} of a matrix game, which represents the maximum utility player 1 can ensure it obtains when playing the game and conversely is the minimum utility player 2 can ensure. More specifically, we say that for some matrix game $Z$, $val(Z) = v^*$ if player 1 has an optimal strategy such that the utility of the game is always at least $v^*$, and conversely if player 2 has an optimal strategy such that the utility of the game is at least $-v^*$. Every matrix game has a value, a consequence of the minimax theorem proved by von Neumann in~\cite{v_neumann_zur_1928}. This value can be obtained as the solution to a linear programming problem, specifically maximising $v$ subject to the following constraints:
 \begin{align*}
-v \leq p_1 \cdot Z_{1, j} + \dots + p_l \cdot Z_{l, j} \quad \text{for} 1 \leq j \leq m \\
-p_i \geq 0 \: \forall i, \quad p_1 + \dots + p_l = 1
+v \leq p_1 \cdot Z_{1, j} + \dots + p_l \cdot Z_{l, j} & \quad \text{for} \; 1 \leq j \leq m \\
+p_i \geq 0 & \quad \text{for} \; 1 \leq i \leq l \\ \quad p_1 + \dots + p_l = 1
 \end{align*}
+The solution $(p_1, \dots, p_l)$ yields an optimal strategy for player 1, and the analogous problem for player 2, which involves minimising $v$, yields an optimal strategy for player 2.
 
-The solution $(p_1, \dots, p_l)$ yields an optimal strategy for player 1, and the analogous problem for player 2, which involves minimising v, yields an optimal strategy for player 2.
-
-We are now ready to compute reachability probabilities and reward-based properties for CSGs.
+%We are now ready to compute reachability probabilities and reward-based properties for CSGs.
 
 \subsection{Property verification for CSGs}
 \label{cs3:prop_ver_csgs}
 
-We use a similar approach to Section \label{cs1:prob_reach_mdps} in order to compute $P^{s}[ \; F a]$, where $s$ is some state and $a$ is an atomic proposition, denoting the probability of eventually reaching some state where $a$ holds starting from $s$. Specifically, we define a sequence $(x_s^{n})_{n \in \mathbb{N}}$ denoting the probability of eventually reaching a state where $a$ holds within at most $n$ steps, then use a large enough value of $n$ to converge to the actual probability.
+Computing reachability properties and reward-based properties for CSGs uses a similar approach to Section \ref{cs1:prob_reach_mdps}, where a sequence is defined based on the value of the required property after $n$ steps, then approximating the actual result with large enough $n$. This process is described further in \cite{kwiatkowska_automated_2018}. However, there are two key differences compared to property verification for MDPs. Firstly, rather than taking the minimum or maximum choice of each possible action, the value of an associated matrix game must be considered. Secondly, the properties have slightly different definitions, as shown below from \cite{kwiatkowska_verification_2019}:
 
 \begin{definition}
-    \label{cs1:val_iter_csgs}
-
-    Given a CSG $\mathcal{G}$, we have that:
-
+    \label{cs3:csg_props}
+    Given a coalition of players $C$ in a CSG $\mathcal{G}$, with $\Sigma^{1}$ and $\Sigma^{2}$ representing the set of strategies for players in and out of the coalition respectively, for a given set of target states $T$, the maximum probability coalition $C$ can ensure of reaching $T$ is given by:
     \begin{equation*}
-    x_s^{n} =
-    \begin{cases}
-    1 & s \in Sat(a) \\
-    0 & s \notin Sat(a), n=0 \\
-    val(Z) & \text{otherwise} \\
-    \end{cases}
+        \mathbf{P}_{\mathcal{G}}^{C}(T) = \sup_{\sigma_1 \in \Sigma^{1}} \inf_{\sigma_2 \in \Sigma^{2}} \mathbf{P}_\mathcal{G}^{\sigma_1, \sigma_2}(T),
     \end{equation*}
-
-    Specifically, $Z$ is the matrix game with:
-
-    \begin{equation*}
-        Z_{i,j} = \sum_{s' \in S} \delta(s, (a_{i}, b_{j}))(s') \cdot x_{s'}^{n-1}
-    \end{equation*}
-
+    where $\mathbf{P}_\mathcal{G}^{\sigma_1, \sigma_2}(T)$ is the probability of reaching T under strategies $\sigma_1$ and $\sigma_2$.
 \end{definition}
+We note that the players in the coalition aim to maximise the result while the players outside of the coalition aim to minimise the result. This allows for collaboration to be modelled using CSGs, although for the purposes of this case study we only consider cases where the sets of coalition and non-coalition players both have just one player.
 
-Computation of reward-based properties is analogous. An important point about the above definition is that CSGs are more involved than normal form games - in particular, CSGs require a sequence of actions whereas normal form games are completed after one action, but we can use a sequence of normal form games to reason about CSGs. Another key aspect of this definition is that the players in a CSG are split into two main "groups", or \emph{coalitions}, with one group aiming to reach the set of target states and one group aiming to avoid the target states. Coalitions are not considered in more depth due to the impact of adding additional players on model size, but they allow for cooperation to be modelled in CSGs.
-
+%The expected value for a reward once reaching $T$ is analogous.
+    
 We now focus on 26.2 in more detail, comparing pre-defined strategies to more complex optimal strategies.
 
 \section{Results and analysis}
 
-To begin with, we discuss a few constraints required to feasibly model 26.2. In order to ensure the size of the model for 26.2 remains feasible to perform model checking, a smaller variant of the game is considered. Rather than allowing up to 10 ten-sided dice per player, each player can roll at most four 4-sided dice. The length of the board is also reduced from 262 spaces (representing 26.2 miles, the length of a marathon) to 50 spaces. Even with these adjustments, a computing cluster with 600 gigabytes of RAM was required in order to perform probabilistic model checking.
+To begin with, we discuss a few constraints required to ensure the size of the model for 26.2 remains feasible to perform model checking. First, rather than allowing up to 10 ten-sided dice per player, each player can roll at most four 4-sided dice. The length of the board is also reduced from 262 spaces to 50 spaces. Even with these adjustments, a computing cluster with 600 gigabytes of RAM was required in order to perform probabilistic model checking. As a result of the size of this model, generating and analysing adversaries during this case study was infeasible.
 
-The simplest possible strategy for 26.2 is to always roll the same number of dice. However, we remark that going bust when rolling 2 dice is impossible, hence there is no reason to roll only one dice. As a result, we only consider the strategies where 2, 3 and 4 dice are always rolled. In addition, we also consider a "hybrid" strategy, where the player rolls 3 dice if they are in the lead, or currently tied for the lead, and rolls 4 dice if they are behind. The rationale behind this approach is that rolling 3 dice while in the lead helds to consolidate a lead while minimising the probability of going bust and not moving for a turn, whereas rolling 4 dice from behind allows the player to catch up to the leader, albeit with the higher risk of going bust and staying even further behind. 
+The simplest possible strategy for 26.2 is to always roll the same number of dice. However, we remark that going bust when rolling 2 dice is impossible, hence there is no reason to roll only one dice. As a result, we only consider the strategies where 2, 3 and 4 dice are always rolled. In addition, we also consider a "hybrid" strategy, where the player rolls 3 dice if they are in the lead, or currently tied for the lead, and rolls 4 dice if they are behind. The rationale behind this approach is that rolling 3 dice while in the lead helps to consolidate a lead while minimising the probability of going bust and not moving for a turn, whereas rolling 4 dice from behind allows the player to catch up to the leader, albeit with the higher risk of going bust and staying even further behind. 
 
 First, we verify that, when both players apply the same strategy, the probability of either player winning is 0.5, up to numerical convergence. This is important for providing additional assurance that the model behaves as expected, and moreover that permuting players 1 and 2 makes no difference to the overall result of the game.
 
 As a short aside, the probability of going bust after rolling a given number of dice can be easily calculated. Rolling 1 or 2 dice clearly means that the player cannot go bust, while rolling 3 dice means going bust with probability $\frac{1}{16} = 6.25\% $ since all three dice must have the same face value. The full derivation of the bust probability for 4 dice is omitted for space reasons, but the cases with 3 dice of the same value and 2 pairs of dice with the same value must be considered separately, giving a bust probability of $\frac{22}{64} = 34.375\%$.
 
-Then, various combinations of strategies were compared, and their winrates are summarised in Table \ref{cs3:winrate_table}. From this table, a number of key insights about the game can be ascertained.
+Then, various combinations of strategies were compared, and their win rates are summarised in Table~\ref{cs3:winrate_table}. From this table, a number of key insights about the game can be ascertained.
 
 \begin{table}[h]
     \centering
@@ -150,21 +129,23 @@ Then, various combinations of strategies were compared, and their winrates are s
     3-dice                                                           & \multicolumn{1}{l|}{4-dice} & 0.5630                         \\
     hybrid                                                           & \multicolumn{1}{l|}{3-dice} & 0.5536                         \\
     hybrid                                                           & \multicolumn{1}{l|}{4-dice} & 0.5685                         \\
-    \begin{tabular}[c]{@{}l@{}}optimal against\\ 3-dice\end{tabular} & \multicolumn{1}{l|}{3-dice} & 0.5608                        
+  optimal against 3-dice & \multicolumn{1}{l|}{3-dice} & 0.5608                        
     \end{tabular}
-    \caption{The winrate of player 1 with various combinations of pre-defined and optimal strategies in the small variant of 26.2.}
+    \vspace*{0.1cm}
+    \caption{The winrate of player 1 with various combinations of pre-defined and optimal strategies in the small version of 26.2.}
     \label{cs3:winrate_table}
-    \end{table}
+    \vspace*{-0.2cm}    \end{table}
 
-The first result in the table shows that the 4-dice strategy beats the 2-dice strategy handily. This is expected, since while the 4-dice strategy goes bust in around $34\%$ of rolls, the expected value per roll is clearly twice as high as in the 2-dice strategy. However the 4-dice strategy fares poorly against the 3-dice strategy, which wins with probability of approximately 0.56 as shown in the second result. This is in line with the theoretical bust probabilities which were computed earlier - increase in bust probability outweighs the additional movement provided by rolling an extra die.
+The first row in the table shows that the 4-dice strategy beats the 2-dice strategy handily. This is expected, since while the 4-dice strategy goes bust in around $34\%$ of rolls, the expected value per roll is clearly double that of the 2-dice strategy. However the 4-dice strategy fares poorly against the 3-dice strategy, which wins with probability of approximately 0.56. This is in line with the theoretical bust probabilities which were computed earlier --- the increase in bust probability outweighs the additional movement provided by rolling an extra die.
 
-The third and fourth results show the effectiveness of the hybrid strategy against both strategies. Against the 3-dice case, we expect both players to mostly stick close together during the game, since they are both rolling the same number of dice. However the variance of dice rolls means either the hybrid player could maintain a small lead, which the 3-dice player struggles to over come, or the hybrid place falls behind, where they then roll 4 dice in order to make up the difference and retake the lead. Against the 4-dice case, again for most of the game we expect both players to roll the same number of dice, but if the 4-dice player goes bust, the hybrid player can capitalise on this lead to start rolling 3 dice and maintain a consistent lead.
+The third and fourth rows of the table show the effectiveness of the hybrid strategy against both fixed strategies. Against the 3-dice case, we expect both players to mostly stick close together during the game, since they are both rolling the same number of dice. However the variance of dice rolls means either the hybrid player could maintain a small lead, which the 3-dice player struggles to over come, or the hybrid place falls behind, where they then roll 4 dice in order to make up the difference and retake the lead. Against the 4-dice case, again for most of the game we expect both players to roll the same number of dice, but if the 4-dice player goes bust, the hybrid player can capitalise on this lead to start rolling 3 dice and maintain a consistent lead.
 
-The most interesting result in this table is of the optimal strategy. Given an opponent who always rolls 3 dice, the optimal strategy generated by PRISM against this opponent wins with probability 0.5608, compared to the hybrid strategy which wins with probability 0.5536, a fairly small difference. Moreover, against the 4-die strategy, the 3-dice and hybrid strategies both perform very similiarly. These raise a similar issue to Shut the Box, in that complex strategies are not sufficiently differentiable to simple strategies. The time spent to reason about and to derive a more optimal strategy is not justified by the performance improvement given as a result.
+The most interesting result in this table is when considering the optimal strategy against the 3-dice strategy. Given an opponent who always rolls 3 dice, the optimal strategy generated by PRISM against this opponent wins with probability 0.5608, compared to the hybrid strategy which wins with probability 0.5536, a fairly small difference. Moreover, against the 4-die strategy, the 3-dice and hybrid strategies both perform very similarly. These raise a similar issue to Shut the Box, in that complex strategies are not sufficiently differentiable to simple strategies. The time spent to reason about and to derive a more optimal strategy is not justified by the performance improvement given as a result.
 
 \section{Evaluating the design of 26.2}
+\label{cs3:eval_262}
 
-Our analysis of 26.2 shows that the game contains similar flaws to Shut the Box, in that optimal strategies are too similar to simple strategies to justify the time required to learn those optimal strategies. In particular, without model checking, determining whether a strategy is optimal is infeasible for human players, so they may try many complex strategies, only to become frustrated and stop playing the game when they realise how similar their outcomes are to a very simple strategy.
+Our analysis of a small variant 26.2 shows that the game contains similar flaws to Shut the Box, in that optimal strategies are too similar to simple strategies to justify the time required to learn those optimal strategies. In particular, without model checking, determining whether a strategy is optimal is infeasible for human players, so they may try many complex strategies, only to become frustrated and stop playing the game when they realise how similar their outcomes are to a very simple strategy.
 
 There are a number of ways to resolve this issue in 26.2. Increasing the number of sides per dice would reduce the rate of increase of the bust probability, allowing for more dice to be rolled at once. This would lead to a greater variety of strategies, meaning the difference between effective and ineffective strategies should become larger. Also, while this was not included in the case study, the original version of 26.2 allows the player to collect \emph{water tokens} when rolling a 1, which can be spent in order to perform various actions to mitigate the impact of luck, such as rerolling dice or reducing the value of a dice. Including these actions in the game would create an interesting comeback mechanic, since players who fall behind due to rolling low numbers will be able to make riskier choices in subsequent turns.
 

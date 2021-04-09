@@ -73,7 +73,7 @@ endmodule
 
 module board2
 
-	b2 : [0..1];
+	b2 : [0..1] init 1;
 
 	[cover_2] b2=0 -> (b2'=1);
 	[cover_2_1] b2=0 -> (b2'=1);
@@ -96,7 +96,7 @@ endmodule
 
 module board4
 
-	b4 : [0..1];
+	b4 : [0..1] init 1;
 
 	[cover_4] b4=0 -> (b4'=1);
 	[cover_4_1] b4=0 -> (b4'=1);

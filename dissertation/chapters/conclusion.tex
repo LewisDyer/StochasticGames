@@ -1,7 +1,13 @@
-\chapter{Conclusion (2 pages)}    
+\chapter{Conclusion}
+\label{conclusion}
 
-Summarise the project, discuss some potential future work. In particular, could the techniques used while analysing weighted dice be used in other applications of model checking (say safety critical systems)?
+The results presented demonstrate that model checking can be an effective tool for answering balance questions about stochastic games. The games presented in these case studies are simple, but even these simple games provide interesting examples of various issues in game design. Shut the Box and 26.2 are both flawed games because optimal strategies are not sufficiently differentiable from simple strategies, while Liar's Dice is flawed because the early rounds of the game have a disproportionate influence on the overall outcome of the game, leading to games which feel artificially long without the later rounds of the game feeling meaningful. Of particular note is the variety of games presented here, with Liar's Dice including hidden information and 26.2 employing simultaneous action selection. This shows the potential of probabilistic model checking for analysing games beyond turn-based perfect information games, which current research primarily focuses on.
 
-\Blindtext
+While this dissertation has considered numerous different possibilities for analysing games using model checking, a number of further questions are still to be considered.
 
-\Blindtext
+\begin{itemize}
+    \item When generating optimal strategies for games, an important factor in the viability of a strategy is its complexity. As discussed in Section \ref{cs1:eval_stb}, players are unlikely to employ complex strategies if a simpler strategy is similarly effective. However, in general the complexity of a strategy is poorly quantified. Future work in model checking could involve defining a measure for the complexity of an adversary, then penalise strategies which are too complex when computing optimal adversaries. While this will likely lead to less effective strategies, the strategies generated in this manner will be more understandable for human players.
+    \item The key bottleneck for further analysis of games is the model size, making full computation infeasible for many realistic games, and improvements in this area would lead to a substantial increase in the viability of model checking for determining game balance. For instance, the game tree construction presented in Section \ref{cs2:state_reduction} could potentially be automated, allowing for subgames to be generated and considered for many types of models.
+    \item Another potential avenue for future research is improving the visualisation of generated strategies. In particular, comparing two strategies is challenging, since their visualisations are large and differences in actions are unclear. Improved tool support in this area would be especially useful for designers who are less familiar with formal verification, allowing for optimal strategies to be more easily considered and evaluated.
+    \item As briefly mentioned in Section~\ref{cs3:eval_262}, extending probabilistic model checking to partially observable stochastic games would allow for similar techniques to be applied to games where all players have different sets of hidden information, rather than just one player having hidden information, which would allow the techniques presented throughout this dissertation to be employed in a much wider class of games.
+\end{itemize}

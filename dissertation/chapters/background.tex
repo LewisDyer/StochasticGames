@@ -1,7 +1,8 @@
 
-\chapter{Background (3 pages)}
+\chapter{Background}
+\label{background}
 
-In order to begin formal analysis of a game, we must first formally define a model of a game, along with properties of this game we wish to consider.
+In order to begin formal analysis of a game, we must first formally define an abstract mathematical model of a game, along with properties of this game we wish to consider.
 
 \section{Discrete-time Markov chains}
 \label{back:stoc_game}
@@ -10,77 +11,64 @@ We first introduce discrete-time Markov chains (or DTMCs), as described by Kwiat
 
 \begin{definition}
 \label{back:dtmc}
-    Given a set of atomic propositions, denoted $AP$, a discrete-time Markov chain (DTMC) is defined as a tuple $\mathcal{D} = (S, \bar{s}, \mathbf{P}, L)$ such that:
+    Given a set of atomic propositions, denoted $AP$, a discrete-time Markov chain (DTMC) is a tuple $\mathcal{D} = (S, \bar{s}, \mathbf{P}, L)$ such that:
 
     \begin{itemize}
-        \item $S$ is the finite set of states;
-        \item $\bar{s}$ is the initial state;
+        \item $S$ is the finite set of states and $\bar{s}$ is the initial state;
         \item $\mathbf{P} : S \times S \rightarrow [0,1]$ is the \emph{transition probability matrix}, where $P(s, s')$ is the probability of transitioning from state $s$ to state $s'$, such that the sum of probabilities of outgoing transitions from each state is $1$.
-        \item $L: S \rightarrow 2^{AP}$ is the \emph{labelling function}, where for $s \in S$ a state, $L(s)$ denotes the subset of atomic propositions which hold at that state.
+        \item $L: S \rightarrow 2^{AP}$ is the \emph{labelling function}, where for $s \in S$ a state, $L(s)$ denotes the subset of atomic propositions which hold at that state. In particular, we let $Sat(a) = \{s \in S \mid a \in L(s)\}$.
     \end{itemize}
-
 \end{definition}
 
-From this definition of a DTMC, we also define the states where an atomic proposition holds.
-
-\begin{definition}
-\label{back:sat}
-
-    For $a \in AP$ and a set of states $S$ as in Definition \ref{back:dtmc}, denote $Sat(a) = \{s \in S \mid a \in L(s)\}$.
-
-\end{definition}
-
-
-As a motivating example, we define a classic board game using a DTMC.
-
-\begin{example}
-\label{back:chess}
-    A game of chess can be defined as a DTMC from Definition \ref{back:dtmc} as follows:
-
-    \begin{itemize}
-        \item $S$ is the set of states for the game, representing all possible board positions throughout a game of chess, along with the current player's turn (since a given board position could be obtained where either black or white is the current player).
-        \item $\bar{s}$ is the initial board position of a standard game of chess, where white makes the first move.
-        \item $\mathbf{P}$ assigns each valid move a probability of being chosen at a particular board position. More precisely, a transition to a board position is only valid if the transition can be presented by one legal move according to the rules of chess by the player whose move it is (for instance, the white player can only move white pieces, can only move one piece per move with the exception of castling, and cannot move a piece if the black player can capture the white king in the following turn).
-        \item $L$ labels each state with a set of propositions which are true at that state. For instance, if we let $\mathbf{C_w}$ be the atomic proposition that the white player is in check in a given state, then for $s \in S$ a state, $\mathbf{C_w} \in L(s)$ means that the white player is in check in state $s$.
-    \end{itemize}
-
-    In this model, the key aspect in determining the skill level of the players is in the transition probability matrix. In theory, there is always an optimal move to make in chess, so for each board position, an optimal player's transition probability matrix will return $1$ for precisely one transition, and return $0$ for all other transitions. But in practice chess is far too complex for players, human or computer alike, to compute this optimal strategy. Hence players choices may be probabilistic, such as a chess player who occasionally "blunders", making a move which places them in a disadvantageous position.
-\end{example}
-
-Playing a game is represented as an infinite \emph{path}, denoted as a sequence $\omega = s_0 \rightarrow s_1 \rightarrow \dots$ where $\mathbf{P}(s_k, s_{k+1})>0$ for all $k\geq0$, or in other words where each transition is possible. Note that in states where a game terminates (for instance, states where either the white or black player is in checkmate, or where the game ends in stalemate), we typically define a self-loop in each of these states with probability 1 to ensure the path remains infinite.
+Playing a game is represented as an infinite \emph{path}, denoted as a sequence $\omega = s_0 \rightarrow s_1 \rightarrow \cdots$ where $\mathbf{P}(s_k, s_{k+1})>0$ for all $k\geq0$, or in other words where each transition is possible. In states where a game terminates, we typically define a self-loop in each of these states with probability 1 to ensure the path remains infinite.
 
 DTMCs may also be augmented with \emph{rewards} - numerical values representing various characteristics of a particular execution of a DTMC.
 
 \begin{definition}
 \label{back:reward_structure}
 
-A \emph{reward structure} for some DTMC $\mathcal{D}$ is a tuple $(\rho, \iota)$. $\rho : S \rightarrow \mathbb{N}$ is a state reward function, associating each state with the value of a reward, while $\iota : S \times S \rightarrow \mathbb{N}$ is a state transition function, associating each transition with the value of a reward.
+A \emph{reward structure} for a DTMC $\mathcal{D}$ is a tuple $(\rho, \iota)$ where $\rho : S \rightarrow \mathbb{R}$ is a state reward function, associating each state with the value of a reward and $\iota : S \times S \rightarrow \mathbb{R}$ is a state transition function, associating each transition with the value of a reward.
 \end{definition}
 
-\begin{example}\label{rew:eg}
-Returning to Example~\ref{back:chess}, we may define a reward structure $R_w = (\rho_w, \iota_w)$ where $\rho_w$ returns $0$ for all states, and $\iota_w$ returns $1$ for all transitions where the white player captures a black piece.
+These reward values can be utilised and examined in various different ways to evaluate a DTMC. More detail on this is provided in Section~\ref{back:prop_spec}, but in particular the expected value of a reward value over all possible paths through a DTMC is frequently considered.
+
+As a motivating example, we define a classic board game along with a reward using a DTMC.
+
+\begin{example}
+\label{back:chess}
+    A game of chess can be defined as a DTMC from Definition \ref{back:dtmc} as follows:
+
+    \begin{itemize}
+        \item $S$ is the set of states for the game, representing all possible board positions throughout a game of chess, along with the current player's turn; % (since a given board position could be obtained where either black or white is the current player).
+        \item $\bar{s}$ is the initial board position of a standard game of chess, where white makes the first move.
+        \item $\mathbf{P}$ assigns each valid move a probability of being chosen at a particular board position, where a transition is valid if the transition can be presented by one legal move according to the rules of chess by the player by the current player.
+        \item $L$ labels each state with a set of propositions which are true at that state. For instance, if we let $\mathtt{c_w}$ be the atomic proposition that the white player is in check in a given state, then for $s \in S$ a state, $\mathtt{c_w} \in L(s)$ means that the white player is in check in state $s$.
+    \end{itemize}
+    
+    We may also define a reward structure $R_w = (\rho_w, \iota_w)$ where $\rho_w$ returns $0$ for all states, and $\iota_w$ returns $1$ for all transitions where the white player captures a black piece, and returns $-1$ for all transitions where the black player captures a white piece.
+    %In this model, the key aspect in determining the skill level of the players is in the transition probability matrix. In theory, there is always an optimal move to make in chess, so for each board position, an optimal player's transition probability matrix will return $1$ for precisely one transition, and return $0$ for all other transitions. But in practice chess is far too complex for players, human or computer alike, to compute this optimal strategy. Hence player's choices may be probabilistic, such as a chess player who occasionally "blunders", making a move which places them in a disadvantageous position.
 \end{example}
-
-Note that the reward values may be real-valued (though they may never be negative), but we only consider reward values from $\mathbb{N}$ - Definition~\ref{back:reward_structure} may be modified accordingly to allow for reward values in $\mathbb{R}_{\geq0}$. These reward values can be utilised and examined in various different ways to evaluate a DTMC. More detail on this is provided in Section~\ref{back:prop_spec}, but in particular the expected value of a reward value over all possible paths through a DTMC is frequently considered during model checking.
-
 
 \section{Property specification}
 \label{back:prop_spec}
 
-When analysing probabilistic models, including DTMCs, we consider two main types of properties: \emph{probabilistic reachability} properties and \emph{reward-based} properties. We may define properties in terms of \emph{Probabilistic Computation Tree Logic} (PCTL), as defined by Hansson and Jonsson~\cite{hansson_logic_1994}. These properties are comprised of path quantifiers and temporal operators, though for the purposes of this dissertation we only consider one temporal operator. In particular, the future operator, denoted $\mathbf{F}$, considers whether a particular proposition \emph{eventually} holds for some state on a given path.
+When analysing probabilistic models, including DTMCs, we consider two main types of properties: \emph{probabilistic reachability} properties and \emph{reward-based} properties. We may define properties in terms of \emph{Probabilistic Computation Tree Logic} (PCTL), as defined by Hansson and Jonsson in~\cite{hansson_logic_1994}. These properties are comprised of path quantifiers and temporal operators, though for the purposes of this dissertation we only focus on one temporal operator: the future operator, denoted $\mathbf{F}$, considers whether a particular proposition \emph{eventually} holds for some state on a given path.
 
-A closely related operator is the until operator, denoted  $\mathbf{U}$, which considers two propositions, say $a$ and $b$, and determines whether for a given path, $a$ always holds before some state, then $b$ holds for the given state. Indeed, the future operator is actually equivalent to the until operator when $a$ is the proposition which always holds, denoted \verb+true+. We use this equivalence in Section~\ref{back:prob_mod_check} in order to perform model checking on probabilistic reachability properties.
+%A closely related operator is the until operator, denoted  $\mathbf{U}$, which considers two propositions, say $\mathtt{a}$ and $\mathtt{b}$, and determines whether for a given path, $\mathtt{a}$ always holds before some state, then $\mathtt{b}$ holds for the given state. Indeed, the future operator is actually equivalent to the until operator when $mathtt{a}$ is the proposition which always holds, denoted \verb+true+. We use this equivalence in Section~\ref{back:prob_mod_check} in order to perform model checking on probabilistic reachability properties.
 
-For probabilistic reachability properties, we also include the $\mathbf{P}$ operator, which considers the probability of a particular property holding across all possible executions of the DTMC. For instance, using Example \ref{back:chess}, if we define $\mathtt{white\_win}$ as the proposition that white is considered to have won the game in the current state, the property $\mathbf{P}_{=?} [\mathbf{F}\ \mathtt{white\_wins}]$ represents the probability that white eventually wins the game of chess. We may similarly define bounded properties in a similar manner, such as $\mathbf{P}_{\geq 0.5} [\mathbf{F}\ \mathtt{white\_wins}]$, denoting whether or not white eventually wins with probability greater than $0.5$, although we introduce bounded properties solely to introduce notation, and do not formally consider model checking bounded properties.
+For probabilistic reachability properties, we also include the $\mathbf{P}$ operator, which considers the probability of a particular property holding across all possible executions of the DTMC. For instance, using Example \ref{back:chess}, if we define $\mathtt{white\_win}$ as the proposition that white is considered to have won the game in the current state, the property $\mathbf{P}_{=?} [\mathbf{F}\ \mathtt{white\_wins}]$ represents the probability that white eventually wins the game of chess. 
+
+%We may similarly define bounded properties in a similar manner, such as $\mathbf{P}_{\geq 0.5} [\mathbf{F}\ \mathtt{white\_wins}]$, denoting whether or not white eventually wins with probability greater than $0.5$, although we introduce bounded properties solely to introduce notation, and do not formally consider model checking bounded properties.
 
 For reward-based properties, PRISM defines an extension to PCTL introducing the $\mathbf{R}$ operator~\cite{kwiatkowska_stochastic_2007}, which allows for properties where the value of a reward is taken into account. For the purposes of this dissertation we only consider one type of reward-based property, namely the \emph{reachability reward} property, referring to the expected cumulative value of a reward along a path, until a state satisfying a particular proposition is reached.
 
 \begin{example}
 \label{back:chess_reward}
-Again building on Example \ref{back:chess} and using the reward structure from Example~\ref{rew:eg}, the property $\mathbf{R}_{=?} [\mathbf{F}\ \mathtt{white\_win}]$ represents the expected value of the difference between the number of pieces the white and black player control in the cases where the white player eventually wins. 
+Again building on Example \ref{back:chess} and using the reward structure presented in this example, the property $\mathbf{R}_{=?} [\mathbf{F}\ \mathtt{white\_win}]$ represents the expected value of the difference between the number of pieces the white and black player control in the cases where the white player eventually wins. 
 \end{example}
 
-These reward-based properties can provide useful information when balancing games. For instance, we may initially expect that the difference in pieces captured is a useful measure of how "close" a game of chess is, and this measure could be evaluated via model checking, where we may find it insufficient as a balance measure. For instance, this measure gives equal weighting to every piece, whereas some pieces such as queens are often considered more valuable than other pieces. This behaviour can be modified by changing the state transition function of the reward structure from Example \ref{back:check_rewards}, such as by defining $\iota_w$ such that it returns $1$ when the white player captures a black pawn, and $\iota_w$ returns $2$ when the white player captures a black piece that is not a pawn.
+These reward-based properties can provide useful information when balancing games. For instance, we may initially expect that the difference in pieces captured is a useful measure of how "close" a game of chess is, and this measure could be evaluated via model checking, where we may find it insufficient as a balance measure. For instance, this measure gives equal weighting to every piece, whereas some pieces such as queens are often considered more valuable than other pieces. This behaviour can be modified by changing the state transition function of the reward structure from Example \ref{back:check_rewards}, such as by defining $\iota_w$ such that it returns $1$ when the white player captures a black pawn, and $\iota_w$ returns $2$ when the white player captures a black piece that is not a pawn, along with the negation of these values when the black player captures a white pawn and a white non-pawn piece respectively.
+
 \section{Probabilistic model checking}
 \label{back:prob_mod_check}
 
@@ -95,51 +83,48 @@ Now that we have defined a DTMC, along with properties of that DTMC to consider,
 
 \begin{example}
 \label{back:chess-reachability}
-    Consider a game of chess, defined in Example \ref{back:chess}, and let $\mathbf{M_w}$ and $\mathbf{M_b}$ be the atomic propositions that the white player and black player, respectively, are in checkmate in a particular position. In non-probabilistic model checking, we may consider the reachability of $\mathbf{M_w}$ - in other words, we consider whether we can always reach a state where the white player is in checkmate, regardless of which reachable board position we start in.
+    Consider a game of chess, defined in Example \ref{back:chess}, and let $\mathtt{m_w}$ and $\mathtt{m_b}$ be the atomic propositions that the white player and black player, respectively, are in checkmate in a particular position. In non-probabilistic model checking, we may consider the reachability of $\mathtt{m_w}$ - in other words, we consider whether we can always reach a state where the white player is in checkmate, regardless of which reachable board position we start in.
     
-    In particular this result is binary - either we can always reach a state where $\mathbf{M_w}$ holds, or there exists a board position where white can never lose via checkmate. Indeed, in chess the latter holds - for instance, if the black player only has a king remaining, then there is no way for white to lose via checkmate, since black has insufficient material. And since our model is essentially a directed graph, we can employ standard widely-known algorithms such as a breadth first search in order to verify such reachability properties.
+    The result of such a query is binary - either we can always reach a state where $\mathtt{m_w}$ holds, or there exists a board position where white can never lose via checkmate. Indeed, in chess the latter holds - for instance, if the black player only has a king remaining, then there is no way for white to lose via checkmate, since black has insufficient material. Since our model is essentially a directed graph, we can employ standard widely-known algorithms such as a breadth first search in order to verify such reachability properties.
 
-    However, if we consider probabilistic model checking, then as well as qualitative properties, such as the above, we can also consider quantitative properties, such as the \emph{probability} that the white player is in checkmate from a particular board position. In PCTL, this may be expressed as the property $\mathbf{P}_{=?} [\mathbf{F} \, \mathbf{M_w}]$. This is a far more general and powerful property - for instance, an advanced chess player, who has found themselves in a state such that they are in disadvantage over the other player, may seek to reach states where the game is unlikely to end in checkmate, maximising the probability of a draw. However calculating this probability is more complex than for non-probabilistic reachability problems, since we must also consider every possible path that can be taken in order to reach a particular state.
+    However, if we consider probabilistic model checking, then as well as qualitative properties, such as the above, we can also consider quantitative properties, such as the \emph{probability} that the white player is in checkmate from a particular board position. In PCTL, this may be expressed as the property $\mathbf{P}_{=?} [\mathbf{F} \; \mathtt{m_w}]$. This is a far more general and powerful property - for instance, an advanced chess player, who has found themselves in a state such that they are in disadvantage over the other player, may seek to reach states where the game is unlikely to end in checkmate, maximising the probability of a draw. However calculating this probability is more complex than for non-probabilistic reachability problems, since we must also consider every possible path that can be taken in order to reach a particular state.
 \end{example}
 
-As we defined reachability and reward-based properties separately, we also define model checking reachability and reward-based properties separately, although the methods used in each type of property are similar.
+As we defined reachability and reward-based properties separately, we also define model checking reachability and reward-based properties separately, each using similar methods.
 
 \subsection{Model checking probabilistic reachability properties}
 \label{back:check-reach}
 
-Evaluating probabilistic reachability properties is a recursive process, since we need to consider the probabilistic reachability of each state that a given state can reach. Hence we need to define the "base cases" of this recursion, which are described below as in \cite{kwiatkowska_stochastic_2007}, with slightly different notation.
+Evaluating probabilistic reachability properties is a recursive process, since we need to consider the probabilistic reachability of each state that a given state can reach. Hence we need to define the "base cases" of this recursion, which are described below as in \cite{kwiatkowska_stochastic_2007}. %, with slightly different notation.
 
 \begin{definition}
 \label{back:S_yes}
 
-    For a DTMC $\mathcal{D}$, with a set of states $S$ and a given atomic proposition $a$, we can partition the state space into three subsets as so:
+    For a DTMC $\mathcal{D}$, with a set of states $S$ and a given atomic proposition $a$, we can partition the state space into the following three subsets:
 
     \begin{itemize}
         
-        \item $S^{yes}$ is the set of all states where $a$ eventually holds with probability 1.
-        \item $S^{no}$ is the set of all states where $a$ never holds in any subsequent reachable state.
+        \item $S^{yes}$ is the set of all states where $a$ eventually holds with probability 1;
+        \item $S^{no}$ is the set of all states where $a$ never holds in any subsequent reachable state;
         \item $S^{?} = S \setminus (S_{yes} \cup S_{no})$ the set of all states where the probability of $a$ holding eventually is in the interval $(0,1)$.
 
     \end{itemize}
 
 \end{definition}
 
-The sets $S^{yes}$ and $S^{no}$ are fairly straightforward to compute using graph-based algorithms. The precise details of their construction are described further in \cite{kwiatkowska_stochastic_2007}, but $S^{no}$ is constructed via a simple reverse traversal of the DTMC, starting from $Sat(a)$ and obtaining all states that can reach a state in $Sat(a)$, then removing these states from $S$. $S^{yes}$ is constructed very similarly, except this construction starts with $S^{no}$ and traverses the DTMC to find all states where the probability of reaching a state in $Sat{a}$ is less than 1, then removing these states from $S$.
+The sets $S^{yes}$ and $S^{no}$ are fairly straightforward to compute using graph-based algorithms. The precise details of their construction are described further in \cite{kwiatkowska_stochastic_2007}, we will just state that $S^{no}$ is constructed via a simple reverse traversal of the DTMC, starting from $Sat(a)$ and obtaining all states that can reach a state in $Sat(a)$, then removing these states from $S$. $S^{yes}$ is constructed similarly, except this construction starts with $S^{no}$ and traverses the DTMC to find all states where the probability of reaching a state in $Sat(a)$ is less than 1, then removing these states from $S$.
 
-After this precomputation process, we can now calculate the probability of a probabilistic reachability property holding over the entire state space $S$, by extending the probability calculation over the states in $S^{?}$.
+After this precomputation process, we can now calculate the probability of a probabilistic reachability property holding over the entire state space $S$, by extending the calculation to $S^{?}$.
 
 \begin{definition}
 \label{back:F_operator}
 
-    For a DTMC $\mathcal{D}$, with a set of states $S$, a partition of $S$ as in Definition \ref{back:S_yes}, and an atomic proposition $a$, we denote $Prob^{\mathcal{D}}(s, \mathbf{F} \: a)$ as the probability that an execution of $\mathcal{D}$ starting at state $s$ eventually reaches a state where $a$ holds. Furthermore, we have for any $s \in S^{?}$:
-
+    For a DTMC $\mathcal{D}$, with a set of states $S$, a partition of $S$ as in Definition~\ref{back:S_yes}, and an atomic proposition $a$, we denote $Prob^{\mathcal{D}}(s, \mathbf{F} \; a)$ as the probability that an execution of $\mathcal{D}$ starting at state $s$ eventually reaches a state where $a$ holds. Furthermore, we have for any $s \in S^{?}$:
     \begin{equation*}
         Prob^{\mathcal{D}}(s, \mathbf{F} \: \Phi) = \mbox{$\sum_{s' \in S^{?}}$} \mathbf{P}(s, s') \cdot Prob^{\mathcal{D}}(s, \mathbf{F} \: \Phi) \: + \mbox{$\sum_{s' \in S^{yes}}$} \mathbf{P}(s, s')
     \end{equation*}
-    
 \end{definition}
-
-From Definition \ref{back:F_operator}, calculating reachability probabilities requires solving a system of linear equations containing $|S^{?}|$ unknowns. There are many different methods for solving these equations, but in practice iterative methods (such as the Gauss-Siedel method or power iteration) are preferred to direct methods (such as Gaussian elimination) - iterative methods generally do not give exact solutions, opting for values which eventually converge to an exact solution, but direct methods can require more time and space to compute an exact solution, and in many circumstances the performance improvements justify a slightly less precise result.
+From Definition \ref{back:F_operator}, calculating reachability probabilities requires solving a system of linear equations containing $|S^{?}|$ unknowns. There are many different methods for solving these equations, as discussed further in~\cite{demmel_applied_1997}, but in practice iterative methods (such as the Gauss-Siedel method or power iteration) are preferred to direct methods (such as Gaussian elimination) - iterative methods generally do not give exact solutions, opting for values which eventually converge to an exact solution, but direct methods can require more time and space to compute an exact solution, and in many circumstances the performance improvements justify a slightly less precise result.
 
 \subsection{Model checking reward-based properties}
 \label{back:check_rewards}
@@ -151,8 +136,7 @@ In order to evaluate reward-based properties, we first define a random variable 
 \begin{definition}
 \label{back:reach_reward}
 
-For a DTMC $\mathcal{D}$, let $Path(s)$ be the set of all paths of $\mathcal{D}$, starting in some stats $s$, and let $T$ be the set of states in $\mathcal{D}$ where some proposition $a$ holds, along with denoting $\rho$ and $\iota$ as state and transition reward functions respectively. Then $X_{Reach(T)} : Path(s) \rightarrow \mathbb{R}_{\geq 0}$ is a random variable where, for any infinite path $\omega = s_{0} s_{1} s_{2} \dots$:
-
+For a DTMC $\mathcal{D}$, let $Path(s)$ be the set of all paths of $\mathcal{D}$, starting in some stats $s$, and let $T$ be the set of states in $\mathcal{D}$ where some proposition $a$ holds, along with denoting $\rho$ and $\iota$ as state and transition reward functions respectively. Then $X_{Reach(T)} : Path(s) \rightarrow \mathbb{R}$ is a random variable where, for any infinite path $\omega = s_{0} \rightarrow s_{1} \rightarrow s_{2} \rightarrow \cdots$:
     \begin{equation*} 
         X_{Reach(T)}(\omega) = 
             \begin{cases}
@@ -161,7 +145,6 @@ For a DTMC $\mathcal{D}$, let $Path(s)$ be the set of all paths of $\mathcal{D}$
                 \sum_{i=0}^{k_{T} - 1} \rho(s_i) + \iota(s_i, s_{i+1}) & \text{otherwise}
             \end{cases}
     \end{equation*}
-
 where $k_T = min \{ j \mid s_j \in T \}$, the first state in the path where the atomic proposition $a$ holds.
 
 From this, we then define $ExpReach(s, T) = \mathbb{E}(X_{Reach(T)})$, the expected value of the cumulative reward value over all possible infinite paths through $\mathcal{D}$, starting from state $s$.
@@ -169,16 +152,14 @@ From this, we then define $ExpReach(s, T) = \mathbb{E}(X_{Reach(T)})$, the expec
 \end{definition}
 
 Model checking reward-based properties consists precisely of calculating $ExpReach(s, T)$ for all $s \in S$,  which can be expressed as the solution of a system of linear equations using the above definition:
-
 \begin{equation*}
     ExpReach(s, T) = 
         \begin{cases}
-            \infty & s \in Sat(\mathbf{P}_{<1} [\mathbf{F} \; a]) \\ 
+            \infty & s \not\in S^{yes} \\ 
             0 & s \in T \\
             \rho(s_i) + \sum_{s' \in S} \mathbf{P}(s, s') \cdot \left( \iota(s_i, s_{i+1}) + ExpReach(s', T) \right) & \text{otherwise}
         \end{cases}
 \end{equation*}
-
 Note that $ExpReach(s, T) = \infty$ precisely where there exists some path in $Path(s)$ such that $a$ never eventually holds, or equivalently where $T$ is never reached.
 
 \section{The PRISM model checker}
@@ -191,7 +172,7 @@ PRISM \cite{kwiatkowska_prism_2011} is a software tool which implements probabil
 
 PRISM provides a modelling language in order to formally specify probabilistic models. In particular, many probabilistic models exhibit \emph{emergent complexity}, where simple descriptions of behaviour can lead to complex models. Hence, a modelling language is essential to allow describing the behaviour of a model, rather than a more complicated model specification. Note that we do not provide a full description of the PRISM modelling language here, instead focusing on the key features used in the various case studies - more details are available in the PRISM manual \cite{noauthor_prism_nodate}, along with additional examples.
 
-PRISM models are defined as a set of \emph{modules}, where each module consists of a set of \emph{variables} and a set of \emph{commands}. Variables may be either integers or boolean values, and in particular integers must be bounded, since otherwise the state space of a model is unbounded. Variables can be accessed by any module, but modules can only alter their own variables.
+PRISM models are defined as a set of \emph{modules}, where each module consists of a set of \emph{variables} and a set of \emph{commands}. Variables may be either bounded integers or boolean value. Variables can be accessed by any module, but modules can only alter their own variables.
 
 The key structure of a PRISM model is a \emph{command}, of the following form:
 
@@ -199,48 +180,40 @@ The key structure of a PRISM model is a \emph{command}, of the following form:
     [] guard -> prob_1 : update_1 + ... + prob_n : update_n;
 \end{verbatim}
 
-A \emph{guard} represents a proposition, identifying the set of states where the command is applicable. The command here has $n$ transitions, with a probability of each transition occurring such that the probabilities sum to $1$. Each update is comprised of a set of variable updates. And each possible combination of values for each variable represents a state of the resulting model, so a set of variable updates represents a transition between two states.
+A \emph{guard} represents a proposition, identifying the set of states where the command is applicable. The command here has $n$ transitions, with a probability of each transition occurring such that the probabilities sum to $1$. Each update is comprised of a set of variable updates. And each possible combination of values for each variable represents a state of the resulting model, so a set of variable updates represents a transition between two states. Guards may overlap, which allows for nondeterministic behaviour if supported by the type of model being constructed.
 
-Note that guards may overlap, including between modules. This behaviour is handled differently depending on the type of model being constructed. For a DTMC each command which is enabled has an equal probability of being selected, but for other model types overlapping guards induce nondeterministic choice - a key aspect of defining strategies for games, as described further in the case studies.
-
-In some cases, there may be a desire for modules to synchronise commands - for instance, two players making a decision simultaneously. This behaviour is supported via the use of \emph{action labels}. As an example, consider the following PRISM command:
+In some cases, there may be a desire for modules to synchronise commands - for instance, a player model making an action and a counter module updating a phase variable. This behaviour is supported via the use of \emph{action labels}. As an example, consider the following PRISM command:
 
 \begin{verbatim}
     [cover_1] b1=0 -> (b1'=1);
 \end{verbatim}
 
-Here, very little logic is given for when the variable \verb+b1+ is updated. However, the \verb+cover_1+ action label allows this command to synchronise with another command with the same action label in another module. This is especially useful for defining "updater" modules - modules which control a particular variable and perform updates, but make no contribution towards the decision making of a particular model. We also note that action labels may be used even where no explicit synchronisation takes place. Indeed, action labels are frequently used in order to describe an execution of a model, which is particularly useful when debugging a model via manual simulation.
+Here, very little logic is given for when the variable \verb+b1+ is updated. However, the \verb+cover_1+ action label allows this command to synchronise with another command with the same action label in other modules. Action labels are frequently used in order to describe an execution of a model, which is particularly useful when debugging a model via manual simulation.
 
-For convenience, PRISM models also define \emph{formulas} and \emph{labels}. Formulas act as shorthand for a particular expression, allowing for a complex expressed to be referred to on multiple occasions without needless code duplication. A simple example of a formula is given below:
+For convenience, PRISM models also define \emph{formulas} and \emph{labels}. Formulas act as shorthand for a particular expression, allowing for a complex expressed to be referred to on multiple occasions without needless code duplication. Labels act very similarly, representing a set of states where a particular boolean condition holds. A simple example of a formula is given below:
 
 \begin{verbatim}
     formula score = b1*1 + b2*2 + b3*3 + b4*4 + b5*5 + b6*6;
 \end{verbatim}
 
-Labels serve a very similar purpose, but they are boolean expressions which define a set of states satisfying a particular proposition, which are frequently used when specifying properties. For instance, the following label shows how labels can be utilised to define a particular characteristic of states of a model:
+Finally, PRISM allows for specifying reward structures. Reward structures include a guard specifying when the reward is applicable, along with the value of a reward when this guard is satisfied. Note that PRISM supports two main types of rewards - instantaneous rewards, considering the value of a reward in a specific state, and cumulative rewards considering the total value of a reward throughout an execution of the model.  The following example represents two rewards, which are intended to be cumulative and instantaneous respectively:
 
-\begin{verbatim}
-    label "game_over" = (phase>=6);
-\end{verbatim}
-
-
-
-
-Finally, PRISM allows for specifying reward structures. Reward structures comprise of a guard specifying when the reward is applicable, along with the value of a reward when this guard is satisfied. Note that PRISM supports two main types of rewards - instantaneous rewards, considering the value of a reward in a specific state, and cumulative rewards considering the total value of a reward throughout an execution of the model.  The following example represents a reward which is intended to be cumulative:
-
+\begin{tabular}{ll}
+\begin{minipage}{3in}
 \begin{verbatim}
     rewards "no_rolls"
         state=0: 1;
     endrewards
 \end{verbatim}
-
-Alternatively, the following reward is intended to be instantaneous, representing the number of cards in a player's hand, which may change throughout the course of some game:
-
+\end{minipage} &
+\begin{minipage}{3in}
 \begin{verbatim}
     rewards "cards_in_hand"
         true: card_count;
     endrewards
 \end{verbatim}
+\end{minipage} 
+\end{tabular}
 
 Note that this distinction between cumulative and instantaneous rewards is purely contextual, and hence the correct reward type to use is based on the intended behaviour of the reward, as opposed to any inherent characteristics of the reward itself. Hence, this distinction is applied at the property specification stage, rather than model construction.
 
@@ -264,22 +237,20 @@ When specifying properties of a model to be evaluated, PRISM defines a property 
     P=? [ F game_over&score=10 ]
 \end{verbatim}
 
-The main difference between the PRISM modelling language and "pure" PCTL syntax is the definition of the atomic proposition. Here, we refer to labels and variables from within a PRISM module in order to define an atomic proposition, allowing us to easily define a set of states where this proposition holds, namely where the game is over and the current score is 10. Reward-based properties can also be defined in a similar manner:
+The main difference between the PRISM modelling language and "pure" PCTL syntax is the definition of the atomic proposition. Here, we refer to labels and variables from within a PRISM module in order to define an atomic proposition, allowing us to easily define a set of states where this proposition holds, namely where the game is over and the current score is 10. Reward-based properties can also be defined in a similar manner, specifying the reward name being considered:
 
 \begin{verbatim}
     R{"total_boards"}=? [ F game_over ]
 \end{verbatim}
 
-Note that PRISM models may contain many possible reward structures, so we specify the particular reward structure considered here using braces.
+% The PRISM modelling language provides a convenient way to express properties in PCTL, but one particular syntactic benefit of the PRISM modelling language is the use of undefined constants. For instance, consider adapting the above probabilistic reachability property in order to use an undefined constant for the score:
 
-The PRISM modelling language provides a convenient way to express properties in PCTL, but one particular syntactic benefit of the PRISM modelling language is the use of undefined constants. For instance, consider adapting the above probabilistic reachability property in order to use an undefined constant for the score:
+% \begin{verbatim}
+%     const int k;
+%     P=? [ F game_over&score=k ]
+% \end{verbatim}
 
-\begin{verbatim}
-    const int k;
-    P=? [ F game_over&score=k ]
-\end{verbatim}
-
-When model checking is performed, an \emph{experiment} can be defined, where different values of \verb+k+ may be considered. For instance, if the value of \verb+score+ is bounded, then allowing \verb+k+ to vary over all possible values of \verb+score+ can be utilised in order to produce a probability distribution of \verb+score+ when the model terminates.
+% When model checking is performed, an \emph{experiment} can be defined, where different values of \verb+k+ may be considered. For instance, if the value of \verb+score+ is bounded, then allowing \verb+k+ to vary over all possible values of \verb+score+ can be utilised in order to produce a probability distribution of \verb+score+ when the model terminates.
 
 %% move this to games section later on
 % In addition, later on in the case studies, we define nondeterministic models, along with coalitions. Hence, properties may look more similar to this:
@@ -296,10 +267,8 @@ When model checking is performed, an \emph{experiment} can be defined, where dif
 
 \label{back:related}
 
-One of the first papers to discuss automatic game balancing was presented by Hom and Marks \cite{hom_automatic_2007}, who focused on combining and mutating the rules of various classic board games using genetic algorithms in order to define a new game, whose win rate was then analysed using a commercial game engine to determine the game's balance. A key feature of future work in automatic game balancing is the development of more sophisticated measures of balance. Hom and Marks primarily focused on two-player games using the win rate of each player, while Jaffe et al. \cite{jaffe_evaluating_2012} built on this foundation by developing a framework designed around answering a wider variety of balance questions, such as the importance of short-term and long-term strategy in decision making, via the use of "restricted players" - optimal AI agents with specific restrictions on how they make decisions, such as being unable to consider the opponent's actions for several rounds at the beginning of a game, facing optimal opponents who are able to exploit these restrictions.
+One of the first papers to discuss automatic game balancing was presented by Hom and Marks \cite{hom_automatic_2007}, who focused on combining and mutating the rules of various classic board games using genetic algorithms in order to define a new game, whose win rate was then analysed using a commercial game engine to determine the game's balance. A key feature of future work in automatic game balancing is the development of more sophisticated measures of balance. Hom and Marks primarily focused on two-player games using the win rate of each player, while Jaffe et al. \cite{jaffe_evaluating_2012} build on this foundation by developing a framework designed around answering a wider variety of balance questions, such as the importance of short-term and long-term strategy in decision making, via the use of agents with restricted behaviour, coupled with opponents who are capable of exploiting these restrictions.
 
 These ideas are then applied by Milazzo et al. \cite{milazzo_case_2015}, using probabilistic and statistical model checking in multiple case studies to answer balance questions about games. In particular, the authors show that model checking can be applied to balance games on several different "levels" at once, both adjusting the parameters of various game mechanics and the inclusion of these mechanics in the first place (such as adjusting how much health players have, whether players can have multiple lives, and how these mechanics interact). This idea is further extended to develop Chained Strategy Generation \cite{kavanagh_balancing_2019}, a technique for balancing games over the course of a \emph{metagame}, where different selections of material choice in a game (such as players or teams in a football game) change in popularity over time. Kavanagh and Miller also consider an alternative formulation of player skill in \cite{kavanagh_gameplay_2020}, where actions have an associated \emph{cost} based on comparison with the best possible action in a particular state, presenting another method for analysing strategies by comparing them to the optimal strategy for a game.
 
-However, this literature review revealed a significant gap in current research on formal verification in game balancing. The games which have currently been considered are primarily turn-based, and more crucially they are all \emph{perfect information} games, where the current state of the game is fully visible to all players. As a result, a key aim of this dissertation is to consider model checking on a wider variety of games.
-
-Throughout the case studies in this dissertation, the first is designed to be fairly conventional relative to existing literature on analysing games via model checking. The second and third case studies consider hidden information games and concurrent games respectively, which we do not believe have been considered in previous literature.
+However, this literature review revealed a significant gap in current research on formal verification in game balancing. The games which have currently been considered are primarily turn-based, and more crucially they are all \emph{perfect information} games, where the current state of the game is fully visible to all players. As a result, a key aim of this dissertation is to consider model checking on a wider variety of games, particularly in the second and third case studies considering hidden information games and concurrent games respectively, which we do not believe have been considered in previous literature.

@@ -24,6 +24,7 @@
 
 
 \newcommand{\gethin}[1]{\marginpar{\footnotesize \color{blue} {\bf G:} \textsf{#1}}}
+\newcommand{\todo}[1]{{\color{red} #1}}
 
 \begin{document}
 
@@ -38,7 +39,7 @@
 %==============================================================================
 %% ABSTRACT
 \begin{abstract}
-    This project investigates the use of model checking using PRISM to evaluate the game design of various games of chance involving dice. [RESULTS HERE].
+    This project investigates the viability of using model checking through the probabilistic model checker PRISM in order to evaluate the game design of various games of chance involving dice. We consider three different case studies, including a hidden information game and a game with simultaneous action selection. We use model checking to identify flaws in the game presented in each case study, including the complexity of optimal strategies compared to simpler strategies with similar effectiveness, and the disproportionate influence of early actions in the overall result of a game.
 \end{abstract}
 
 %==============================================================================
@@ -56,12 +57,12 @@
 %\def\consentdate {20 March 2018} % the date you agree
 %
 \def\consentname {Lewis Dyer}
-\def\consentdate {}
+\def\consentdate {9th April 2021}
 \educationalconsent
 
 \chapter*{Acknowledgements}
 
-I would like to express my gratitude to Dr. Gethin Norman, my project supervisor, for his continual support and guidance throughout the project. I would also like to thank William Kavanagh for offering several useful suggestions throughout the project. Finally, I would like to thank my parents for their encouragement and support throughout what has been a rather eventful year.
+I would like to express my gratitude to Dr.~Gethin Norman, my project supervisor, for his continual support and guidance throughout the project. I would also like to thank William Kavanagh for offering several useful suggestions throughout the project. Finally, I would like to thank my parents for their encouragement and support throughout what has been a rather eventful year.
 
 %==============================================================================
 \tableofcontents
@@ -114,11 +115,11 @@ I would like to express my gratitude to Dr. Gethin Norman, my project supervisor
 
 %==================================================================================================================================
 
-%\input{chapters/evaluation.tex}
+\input{chapters/evaluation.tex}
 
 %==================================================================================================================================
 
-%\input{chapters/conclusion.tex}
+\input{chapters/conclusion.tex}
 
 %==================================================================================================================================
 %
@@ -128,27 +129,19 @@ I would like to express my gratitude to Dr. Gethin Norman, my project supervisor
 
 \begin{appendices}
 
-\chapter{Appendices}
+\chapter{Conditional probability of board coverings in Shut the Box}
+\label{app:cond_prob_figure}
 
-Typical inclusions in the appendices are:
 
-\begin{itemize}
-\item
-  Copies of ethics approvals (required if obtained)
-\item
-  Copies of questionnaires etc. used to gather data from subjects.
-\item
-  Extensive tables or figures that are too bulky to fit in the main body of
-  the report, particularly ones that are repetitive and summarised in the body.
+%crop out white at top
+\begin{figure}[!h]
+\centering
+    \includegraphics[width=0.7\textwidth]{images/ShutTheBox/stb12_2d6_score_given_board_12.pdf}
+    \caption{The conditional probability of each board being covered in Shut the Box given the final score, in the standard variant under the high-board strategy.}
+\label{cs1:stb12_2d6_cond_prob}
+\end{figure}
 
-\item Outline of the source code (e.g. directory structure), or other architecture documentation like class diagrams.
-
-\item User manuals, and any guides to starting/running the software.
-
-\end{itemize}
-
-\textbf{Don't include your source code in the appendices}. It will be
-submitted separately.
+Figure~\ref{cs1:stb12_2d6_cond_prob} shows the probability of each board being covered in Shut the Box, given a particular final score. Every board has a positive correlation with the final score - this is as expected, since higher scores typically cover more boards. However, this positive correlation is much stronger for higher value boards, suggesting that high value boards are strong indicators for high scores in Shut the Box.
 
 \end{appendices}
 
